@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HttpWebTest</name>
+    </assembly>
+    <members>
+        <member name="M:HttpWebTest.CoreObjects.ComparisonOperand.#ctor(System.String)">
+            <summary>
+            The constructor takes a string value and determines if it is 
+            a boolean, a numeric value or a string and assigns the type.
+            </summary>
+            <param name="operandValue"></param>
+        </member>
+        <member name="P:HttpWebTest.DataSources.BaseDataSource.currentDataProperties">
+            <summary>
+            The collection of Key/Value pairs for the current "row" of data
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.ControlComparisonScope">
+            <summary>
+            This enum describes the scope of the test executions that can occur based on the 
+            comparison type and operands for the control.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.ControlComparisonScope.If">
+            <summary>
+            Indicates that the control will perform either ZERO executions of the control
+            or ONE execution of the control.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.ControlComparisonScope.While">
+            <summary>
+            Indicates that the control will perform ZERO or MORE executions of the control.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.ControlComparisonType">
+            <summary>
+            This enum describes the type of comparisons available for the control.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.DataSourceCursorType">
+            <summary>
+            Describes the behavior of the cursor for the data source.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.DataSourceCursorType.Sequential">
+            <summary>
+            Every time the cursor advances, it moves to the next record in the data set. 
+            When the end of the recordset is reached, the cursor moves back to the first
+            record in the set.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.DataSourceCursorType.Random">
+            <summary>
+            Every time the cursor advances, it moves to a random record in the data set. 
+            It is possible for the same record to get used multiple times before all records get used.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.DataSourceCursorType.Unique">
+            <summary>
+            Every time the cursor advances, it moves to the next record in the data set. 
+            When the end of the recordset is reached, the Data source will no longer 
+            provide data and the test will be stopped.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.RuleResult_Enums">
+            <summary>
+            Lists the location where a given rule should be executed
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleResult_Enums.Passed">
+            <summary>
+            Indicates that this rule's execution passed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleResult_Enums.Failed">
+            <summary>
+            Indicates that this rule's execution failed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleResult_Enums.Ignored">
+            <summary>
+            Indicates that this rule's execution state was ignored.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleResult_Enums.Aborted">
+            <summary>
+            Indicates that the rule was aborted due to an exception.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.RuleTypes_Enums">
+            <summary>
+            Lists the rule's scope and the location where a given rule should be executed
+            </summary>
+            <MyMembers name="RuleExecutionOrder">
+    <remarks>
+      Test level rules will always execute after their request level counterparts.
+      The order of execution for rules is as follows:
+      <list type="number">
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.PreTest" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PreRequest" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_PreRequest" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Validation" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_Validation" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Extraction" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_Extraction" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PostRequest" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_PostRequest" />
+        </item>
+        <item>
+          <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.PostTest" />
+        </item>
+      </list>
+    </remarks>
+  </MyMembers>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.PreTest">
+            <summary>
+            Executes before the first request of the test is executed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PreRequest">
+            <summary>
+            Executes before the request is executed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_PreRequest">
+            <summary>
+            Executes before EACH request is executed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Validation">
+            <summary>
+            Executes after the request is executed, but before any 
+            <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Extraction"/> Rules or any
+            <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PostRequest"/> Rules.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_Validation">
+            <summary>
+            Executes after EACH request in the test is executed. 
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Extraction">
+            <summary>
+            Executes after the request is executed and after any 
+            <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_Validation"/> Rules but BEFORE any
+            <see cref="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PostRequest"/> Rules.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_Extraction">
+            <summary>
+            Executes after EACH request in the test is executed. 
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.RequestRule_PostRequest">
+            <summary>
+            Executes after the request is executed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.TestRule_PostRequest">
+            <summary>
+            Executes after EACH request is executed.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.RuleTypes_Enums.PostTest">
+            <summary>
+            Executes after the last request of the test is executed.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.Enums.WebTestItemType">
+            <summary>
+            Flags used by the parser on its initial pass of building the test objects.
+            </summary>
+            <remarks>
+            When the parser starts working, it makes an initial pass whose purpose is to break the text into the representative queries, test level objects or query level objects.
+            These flags are used to denote queries and test level objects.
+            </remarks>
+        </member>
+        <member name="F:HttpWebTest.Enums.WebTestItemType.Wti_IncludedWebTestItem">
+            <summary>
+            This is either the main test root item, or it is a call to a sub item of the same type.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.WebTestItemType.Wti_RequestObject">
+            <summary>
+            Indicates that this object represents a request object
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.WebTestItemType.Wti_Transactiontimer">
+            <summary>
+            Indicates that this object is a transaction timer and all requests inside it will have their times summarized.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.WebTestItemType.Wti_LoopControl">
+            <summary>
+            Indicates that this object houses a series of requests that will be executed multiple times in a loop.
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.Enums.WebTestItemType.Wti_Comment">
+            <summary>
+            Indicates that this object represents a Comment object
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.WebTestItems.WebTestItem">
+            <summary>
+            The base class from which the test level object classes are derived. This class enforces the need to have an object type and position for all classes
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WebTestItem.objectItemType">
+            <summary>
+            Defines what type of test object is housed in the given instance of the class. It is based on the <see cref="T:HttpWebTest.Enums.WebTestItemType"/> ENUM
+            </summary>
+        </member>
+        <member name="F:HttpWebTest.WebTestItems.WebTestItem.Enabled">
+            <summary>
+            If this is set to false, this item is ignored during playback. Default is TRUE
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WebTestItem.itemComment">
+            <summary>
+            A field to maintain a comment that can be seen in the UI
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WebTestItem.guid">
+            <summary>
+            A unique identifier that allows every item to be uniquely tracked.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.WebTestItems.WTI_Comment">
+            <summary>
+            A Comment object allows comments to be added to the heirarchy of items in a web test.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Comment.Comment">
+            <summary>
+            The comment text to be displayed in the test viewer
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.Name">
+            <summary>
+            The friendly name of the web test to include. This is what 
+            will be displayed in the webtest viewer
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.Description">
+            <summary>
+            A description that summarizes the purpose of the web test.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.IsEnabled">
+            <summary>
+            A flag that tells the test execution engine whether to 
+            execute the embedded webtest or ignore it.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.InheritParentSettings">
+            <summary>
+            A flag that tells the test engine whether the embedded test 
+            should override any local test settings with the parent test's 
+            values (if the parent test has the same settings).
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.ReportResults">
+            <summary>
+            A flag that tells the test engine whether the results of the 
+            execution of the embedded test should be saved and shown in 
+            the final reports.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_IncludedWebTest.HttpWebTest">
+            <summary>
+            A copy of the actual webtest to be embedded in the parent test.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.Name">
+            <summary>
+            The friendly name of the loop. This is what 
+            will be displayed in the webtest viewer
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.Description">
+            <summary>
+            A description that summarizes the purpose of the loop.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.IsEnabled">
+            <summary>
+            A flag that tells the test execution engine whether to 
+            execute the items in the loop or ignore them.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.ControlComparisonType">
+            <summary>
+            An enum that describes what type of comparison is used when 
+            evaluating the control for continued execution.
+            </summary>
+            <remarks>
+            The possible values can be seen in the <see cref="T:HttpWebTest.Enums.ControlComparisonType"/>
+            enum. A value of <b><see cref="F:HttpWebTest.Enums.ControlComparisonType.IsLoop"/></b> indicates that the
+            control will use the three optional loop values
+            <list type="bullet">
+            <item><see cref="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopStartingValue"/></item>
+            <item><see cref="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopEndingValue"/></item>
+            <item><see cref="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopIncrementValue"/></item>
+            </list>
+            These three values will be ignored for all other <see cref="T:HttpWebTest.Enums.ControlComparisonType"/>
+            values
+            </remarks>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.ControlComparisonScope">
+            <summary>
+            An enum that describes what scope applies to the <see cref="P:HttpWebTest.WebTestItems.WTI_LoopControl.ControlComparisonType"/>
+            when evaluating the control for continued execution.
+            </summary>
+            <remarks>
+            The possible values can be seen in the <see cref="T:HttpWebTest.Enums.ControlComparisonType"/>
+            enum. 
+            </remarks>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.FirstOperand">
+            <summary>
+            Contains the value on the left side of the comparison statement
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.SecondOperand">
+            <summary>
+            Contains the value on the right side of the comparison statement
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopStartingValue">
+            <summary>
+            [OPTIONAL] The starting value for the control when run as a loop
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopEndingValue">
+            <summary>
+            [OPTIONAL] The ending value for the control when run as a loop
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.LoopIncrementValue">
+            <summary>
+            [OPTIONAL] The amount to increment the counter for the control when run as a loop
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.AdvanceDataSourceOnEachIteration">
+            <summary>
+            This flag indicates whether the data sources associated with the test 
+            should advance their cursor each time an iteration of this loop completes execution.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_LoopControl.webTestItems">
+            <summary>
+            This is a collection of the <see cref="T:HttpWebTest.WebTestItems.WebTestItem"/> items that will be executed
+            for each iteration of this loop control.
+            </summary>
+        </member>
+        <member name="T:HttpWebTest.WebTestItems.WTI_Request">
+            <summary>
+            Represents a single <see cref="T:System.Net.Http.HttpRequestMessage"/> and all of the necessary testing items necessary to 
+            modify and execute the request, capture result information, and extract any information needed for
+            subsequent test requests.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.requestItem">
+            <summary>
+            The request object that gets executed by the <see cref="T:System.Net.Http.HttpClient"/>.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.Rules">
+            <summary>
+            a collection of rules to execute either before or after the request gets executed.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.ReportingName">
+            <summary>
+            The Reporting Name is a report friendly name for this request. If the value is empty, then
+            the request's URL will be used for the reporting.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.ThinkTime">
+            <summary>
+            The amount of time (in seconds) to wait (after this request completes) before executing
+            the next request in this test.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.RecordResults">
+            <summary>
+            Should the results of this request be recorded in the final test result set and report?
+            </summary>
+            <remarks>
+            This flag allows you to tell the test results to ignore certain requests that may be 
+            necessary to complete a test but are not important for tracking in the results files.
+            For instance, OPTIONS calls to APIs are often needed, but not important to track.
+            </remarks>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.FollowRedirects">
+            <summary>
+            If true, this flag tells the test engine to execute any redirects received from the request.
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Request.ParseDependentRequests">
+            <summary>
+            If true, this flag tells the test engine to parse the response and attempt to execute all
+            the dependent requests that would normally be automatically executed by a browser making
+            the call for this request.
+            </summary>
+        </member>
+        <member name="M:HttpWebTest.WebTestItems.WTI_Request.#ctor">
+            <summary>
+            Creates a new Request object.
+            </summary>
+            <remarks>
+            The object is created with the following defaults
+            <list type="bullet">
+            <item>ReportingName = ""</item>
+            <item>ThinkTime = 0</item>
+            <item>RecordResults = true</item>
+            <item>FollowRedirects = true</item>
+            <item>ParseDependentRequests = true</item>
+            </list>
+            The 
+            </remarks>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Transaction.Name">
+            <summary>
+            The name of the transaction
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Transaction.Description">
+            <summary>
+            A description of the transaction
+            </summary>
+        </member>
+        <member name="P:HttpWebTest.WebTestItems.WTI_Transaction.webTestItems">
+            <summary>
+            This is a collection of the <see cref="T:HttpWebTest.WebTestItems.WebTestItem"/> items that will be executed
+            for each iteration of this loop control.
+            </summary>
+        </member>
+    </members>
+</doc>
