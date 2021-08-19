@@ -1,4 +1,6 @@
-﻿namespace HttpWebTesting.WebTestItems
+﻿using System;
+
+namespace HttpWebTesting.WebTestItems
 {
     public class WTI_IncludedWebTest : WebTestItem
     {
@@ -12,12 +14,6 @@
         /// A description that summarizes the purpose of the web test.
         /// </summary>
         public string Description { get; set; }
-        
-        /// <summary>
-        /// A flag that tells the test execution engine whether to 
-        /// execute the embedded webtest or ignore it.
-        /// </summary>
-        public bool IsEnabled { get; set; }
         
         /// <summary>
         /// A flag that tells the test engine whether the embedded test 
@@ -37,5 +33,29 @@
         /// A copy of the actual webtest to be embedded in the parent test.
         /// </summary>
         public HttpWebTest HttpWebTest { get; set; }
+
+        public WTI_IncludedWebTest()
+        {
+            HttpWebTest = new HttpWebTest();
+            InitializeObject();
+        }
+
+        public WTI_IncludedWebTest(HttpWebTest httpWebTest)
+        {
+            HttpWebTest = httpWebTest;
+            Name = httpWebTest.Name;
+            InitializeObject();
+        }
+
+        private void InitializeObject()
+        {
+            objectItemType = Enums.WebTestItemType.Wti_IncludedWebTestItem;
+            Enabled = true;
+            guid = Guid.NewGuid();
+            itemComment = string.Empty;
+
+            InheritParentSettings = true;
+            ReportResults = true;
+        }
     }
 }

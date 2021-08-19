@@ -14,6 +14,7 @@ namespace HttpWebTesting.Rules
         public RuleTypes_Enums RuleType { get; set; }
         public bool ExecutionBeforeDependentRequests { get; set; }
         public PropertyCollection Properties { get; set; }
+        public RuleResult RuleResult { get; set; }
 
         protected BaseRule()
         {
@@ -21,6 +22,7 @@ namespace HttpWebTesting.Rules
             Description = string.Empty;
             ExecutionBeforeDependentRequests = true;
             Properties = new PropertyCollection();
+            RuleResult = RuleResult.NotEvaluatedYet;
         }
 
         protected BaseRule(BaseRule copy)
@@ -34,6 +36,7 @@ namespace HttpWebTesting.Rules
             this.Description = copy.Description;
             this.ExecutionBeforeDependentRequests = copy.ExecutionBeforeDependentRequests;
             this.type = copy.type;
+            this.RuleResult = copy.RuleResult;
         }
 
         protected BaseRule(Type type) : this()

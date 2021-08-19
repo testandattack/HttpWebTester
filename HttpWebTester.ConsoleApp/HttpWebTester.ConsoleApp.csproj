@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
     <ProjectReference Include="..\HttpWebTest\HttpWebTest.csproj" />
   </ItemGroup>

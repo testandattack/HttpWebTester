@@ -25,5 +25,11 @@ namespace HttpWebTesting.CoreObjects
 
             Operand = operandValue;
         }
+
+        public ComparisonOperand()
+        {
+            Operand = string.Empty;
+            Type = typeof(System.String);
+        }
     }
 }

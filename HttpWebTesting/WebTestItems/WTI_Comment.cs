@@ -29,7 +29,7 @@ namespace HttpWebTesting.WebTestItems
         {
             objectItemType = Enums.WebTestItemType.Wti_Comment;
             Enabled = true;
-            guid = new Guid();
+            guid = Guid.NewGuid();
             itemComment = string.Empty;
         }
     }

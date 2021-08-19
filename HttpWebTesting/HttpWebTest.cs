@@ -1,6 +1,8 @@
 ﻿using HttpWebTesting.Collections;
 using HttpWebTesting.Enums;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 
 namespace HttpWebTesting
 {
@@ -50,18 +52,6 @@ namespace HttpWebTesting
             ContextProperties = new ContextCollection();
             DataSources = new DataSourceCollection();
             Rules = new RuleCollection();
-        }
-        #endregion
-
-        #region -- public methods -----
-        public void Load(string webTestFileName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save(string webTestFileName)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

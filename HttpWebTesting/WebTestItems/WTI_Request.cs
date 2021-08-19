@@ -1,4 +1,5 @@
 ﻿using HttpWebTesting.Collections;
+using System;
 using System.Net.Http;
 
 namespace HttpWebTesting.WebTestItems
@@ -80,16 +81,17 @@ namespace HttpWebTesting.WebTestItems
         /// </remarks>
         public WTI_Request() 
         {
-            ReportingName = string.Empty;
-            ThinkTime = 0;
-            RecordResults = true;
-            FollowRedirects = true;
-            ParseDependentRequests = true;
-
+            InitializeObject();
             requestItem = new HttpRequestMessage();
         }
 
         public WTI_Request(HttpRequestMessage httpRequestMessage)
+        {
+            InitializeObject();
+            requestItem = httpRequestMessage;
+        }
+
+        private void InitializeObject()
         {
             ReportingName = string.Empty;
             ThinkTime = 0;
@@ -97,7 +99,11 @@ namespace HttpWebTesting.WebTestItems
             FollowRedirects = true;
             ParseDependentRequests = true;
 
-            requestItem = httpRequestMessage;
+            objectItemType = Enums.WebTestItemType.Wti_RequestObject;
+            Enabled = true;
+            guid = Guid.NewGuid();
+            itemComment = string.Empty;
+            Rules = new RuleCollection();
         }
         #endregion
 

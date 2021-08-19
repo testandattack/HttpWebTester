@@ -7,7 +7,7 @@ namespace HttpWebTesting.Enums
     /// <summary>
     /// This enum describes the type of comparisons available for the control.
     /// </summary>
-    public enum ControlComparisonType
+    public enum ComparisonType
     {
         IsLoop = 0,
         IsEqual = 1,

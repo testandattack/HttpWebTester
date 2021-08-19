@@ -4,11 +4,13 @@ using HttpWebTesting.CoreObjects;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace HttpWebTesting.WebTestItems
 {
     public class WTI_LoopControl : WebTestItem
     {
+        #region -- Properties -----
         /// <summary>
         /// The friendly name of the loop. This is what 
         /// will be displayed in the webtest viewer
@@ -34,27 +36,27 @@ namespace HttpWebTesting.WebTestItems
         /// evaluating the control for continued execution.
         /// </summary>
         /// <remarks>
-        /// The possible values can be seen in the <see cref="Enums.ControlComparisonType"/>
-        /// enum. A value of <b><see cref="ControlComparisonType.IsLoop"/></b> indicates that the
+        /// The possible values can be seen in the <see cref="Enums.ComparisonType"/>
+        /// enum. A value of <b><see cref="ComparisonType.IsLoop"/></b> indicates that the
         /// control will use the three optional loop values
         /// <list type="bullet">
         /// <item><see cref="LoopStartingValue"/></item>
         /// <item><see cref="LoopEndingValue"/></item>
         /// <item><see cref="LoopIncrementValue"/></item>
         /// </list>
-        /// These three values will be ignored for all other <see cref="Enums.ControlComparisonType"/>
+        /// These three values will be ignored for all other <see cref="Enums.ComparisonType"/>
         /// values
         /// </remarks>
         [Category("General")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ControlComparisonType ControlComparisonType { get; set; }
+        public ComparisonType ControlComparisonType { get; set; }
 
         /// <summary>
         /// An enum that describes what scope applies to the <see cref="WTI_LoopControl.ControlComparisonType"/>
         /// when evaluating the control for continued execution.
         /// </summary>
         /// <remarks>
-        /// The possible values can be seen in the <see cref="Enums.ControlComparisonType"/>
+        /// The possible values can be seen in the <see cref="Enums.ComparisonType"/>
         /// enum. 
         /// </remarks>
         [Category("Comparison")]
@@ -105,5 +107,22 @@ namespace HttpWebTesting.WebTestItems
         /// </summary>
         [Category("General")]
         public WebTestItemCollection webTestItems { get; set; }
-     }
+        #endregion
+
+        #region -- Constructors -----
+        public WTI_LoopControl()
+        {
+            InitializeObject();
+        }
+
+        private void InitializeObject()
+        {
+            objectItemType = Enums.WebTestItemType.Wti_LoopControl;
+            Enabled = true;
+            guid = Guid.NewGuid();
+            itemComment = string.Empty;
+        }
+
+        #endregion
+    }
 }
