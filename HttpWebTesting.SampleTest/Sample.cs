@@ -9,6 +9,7 @@ using HttpWebTesting.DataSources;
 using HttpWebTesting.Enums;
 using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
+using WebTestRules;
 
 namespace HttpWebTesting.SampleTest
 {
@@ -74,7 +75,7 @@ namespace HttpWebTesting.SampleTest
             req.ReportingName = "Contoso Home Page Post.";
 
             // Add a rule to it
-            var responseContainsValidationRule = new ResponseContainsValidationRule("Phrase to look for in the response");
+            var responseContainsValidationRule = new ValidateResponseContains("Phrase to look for in the response");
             req.Rules.Add(responseContainsValidationRule);
 
             //Add request to the collection
@@ -109,44 +110,5 @@ namespace HttpWebTesting.SampleTest
             return message;
         }
 
-    }
-
-    public class ResponseContainsValidationRule : RequestValidationRule
-    {
-        public ResponseContainsValidationRule(string ResponseShouldContain)
-        {
-            SecondOperand.Operand = ResponseShouldContain;
-        }
-
-        public override void PostRequest(object sender, PostRequestEventArgs e)
-        {
-            string responseString = e.response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            //base.PostRequest(sender, e);
-            if (responseString.Contains(SecondOperand.Operand))
-            {
-                RuleResult = RuleResult.Passed;
-            }
-            else
-            {
-                RuleResult = RuleResult.Failed;
-            }
-        }
-    }
-
-    public class ValidateStatusCode : RequestValidationRule
-    {
-        public ValidateStatusCode() { }
-
-        public override void PostRequest(object sender, PostRequestEventArgs e)
-        {
-            if(e.response.IsSuccessStatusCode)
-            {
-                RuleResult = RuleResult.Passed;
-            }
-            else
-            {
-                RuleResult = RuleResult.Failed;
-            }
-        }
     }
 }

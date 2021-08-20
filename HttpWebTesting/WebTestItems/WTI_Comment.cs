@@ -12,7 +12,7 @@ namespace HttpWebTesting.WebTestItems
         /// <summary>
         /// The comment text to be displayed in the test viewer
         /// </summary>
-        public string Comment { get; set; }
+        public string CommentText { get; set; }
 
         public WTI_Comment()
         {
@@ -22,7 +22,7 @@ namespace HttpWebTesting.WebTestItems
         public WTI_Comment(string comment)
         {
             InitializeObject();
-            Comment = comment;
+            CommentText = comment;
         }
 
         private void InitializeObject()

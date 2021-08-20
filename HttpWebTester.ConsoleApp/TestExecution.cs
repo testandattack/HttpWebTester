@@ -4,8 +4,9 @@ using HttpWebTesting.WebTestItems;
 using System;
 using System.Net.Http;
 using WebTestExecutionEngine;
+using WebTestRules;
 
-namespace HttpWebTester.ConsoleApp
+namespace HttpWebTester
 {
     public class ExecuteTests
     {
@@ -18,16 +19,11 @@ namespace HttpWebTester.ConsoleApp
             request.ReportingName = "Rubber Baby Buggy Bumpers";
             request.requestItem = new HttpRequestMessage(HttpMethod.Get, "http://www.bing.com");
 
-            RequestExecution requestExecution = new RequestExecution(request);
+            var validationRule = new ValidateStatusCode();
+            request.Rules.Add(validationRule);
 
-            //MyCustomPreRequestPlugin plugin = new MyCustomPreRequestPlugin();
-            //request.PreRequest += plugin.PreRequest;
-
-            PreRequestEventArgs args = new PreRequestEventArgs();
-            args.requestItem = request;
-            //requestExecution.PreRequestPreDataBinding(requestExecution, args);
-
-            requestExecution.AddPreRequestHandler();
+            RequestExecution re = new RequestExecution(request);
+            re.ProcessRequest();
 
             Console.WriteLine("Finished Test");
         }
@@ -47,85 +43,85 @@ namespace HttpWebTester.ConsoleApp
 
 
     // -- Showing usage of delegates
-    #region delegates
-    public class CustomClass
-    {
-        public void OnCommand()
-        {
-            Console.WriteLine("Called OnCommand From CustomClass");
-        }
-    }
+    //#region delegates
+    //public class CustomClass
+    //{
+    //    public void OnCommand()
+    //    {
+    //        Console.WriteLine("Called OnCommand From CustomClass");
+    //    }
+    //}
 
-    public class ActionClass
-    {
-        // Create Delegate
-        public delegate void actionClassDelegate();
+    //public class ActionClass
+    //{
+    //    // Create Delegate
+    //    public delegate void actionClassDelegate();
 
-        // Create Delegate Instance
-        public actionClassDelegate actionClassDelegateInstance;
+    //    // Create Delegate Instance
+    //    public actionClassDelegate actionClassDelegateInstance;
 
-        public void PerformAnAction()
-        {
-            if (actionClassDelegateInstance != null)
-            {
-                actionClassDelegateInstance();
-            }
-            else
-            {
-                Console.WriteLine("No delegate instance found");
-            }
-        }
-    }
-    #endregion
+    //    public void PerformAnAction()
+    //    {
+    //        if (actionClassDelegateInstance != null)
+    //        {
+    //            actionClassDelegateInstance();
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("No delegate instance found");
+    //        }
+    //    }
+    //}
+    //#endregion
 
     // -- Showing usage of delegates
-    #region events
+    //#region events
 
-    /*
-    Declare a delegate (actionClassEventHandler)
-    Declare an event based on that delegate (actionClassEvent)
-    Create an event (actionClassEvent(this, EventArgs.Empty);)
-    Subscribe methods to that event(actionClass2.actionClassEvent += customClass2.OnEvent)
-    Fire that event (PerformAnAction)
-    */
-    // Class that contains the extra code to run
-    public class CustomClass2
-    {
-        public void OnEvent(object source, EventArgs e)
-        {
-            Console.WriteLine("Called OnEvent From CustomClass2");
-        }
-    }
+    ///*
+    //Declare a delegate (actionClassEventHandler)
+    //Declare an event based on that delegate (actionClassEvent)
+    //Create an event (actionClassEvent(this, EventArgs.Empty);)
+    //Subscribe methods to that event(actionClass2.actionClassEvent += customClass2.OnEvent)
+    //Fire that event (PerformAnAction)
+    //*/
+    //// Class that contains the extra code to run
+    //public class CustomClass2
+    //{
+    //    public void OnEvent(object source, EventArgs e)
+    //    {
+    //        Console.WriteLine("Called OnEvent From CustomClass2");
+    //    }
+    //}
 
-    // Class that wants to be extendable
-    public class ActionClass2
-    {
-        // Create Delegate
-        public delegate void actionClassEventHandler(object source, EventArgs e);
-        // Create Event Instance
-        public event actionClassEventHandler actionClassEvent;
+    //// Class that wants to be extendable
+    //public class ActionClass2
+    //{
+    //    // Create Delegate
+    //    public delegate void actionClassEventHandler(object source, EventArgs e);
+    //    // Create Event Instance
+    //    public event actionClassEventHandler actionClassEvent;
 
-        // ALTERNATE Syntax for combining above two lines
-        public event EventHandler secondActionClassEvent;
+    //    // ALTERNATE Syntax for combining above two lines
+    //    public event EventHandler secondActionClassEvent;
 
-        public void PerformAnAction()
-        {
-            if (actionClassEvent != null)
-            {
-                actionClassEvent(this, EventArgs.Empty);
-            }
-            else
-            {
-                Console.WriteLine("No delegate instance found");
-            }
+    //    public void PerformAnAction()
+    //    {
+    //        if (actionClassEvent != null)
+    //        {
+    //            actionClassEvent(this, EventArgs.Empty);
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("No delegate instance found");
+    //        }
 
-            if (secondActionClassEvent != null)
-            {
-                secondActionClassEvent(this, EventArgs.Empty);
-            }
-        }
-    }
-    #endregion
+    //        if (secondActionClassEvent != null)
+    //        {
+    //            secondActionClassEvent(this, EventArgs.Empty);
+    //        }
+    //    }
+    //}
+    //#endregion
 
 
 }

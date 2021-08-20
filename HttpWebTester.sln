@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpWebTesting.SampleTest", "HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj", "{725DEDDF-560D-45E7-A462-DC8628FB0EDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestItemManager", "WebTestItemManager\WebTestItemManager.csproj", "{62D8FFE7-7EDF-4919-9923-C5391BF47124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestRules", "WebTestRules\WebTestRules.csproj", "{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{725DEDDF-560D-45E7-A462-DC8628FB0EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{725DEDDF-560D-45E7-A462-DC8628FB0EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{725DEDDF-560D-45E7-A462-DC8628FB0EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D8FFE7-7EDF-4919-9923-C5391BF47124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D8FFE7-7EDF-4919-9923-C5391BF47124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D8FFE7-7EDF-4919-9923-C5391BF47124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D8FFE7-7EDF-4919-9923-C5391BF47124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using HttpWebTesting.Rules;
+﻿using HttpWebTesting.Enums;
+using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using System;
 using System.Net.Http;
@@ -8,31 +9,47 @@ namespace WebTestExecutionEngine
 {
     public class RequestExecution
     {
+        #region -- Properties -----
+        public WTI_Request request { get; set; }
+
+        public HttpResponseMessage httpResponseMessage { get; set; }
+
+        public string ResponseAsString = string.Empty;
+        #endregion
+
+        #region -- Constructors -----
         public RequestExecution() { }
 
         public RequestExecution(WTI_Request wTI_RequestObject)
         {
             request = wTI_RequestObject;
         }
+        #endregion
 
-        public WTI_Request request { get; set; }
-
+        #region Public Methods -----
         public void ProcessRequest()
         {
-            // Handle PreRequest events
-            PreRequestEventArgs args = new PreRequestEventArgs();
-            args.requestItem = request;
-            PreRequest(this, args);
 
             // Execute the request
             var response = ExecuteRequest(request).GetAwaiter().GetResult();
+            if (response != null)
+            {
+                httpResponseMessage = response;
+                ResponseAsString = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            // Handle PostRequest events
-            RuleEventArgs ruleArgs = new RuleEventArgs();
-            ruleArgs.requestItem = request;
-            ruleArgs.response = response;
-
+                // Handle PostRequest events
+                foreach (var rule in request.Rules)
+                {
+                    if (rule.RuleType == RuleTypes_Enums.RequestRule_Validation)
+                    {
+                        ValidationRule validationRule = rule as ValidationRule;
+                        PostRequest += validationRule.PostRequest;
+                        FirePostRequestHandler(response);
+                    }
+                }
+            }
         }
+        #endregion
 
         #region -- PreRequest Event -----
         public void AddPreRequestHandler()
@@ -42,9 +59,7 @@ namespace WebTestExecutionEngine
             OnPreRequest(args);
             request = args.requestItem;
         }
-        
         public event EventHandler<PreRequestEventArgs> PreRequest;
-        
         protected virtual void OnPreRequest(PreRequestEventArgs e)
         {
             EventHandler<PreRequestEventArgs> handler = PreRequest;
@@ -56,7 +71,7 @@ namespace WebTestExecutionEngine
         #endregion
 
         #region -- PostRequest Event -----
-        public void AddPostRequestHandler(HttpResponseMessage response)
+        public void FirePostRequestHandler(HttpResponseMessage response)
         {
             PostRequestEventArgs args = new PostRequestEventArgs();
             args.requestItem = request;

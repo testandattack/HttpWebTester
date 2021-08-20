@@ -14,8 +14,11 @@ namespace HttpWebTester
 
         static void Main(string[] args)
         {
-            Sample sample = new Sample();
-            HttpWebTestSerializer.SerializeTest(sample.httpWebTest, @"c:\temp\sampleHttpWebTest.json");
+            //Sample sample = new Sample();
+            //HttpWebTestSerializer.SerializeTest(sample.httpWebTest, @"c:\temp\sampleHttpWebTest.json");
+
+            ExecuteTests execute = new ExecuteTests();
+            execute.ExecuteTheTests();
         }
     }
 }
