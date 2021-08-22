@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestItemManager", "WebTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestRules", "WebTestRules\WebTestRules.csproj", "{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpWebTestingResults", "HttpWebTestingResults\HttpWebTestingResults.csproj", "{33271138-17E3-4425-90DE-B5807FDA4218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D6FE4A-9844-41FF-8C62-DCA914FF0AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33271138-17E3-4425-90DE-B5807FDA4218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33271138-17E3-4425-90DE-B5807FDA4218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33271138-17E3-4425-90DE-B5807FDA4218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33271138-17E3-4425-90DE-B5807FDA4218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

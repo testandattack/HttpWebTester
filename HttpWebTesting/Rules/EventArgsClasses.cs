@@ -30,9 +30,10 @@ namespace HttpWebTesting.Rules
 
     public class RuleEventArgs : EventArgs
     {
-
-        //public HttpWebTest webTest { get; set; }
+        public HttpWebTest webTest { get; set; }
+        
         public WTI_Request requestItem { get; set; }
+        
         public HttpResponseMessage response { get; set; }
 
         public RuleResult ruleResult { get; set; }

@@ -9,18 +9,18 @@ using System.Text;
 
 namespace HttpWebTesting.Rules
 {
-    public class ValidationRule : BaseRule
+    public class PostRequestRule : BaseRule
     {
         public override object Clone()
         {
             return base.MemberwiseClone();
         }
 
-        public ValidationRule() 
+        public PostRequestRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.RequestRule_Validation;
+            RuleType = Enums.RuleTypes_Enums.RequestRule_PostRequest;
         }
 
-        public virtual void Validate(object sender, RuleEventArgs e) { }
+        public virtual void PostRequest(object sender, PostRequestEventArgs e) { }
     }
 }
