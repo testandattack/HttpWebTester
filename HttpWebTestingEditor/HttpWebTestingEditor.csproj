@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>HttpWebTestEditor</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Comment_16.png" />
+    <None Remove="Resources\Comment_24.png" />
+    <None Remove="Resources\ContextParameter_24.png" />
+    <None Remove="Resources\DataSources_24.png" />
+    <None Remove="Resources\DataSource_24.png" />
+    <None Remove="Resources\DataTable_24.png" />
+    <None Remove="Resources\ExtractionRule_24.png" />
+    <None Remove="Resources\Failed_16.png" />
+    <None Remove="Resources\Folder_24.png" />
+    <None Remove="Resources\FormPostParam_24.png" />
+    <None Remove="Resources\Header_24.png" />
+    <None Remove="Resources\Passed_16.png" />
+    <None Remove="Resources\QueryStringParam_24.png" />
+    <None Remove="Resources\RequestPlugin_24.png" />
+    <None Remove="Resources\TransactionTimer_24.png" />
+    <None Remove="Resources\ValidationRule_24.png" />
+    <None Remove="Resources\WebRequest_24.png" />
+    <None Remove="Resources\WebTestCondition_24.png" />
+    <None Remove="Resources\WebTestLoop_24.png" />
+    <None Remove="Resources\WebTestPlugin_24.png" />
+    <None Remove="Resources\WebTest_24.png" />
+    <None Remove="Resources\Webtest_Icons_Image.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Comment_16.png" />
+    <Resource Include="Resources\Comment_24.png" />
+    <Resource Include="Resources\ContextParameter_24.png" />
+    <Resource Include="Resources\DataSources_24.png" />
+    <Resource Include="Resources\DataSource_24.png" />
+    <Resource Include="Resources\DataTable_24.png" />
+    <Resource Include="Resources\ExtractionRule_24.png" />
+    <Resource Include="Resources\Failed_16.png" />
+    <Resource Include="Resources\Folder_24.png" />
+    <Resource Include="Resources\FormPostParam_24.png" />
+    <Resource Include="Resources\Header_24.png" />
+    <Resource Include="Resources\Passed_16.png" />
+    <Resource Include="Resources\QueryStringParam_24.png" />
+    <Resource Include="Resources\RequestPlugin_24.png" />
+    <Resource Include="Resources\TransactionTimer_24.png" />
+    <Resource Include="Resources\ValidationRule_24.png" />
+    <Resource Include="Resources\WebRequest_24.png" />
+    <Resource Include="Resources\WebTestCondition_24.png" />
+    <Resource Include="Resources\WebTestLoop_24.png" />
+    <Resource Include="Resources\WebTestPlugin_24.png" />
+    <Resource Include="Resources\WebTest_24.png" />
+    <Resource Include="Resources\Webtest_Icons_Image.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
+    <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
+    <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

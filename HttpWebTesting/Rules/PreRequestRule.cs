@@ -9,6 +9,9 @@ using System.Text;
 
 namespace HttpWebTesting.Rules
 {
+    /// <summary>
+    /// A base class for creating custom PreRequest rules for the webtest.
+    /// </summary>
     public class PreRequestRule : BaseRule
     {
         public override object Clone()
@@ -19,6 +22,7 @@ namespace HttpWebTesting.Rules
         public PreRequestRule() 
         {
             RuleType = Enums.RuleTypes_Enums.RequestRule_PreRequest;
+            baseRuleType = BaseRuleTypes.PreRequest;
         }
 
         public virtual void PreRequest(object sender, PreRequestEventArgs e) { }

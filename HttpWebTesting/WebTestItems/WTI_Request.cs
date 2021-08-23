@@ -64,6 +64,12 @@ namespace HttpWebTesting.WebTestItems
         /// </summary>
         public bool ParseDependentRequests { get; set; }
 
+        /// <summary>
+        /// If true, then the request will have all built in data binding occur BEFORE
+        /// it executes any PreRequest event handlers.
+        /// </summary>
+        public bool FirePreRequestHandlersAfterDataBinding { get; set; }
+
         #region -- Constructors -----
         /// <summary>
         /// Creates a new Request object.
@@ -98,6 +104,7 @@ namespace HttpWebTesting.WebTestItems
             RecordResults = true;
             FollowRedirects = true;
             ParseDependentRequests = true;
+            FirePreRequestHandlersAfterDataBinding = true;
 
             objectItemType = Enums.WebTestItemType.Wti_RequestObject;
             Enabled = true;

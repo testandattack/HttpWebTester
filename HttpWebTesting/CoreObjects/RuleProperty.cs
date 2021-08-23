@@ -5,9 +5,9 @@ using GTC.Extensions;
 
 namespace HttpWebTesting.CoreObjects
 {
-    public class ComparisonOperand
+    public class RuleProperty
     {
-        public string Operand { get; set; }
+        public string Value { get; set; }
 
         public Type Type { get; private set; }
 
@@ -15,20 +15,20 @@ namespace HttpWebTesting.CoreObjects
         /// The constructor takes a string value and determines if it is 
         /// a boolean, a numeric value or a string and assigns the type.
         /// </summary>
-        /// <param name="operandValue"></param>
-        public ComparisonOperand(string operandValue)
+        /// <param name="propertyValue"></param>
+        public RuleProperty(string propertyValue)
         {
-            if (operandValue.IsBoolean())
+            if (propertyValue.IsBoolean())
                 Type = typeof(System.Boolean);
 
-            else Type = operandValue.IsNumeric();
+            else Type = propertyValue.IsNumeric();
 
-            Operand = operandValue;
+            Value = propertyValue;
         }
 
-        public ComparisonOperand()
+        public RuleProperty()
         {
-            Operand = string.Empty;
+            Value = string.Empty;
             Type = typeof(System.String);
         }
     }

@@ -75,7 +75,8 @@ namespace HttpWebTesting.SampleTest
             req.ReportingName = "Contoso Home Page Post.";
 
             // Add a rule to it
-            var responseContainsValidationRule = new ValidateResponseContains("Phrase to look for in the response");
+            var responseContainsValidationRule = new ValidateResponseText();
+            responseContainsValidationRule.ValueToFind = "Phrase to look for in the response";
             req.Rules.Add(responseContainsValidationRule);
 
             //Add request to the collection
@@ -87,11 +88,11 @@ namespace HttpWebTesting.SampleTest
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
             message.Headers.Add("CustomHeader", "customeHeaderValue");
             
-            MultipartFormDataContent content = new MultipartFormDataContent();
+            //MultipartFormDataContent content = new MultipartFormDataContent();
 
-            content.Add(new StringContent(Guid.NewGuid().ToString()), "Id");
-            content.Add(new StringContent("Value 2"), "Key2");
-            message.Content = content;
+            //content.Add(new StringContent(Guid.NewGuid().ToString()), "Id");
+            //content.Add(new StringContent("Value 2"), "Key2");
+            //message.Content = content;
             return message;
         }
 
@@ -100,13 +101,13 @@ namespace HttpWebTesting.SampleTest
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
             message.Headers.Add("CustomHeader", "customeHeaderValue");
 
-            string jsonString = @"
-{
+//            string jsonString = @"
+//{
     
-}";
+//}";
 
-            StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            message.Content = content;
+            //StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            //message.Content = content;
             return message;
         }
 

@@ -67,14 +67,14 @@ namespace HttpWebTesting.WebTestItems
         /// Contains the value on the left side of the comparison statement
         /// </summary>
         [Category("Comparison")]
-        public ComparisonOperand FirstOperand { get; set; }
+        public RuleProperty FirstOperand { get; set; }
 
 
         /// <summary>
         /// Contains the value on the right side of the comparison statement
         /// </summary>
         [Category("Comparison")]
-        public ComparisonOperand SecondOperand { get; set; }
+        public RuleProperty SecondOperand { get; set; }
 
         /// <summary>
         /// [OPTIONAL] The starting value for the control when run as a loop
@@ -124,5 +124,13 @@ namespace HttpWebTesting.WebTestItems
         }
 
         #endregion
+
+        public string GetLoopControlDisplayName()
+        {
+            if (this.ControlComparisonType == HttpWebTesting.Enums.ComparisonType.IsLoop)
+                return $"LOOP: {this.Name}";
+            else
+                return $"CONDITION: {this.Name}";
+        }
     }
 }

@@ -1,19 +1,24 @@
 ﻿using HttpWebTesting.Enums;
 using HttpWebTesting.Rules;
+using Serilog;
 using System;
 
 namespace WebTestRules
 {
     public class ValidateStatusCode : ValidationRule
     {
-        public ValidateStatusCode() { }
+        public ValidateStatusCode() 
+        { 
+            type = typeof(ValidateStatusCode);
+            TypeAsString = "ValidateStatusCode";
+        }
 
-        public override void PostRequest(object sender, PostRequestEventArgs e)
+        public override void Validate(object sender, RuleEventArgs e)
         {
+            Log.ForContext("SourceContext", "Rules").Debug("entering ValidateStatusCode-Validate for {request}", e.requestItem.guid);
             if (e.response.IsSuccessStatusCode)
             {
                 RuleResult = RuleResult.Passed;
-                Console.WriteLine("ValidateStatusCode rule passed.");
             }
             else
             {

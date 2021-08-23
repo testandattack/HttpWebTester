@@ -10,21 +10,21 @@ using System.Text;
 namespace HttpWebTesting.Rules
 {
     /// <summary>
-    /// A base class for creating custom PostRequest rules for the webtest.
+    /// A base class for creating custom PostWebTest rules for the webtest.
     /// </summary>
-    public class PostRequestRule : BaseRule
+    public class PostWebTestRule : BaseRule
     {
         public override object Clone()
         {
             return base.MemberwiseClone();
         }
 
-        public PostRequestRule() 
+        public PostWebTestRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.RequestRule_PostRequest;
-            baseRuleType = BaseRuleTypes.PostRequest;
+            RuleType = Enums.RuleTypes_Enums.PostTest;
+            baseRuleType = BaseRuleTypes.PostTest;
         }
 
-        public virtual void PostRequest(object sender, PostRequestEventArgs e) { }
+        public virtual void PostWebTest(object sender, PostWebtestEventArgs e) { }
     }
 }

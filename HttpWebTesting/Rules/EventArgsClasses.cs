@@ -5,6 +5,9 @@ using System.Net.Http;
 
 namespace HttpWebTesting.Rules
 {
+    /// <summary>
+    /// The argument collection passed into any event handlers for 
+    /// </summary>
     public class PreWebtestEventArgs : EventArgs
     {
         public HttpWebTest webTest { get; set; }
@@ -38,4 +41,10 @@ namespace HttpWebTesting.Rules
 
         public RuleResult ruleResult { get; set; }
     }
+
+    public class PostWebtestEventArgs : EventArgs
+    {
+        public HttpWebTest webTest { get; set; }
+    }
+
 }

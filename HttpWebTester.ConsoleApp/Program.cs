@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using HttpWebTesting.SampleTest;
 using HttpWebTesting;
+using WebTestItemManager;
 
 namespace HttpWebTester
 {
@@ -14,11 +15,15 @@ namespace HttpWebTester
 
         static void Main(string[] args)
         {
-            //Sample sample = new Sample();
-            //HttpWebTestSerializer.SerializeTest(sample.httpWebTest, @"c:\temp\sampleHttpWebTest.json");
+            // Build and Serialize a webtest
+            Sample sample = new Sample();
+            HttpWebTestSerializer.SerializeTest(sample.httpWebTest, @"c:\temp\sampleHttpWebTest.json");
 
-            ExecuteTests execute = new ExecuteTests();
-            execute.ExecuteTheTests();
+            // Make sure the test will deserialize
+            HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleHttpWebTest.json");
+
+            //ExecuteTests execute = new ExecuteTests();
+            //execute.ExecuteTheTests();
         }
     }
 }
