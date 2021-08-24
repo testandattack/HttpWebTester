@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebTestItemManager;
 
 namespace HttpWebTestingEditor
 {
@@ -31,11 +32,12 @@ namespace HttpWebTestingEditor
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _webTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleHttpWebTest.json");
+            PopulateTreeView();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            
         }
 
         private void tvWebTest_ContextMenuOpening(object sender, ContextMenuEventArgs e)

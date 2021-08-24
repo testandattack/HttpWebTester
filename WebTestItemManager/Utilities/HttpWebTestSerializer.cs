@@ -1,14 +1,6 @@
-﻿using HttpWebTesting.WebTestItems;
+﻿using HttpWebTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using JsonSubTypes;
-using HttpWebTesting.Enums;
-using HttpWebTesting.Rules;
-using HttpWebTesting;
 
 namespace WebTestItemManager
 {
@@ -20,7 +12,6 @@ namespace WebTestItemManager
             {
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
-                //settings.TypeNameHandling = TypeNameHandling.Objects & TypeNameHandling.Arrays;
                 sw.Write(JsonConvert.SerializeObject(httpWebTest, Formatting.Indented, settings));
             }
         }
@@ -30,7 +21,7 @@ namespace WebTestItemManager
             using (StreamReader sr = new StreamReader(webTestFileName))
             {
                 JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.Converters = new List<JsonConverter> { new RuleConverter() };
+                settings.TypeNameHandling = TypeNameHandling.Objects;
                 return JsonConvert.DeserializeObject<HttpWebTest>(sr.ReadToEnd(), settings);
             }
         }

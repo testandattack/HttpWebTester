@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HttpWebTestingEditor"
+        xmlns:pt="http://propertytools.org/wpf"
         mc:Ignorable="d"
         Title="HttpWebTestEditor" Height="800" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
@@ -37,7 +38,7 @@
             </TabItem>
         </TabControl>
         <GridSplitter x:Name="_gridSplitter" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="12" Cursor="SizeWE" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-
+        
         <StatusBar Height="25" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <StatusBarItem x:Name="sbiMessageItem" MinWidth="500">
                 <Label x:Name="tsslMessage" Padding="3,0,3,0" Content="This space for rent." />

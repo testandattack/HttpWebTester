@@ -137,7 +137,7 @@ namespace HttpWebTestingEditor
 
             WTI_Request wtr = (WTI_Request)item;
             treeItem.Header = CustomizeTreeViewItem(wtr.requestItem.RequestUri.AbsoluteUri, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
-
+            AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }
 
@@ -162,14 +162,10 @@ namespace HttpWebTestingEditor
             }
         }
 
-        private void AddRequestLevelRules(TreeViewItem parentItem)
+        private void AddRequestLevelRules(TreeViewItem parentItem, WTI_Request request)
         {
-            RuleCollection rules = _webTest.Rules.GetRulesOfType(RuleTypes_Enums.RequestRule_PreRequest);
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.RequestRule_Validation));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.RequestRule_Extraction));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.RequestRule_PostRequest));
 
-            if (rules.Count == 0)
+            if (request.Rules.Count == 0)
                 return;
 
             TreeViewItem treeItem = new TreeViewItem();
@@ -178,7 +174,7 @@ namespace HttpWebTestingEditor
             parentItem.Items.Add(treeItem);
 
             int x = 0;
-            foreach (var rule in rules)
+            foreach (var rule in request.Rules)
             {
                 TreeViewItem subItem = new TreeViewItem();
                 subItem.Header = CustomizeTreeViewItem(rule.Name, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
@@ -189,14 +185,8 @@ namespace HttpWebTestingEditor
 
         private void AddTestLevelRules(TreeViewItem parentItem)
         {
-            RuleCollection rules = _webTest.Rules.GetRulesOfType(RuleTypes_Enums.PreTest);
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.TestRule_PreRequest));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.TestRule_Validation));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.TestRule_Extraction));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.TestRule_PostRequest));
-            rules.AddRange(_webTest.Rules.GetRulesOfType(RuleTypes_Enums.PostTest));
 
-            if (rules.Count == 0)
+            if (_webTest.Rules.Count == 0)
                 return;
 
             TreeViewItem treeItem = new TreeViewItem();
@@ -205,7 +195,7 @@ namespace HttpWebTestingEditor
             parentItem.Items.Add(treeItem);
 
             int x = 0;
-            foreach (var rule in rules)
+            foreach (var rule in _webTest.Rules)
             {
                 TreeViewItem subItem = new TreeViewItem();
                 subItem.Header = CustomizeTreeViewItem(rule.Name, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());

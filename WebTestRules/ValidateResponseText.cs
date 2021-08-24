@@ -26,7 +26,7 @@ namespace WebTestRules
         public ValidateResponseText()
         {
             type = typeof(ValidateResponseText);
-            TypeAsString = "ValidateResponseContains";
+            Name = "Validate Response Text";
         }
 
 

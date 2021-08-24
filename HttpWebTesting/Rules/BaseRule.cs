@@ -49,10 +49,7 @@ namespace HttpWebTesting.Rules
         /// </summary>
         public bool Enabled = true;
 
-
         protected BaseRuleTypes baseRuleType { get; set; }
-
-        public string TypeAsString { get; set; }
 
         #region -- Constructors -----
         protected BaseRule()

@@ -10,7 +10,7 @@ namespace WebTestRules
         public ValidateStatusCode() 
         { 
             type = typeof(ValidateStatusCode);
-            TypeAsString = "ValidateStatusCode";
+            Name = "Validate IsSuccess Status Code";
         }
 
         public override void Validate(object sender, RuleEventArgs e)

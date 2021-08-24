@@ -66,7 +66,6 @@ namespace WebTestRules
             Name = "Extract String";
             Description = "Extracts a string from the response based on the properties set for the rule instance.";
             type = typeof(ExtractString);
-            TypeAsString = "ExtractString";
             RuleResult = RuleResult.NotEvaluatedYet;
         }
         #endregion
