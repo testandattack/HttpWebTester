@@ -1,5 +1,7 @@
 ﻿using HttpWebTesting.Collections;
+using HttpWebTesting.CoreObjects;
 using System;
+using System.ComponentModel;
 using System.Net.Http;
 
 namespace HttpWebTesting.WebTestItems
@@ -34,6 +36,10 @@ namespace HttpWebTesting.WebTestItems
         /// The Reporting Name is a report friendly name for this request. If the value is empty, then
         /// the request's URL will be used for the reporting.
         /// </summary>
+        [DisplayName("Reporting Name")]
+        [Description("a report friendly name for this request.")]
+        [Category("General")]
+        [DefaultValue("empty")]
         public string ReportingName { get; set; }
 
         /// <summary>
@@ -69,6 +75,8 @@ namespace HttpWebTesting.WebTestItems
         /// it executes any PreRequest event handlers.
         /// </summary>
         public bool FirePreRequestHandlersAfterDataBinding { get; set; }
+
+        internal PropertyDisplayInfoCollection displayInfo;
 
         #region -- Constructors -----
         /// <summary>
@@ -111,6 +119,8 @@ namespace HttpWebTesting.WebTestItems
             guid = Guid.NewGuid();
             itemComment = string.Empty;
             Rules = new RuleCollection();
+            displayInfo = new PropertyDisplayInfoCollection();
+            displayInfo.AddAllItems(this, "Request Object");
         }
         #endregion
 

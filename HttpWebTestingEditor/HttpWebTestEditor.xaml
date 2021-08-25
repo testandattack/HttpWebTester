@@ -18,6 +18,13 @@
             <ColumnDefinition x:Name="GridSplitter" Width="5"/>
             <ColumnDefinition x:Name="gridMainWindowRightSide" Width="2*"/>
         </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3" Width="Auto" Height="20" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" >
+            <MenuItem Header="_File" >
+                <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open a .webtest file for editing." Click="tsmiOpen_Click" />
+                <MenuItem Background="#7F404040" Height="4" Margin="5,0" />
+                <MenuItem x:Name="tsmiAppExit" Header="_Exit" HorizontalAlignment="Left" ToolTip="This will close the application. If the developer did his homework, the application will prompt you for saving any changes if you have not already saved it." Click="tsmiAppExit_Click"/>
+            </MenuItem>
+        </Menu>
 
         <TabControl Grid.Row="1" Grid.Column="0" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabTreeView" Header="HttpWebTest">

@@ -14,6 +14,7 @@ namespace HttpWebTestingEditor
 {
     public partial class HttpWebTestEditor : Window
     {
+        #region -- Treeview Population Methods -----
         private void PopulateTreeView()
         {
             tvWebTest.Items.Clear();
@@ -37,6 +38,7 @@ namespace HttpWebTestingEditor
             // expand tree to the first level
             treeItem.IsExpanded = true;
         }
+
         private StackPanel CustomizeTreeViewItem(object itemObj, BitmapImage bmi, int tvItemId = 0)
         {
             return CustomizeTreeViewItem(itemObj, bmi, Colors.White, tvItemId);
@@ -203,6 +205,9 @@ namespace HttpWebTestingEditor
                 treeItem.Items.Add(subItem);
             }
         }
+        #endregion
+
+
     }
 
     public class tvStackPanel : StackPanel

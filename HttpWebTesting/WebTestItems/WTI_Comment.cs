@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace HttpWebTesting.WebTestItems
@@ -12,6 +13,10 @@ namespace HttpWebTesting.WebTestItems
         /// <summary>
         /// The comment text to be displayed in the test viewer
         /// </summary>
+        [DisplayName("Comment Text")]
+        [Description("The text to show in the comment")]
+        [Category("General")]
+        [DefaultValue("")]
         public string CommentText { get; set; }
 
         public WTI_Comment()
