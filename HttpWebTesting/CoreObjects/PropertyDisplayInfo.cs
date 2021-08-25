@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Text;
 
 namespace HttpWebTesting.CoreObjects
 {
     public class PropertyDisplayInfo
     {
+        public bool Browsable { get; private set; }
+
+        public bool JsonIgnore { get; private set; }
+
         public string DisplayName { get; private set; }
         
         public string Description { get; private set; }
@@ -17,40 +22,75 @@ namespace HttpWebTesting.CoreObjects
 
         public Type type { get; private set; }
 
-        public PropertyDisplayInfo(IEnumerable<Attribute> attributes)
+        public List<string> unknownCustomAttributes { get; private set; }
+
+        public PropertyDisplayInfo(PropertyInfo prop)
         {
+            Browsable = true;
+            JsonIgnore = false;
             DisplayName = "";
             Description = "";
             Category = "";
             DefaultValue = null;
-            SetAttributeValues(attributes);
+            unknownCustomAttributes = new List<string>();
+            GetPropertyValues(prop);
         }
 
-        public void SetAttributeValues(IEnumerable<Attribute> attributes)
+        private void GetPropertyValues(PropertyInfo prop)
         {
-            foreach(var attribute in attributes)
+            var customProps = prop.GetCustomAttributesData();
+            if (customProps != null && customProps.Count > 0)
             {
-                if(attribute.GetType() == typeof(DisplayNameAttribute))
-                {
-                    DisplayName = ((DisplayNameAttribute)attribute).DisplayName;
-                }
-                else if (attribute.GetType() == typeof(DescriptionAttribute))
-                {
-                    Description = ((DescriptionAttribute)attribute).Description;
-                }
-                else if (attribute.GetType() == typeof(CategoryAttribute))
-                {
-                    Category = ((CategoryAttribute)attribute).Category;
-                }
-                else if (attribute.GetType() == typeof(DefaultValueAttribute))
-                {
-                    DefaultValue = ((DefaultValueAttribute)attribute).Value;
-                }
+                SetAttributeValues(customProps);
+            }
+            else
+            {
+                SetAttributeValues(prop);
+            }
+            SetType(prop.PropertyType);
+        }
 
+        private void SetAttributeValues(IList<CustomAttributeData> attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                if (attribute.AttributeType.Name == "BrowsableAttribute")
+                {
+                    Browsable = (bool)attribute.ConstructorArguments[0].Value;
+                }
+                else if(attribute.AttributeType.Name == "DisplayNameAttribute")
+                {
+                    DisplayName = (string)attribute.ConstructorArguments[0].Value;
+                }
+                else if (attribute.AttributeType.Name == "DescriptionAttribute")
+                {
+                    Description = (string)attribute.ConstructorArguments[0].Value;
+                }
+                else if (attribute.AttributeType.Name == "CategoryAttribute")
+                {
+                    Category = (string)attribute.ConstructorArguments[0].Value;
+                }
+                else if (attribute.AttributeType.Name == "DefaultValueAttribute")
+                {
+                    DefaultValue = attribute.ConstructorArguments[0].Value;
+                }
+                else if (attribute.AttributeType.Name == "JsonIgnoreAttribute")
+                {
+                    JsonIgnore = true;
+                }
+                else
+                {
+                    unknownCustomAttributes.Add(attribute.AttributeType.Name);
+                }
             }
         }
 
-        public void SetType(Type itemType)
+        private void SetAttributeValues(PropertyInfo prop)
+        {
+            DisplayName = prop.Name;
+        }
+
+        private void SetType(Type itemType)
         {
             type = itemType;
         }
