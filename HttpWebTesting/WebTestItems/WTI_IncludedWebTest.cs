@@ -3,6 +3,11 @@ using System.ComponentModel;
 
 namespace HttpWebTesting.WebTestItems
 {
+    /// <summary>
+    /// Holds an embedded <see cref="HttpWebTest"/> and exposes
+    /// extra settings for how that webtest will interact with
+    /// the parent webtest.
+    /// </summary>
     public class WTI_IncludedWebTest : WebTestItem
     {
         /// <summary>

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HttpWebTesting.Enums
+﻿namespace HttpWebTesting.Enums
 {
     /// <summary>
     /// Lists the rule's scope and the location where a given rule should be executed
     /// </summary>
     /// <include file='Documentation/xml_include_tag.xml' path='MyDocs/MyMembers[@name="RuleExecutionOrder"]'/>
-    public enum BaseRuleTypes
+    public enum BaseRuleType
     {
 
         PreTest = 1,

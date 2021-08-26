@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HttpWebTesting.Enums
+﻿namespace HttpWebTesting.Enums
 {
     /// <summary>
     /// Flags used by the parser on its initial pass of building the test objects.

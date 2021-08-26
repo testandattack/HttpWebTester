@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HttpWebTesting.Enums
+﻿namespace HttpWebTesting.Enums
 {
     /// <summary>
     /// Describes the behavior of the cursor for the data source.

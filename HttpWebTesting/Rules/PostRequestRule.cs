@@ -22,7 +22,7 @@ namespace HttpWebTesting.Rules
         public PostRequestRule() 
         {
             RuleType = Enums.RuleTypes_Enums.RequestRule_PostRequest;
-            baseRuleType = BaseRuleTypes.PostRequest;
+            baseRuleType = BaseRuleType.PostRequest;
         }
 
         public virtual void PostRequest(object sender, PostRequestEventArgs e) { }

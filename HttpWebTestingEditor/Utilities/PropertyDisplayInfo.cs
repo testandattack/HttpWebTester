@@ -6,6 +6,10 @@ using System.Text;
 
 namespace HttpWebTestingEditor
 {
+    /// <summary>
+    /// This class represents a list of information (attributes) about a Property within a 
+    /// class object. This information is used to help manage Property Editors, etc. 
+    /// </summary>
     public class PropertyDisplayInfo
     {
         public bool Browsable { get; private set; }

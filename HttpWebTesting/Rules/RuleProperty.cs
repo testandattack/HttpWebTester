@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using GTC.Extensions;
 
-namespace HttpWebTesting.CoreObjects
+namespace HttpWebTesting.Rules
 {
+    /// <summary>
+    /// Property used as input to a rule or a control loop.
+    /// </summary>
     public class RuleProperty
     {
         public string Value { get; set; }

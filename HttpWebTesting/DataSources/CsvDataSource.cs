@@ -16,7 +16,7 @@ namespace HttpWebTesting.DataSources
 
         public CsvDataSource() 
         {
-            dataSourceType = DataSourceType.csv;
+            dataSourceType = DataSourceType.CSV;
         }
     }
 }

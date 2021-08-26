@@ -22,7 +22,7 @@ namespace HttpWebTesting.Rules
         public PreWebTestRule() 
         {
             RuleType = Enums.RuleTypes_Enums.PreTest;
-            baseRuleType = BaseRuleTypes.PreTest;
+            baseRuleType = BaseRuleType.PreTest;
         }
 
         public virtual void PreWebTest(object sender, PreWebtestEventArgs e) { }

@@ -5,9 +5,15 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using HttpWebTesting.Rules;
 
 namespace HttpWebTesting.WebTestItems
 {
+    /// <summary>
+    /// A container that holds nested <see cref="WebTestItem"/>s and allows
+    /// you to specify if, when, and how often the embedded items should be
+    /// executed.
+    /// </summary>
     public class WTI_LoopControl : WebTestItem
     {
         #region -- Properties -----
@@ -125,6 +131,11 @@ namespace HttpWebTesting.WebTestItems
 
         #endregion
 
+        /// <summary>
+        /// This method is exposed to allow the UI editor to get a proper Display Name
+        /// for the control.
+        /// </summary>
+        /// <returns></returns>
         public string GetLoopControlDisplayName()
         {
             if (this.ControlComparisonType == HttpWebTesting.Enums.ComparisonType.IsLoop)

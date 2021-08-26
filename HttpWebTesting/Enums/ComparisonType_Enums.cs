@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HttpWebTesting.Enums
+﻿namespace HttpWebTesting.Enums
 {
     /// <summary>
     /// This enum describes the type of comparisons available for the control.

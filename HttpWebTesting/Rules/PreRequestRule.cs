@@ -22,7 +22,7 @@ namespace HttpWebTesting.Rules
         public PreRequestRule() 
         {
             RuleType = Enums.RuleTypes_Enums.RequestRule_PreRequest;
-            baseRuleType = BaseRuleTypes.PreRequest;
+            baseRuleType = BaseRuleType.PreRequest;
         }
 
         public virtual void PreRequest(object sender, PreRequestEventArgs e) { }

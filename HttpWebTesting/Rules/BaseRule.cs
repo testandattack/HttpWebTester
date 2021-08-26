@@ -8,12 +8,12 @@ using System.ComponentModel;
 namespace HttpWebTesting.Rules
 {
     [JsonConverter(typeof(JsonSubtypes), "baseRuleType")]
-    [JsonSubtypes.KnownSubType(typeof(PreWebTestRule), BaseRuleTypes.PreTest)]
-    [JsonSubtypes.KnownSubType(typeof(PreRequestRule), BaseRuleTypes.PreRequest)]
-    [JsonSubtypes.KnownSubType(typeof(ValidationRule), BaseRuleTypes.Validation)]
-    [JsonSubtypes.KnownSubType(typeof(ExtractionRule), BaseRuleTypes.Extraction)]
-    [JsonSubtypes.KnownSubType(typeof(PostRequestRule), BaseRuleTypes.PostRequest)]
-    [JsonSubtypes.KnownSubType(typeof(PostWebTestRule), BaseRuleTypes.PostTest)]
+    [JsonSubtypes.KnownSubType(typeof(PreWebTestRule), BaseRuleType.PreTest)]
+    [JsonSubtypes.KnownSubType(typeof(PreRequestRule), BaseRuleType.PreRequest)]
+    [JsonSubtypes.KnownSubType(typeof(ValidationRule), BaseRuleType.Validation)]
+    [JsonSubtypes.KnownSubType(typeof(ExtractionRule), BaseRuleType.Extraction)]
+    [JsonSubtypes.KnownSubType(typeof(PostRequestRule), BaseRuleType.PostRequest)]
+    [JsonSubtypes.KnownSubType(typeof(PostWebTestRule), BaseRuleType.PostTest)]
     public abstract class BaseRule : ICloneable
     {
         /// <summary>
@@ -49,7 +49,7 @@ namespace HttpWebTesting.Rules
         /// </summary>
         public bool Enabled = true;
 
-        protected BaseRuleTypes baseRuleType { get; set; }
+        protected BaseRuleType baseRuleType { get; set; }
 
         #region -- Constructors -----
         protected BaseRule()

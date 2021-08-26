@@ -3,6 +3,12 @@ using System;
 
 namespace HttpWebTesting.WebTestItems
 {
+    /// <summary>
+    /// This container allows you to group a collection of
+    /// <see cref="WebTestItem"/>s. It will then capture
+    /// total time for the execution of all items in the
+    /// container.
+    /// </summary>
     public class WTI_Transaction : WebTestItem
     {
         #region -- Properties -----

@@ -10,6 +10,11 @@ namespace HttpWebTestingEditor
 {
     public static class BitmapConversion
     {
+        /// <summary>
+        /// This converts a normal bitmap to a BitmapSource object that can be used by WPF controls.
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
         public static BitmapSource ToWpfBitmap(this Bitmap bitmap)
         {
             using (MemoryStream stream = new MemoryStream())
@@ -41,9 +46,9 @@ namespace HttpWebTestingEditor
         {
             uiElement.Dispatcher.Invoke(DispatcherPriority.Send, EmptyDelegate);
         }
-    }
-//    //Example of using the delegate:
-//    tsslMessage.Content = sUpdated;
-//tsslMessage.Refresh();
 
+        //    //Example of using the delegate:
+        //    tsslMessage.Content = sUpdated;
+        //    tsslMessage.Refresh();
+    }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HttpWebTesting.Enums
+﻿namespace HttpWebTesting.Enums
 {
     /// <summary>
     /// Lists the location where a given rule should be executed

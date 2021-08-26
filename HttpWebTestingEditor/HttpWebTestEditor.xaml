@@ -18,6 +18,8 @@
             <ColumnDefinition x:Name="GridSplitter" Width="5"/>
             <ColumnDefinition x:Name="gridMainWindowRightSide" Width="2*"/>
         </Grid.ColumnDefinitions>
+        
+        <!-- Menu Items-->
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Width="Auto" Height="20" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" >
             <MenuItem Header="_File" >
                 <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open a .webtest file for editing." Click="tsmiOpen_Click" />
@@ -26,6 +28,7 @@
             </MenuItem>
         </Menu>
 
+        <!-- Main Window Left Tab Control -->
         <TabControl Grid.Row="1" Grid.Column="0" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabTreeView" Header="HttpWebTest">
                 <TreeView x:Name="tvWebTest" ContextMenuOpening="tvWebTest_ContextMenuOpening" SelectedItemChanged="tvWebTest_SelectedItemChanged">
@@ -44,12 +47,18 @@
                 </TreeView>
             </TabItem>
         </TabControl>
+
+        <!-- Main Window Grid Splitter -->
         <GridSplitter x:Name="_gridSplitter" Grid.Row="1" Grid.Column="1" Grid.RowSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="12" Cursor="SizeWE" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+
+        <!-- Main Window Right Tab Control -->
         <TabControl Grid.Row="1" Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabProperties" Header="Properties" >
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>
         </TabControl>
+
+        <!-- Status Bar at the bottom of the window -->
         <StatusBar Height="25" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <StatusBarItem x:Name="sbiMessageItem" MinWidth="500">
                 <Label x:Name="tsslMessage" Padding="3,0,3,0" Content="This space for rent." />

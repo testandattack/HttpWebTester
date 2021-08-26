@@ -20,10 +20,13 @@ namespace HttpWebTesting.Rules
             return base.MemberwiseClone();
         }
 
+        public RuleResult Outcome { get; set; }
+
         public ValidationRule() 
         {
             RuleType = Enums.RuleTypes_Enums.RequestRule_Validation;
-            baseRuleType = BaseRuleTypes.Validation;
+            baseRuleType = BaseRuleType.Validation;
+            Outcome = RuleResult.NotEvaluatedYet;
         }
 
         public virtual void Validate(object sender, RuleEventArgs e) { }

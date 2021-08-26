@@ -9,6 +9,7 @@ namespace HttpWebTesting.Collections
         {
             return base.MemberwiseClone();
         }
+
         public RuleCollection GetRulesOfType(RuleTypes_Enums ruleType)
         {
             RuleCollection rules = new RuleCollection();
