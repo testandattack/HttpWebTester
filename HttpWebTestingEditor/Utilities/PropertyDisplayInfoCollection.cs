@@ -7,7 +7,7 @@ using System.Text;
 using HttpWebTesting.CoreObjects;
 using System.ComponentModel;
 
-namespace HttpWebTesting.CoreObjects
+namespace HttpWebTestingEditor
 {
     public class PropertyDisplayInfoCollection : BaseCollection<PropertyDisplayInfo>
     {
@@ -30,6 +30,11 @@ namespace HttpWebTesting.CoreObjects
         }
 
 
-    }
+        // To Use:
+        //displayInfo = new PropertyDisplayInfoCollection();
+        //displayInfo.AddAllItems(this, "Request Object");
 
-}
+
+        }
+
+    }

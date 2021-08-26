@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
-namespace HttpWebTesting.CoreObjects
+namespace HttpWebTestingEditor
 {
     public class PropertyDisplayInfo
     {

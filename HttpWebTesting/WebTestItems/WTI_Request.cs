@@ -1,12 +1,8 @@
 ﻿using HttpWebTesting.Collections;
-using HttpWebTesting.CoreObjects;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Net.Http;
-using System.Net.Http.
-using GTC.Extensions;
-using System.Net.Http.Headers;
 
 namespace HttpWebTesting.WebTestItems
 {
@@ -30,18 +26,8 @@ namespace HttpWebTesting.WebTestItems
         /// The request object that gets executed by the <see cref="HttpClient"/>.
         /// </summary>
         [Browsable(false)]
-        [JsonIgnore]
         public HttpRequestMessage requestItem { get; set; }
 
-        //#region -- Properties that map to HttpRequestMessage -----
-        //public HttpRequestHeaders HeaderCollection { get; set; }
-        //public PropertyCollection QueryStringCollection { get; set; }
-        //public HttpMethod Method { get; set; }
-        //public string Url { get; set; }
-        //public string Version { get; set; }
-        //#endregion
-
-        #region -- Public Properties -----
         /// <summary>
         /// a collection of rules to execute either before or after the request gets executed.
         /// </summary>
@@ -91,17 +77,6 @@ namespace HttpWebTesting.WebTestItems
         [DefaultValue(true)]
         public bool FollowRedirects { get; set; }
 
-        ///// <summary>
-        ///// If true, this flag tells the test engine to parse the response and attempt to execute all
-        ///// the dependent requests that would normally be automatically executed by a browser making
-        ///// the call for this request.
-        ///// </summary>
-        //[DisplayName("Parse Dependent Requests")]
-        //[Description("")]
-        //[Category("Behavior")]
-        //[DefaultValue(true)]
-        //public bool ParseDependentRequests { get; set; }
-
         /// <summary>
         /// If true, then the request will have all built in data binding occur BEFORE
         /// it executes any PreRequest event handlers.
@@ -111,9 +86,6 @@ namespace HttpWebTesting.WebTestItems
         [Category("Behavior")]
         [DefaultValue(true)]
         public bool FirePreRequestHandlersAfterDataBinding { get; set; }
-        #endregion
-
-        internal PropertyDisplayInfoCollection displayInfo;
         #endregion
 
         #region -- Constructors -----
@@ -127,9 +99,7 @@ namespace HttpWebTesting.WebTestItems
         /// <item>ThinkTime = 0</item>
         /// <item>RecordResults = true</item>
         /// <item>FollowRedirects = true</item>
-        /// <item>ParseDependentRequests = true</item>
         /// </list>
-        /// The 
         /// </remarks>
         public WTI_Request() 
         {
@@ -141,7 +111,6 @@ namespace HttpWebTesting.WebTestItems
         {
             InitializeObject();
             requestItem = httpRequestMessage;
-            //HttpRequestToProperties();
         }
 
         private void InitializeObject()
@@ -150,7 +119,6 @@ namespace HttpWebTesting.WebTestItems
             ThinkTime = 0;
             RecordResults = true;
             FollowRedirects = true;
-            //ParseDependentRequests = true;
             FirePreRequestHandlersAfterDataBinding = true;
 
             objectItemType = Enums.WebTestItemType.Wti_RequestObject;
@@ -158,29 +126,8 @@ namespace HttpWebTesting.WebTestItems
             guid = Guid.NewGuid();
             itemComment = string.Empty;
             Rules = new RuleCollection();
-            displayInfo = new PropertyDisplayInfoCollection();
-            displayInfo.AddAllItems(this, "Request Object");
         }
         #endregion
 
-        //private void HttpRequestToProperties()
-        //{
-        //    if (requestItem.RequestUri == null)
-        //        return;
-
-        //    Url = requestItem.RequestUri.AbsolutePath;
-        //    Version = requestItem.Version.ToString();
-        //    Method = requestItem.Method;
-        //    if(requestItem.RequestUri.Query != string.Empty)
-        //    {
-        //        QueryStringCollection.AddKeyValuePairs(requestItem.RequestUri.Query.GetQueryParameters());
-        //    }
-        //    HeaderCollection = requestItem.Headers;
-        //}
-
-        //private void PropertiesToHttpRequestMessage()
-        //{
-
-        //}
     }
 }

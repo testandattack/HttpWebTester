@@ -27,6 +27,8 @@ namespace WebTestItemManager
         public ItemManager(HttpWebTest webTest)
         {
             HttpWebTest = webTest;
+            _webTestItemMetaData = new Dictionary<int, WebTestItemMetaData>();
+            BuildWebTestItemMetaData();
         }
         #endregion
 

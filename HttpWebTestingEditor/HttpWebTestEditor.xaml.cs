@@ -2,6 +2,7 @@
 using HttpWebTesting.WebTestItems;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,11 @@ namespace HttpWebTestingEditor
     public partial class HttpWebTestEditor : Window
     {
         private HttpWebTest _webTest;
+        private ItemManager wtim;
+
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
+        private DataTable _propertiesDataTable;
 
         public HttpWebTestEditor()
         {
@@ -37,6 +41,7 @@ namespace HttpWebTestingEditor
         {
             _currentlyLoadedFileName = "";
             _fileWasModified = false;
+            CreatePropertiesDataTable();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -56,11 +61,16 @@ namespace HttpWebTestingEditor
             TreeViewItem tvi = ((TreeViewItem)e.NewValue);
             if (tvi != null)
             {
-                string str = tvi.Name;
-
-                WTI_Request aRequest = _webTest.WebTestItems[2] as WTI_Request;
-
-                Console.WriteLine("");
+                if(tvi.Name.StartsWith("Root_"))
+                {
+                    string str = tvi.Name.Replace('_', '.');
+                    if (wtim.GetItemTreeType(str) == WTItemType.WebTestRequest)
+                    {
+                        WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
+                        GetWebTestItemCustomProperties(selectedItem);
+                        dgPropertyList.ItemsSource = _propertiesDataTable.AsDataView();
+                    }
+                }
             }
         }
         #endregion
@@ -79,6 +89,7 @@ namespace HttpWebTestingEditor
                 {
                     _currentlyLoadedFileName = ofd.FileName;
                     _webTest = HttpWebTestSerializer.DeserializeTest(_currentlyLoadedFileName);
+                    wtim = new ItemManager(_webTest);
                     tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
                     PopulateTreeView();
                 }
