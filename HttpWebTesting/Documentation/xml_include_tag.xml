@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MyDocs>
+  <MyMembers name="RuleExecutionOrder">
+    <remarks>
+      Test level rules will always execute after their request level counterparts.
+      The order of execution for rules is as follows:
+      <list type="number">
+        <item>
+          <see cref="RuleTypes_Enums.PreTest"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.RequestRule_PreRequest"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.TestRule_PreRequest"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.RequestRule_Validation"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.TestRule_Validation"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.RequestRule_Extraction"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.TestRule_Extraction"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.RequestRule_PostRequest"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.TestRule_PostRequest"/>
+        </item>
+        <item>
+          <see cref="RuleTypes_Enums.PostTest"/>
+        </item>
+      </list>
+    </remarks>
+  </MyMembers>
+</MyDocs>
