@@ -32,7 +32,12 @@
         /// <summary>
         /// Indicates that this object represents a Comment object
         /// </summary>
-        Wti_Comment = 5
+        Wti_Comment = 5,
+
+        /// <summary>
+        /// This indicates an unknown item type and is used to handle parsing errors by the WebTestItemManager.
+        /// </summary>
+        Wti_Unknown = 6
     };
 
 

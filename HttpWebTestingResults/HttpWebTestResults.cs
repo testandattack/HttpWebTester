@@ -17,6 +17,8 @@ namespace HttpWebTestingResults
         {
             webTestResultsItems = new Collection<WebTestResultsItem>();
             executionTime = DateTime.UtcNow;
+            // Results design still under construction
+            throw new NotImplementedException();
         }
     }
 }

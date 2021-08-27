@@ -1,4 +1,5 @@
 ﻿using HttpWebTesting;
+using HttpWebTesting.Enums;
 using HttpWebTesting.WebTestItems;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace HttpWebTestingEditor
                 if(tvi.Name.StartsWith("Root_"))
                 {
                     string str = tvi.Name.Replace('_', '.');
-                    if (wtim.GetItemTreeType(str) == WTItemType.WebTestRequest)
+                    if (wtim.GetItemTreeType(str) == WebTestItemType.Wti_RequestObject)
                     {
                         WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
                         GetWebTestItemCustomProperties(selectedItem);

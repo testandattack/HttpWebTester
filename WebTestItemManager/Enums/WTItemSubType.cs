@@ -15,10 +15,6 @@ namespace WebTestItemManager
         WebTestRequestwithMultiPartContent = 16,
         WebTestRequestwithNoBody = 32,
         CommentBlank = 64,      // length < 2
-        CommentUseCase = 128,    // "@@ "
-        CommentHeader = 256,     // "// "
-        CommentWarning = 512,    // "     !! "
-        CommentDivider = 1024,    // "-----"
         CommentOther = 2048,      // everything else
         NoSubType = 4096,
         WebTestRequestwithQueryString = 8192, // used for searching

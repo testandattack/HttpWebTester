@@ -15,7 +15,6 @@ namespace WebTestItemManager
     {
 
         #region -- Get Actual Item methods ---------------------
-
         public WebTestItem GetActualItem(string sTreeLoc, WebTestItemCollection wtic)
         {
             IEnumerable<int> indexes = sTreeLoc.Replace("Root.", "").Split('.').Select(int.Parse);
@@ -82,11 +81,11 @@ namespace WebTestItemManager
         /// </summary>
         /// <param name="itemId">The unique Id of the item in the collection</param>
         /// <returns>string</returns>
-        public WTItemType GetItemTreeType(int itemId)
+        public WebTestItemType GetItemTreeType(int itemId)
         {
             return _webTestItemMetaData[itemId].wtit;
         }
-        public WTItemType GetItemTreeType(string sLoc)
+        public WebTestItemType GetItemTreeType(string sLoc)
         {
             return _webTestItemMetaData[GetItemTreeLocation(sLoc)].wtit;
         }

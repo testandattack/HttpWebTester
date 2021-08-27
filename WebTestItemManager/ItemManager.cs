@@ -32,16 +32,14 @@ namespace WebTestItemManager
         }
         #endregion
 
-        #region -- Public Methods -----
         public void BuildWebTestItemMetaData()
         {
             _webTestItemMetaData.Clear();
             _itemId = 0;
             RecurseTheWebTestItemCollection(this.HttpWebTest.WebTestItems, "Root", 0);
         }
-        #endregion
 
-        #region -- Private Methods -----
+        #region -- BuildWebTestItemMetaData Methods -----
         private void RecurseTheWebTestItemCollection(WebTestItemCollection items, string sTreeLoc, int iDepth)
         {
             for (int nIndex = 0; nIndex < items.Count; nIndex++)
@@ -73,7 +71,7 @@ namespace WebTestItemManager
                 }
                 else
                 {
-                    wtii.wtit = WTItemType.UnknownType;
+                    wtii.wtit = WebTestItemType.Wti_Unknown;
                     _webTestItemMetaData.Add(_itemId++, wtii);
                 }
             }
@@ -84,7 +82,7 @@ namespace WebTestItemManager
         private void ParseRequest(WebTestItemCollection items, int nIndex, WebTestItemMetaData wtii)
         {
             WTI_Request wtr = (WTI_Request)items[nIndex];
-            wtii.wtit = WTItemType.WebTestRequest;
+            wtii.wtit = WebTestItemType.Wti_RequestObject;
             wtii.Uri = wtr.requestItem.RequestUri;
 
             //--- Get Rule Counts
@@ -121,7 +119,7 @@ namespace WebTestItemManager
             else
             {
                 //Unknown type
-                wtii.wtit = WTItemType.UnknownType;
+                wtii.wtit = WebTestItemType.Wti_Unknown;
                 _webTestItemMetaData.Add(_itemId++, wtii);
             }
             #endregion
@@ -129,7 +127,7 @@ namespace WebTestItemManager
 
         private void ParseComment(WebTestItemCollection items, int nIndex, WebTestItemMetaData wtii)
         {
-            wtii.wtit = WTItemType.Comment;
+            wtii.wtit = WebTestItemType.Wti_Comment;
 
             WTI_Comment cmt = new WTI_Comment();
             cmt = items[nIndex] as WTI_Comment;
@@ -150,7 +148,7 @@ namespace WebTestItemManager
 
         private void ParseTransaction(WebTestItemCollection items, string sTreeLoc, int iDepth, int nIndex, WebTestItemMetaData wtii)
         {
-            wtii.wtit = WTItemType.TransactionTimer;
+            wtii.wtit = WebTestItemType.Wti_Transactiontimer;
             _webTestItemMetaData.Add(_itemId++, wtii);
             WTI_Transaction transaction = items[nIndex] as WTI_Transaction;
             RecurseTheWebTestItemCollection(transaction.webTestItems, sTreeLoc + "." + nIndex.ToString(CultureInfo.InvariantCulture), iDepth + 1);
@@ -158,7 +156,7 @@ namespace WebTestItemManager
 
         private void ParseLoop(WebTestItemCollection items, string sTreeLoc, int iDepth, int nIndex, WebTestItemMetaData wtii)
         {
-            wtii.wtit = WTItemType.WebTestLoop;
+            wtii.wtit = WebTestItemType.Wti_LoopControl;
             _webTestItemMetaData.Add(_itemId++, wtii);
             WTI_LoopControl loop = items[nIndex] as WTI_LoopControl;
             RecurseTheWebTestItemCollection(loop.webTestItems, sTreeLoc + "." + nIndex.ToString(CultureInfo.InvariantCulture), iDepth + 1);
@@ -166,7 +164,7 @@ namespace WebTestItemManager
 
         private void ParseIncludedWebTest(WebTestItemCollection items, int nIndex, WebTestItemMetaData wtii)
         {
-            wtii.wtit = WTItemType.IncludedWebTest;
+            wtii.wtit = WebTestItemType.Wti_IncludedWebTestItem;
             WTI_IncludedWebTest includedWebTest = items[nIndex] as WTI_IncludedWebTest;
             //TODO: Consider adding recursion for the included web test here.
             _webTestItemMetaData.Add(_itemId++, wtii);

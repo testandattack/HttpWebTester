@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HttpWebTesting.Enums;
 
 namespace WebTestItemManager
 {
@@ -15,11 +16,14 @@ namespace WebTestItemManager
         /// </summary>
         public int iTreeDepth { get; set; }
 
-        public WTItemType wtit { get; set; }
+        public WebTestItemType wtit { get; set; }
+
         public WTItemSubType wtist { get; set; }
+
         public Guid guid { get; set; }
 
         public Uri Uri { get; set; }
+
         public WebTestItemMetaData() { }
     }
 }
