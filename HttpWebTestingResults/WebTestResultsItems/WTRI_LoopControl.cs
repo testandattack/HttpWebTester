@@ -8,7 +8,7 @@ namespace HttpWebTestingResults
 {
     public class WTRI_LoopControl : WebTestResultsItem
     {
-        public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
+        public Dictionary<string, Collection<WebTestResultsItem>> webTestResultsItems { get; set; }
 
         public TimeSpan totalElapsedTime { get; set; }
 
@@ -18,6 +18,7 @@ namespace HttpWebTestingResults
         {
             objectItemType = WebTestResultItemType.Wtri_LoopControlItem;
             webTestItem = (WTI_LoopControl)originalLoop;
+            webTestResultsItems = new Dictionary<string, Collection<WebTestResultsItem>>();
         }
     }
 }

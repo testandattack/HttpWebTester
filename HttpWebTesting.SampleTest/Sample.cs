@@ -27,6 +27,7 @@ namespace HttpWebTesting.SampleTest
         {
             // Add a data source
             CsvDataSource cds = new CsvDataSource();
+            cds.csvDataSourceFile = @"ExampleCsvDataSource.csv";
             cds.Name = "ExampleCsvDataSource";
             cds.dataSourceCursorType = DataSourceCursorType.Sequential;
             httpWebTest.DataSources.Add(cds);
@@ -40,7 +41,7 @@ namespace HttpWebTesting.SampleTest
             httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Comment"));
 
             // Add a transaction
-            AddTransactionToSample("Sample Transaction");
+//            AddTransactionToSample("Sample Transaction");
 
             // Add a request
             AddRequest(httpWebTest.WebTestItems);
@@ -67,8 +68,13 @@ namespace HttpWebTesting.SampleTest
 
         private void AddRequest(WebTestItemCollection items)
         {
+            AddRequest(items, "http://www.contoso.com");
+        }
+
+        private void AddRequest(WebTestItemCollection items, string sUrl)
+        {
             // Build a request
-            WTI_Request req = new WTI_Request(BuildFormPostRequest("http://www.contoso.com"));
+            WTI_Request req = new WTI_Request(BuildFormPostRequest(sUrl));
 
             // Set some properties
             req.ThinkTime = 5;
@@ -96,20 +102,20 @@ namespace HttpWebTesting.SampleTest
             return message;
         }
 
-        private HttpRequestMessage BuildJsonPostMessage(string sUrl)
-        {
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
-            message.Headers.Add("CustomHeader", "customeHeaderValue");
+//        private HttpRequestMessage BuildJsonPostMessage(string sUrl)
+//        {
+//            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
+//            message.Headers.Add("CustomHeader", "customeHeaderValue");
 
-//            string jsonString = @"
-//{
+////            string jsonString = @"
+////{
     
-//}";
+////}";
 
-            //StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            //message.Content = content;
-            return message;
-        }
+//            //StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+//            //message.Content = content;
+//            return message;
+//        }
 
     }
 }

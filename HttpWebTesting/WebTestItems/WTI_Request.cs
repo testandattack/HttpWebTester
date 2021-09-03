@@ -76,16 +76,6 @@ namespace HttpWebTesting.WebTestItems
         [Category("Behavior")]
         [DefaultValue(true)]
         public bool FollowRedirects { get; set; }
-
-        /// <summary>
-        /// If true, then the request will have all built in data binding occur BEFORE
-        /// it executes any PreRequest event handlers.
-        /// </summary>
-        [DisplayName("Fire PreRequestHandlers After DataBinding")]
-        [Description("If true, then the request will have all built in data binding occur BEFORE it executes any PreRequest event handlers.")]
-        [Category("Behavior")]
-        [DefaultValue(true)]
-        public bool FirePreRequestHandlersAfterDataBinding { get; set; }
         #endregion
 
         #region -- Constructors -----
@@ -119,7 +109,6 @@ namespace HttpWebTesting.WebTestItems
             ThinkTime = 0;
             RecordResults = true;
             FollowRedirects = true;
-            FirePreRequestHandlersAfterDataBinding = true;
 
             objectItemType = Enums.WebTestItemType.Wti_RequestObject;
             Enabled = true;

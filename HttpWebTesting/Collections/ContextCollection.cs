@@ -1,4 +1,6 @@
 ﻿using HttpWebTesting.CoreObjects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HttpWebTesting.Collections
 {
@@ -33,6 +35,25 @@ namespace HttpWebTesting.Collections
                     }
                 }
                 base.Add(new Property(propertyName, value));
+            }
+        }
+
+        /// <summary>
+        /// This method is used to add or update context values that
+        /// are derived from data sources.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="DataSourceName"></param>
+        public void AddDataSourceRow(Dictionary<string, string> values, string DataSourceName)
+        {
+            foreach(var kvp in values)
+            {
+                string contextName = $"{DataSourceName}.{kvp.Key}";
+                var prop = this.Where(p => p.Name == contextName).FirstOrDefault();
+                if (prop == null)
+                    base.Add(new Property(contextName, kvp.Value));
+                else
+                    prop.Value = kvp.Value;
             }
         }
     }

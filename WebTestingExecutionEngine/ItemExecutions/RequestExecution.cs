@@ -1,4 +1,5 @@
-﻿using HttpWebTesting.Enums;
+﻿using HttpWebTesting;
+using HttpWebTesting.Enums;
 using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
@@ -7,12 +8,15 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebTestExecutionEngine.HttpClient;
 
 namespace WebTestExecutionEngine
 {
-    public class RequestExecution : BaseExecution
+    public class RequestExecution
     {
         #region -- Properties -----
+        public HttpWebTest httpWebTest { get; set; }
+
         public WTI_Request request { get; set; }
 
         public HttpResponseMessage httpResponseMessage { get; set; }
@@ -21,58 +25,51 @@ namespace WebTestExecutionEngine
         #endregion
 
         #region -- Constructors -----
-        public RequestExecution() { }
-
-        public RequestExecution(WTI_Request wTI_RequestObject)
+        public RequestExecution(WTI_Request wTI_RequestObject, HttpWebTest webTest)
         {
+            httpWebTest = webTest;
             request = wTI_RequestObject;
         }
         #endregion
 
-        public WTRI_Request ProcessRequest()
+        public WebTestResultsItem ProcessRequest()
         {
             // Make sure we should execute the request. 
             if (request.Enabled == false)
-                return null;
+            {
+                WTI_SkippedItem skippedItem = new WTI_SkippedItem(
+                    request.requestItem.RequestUri.GetLeftPart(UriPartial.Path)
+                    , WebTestItemType.Wti_LoopControl);
+                return new WTRI_SkippedItem(skippedItem);
+            }
 
-            ExecutePreRequestSteps();
+            ApplyContexts();
+            HandlePreRequestEventProcessing();
             var response = ExecuteRequest(request).GetAwaiter().GetResult();
             return ExecutePostRequestSteps(response);
         }
 
 
         #region -- Private Methods -----
-        private void ExecutePreRequestSteps()
+        private void ApplyContexts()
         {
-            if (request.FirePreRequestHandlersAfterDataBinding == true)
-            {
-                BindDataSources();
-                HandlePreRequestEventProcessing();
-                ApplyContexts();
-            }
-            else
-            {
-                HandlePreRequestEventProcessing();
-                BindDataSources();
-                ApplyContexts();
-            }
+            Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
         }
 
         private static async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
         {
-            HttpClient client = new HttpClient();
-            var httpResponse = client.SendAsync(request.requestItem);
-            return await httpResponse;
+            return await RequestClient.SendAsync(request.requestItem);
         }
 
         private WTRI_Request ExecutePostRequestSteps(HttpResponseMessage response)
         {
             if (response != null)
             {
+                WTRI_Request requestResults = GetResults(response);
                 HandleValidationEventProcessing(response);
                 HandleExtractionEventProcessing(response);
                 HandlePostRequestEventProcessing(response);
-                return GetResults(response);
+                return requestResults;
             }
             else if (httpWebTest.StopOnError == true)
             {
@@ -96,14 +93,17 @@ namespace WebTestExecutionEngine
             return null;
         }
 
-        private void BindDataSources()
+        private WTRI_Request GetResults()
         {
-            Log.ForContext("SourceContext", "RequestExecution").Debug("entering BindDataSources for {request}", request.guid);
-        }
-
-        private void ApplyContexts()
-        {
-            Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
+            if (request.RecordResults == true)
+            {
+                WTRI_Request resultsItem = new WTRI_Request(request);
+                resultsItem.response = null;
+                resultsItem.HttpResponseMessageWasNull = true;
+                resultsItem.contextCollection = httpWebTest.ContextProperties;
+                return resultsItem;
+            }
+            return null;
         }
         #endregion
 

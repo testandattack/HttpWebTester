@@ -13,10 +13,13 @@ namespace HttpWebTestingResults
 
         public ContextCollection contextCollection { get; set; }
         
+        public bool HttpResponseMessageWasNull { get; set; }
+
         public WTRI_Request(WTI_Request originalRequest)
         {
             objectItemType = WebTestResultItemType.Wtri_RequestObject;
             webTestItem = (WTI_Request)originalRequest;
+            HttpResponseMessageWasNull = false;
         }
     }
 }

@@ -7,16 +7,20 @@ namespace HttpWebTesting.DataSources
 {
     public class CsvDataSource : BaseDataSource
     {
+        public string csvDataSourceFile { get; set; }
+
+        public CsvDataSource() 
+        {
+            dataSourceType = DataSourceType.CSV;
+        }
+
+        #region -- implementations for the base class requirements -----
         private CsvDataSource(CsvDataSource copy) : base(copy) { }
 
         public override object Clone()
         {
             return new CsvDataSource(this);
         }
-
-        public CsvDataSource() 
-        {
-            dataSourceType = DataSourceType.CSV;
-        }
+        #endregion
     }
 }

@@ -14,10 +14,10 @@ namespace HttpWebTestingResults
 
         public TimeSpan totalTransactionTime { get; set; }
 
-        public WTRI_Transaction(WTI_Transaction originalComment)
+        public WTRI_Transaction(WTI_Transaction originalTransaction)
         {
             objectItemType = WebTestResultItemType.Wtri_TransactionItem;
-            webTestItem = (WTI_Transaction)originalComment;
+            webTestItem = (WTI_Transaction)originalTransaction;
         }
     }
 }

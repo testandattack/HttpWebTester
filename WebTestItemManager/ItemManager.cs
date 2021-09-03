@@ -133,14 +133,14 @@ namespace WebTestItemManager
             cmt = items[nIndex] as WTI_Comment;
             if (cmt.CommentText.Length < 2)
                 wtii.wtist = WTItemSubType.CommentBlank;
-            else if (cmt.CommentText.Length > 3 && cmt.CommentText.Substring(0, 3) == "@@ ")
-                wtii.wtist = WTItemSubType.CommentUseCase;
-            else if (cmt.CommentText.Length > 3 && cmt.CommentText.Substring(0, 3) == "// ")
-                wtii.wtist = WTItemSubType.CommentHeader;
-            else if (cmt.CommentText.Length > 8 && cmt.CommentText.Substring(0, 8) == "     !! ")
-                wtii.wtist = WTItemSubType.CommentWarning;
-            else if (cmt.CommentText.Length > 4 && cmt.CommentText.Substring(0, 4) == "----")
-                wtii.wtist = WTItemSubType.CommentDivider;
+            //else if (cmt.CommentText.Length > 3 && cmt.CommentText.Substring(0, 3) == "@@ ")
+            //    wtii.wtist = WTItemSubType.CommentUseCase;
+            //else if (cmt.CommentText.Length > 3 && cmt.CommentText.Substring(0, 3) == "// ")
+            //    wtii.wtist = WTItemSubType.CommentHeader;
+            //else if (cmt.CommentText.Length > 8 && cmt.CommentText.Substring(0, 8) == "     !! ")
+            //    wtii.wtist = WTItemSubType.CommentWarning;
+            //else if (cmt.CommentText.Length > 4 && cmt.CommentText.Substring(0, 4) == "----")
+            //    wtii.wtist = WTItemSubType.CommentDivider;
             else wtii.wtist = WTItemSubType.CommentOther;
 
             _webTestItemMetaData.Add(_itemId++, wtii);

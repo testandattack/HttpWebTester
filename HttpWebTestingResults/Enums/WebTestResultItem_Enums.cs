@@ -36,7 +36,12 @@ namespace HttpWebTestingResults
         /// <summary>
         /// Indicates that this object represents a Comment object
         /// </summary>
-        Wtri_CommentItem = 5
+        Wtri_CommentItem = 5,
+
+        /// <summary>
+        /// Indicates that this object represents an object that was not executed.
+        /// </summary>
+        Wtri_SkippedItem = 6
     };
 
 
