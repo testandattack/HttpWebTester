@@ -56,5 +56,16 @@ namespace HttpWebTesting.Collections
                     prop.Value = kvp.Value;
             }
         }
+
+        public string GetValue(string contextName)
+        {
+            foreach(Property property in base.Items)
+            {
+                if (property.Name == contextName)
+                    return property.Value;
+            }
+            return string.Empty;
+        }
+
     }
 }

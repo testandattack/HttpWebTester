@@ -9,22 +9,22 @@ using WebTestRules;
 
 namespace WebTestExecutionEngine
 {
-    public class ExecuteTests
+    public class ExecutionEngine
     {
         public HttpWebTest webTest { get; set; }
 
-        HttpWebTestResults testingResults { get; set; }
+        private HttpWebTestResults testingResults;
 
-        public ExecuteTests() { }
+        public ExecutionEngine() { }
 
-        public ExecuteTests(HttpWebTest httpWebTest)
+        public ExecutionEngine(HttpWebTest httpWebTest)
         {
             webTest = httpWebTest;
             testingResults = new HttpWebTestResults();
         }
 
 
-        public void ExecuteTheTests()
+        public HttpWebTestResults ExecuteTheTests()
         {
             // Need to make these staic, or add them in a way that we do not need to initialize.
             PreWebTestExecution preWebTestExecution = new PreWebTestExecution();
@@ -36,9 +36,9 @@ namespace WebTestExecutionEngine
             PostWebTestExecution postWebTestExecution = new PostWebTestExecution();
             postWebTestExecution.ProcessPostWebTest();
 
-            testingResults.SaveTestResults("c:\\HttpWebTest\\testresults.json");
-            
-            Console.WriteLine("Finished Test");
+            //testingResults.SaveTestResults("c:\\HttpWebTest\\testresults.json");
+            return testingResults;
+            //Console.WriteLine("Finished Test");
         }
     }
 }

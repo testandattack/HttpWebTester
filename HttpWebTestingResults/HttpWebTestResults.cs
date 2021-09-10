@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Serilog;
+using GTC.Extensions;
 
 namespace HttpWebTestingResults
 {
@@ -31,6 +33,20 @@ namespace HttpWebTestingResults
                 sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
                 Log.ForContext<HttpWebTestResults>().Information("aved Test results to {fileName}");
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"Results for test '{Name}'");
+            sb.AppendLine($"Executed on {executionTime.ToString()}");
+            foreach(var item in webTestResultsItems)
+            {
+                sb.Append(item.ToString());
+            }
+
+            return sb.ToString();
         }
     }
 }

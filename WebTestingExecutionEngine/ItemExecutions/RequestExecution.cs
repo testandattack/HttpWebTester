@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WebTestExecutionEngine.HttpClient;
+using GTC.Extensions;
+using System.Collections.Generic;
 
 namespace WebTestExecutionEngine
 {
@@ -22,6 +24,9 @@ namespace WebTestExecutionEngine
         public HttpResponseMessage httpResponseMessage { get; set; }
 
         public string ResponseAsString = string.Empty;
+
+        private HttpRequestMessage _requestMessage;
+        private TimeSpan _responseTime;
         #endregion
 
         #region -- Constructors -----
@@ -42,11 +47,14 @@ namespace WebTestExecutionEngine
                     , WebTestItemType.Wti_LoopControl);
                 return new WTRI_SkippedItem(skippedItem);
             }
-
+            DateTime dt = DateTime.UtcNow;
             ApplyContexts();
             HandlePreRequestEventProcessing();
-            var response = ExecuteRequest(request).GetAwaiter().GetResult();
-            return ExecutePostRequestSteps(response);
+            var response = ExecuteRequest(request, _responseTime).GetAwaiter().GetResult();
+            var results = ExecutePostRequestSteps(response);
+            results.ResponseTime = _responseTime;
+            results.TotalExecutionTime = DateTime.UtcNow - dt;
+            return results;
         }
 
 
@@ -54,11 +62,17 @@ namespace WebTestExecutionEngine
         private void ApplyContexts()
         {
             Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
+            UrlContextReplace(request.requestItem);
+
+            throw new NotImplementedException("Still need to add Context Handling");
         }
 
-        private static async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
+        private static async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request, TimeSpan responseTime)
         {
-            return await RequestClient.SendAsync(request.requestItem);
+            DateTime dt = DateTime.UtcNow;
+            var response = await RequestClient.SendAsync(request.requestItem);
+            responseTime = DateTime.UtcNow - dt;
+            return response;
         }
 
         private WTRI_Request ExecutePostRequestSteps(HttpResponseMessage response)
@@ -283,6 +297,25 @@ namespace WebTestExecutionEngine
             {
                 handler(this, e);
             }
+        }
+        #endregion
+
+        #region -- Context Application -----
+        private void UrlContextReplace(HttpRequestMessage message)
+        {
+            string requestMessage = message.RequestUri.AbsoluteUri;
+            
+            List<string> contextNames = message.RequestUri.AbsoluteUri.FindSubStrings("{{", "}}");
+            foreach(string name in contextNames)
+            {
+                string value = httpWebTest.ContextProperties.GetValue(name);
+                if (value != string.Empty)
+                {
+                    requestMessage = requestMessage.Replace(name.AddBraces(), value);
+                }
+            }
+
+            _requestMessage = new HttpRequestMessage(message.Method, requestMessage);
         }
         #endregion
     }

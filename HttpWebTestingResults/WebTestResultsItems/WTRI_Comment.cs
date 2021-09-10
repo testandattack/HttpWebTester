@@ -12,5 +12,12 @@ namespace HttpWebTestingResults
             objectItemType = WebTestResultItemType.Wtri_CommentItem;
             webTestItem = (WTI_Comment)originalComment;
         }
+
+        public override string ToString()
+        {
+            string comment = (webTestItem as WTI_Comment).CommentText;
+            // FormatXXXXXXXXXXXXXXXX
+            return $"Comment         | {comment}";
+        }
     }
 }

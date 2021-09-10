@@ -23,5 +23,10 @@ namespace HttpWebTestingResults
         /// The item in the webtest that this result is for
         /// </summary>
         public WebTestItem webTestItem { get; set; }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

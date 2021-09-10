@@ -2,6 +2,7 @@
 using HttpWebTesting.Enums;
 using JsonSubTypes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.ComponentModel;
 
@@ -32,6 +33,7 @@ namespace HttpWebTesting.Rules
         /// <summary>
         /// the <see cref="RuleTypes_Enums">RuleType</see> of this rule
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public RuleTypes_Enums RuleType { get; set; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace HttpWebTesting.Rules
         /// <summary>
         /// The <see cref="RuleResult">result</see> of the execution of the rule
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public RuleResult RuleResult { get; set; }
 
         /// <summary>
