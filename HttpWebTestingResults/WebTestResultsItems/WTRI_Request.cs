@@ -31,8 +31,8 @@ namespace HttpWebTestingResults
             StringBuilder sb = new StringBuilder();
             var request = webTestItem as WTI_Request;
             // Format       XXXXXXXXXXXXXXXX
-            sb.AppendLine($"Request         | {request.requestItem.RequestUri}");
-            sb.AppendLine($"        Method  | {request.requestItem.Method}");
+            sb.AppendLine($"Request         | {request.RequestUri}");
+            sb.AppendLine($"        Method  | {request.Method}");
             sb.AppendLine($"    StatusCode  | {response.StatusCode}");
             sb.AppendLine($"  ResponseTime  | {ResponseTime.TotalSeconds}");
             return sb.ToString();

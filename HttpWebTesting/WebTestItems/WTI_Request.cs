@@ -1,8 +1,10 @@
 ﻿using HttpWebTesting.Collections;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace HttpWebTesting.WebTestItems
 {
@@ -13,6 +15,7 @@ namespace HttpWebTesting.WebTestItems
     /// </summary>
     public class WTI_Request : WebTestItem
     {
+        #region -- Core Request Properties -----
         // The built in items (These items are all part of the System.Net.Http namespace
         //public System.Net.Http.HttpContent Content { get; set; }
         //public sealed class HttpRequestHeaders : System.Net.Http.Headers.HttpHeaders
@@ -21,11 +24,43 @@ namespace HttpWebTesting.WebTestItems
         //public Uri RequestUri { get; set; }
         //public Version Version { get; set; }
 
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Content"/>
+        /// </summary>
+        public HttpContent Content { get; set; }
+
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Headers"/>
+        /// </summary>
+        public Dictionary<string, IEnumerable<string>> Headers { get; set; }
+
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Method"/>
+        /// </summary>
+        public HttpMethod Method { get; set; }
+
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Properties"/>
+        /// </summary>
+        public Dictionary<string, object> Properties { get; }
+
+        /// <summary>
+        /// <see cref="HttpRequestMessage.RequestUri"/>
+        /// </summary>
+        public Uri RequestUri { get; set; }
+
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Version"/>
+        /// </summary>
+        public Version Version { get; set; }
+        #endregion
+
         #region -- Properties -----
         /// <summary>
         /// The request object that gets executed by the <see cref="HttpClient"/>.
         /// </summary>
         [Browsable(false)]
+        [JsonIgnore]
         public HttpRequestMessage requestItem { get; set; }
 
         /// <summary>
@@ -91,20 +126,27 @@ namespace HttpWebTesting.WebTestItems
         /// <item>FollowRedirects = true</item>
         /// </list>
         /// </remarks>
-        public WTI_Request() 
+        public WTI_Request(string url, HttpMethod method) 
         {
+            Method = method;
+            RequestUri = new Uri(url);
             InitializeObject();
-            requestItem = new HttpRequestMessage();
         }
 
-        public WTI_Request(HttpRequestMessage httpRequestMessage)
+        [JsonConstructor]
+        public WTI_Request(Uri uri, HttpMethod method)
         {
+            Method = method;
+            RequestUri = uri;
             InitializeObject();
-            requestItem = httpRequestMessage;
         }
 
         private void InitializeObject()
         {
+            Headers = new Dictionary<string, IEnumerable<string>>();
+            Version = new Version("1.1");
+            Content = null;
+
             ReportingName = string.Empty;
             ThinkTime = 0;
             RecordResults = true;

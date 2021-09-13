@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using WebTestExecutionEngine;
 using WebTestItemManager;
 using HttpWebTestingResults;
+using HttpWebTesting.SampleTest;
+using System.IO;
 
 namespace HttpWebTestingEditor
 {
@@ -131,6 +133,24 @@ namespace HttpWebTestingEditor
             }
             tabResultsView.IsSelected = true;
         }
+
+        private void tsmiCreateSampleTest_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog ofd = new Microsoft.Win32.SaveFileDialog();
+            ofd.DefaultExt = ".json";
+            ofd.Filter = "HttpWebTest Files (*.json)|*.json|All Files (*.*)|*.*";
+            Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+            if (fUserPickedFile == true)
+            {
+                Sample sample = new Sample(ofd.FileName.Replace(".json",".csv"));
+                HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, ofd.FileName);
+                _webTest = sample.httpWebTest;
+                _currentlyLoadedFileName = ofd.FileName;
+                wtim = new ItemManager(_webTest);
+                tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                PopulateTreeView();
+            }
+        }
         #endregion
 
         private bool SaveModifiedFile()
@@ -159,5 +179,6 @@ namespace HttpWebTestingEditor
             else
                 return true;
         }
+
     }
 }

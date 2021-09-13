@@ -25,6 +25,7 @@
                 <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open a .webtest file for editing." Click="tsmiOpen_Click" />
                 <MenuItem x:Name="tsmiExecute" Header="_Execute" HorizontalAlignment="Left" ToolTip="Executes the currently loaded test" Click="tsmiExecute_Click" />
                 <MenuItem Background="#7F404040" Height="4" Margin="5,0" />
+                <MenuItem x:Name="tsmiCreateSampleTest" Header="Create Sample Test" HorizontalAlignment="Left" ToolTip="Creates and saves a new sample webtest." Click="tsmiCreateSampleTest_Click" />
                 <MenuItem x:Name="tsmiAppExit" Header="_Exit" HorizontalAlignment="Left" ToolTip="This will close the application. If the developer did his homework, the application will prompt you for saving any changes if you have not already saved it." Click="tsmiAppExit_Click"/>
             </MenuItem>
         </Menu>

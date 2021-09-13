@@ -25,8 +25,7 @@ namespace WebTestExecutionEngine
 
         public string ResponseAsString = string.Empty;
 
-        private HttpRequestMessage _requestMessage;
-        private TimeSpan _responseTime;
+        private TimeSpan _responseTime = TimeSpan.MinValue;
         #endregion
 
         #region -- Constructors -----
@@ -43,35 +42,43 @@ namespace WebTestExecutionEngine
             if (request.Enabled == false)
             {
                 WTI_SkippedItem skippedItem = new WTI_SkippedItem(
-                    request.requestItem.RequestUri.GetLeftPart(UriPartial.Path)
+                    request.RequestUri.GetLeftPart(UriPartial.Path)
                     , WebTestItemType.Wti_LoopControl);
                 return new WTRI_SkippedItem(skippedItem);
             }
+
+            // Start overall timer
             DateTime dt = DateTime.UtcNow;
-            ApplyContexts();
+
+            // Apply all context values to request objects
+            httpWebTest.ContextProperties.BuildRequestWithContextValues(request);
+
+            // trigger pre-request event to fire any handlers that were added.
             HandlePreRequestEventProcessing();
-            var response = ExecuteRequest(request, _responseTime).GetAwaiter().GetResult();
+
+            // Execute the request
+            var response = ExecuteRequest(request).GetAwaiter().GetResult();
+
+            // Handle the various post-request steps
             var results = ExecutePostRequestSteps(response);
+
+            // Add the request's response time to the result.
             results.ResponseTime = _responseTime;
+
+            // Get the processing timer for the request
             results.TotalExecutionTime = DateTime.UtcNow - dt;
+
+            // return the results object to the test engine
             return results;
         }
 
 
         #region -- Private Methods -----
-        private void ApplyContexts()
-        {
-            Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
-            UrlContextReplace(request.requestItem);
-
-            throw new NotImplementedException("Still need to add Context Handling");
-        }
-
-        private static async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request, TimeSpan responseTime)
+        private async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
         {
             DateTime dt = DateTime.UtcNow;
             var response = await RequestClient.SendAsync(request.requestItem);
-            responseTime = DateTime.UtcNow - dt;
+            _responseTime = DateTime.UtcNow - dt;
             return response;
         }
 
@@ -301,22 +308,6 @@ namespace WebTestExecutionEngine
         #endregion
 
         #region -- Context Application -----
-        private void UrlContextReplace(HttpRequestMessage message)
-        {
-            string requestMessage = message.RequestUri.AbsoluteUri;
-            
-            List<string> contextNames = message.RequestUri.AbsoluteUri.FindSubStrings("{{", "}}");
-            foreach(string name in contextNames)
-            {
-                string value = httpWebTest.ContextProperties.GetValue(name);
-                if (value != string.Empty)
-                {
-                    requestMessage = requestMessage.Replace(name.AddBraces(), value);
-                }
-            }
-
-            _requestMessage = new HttpRequestMessage(message.Method, requestMessage);
-        }
         #endregion
     }
 }

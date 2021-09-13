@@ -83,7 +83,7 @@ namespace WebTestItemManager
         {
             WTI_Request wtr = (WTI_Request)items[nIndex];
             wtii.wtit = WebTestItemType.Wti_RequestObject;
-            wtii.Uri = wtr.requestItem.RequestUri;
+            wtii.Uri = wtr.RequestUri;
 
             //--- Get Rule Counts
             //wtii.extractionRuleCount = wtr.ExtractionRuleReferences.Count;
@@ -96,22 +96,22 @@ namespace WebTestItemManager
             //GetHiddenExtractionReferencesInRequest(wtr, ref wtii);
 
             #region === Request Body dissection ==========
-            if (wtr.requestItem.Content == null)
+            if (wtr.Content == null)
             {
                 wtii.wtist = WTItemSubType.WebTestRequestwithNoBody;
                 _webTestItemMetaData.Add(_itemId++, wtii);
             }
-            else if (wtr.requestItem.Content is StringContent)
+            else if (wtr.Content is StringContent)
             {
                 wtii.wtist = WTItemSubType.WebTestRequestwithString;
                 _webTestItemMetaData.Add(_itemId++, wtii);
             }
-            else if (wtr.requestItem.Content is MultipartFormDataContent)
+            else if (wtr.Content is MultipartFormDataContent)
             {
                 wtii.wtist = WTItemSubType.WebTestRequestwithMultiPartContent;
                 _webTestItemMetaData.Add(_itemId++, wtii);
             }
-            else if (wtr.requestItem.Content is ByteArrayContent)
+            else if (wtr.Content is ByteArrayContent)
             {
                 wtii.wtist = WTItemSubType.WebTestRequestwithByteArrayBody;
                 _webTestItemMetaData.Add(_itemId++, wtii);

@@ -11,7 +11,7 @@ namespace WebTestItemManager
         {
             using (StreamWriter sw = new StreamWriter(webTestFileName, false))
             {
-                
+                httpWebTest.WorkingDirectoryLocation = webTestFileName.Substring(0, webTestFileName.LastIndexOf("\\"));
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
                 settings.Converters.Add(new StringContentConverter());
@@ -31,11 +31,14 @@ namespace WebTestItemManager
         {
             using (StreamReader sr = new StreamReader(webTestFileName))
             {
+                HttpWebTest webTest;
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
                 settings.Converters.Add(new StringContentConverter());
                 settings.Converters.Add(new HttpContentConverter());
-                return JsonConvert.DeserializeObject<HttpWebTest>(sr.ReadToEnd(), settings);
+                webTest = JsonConvert.DeserializeObject<HttpWebTest>(sr.ReadToEnd(), settings);
+                webTest.WorkingDirectoryLocation = webTestFileName.Substring(0, webTestFileName.LastIndexOf("\\"));
+                return webTest;
             }
         }
     }

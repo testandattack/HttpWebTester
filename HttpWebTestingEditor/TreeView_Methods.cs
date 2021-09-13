@@ -140,7 +140,7 @@ namespace HttpWebTestingEditor
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
             WTI_Request wtr = (WTI_Request)item;
-            treeItem.Header = CustomizeTreeViewItem(wtr.requestItem.RequestUri.AbsoluteUri.UrlDecode(), (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            treeItem.Header = CustomizeTreeViewItem(wtr.RequestUri.AbsoluteUri.UrlDecode(), (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
             AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }
@@ -219,8 +219,6 @@ namespace HttpWebTestingEditor
             }
         }
         #endregion
-
-
     }
 
     public class tvStackPanel : StackPanel

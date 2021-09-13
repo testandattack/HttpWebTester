@@ -28,7 +28,13 @@ namespace WebTestExecutionEngine
             {
                 if(dataSource.dataSourceType == DataSourceType.CSV)
                 {
-                    dataSource.dataTable = CsvDataSourceLoader.LoadDataSource(((CsvDataSource)dataSource).csvDataSourceFile);
+                    string fileLocation = string.Empty;
+                    if (((CsvDataSource)dataSource).csvDataSourceFile.Contains("\\") == false)
+                        fileLocation = httpWebTest.WorkingDirectoryLocation + "\\" + ((CsvDataSource)dataSource).csvDataSourceFile;
+                    else
+                        fileLocation = ((CsvDataSource)dataSource).csvDataSourceFile;
+
+                    dataSource.dataTable = CsvDataSourceLoader.LoadDataSource(fileLocation);
                 } 
             }
         }

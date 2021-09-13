@@ -16,11 +16,6 @@ namespace WebTestItemManager
     public partial class ItemManager
     {
         #region -- Request Creation -----
-        public static WTI_Request CreateNewRequest()
-        {
-            return CreateNewRequest(new HttpRequestMessage());
-        }
-
         public static WTI_Request CreateNewRequest(string requestUri)
         {
             return CreateNewRequest(requestUri, HttpMethod.Get, new Version(1, 1));
@@ -38,48 +33,47 @@ namespace WebTestItemManager
 
         public static WTI_Request CreateNewRequest(string requestUri, HttpMethod method, Version version)
         {
-
-            HttpRequestMessage message = new HttpRequestMessage(method, requestUri);
-            message.Version = version;
-
-            WTI_Request request = new WTI_Request(message);
+            WTI_Request request = new WTI_Request(requestUri, method);
+            request.Version = version;
 
             return request;
         }
 
         public static WTI_Request CreateNewRequest(string requestUri, HttpMethod method, HttpRequestHeaders Headers, Version version)
         {
-            
-            HttpRequestMessage message = new HttpRequestMessage(method, requestUri);
-            foreach(var header in Headers)
+            WTI_Request request = new WTI_Request(requestUri, method);
+            foreach (var header in Headers)
             {
-                message.Headers.Add(header.Key, header.Value);
+                request.Headers.Add(header.Key, header.Value);
             }
-            message.Version = version;
-
-            WTI_Request request = new WTI_Request(message);
+            request.Version = version;
 
             return request;
         }
 
         public static WTI_Request CreateNewRequest(HttpRequestMessage message)
         {
-            WTI_Request request = new WTI_Request(message);
-
+            WTI_Request request = new WTI_Request(message.RequestUri.AbsoluteUri, message.Method);
+            request.Version = message.Version;
+            foreach (var header in message.Headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+            request.Content = message.Content;
             return request;
         }
 
         public static WTI_Request CreateNewJsonPostRequest(string requestUri, string content)
         {
             WTI_Request request = CreateNewRequest(requestUri, HttpMethod.Post);
-            request.requestItem.Content = new StringContent(content, Encoding.UTF8, "application/json");
+            request.Content = new StringContent(content, Encoding.UTF8, "application/json");
             return request;
         }
 
         public static WTI_Request CreateNewJsonPutRequest(string requestUri, string content)
         {
             WTI_Request request = CreateNewRequest(requestUri, HttpMethod.Put);
-            request.requestItem.Content = new StringContent(content, Encoding.UTF8, "application/json");
+            request.Content = new StringContent(content, Encoding.UTF8, "application/json");
             return request;
         }
         #endregion

@@ -1,6 +1,12 @@
 ﻿using HttpWebTesting.CoreObjects;
 using System.Collections.Generic;
 using System.Linq;
+using GTC.Extensions;
+using System.Net.Http;
+using HttpWebTesting.WebTestItems;
+using System.Text;
+using System;
+using Serilog;
 
 namespace HttpWebTesting.Collections
 {
@@ -67,5 +73,88 @@ namespace HttpWebTesting.Collections
             return string.Empty;
         }
 
+        public void BuildRequestWithContextValues(WTI_Request request)
+        {
+            Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
+
+            string sUrl = ContextReplacement(request.RequestUri.AbsoluteUri);
+            request.requestItem = new HttpRequestMessage(request.Method, sUrl);
+            request.requestItem.Headers.Clear();
+
+            foreach (var header in request.Headers)
+            {
+                request.requestItem.Headers.Add(header.Key, ContextReplacement(header.Value.ToString(";")));
+            }
+
+            request.requestItem.Content = ApplyContextsToContent(request.Content);
+            request.ReportingName = ContextReplacement(request.ReportingName);
+
+        }
+
+        private string ContextReplacement(string inputString)
+        {
+            string outputString = inputString;
+            List<string> contextNames = inputString.FindSubStrings("{{", "}}");
+            foreach (string name in contextNames)
+            {
+                string value = this.GetValue(name);
+                if (value != string.Empty)
+                {
+                    outputString = outputString.Replace(name.AddBraces(), value);
+                }
+            }
+            return outputString;
+        }
+
+        private HttpContent ApplyContextsToContent(HttpContent content)
+        {
+            #region === Request Body dissection ==========
+            if (content == null)
+            {
+                return null;
+            }
+            else if (content is StringContent)
+            {
+                string strContent = content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+                return new StringContent(ContextReplacement(strContent)
+                    , GetEncoding(content.Headers.ContentType.CharSet)
+                    , content.Headers.ContentType.MediaType);
+            }
+            else if (content is MultipartFormDataContent)
+            {
+                throw new NotImplementedException();
+            }
+            else if (content is ByteArrayContent)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+            #endregion
+        }
+
+        private Encoding GetEncoding(string encodingValue)
+        {
+            switch (encodingValue)
+            {
+                case "UTF8":
+                    return Encoding.UTF8;
+                case "ASCII":
+                    return Encoding.ASCII;
+                case "Unicode":
+                    return Encoding.Unicode;
+                case "UTF7":
+                    return Encoding.UTF7;
+                case "BigEndianUnicode":
+                    return Encoding.BigEndianUnicode;
+                case "UTF32":
+                    return Encoding.UTF32;
+                default:
+                    return Encoding.Default;
+            }
+        }
     }
 }

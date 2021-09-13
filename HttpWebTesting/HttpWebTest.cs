@@ -44,6 +44,10 @@ namespace HttpWebTesting
         [Category(PropertyCategories.Behavior)]
         [DefaultValue(true)]
         public bool SuppressAllCommentsInResults { get; set; }
+
+        [Browsable(false)]
+        [JsonIgnore]
+        public string WorkingDirectoryLocation { get; set; }
         #endregion
 
         #region -- Test Level Collections -----
