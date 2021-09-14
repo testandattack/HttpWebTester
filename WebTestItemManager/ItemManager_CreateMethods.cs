@@ -18,17 +18,17 @@ namespace WebTestItemManager
         #region -- Request Creation -----
         public static WTI_Request CreateNewRequest(string requestUri)
         {
-            return CreateNewRequest(requestUri, HttpMethod.Get, new Version(1, 1));
+            return CreateNewRequest(requestUri, HttpMethod.Get, new Version(2, 0));
         }
 
         public static WTI_Request CreateNewRequest(string requestUri, HttpMethod method)
         {
-            return CreateNewRequest(requestUri, method, new Version(1, 1));
+            return CreateNewRequest(requestUri, method, new Version(2, 0));
         }
 
         public static WTI_Request CreateNewRequest(string requestUri, HttpMethod method, HttpRequestHeaders Headers)
         {
-            return CreateNewRequest(requestUri, method, Headers, new Version(1, 1));
+            return CreateNewRequest(requestUri, method, Headers, new Version(2, 0));
         }
 
         public static WTI_Request CreateNewRequest(string requestUri, HttpMethod method, Version version)

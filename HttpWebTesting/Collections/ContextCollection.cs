@@ -93,8 +93,8 @@ namespace HttpWebTesting.Collections
 
         private string ContextReplacement(string inputString)
         {
-            string outputString = inputString;
-            List<string> contextNames = inputString.FindSubStrings("{{", "}}");
+            string outputString = inputString.UrlDecode();
+            List<string> contextNames = outputString.FindSubStrings("{{", "}}");
             foreach (string name in contextNames)
             {
                 string value = this.GetValue(name);

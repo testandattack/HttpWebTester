@@ -17,14 +17,14 @@ namespace HttpWebTester
         static void Main(string[] args)
         {
             //Build and Serialize a webtest
-            Sample sample = new Sample();
-            HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, @"c:\temp\sampleContosoTest.json");
+            //Sample sample = new Sample();
+            //HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, @"c:\temp\sampleContosoTest.json");
 
             // Make sure the test will deserialize
-            //HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\HttpWebTest\sampleHttpWebTest.json");
+            HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleContosoTestFromUI.json");
 
-            //ExecuteTests execute = new ExecuteTests(newWebTest);
-            //execute.ExecuteTheTests();
+            ExecutionEngine execute = new ExecutionEngine(newWebTest);
+            execute.ExecuteTheTests();
         }
     }
 }

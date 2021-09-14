@@ -21,6 +21,7 @@ using WebTestItemManager;
 using HttpWebTestingResults;
 using HttpWebTesting.SampleTest;
 using System.IO;
+using Serilog;
 
 namespace HttpWebTestingEditor
 {

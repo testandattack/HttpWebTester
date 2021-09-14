@@ -47,11 +47,18 @@ namespace WebTestRules
 
             string extractedValue = string.Empty;
 
-            if (e.response.StatusCode != System.Net.HttpStatusCode.Created)
+            if (e.response.StatusCode == System.Net.HttpStatusCode.Created)
             {
 
-                string location = e.response.Headers.Location.AbsolutePath;
+                string location = e.response.Headers.Location.ToString();
                 string originalUri = e.requestItem.requestItem.RequestUri.AbsolutePath;
+
+                //    location = api/contoso/11
+                // originalUri = /api/contoso
+                if(originalUri.StartsWith("/"))
+                {
+                    originalUri = originalUri.Substring(1);
+                }
 
                 int x = location.IndexOf(originalUri);
                 if (x != -1)
@@ -59,7 +66,12 @@ namespace WebTestRules
                     int iStart = x + originalUri.Length + 1;
                     extractedValue = location.Substring(iStart);
                 }
-                // First, get the value
+                else
+                {
+                    // I think we should never get here, so need to add some sort of validation.
+                    // In the meantime, just snag the final item 
+                    extractedValue = location.Substring(location.LastIndexOf("/") + 1);
+                }
             }
 
             // Second, evaluate the value

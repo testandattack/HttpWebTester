@@ -1,6 +1,7 @@
 ﻿using HttpWebTesting;
 using HttpWebTesting.DataSources;
 using HttpWebTesting.Enums;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,7 @@ namespace WebTestExecutionEngine
 
         private void LoadDataSources()
         {
+            Log.ForContext("SourceContext", "PreWebTestExecution").Debug("Executing {objectItemType}", "LoadDataSources");
             foreach (var dataSource in httpWebTest.DataSources)
             {
                 if(dataSource.dataSourceType == DataSourceType.CSV)
@@ -35,16 +37,19 @@ namespace WebTestExecutionEngine
                         fileLocation = ((CsvDataSource)dataSource).csvDataSourceFile;
 
                     dataSource.dataTable = CsvDataSourceLoader.LoadDataSource(fileLocation);
-                } 
+                }
+                Log.ForContext("SourceContext", "PreWebTestExecution").Debug("Loaded {objectItemType}", dataSource);
             }
         }
 
         private void BindDataSources()
         {
+            Log.ForContext("SourceContext", "PreWebTestExecution").Debug("Executing {objectItemType}", "BindDataSources");
             foreach (var dataSource in httpWebTest.DataSources)
             {
                 dataSource.GetNextRow(httpWebTest.ContextProperties);
             }
+            Log.ForContext("SourceContext", "PreWebTestExecution").Debug("Bound all data sources.");
         }
     }
 }
