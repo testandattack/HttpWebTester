@@ -22,6 +22,7 @@ namespace HttpWebTestingResults
         /// <summary>
         /// The item in the webtest that this result is for
         /// </summary>
+        [JsonProperty(PropertyName = "Original Item")]
         public WebTestItem webTestItem { get; set; }
 
         public override string ToString()

@@ -5,11 +5,11 @@ using System;
 
 namespace WebTestRules
 {
-    public class ValidateStatusCode : ValidationRule
+    public class ValidateSuccessStatusCode : ValidationRule
     {
-        public ValidateStatusCode() 
+        public ValidateSuccessStatusCode() 
         { 
-            type = typeof(ValidateStatusCode);
+            type = typeof(ValidateSuccessStatusCode);
             Name = "Validate IsSuccess Status Code";
         }
 

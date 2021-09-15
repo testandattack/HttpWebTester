@@ -80,7 +80,7 @@ namespace WebTestExecutionEngine
             DateTime dt = DateTime.UtcNow;
             var response = await RequestClient.SendAsync(request.requestItem);
             _responseTime = DateTime.UtcNow - dt;
-            Log.ForContext("SourceContext", "RequestExecution").Debug("Rrequest execution completed in {_time} seconds for {request}.", _responseTime.TotalSeconds, request.RequestUri.GetLeftPart(UriPartial.Path));
+            Log.ForContext("SourceContext", "RequestExecution").Debug("Rrequest execution completed in {_time} seconds for {request}.", _responseTime.TotalSeconds, request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
             return response;
         }
 
@@ -111,12 +111,12 @@ namespace WebTestExecutionEngine
                 WTRI_Request resultsItem = new WTRI_Request(request);
                 resultsItem.response = response;
                 resultsItem.contextCollection = httpWebTest.ContextProperties;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri.GetLeftPart(UriPartial.Path));
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
                 return resultsItem;
             }
             else
             {
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri.GetLeftPart(UriPartial.Path));
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
             }
             return null;
         }
@@ -151,15 +151,14 @@ namespace WebTestExecutionEngine
                 PreRequest += preRequestRule.PreRequest;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
             }
-            FirePreRequestHandler();
 
-            // Handle TestRule_PreRequest
-            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PreRequest))
-            {
-                PreRequestRule preRequestRule = rule as PreRequestRule;
-                PreRequest += preRequestRule.PreRequest;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
-            }
+            //// Handle TestRule_PreRequest
+            //foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PreRequest))
+            //{
+            //    PreRequestRule preRequestRule = rule as PreRequestRule;
+            //    PreRequest += preRequestRule.PreRequest;
+            //    Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
+            //}
             FirePreRequestHandler();
         }
 
@@ -195,10 +194,9 @@ namespace WebTestExecutionEngine
                 Validate += validationRule.Validate;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_Validation {rule} for {request}", rule.Name, request.guid);
             }
-            FireValidationRuleHandler(response);
 
             // Handle TestRule_Validation
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Validation))
+            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Validation))
             {
                 ValidationRule validationRule = rule as ValidationRule;
                 Validate += validationRule.Validate;
@@ -241,15 +239,6 @@ namespace WebTestExecutionEngine
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_Extraction {rule} for {request}", rule.Name, request.guid);
             }
             FireExtractionRuleHandler(response);
-
-            // Handle TestRule_Extraction
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Extraction))
-            {
-                ExtractionRule extractionRule = rule as ExtractionRule;
-                Extract += extractionRule.Extract;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_Extraction {rule} for {request}", rule.Name, request.guid);
-            }
-            FireExtractionRuleHandler(response);
         }
 
         public void FireExtractionRuleHandler(HttpResponseMessage response)
@@ -285,15 +274,14 @@ namespace WebTestExecutionEngine
                 PostRequest += postRequestRule.PostRequest;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
             }
-            FirePostRequestHandler(response);
 
-            // Handle TestRule_PostRequest
-            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PostRequest))
-            {
-                PostRequestRule postRequestRule = rule as PostRequestRule;
-                PostRequest += postRequestRule.PostRequest;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
-            }
+            //// Handle TestRule_PostRequest
+            //foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PostRequest))
+            //{
+            //    PostRequestRule postRequestRule = rule as PostRequestRule;
+            //    PostRequest += postRequestRule.PostRequest;
+            //    Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
+            //}
             FirePostRequestHandler(response);
         }
 

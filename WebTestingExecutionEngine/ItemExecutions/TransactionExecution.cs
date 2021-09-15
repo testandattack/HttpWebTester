@@ -14,8 +14,6 @@ namespace WebTestExecutionEngine
 
         public WTI_Transaction transaction { get; set; }
 
-        public WTRI_Transaction ExecutionResults { get; set; }
-
         #region -- Constructors -----
         public TransactionExecution(WTI_Transaction wTI_Transaction, HttpWebTest webTest)
         {

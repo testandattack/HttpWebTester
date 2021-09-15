@@ -17,8 +17,8 @@ namespace HttpWebTester
         static void Main(string[] args)
         {
             //Build and Serialize a webtest
-            //Sample sample = new Sample();
-            //HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, @"c:\temp\sampleContosoTest.json");
+            //Sample sample = new Sample(@"c:\temp\sampleContosoTestFromUI.csv");
+            //HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, @"c:\temp\sampleContosoTestFromUI.json");
 
             // Make sure the test will deserialize
             HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleContosoTestFromUI.json");

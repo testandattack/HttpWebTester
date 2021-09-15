@@ -47,10 +47,12 @@ namespace HttpWebTesting.SampleTest
             Property property = new Property("Context1", "Value1");
             httpWebTest.ContextProperties.Add(property);
             httpWebTest.ContextProperties.Add(new Property("Context2", "Value2"));
+            httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
             var trans =  ItemManager.CreateNewTransaction("Crud Stuff", "Calling CRUD operations on the Contoso model");
             var request1 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
             request1.Rules.Add(new ExtractCreationId("CreatedId"));
+            request1.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
             trans.webTestItems.Add(request1);
 
             trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso", HttpMethod.Get));

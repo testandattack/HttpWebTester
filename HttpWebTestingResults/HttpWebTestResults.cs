@@ -16,6 +16,7 @@ namespace HttpWebTestingResults
 
         public DateTime executionTime { get; set; }
 
+        [JsonProperty(PropertyName = "TestResultsItems")]
         public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
 
         public HttpWebTestResults()

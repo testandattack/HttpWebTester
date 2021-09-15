@@ -2,6 +2,7 @@
 using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
+using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Net.Http;
@@ -23,6 +24,7 @@ namespace WebTestExecutionEngine
             webTest = httpWebTest;
             testingResults = new HttpWebTestResults();
             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .WriteTo.Debug()
                 .WriteTo.File(@"c:\temp\HttpWebTester_Log.txt")
                 .Enrich.FromLogContext()
