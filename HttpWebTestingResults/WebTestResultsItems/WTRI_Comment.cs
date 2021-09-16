@@ -10,14 +10,7 @@ namespace HttpWebTestingResults
         public WTRI_Comment(WTI_Comment originalComment)
         {
             objectItemType = WebTestResultItemType.Wtri_CommentItem;
-            webTestItem = (WTI_Comment)originalComment;
-        }
-
-        public override string ToString()
-        {
-            string comment = (webTestItem as WTI_Comment).CommentText;
-            // FormatXXXXXXXXXXXXXXXX
-            return $"Comment         | {comment}";
+            webTestItemId = originalComment.guid;
         }
     }
 }

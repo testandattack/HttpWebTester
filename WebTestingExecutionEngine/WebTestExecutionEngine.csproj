@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
+    <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
     <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />
   </ItemGroup>
 

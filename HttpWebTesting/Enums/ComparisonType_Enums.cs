@@ -18,4 +18,35 @@
         EndsWith = 10
     };
 
+    public static class ComparisonTypeExtensions
+    {
+        public static string AsString(this ComparisonType source)
+        {
+            switch (source)
+            {
+                case ComparisonType.Contains:
+                    return "contains";
+                case ComparisonType.DoesNotContain:
+                    return "doesn't contain";
+                case ComparisonType.EndsWith:
+                    return "ends with";
+                case ComparisonType.IsEqual:
+                    return "=";
+                case ComparisonType.IsGreaterThan:
+                    return ">";
+                case ComparisonType.IsGreaterThanOrEqual:
+                    return ">=";
+                case ComparisonType.IsLessThan:
+                    return "<";
+                case ComparisonType.IsLessThanOrEqual:
+                    return "<=";
+                case ComparisonType.IsNotEqual:
+                    return "!=";
+                case ComparisonType.StartsWith:
+                    return "starts with";
+                default:
+                    return "";
+            }
+        }
+    }
 }

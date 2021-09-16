@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Serilog;
 using GTC.Extensions;
+using HttpWebTesting;
 
 namespace HttpWebTestingResults
 {
@@ -18,6 +19,9 @@ namespace HttpWebTestingResults
 
         [JsonProperty(PropertyName = "TestResultsItems")]
         public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
+
+        [JsonProperty(PropertyName = "Copy of Executed Web Test")]
+        public HttpWebTest webTestCopy { get; set; }
 
         public HttpWebTestResults()
         {

@@ -14,6 +14,7 @@ using System.Data;
 using System.IO;
 using GTC.Extensions;
 using System.Linq;
+using HttpWebTesting.Rules;
 
 namespace HttpWebTesting.SampleTest
 {
@@ -46,21 +47,47 @@ namespace HttpWebTesting.SampleTest
             // Add a couple of context properties
             Property property = new Property("Context1", "Value1");
             httpWebTest.ContextProperties.Add(property);
-            httpWebTest.ContextProperties.Add(new Property("Context2", "Value2"));
+            httpWebTest.ContextProperties.Add(new Property("MaxCreatedId", "25"));
             httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
+            // Add a comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Comment"));
+
+            // Add a transaction with some requests
             var trans =  ItemManager.CreateNewTransaction("Crud Stuff", "Calling CRUD operations on the Contoso model");
+            trans.webTestItems.Add(new WTI_Comment("Create a new item and extract the Id from the call"));
             var request1 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
             request1.Rules.Add(new ExtractCreationId("CreatedId"));
             request1.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
             trans.webTestItems.Add(request1);
-
             trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso", HttpMethod.Get));
             trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Get));
             trans.webTestItems.Add(ItemManager.CreateNewJsonPutRequest("http://localhost:5000/api/contoso", "{\"Id\": {{CreatedId}},\"Description\": \"Updated ContosoModel\"}"));
             trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Delete));
-
             httpWebTest.WebTestItems.Add(trans);
+
+            // Add a spacer comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+
+            // Create a couple of items to add to a loop control
+            var request2 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
+            request2.Rules.Add(new ExtractCreationId("CreatedId"));
+            request2.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
+            var ifLoop = ItemManager.CreateNew_IF_LoopControl(new RuleProperty("{{CreatedId}}"), ComparisonType.IsLessThan, new RuleProperty("{{MaxCreatedId}}"));
+            ifLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Get));
+
+            // Add a Loop Control and add the above items to it
+            var forLoop = ItemManager.CreateNew_FOR_LoopControl(1, 5, 2);
+            forLoop.webTestItems.Add(request2);
+            forLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso", HttpMethod.Get));
+            forLoop.webTestItems.Add(ifLoop);
+            forLoop.webTestItems.Add(ItemManager.CreateNewJsonPutRequest("http://localhost:5000/api/contoso", "{\"Id\": {{CreatedId}},\"Description\": \"Updated ContosoModel\"}"));
+            forLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Delete));
+            httpWebTest.WebTestItems.Add(forLoop);
+
+            // Add test end comments. These are solely for ease of reading the test in the tree view            
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+            httpWebTest.WebTestItems.Add(new WTI_Comment("-- End of Test Items -----"));
         }
 
         public void CreateAndSavePopulatedDataSource(string fileName)

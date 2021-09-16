@@ -141,9 +141,11 @@ namespace HttpWebTesting.WebTestItems
         public string GetLoopControlDisplayName()
         {
             if (this.ControlComparisonType == HttpWebTesting.Enums.ComparisonType.IsLoop)
-                return $"LOOP: {this.Name}";
+                return $"LOOP: From {this.LoopStartingValue} To {this.LoopEndingValue} Incremented by {this.LoopIncrementValue}";
             else
-                return $"CONDITION: {this.Name}";
+            {
+                return $"CONDITION: {this.ControlComparisonScope} {this.FirstOperand.Value} {this.ControlComparisonType.AsString()} {this.SecondOperand.Value}";
+            }
         }
     }
 }

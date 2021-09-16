@@ -20,7 +20,7 @@ namespace HttpWebTestingResults
         public WTRI_Transaction(WTI_Transaction originalTransaction)
         {
             objectItemType = WebTestResultItemType.Wtri_TransactionItem;
-            webTestItem = (WTI_Transaction)originalTransaction;
+            webTestItemId = originalTransaction.guid;
         }
     }
 }

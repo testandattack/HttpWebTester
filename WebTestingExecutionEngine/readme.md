@@ -2,9 +2,16 @@
 The WebTestExecutionEngine provides all of the functionality needed to execute an [HttpWebTest](../HttpWebTesting/readme.md) and collect the results. 
 ## Execution Steps
 The following describes the steps that the execution engine takes for a single web test:
-- The webtest is loaded into memory.
-- All data sources are loaded into memory.
-- The first row of data for each data source is loaded and bound to the ContextCollection.
+```csharp
+// Load the test into memory
+HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"webTest.json");
+
+// Create a new ExecutionEngine and pass in the webTest to execute
+ExecutionEngine execute = new ExecutionEngine(newWebTest);
+// Execute the test
+execute.ExecuteTheTests();
+```
+- The engine calls `LoadDataSources` and `BindDataSources`
 - The engine parses the [WebTestItemCollection](../HttpWebTesting/WebTestItems/readme.md) and starts executing the items in a recursive method called `WebTestItemExecution`, using the various item executions:
     - **Comments** are either ignored or added to the results collection (depending on the webtest property `SuppressAllCommentsInResults`).
     - **Requests** are handled as follows:

@@ -182,8 +182,7 @@ namespace HttpWebTestingEditor
             {
                 TreeViewItem subItem = new TreeViewItem();
                 string ruleDisplayName;
-                if (rule.RuleType == RuleTypes_Enums.RequestRule_Extraction ||
-                    rule.RuleType == RuleTypes_Enums.TestRule_Extraction)
+                if (rule.RuleType == RuleTypes_Enums.RequestRule_Extraction)
                 {
                     string contextName = (rule as ExtractionRule).ContextName;
                     ruleDisplayName = $"{rule.Name} to: {contextName.AddBraces()}";

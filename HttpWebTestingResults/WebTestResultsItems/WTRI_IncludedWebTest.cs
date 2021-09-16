@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace HttpWebTestingResults
 {
     public class WTRI_IncludedWebTest : WebTestResultsItem
     {
+        [JsonProperty(PropertyName = "IncludedWebtestResultsItems")]
         public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
 
         public TimeSpan totalElapsedTime { get; set; }
@@ -21,7 +23,7 @@ namespace HttpWebTestingResults
         {
             objectItemType = WebTestResultItemType.Wtri_LoopControlItem;
             httpWebTest = (HttpWebTest)originalIncludedWebTest;
-            webTestItem = null;
+            webTestItemId = originalIncludedWebTest.Id;
         }
     }
 }

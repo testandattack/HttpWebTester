@@ -22,20 +22,20 @@ namespace HttpWebTestingResults
         public WTRI_Request(WTI_Request originalRequest)
         {
             objectItemType = WebTestResultItemType.Wtri_RequestObject;
-            webTestItem = (WTI_Request)originalRequest;
+            webTestItemId = originalRequest.guid;
             HttpResponseMessageWasNull = false;
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            var request = webTestItem as WTI_Request;
-            // Format       XXXXXXXXXXXXXXXX
-            sb.AppendLine($"Request         | {request.RequestUri}");
-            sb.AppendLine($"        Method  | {request.Method}");
-            sb.AppendLine($"    StatusCode  | {response.StatusCode}");
-            sb.AppendLine($"  ResponseTime  | {ResponseTime.TotalSeconds}");
-            return sb.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    var request = webTestItemId as WTI_Request;
+        //    // Format       XXXXXXXXXXXXXXXX
+        //    sb.AppendLine($"Request         | {request.RequestUri}");
+        //    sb.AppendLine($"        Method  | {request.Method}");
+        //    sb.AppendLine($"    StatusCode  | {response.StatusCode}");
+        //    sb.AppendLine($"  ResponseTime  | {ResponseTime.TotalSeconds}");
+        //    return sb.ToString();
+        //}
     }
 }

@@ -8,7 +8,6 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WebTestExecutionEngine.HttpClient;
 using GTC.Extensions;
 using System.Collections.Generic;
 
@@ -77,10 +76,14 @@ namespace WebTestExecutionEngine
         #region -- Private Methods -----
         private async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
         {
+            var client = new System.Net.Http.HttpClient();
+            client.Timeout = new TimeSpan(0, 0, 30);
+
             DateTime dt = DateTime.UtcNow;
-            var response = await RequestClient.SendAsync(request.requestItem);
+            //var response = await RequestClient.SendAsync(request.requestItem);
+            var response = await client.SendAsync(request.requestItem);
             _responseTime = DateTime.UtcNow - dt;
-            Log.ForContext("SourceContext", "RequestExecution").Debug("Rrequest execution completed in {_time} seconds for {request}.", _responseTime.TotalSeconds, request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
+            Log.ForContext("SourceContext", "RequestExecution").Debug("Request execution completed in {_time} seconds for {request}.", _responseTime.TotalSeconds, request.RequestUri.GetLeftPart(UriPartial.Path));
             return response;
         }
 
@@ -111,12 +114,12 @@ namespace WebTestExecutionEngine
                 WTRI_Request resultsItem = new WTRI_Request(request);
                 resultsItem.response = response;
                 resultsItem.contextCollection = httpWebTest.ContextProperties;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri.GetLeftPart(UriPartial.Path));
                 return resultsItem;
             }
             else
             {
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.requestItem.RequestUri.GetLeftPart(UriPartial.Path));
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri.GetLeftPart(UriPartial.Path));
             }
             return null;
         }
