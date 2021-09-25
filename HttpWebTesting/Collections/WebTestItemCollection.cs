@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using HttpWebTesting.WebTestItems;
+using System.Collections.Generic;
 
 namespace HttpWebTesting.Collections
 {

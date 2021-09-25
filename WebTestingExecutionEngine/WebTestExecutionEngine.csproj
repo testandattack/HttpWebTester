@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
+    <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
+    <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
+    <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using GTC.Extensions;
+using HttpWebTesting.Rules;
 
 namespace HttpWebTestingEditor
 {
@@ -138,7 +140,7 @@ namespace HttpWebTestingEditor
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
             WTI_Request wtr = (WTI_Request)item;
-            treeItem.Header = CustomizeTreeViewItem(wtr.requestItem.RequestUri.AbsoluteUri, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            treeItem.Header = CustomizeTreeViewItem(wtr.RequestUri.AbsoluteUri.UrlDecode(), (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
             AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }
@@ -179,7 +181,17 @@ namespace HttpWebTestingEditor
             foreach (var rule in request.Rules)
             {
                 TreeViewItem subItem = new TreeViewItem();
-                subItem.Header = CustomizeTreeViewItem(rule.Name, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
+                string ruleDisplayName;
+                if (rule.RuleType == RuleTypes_Enums.RequestRule_Extraction)
+                {
+                    string contextName = (rule as ExtractionRule).ContextName;
+                    ruleDisplayName = $"{rule.Name} to: {contextName.AddBraces()}";
+                }
+                else
+                {
+                    ruleDisplayName = $"{rule.Name}";
+                }
+                subItem.Header = CustomizeTreeViewItem(ruleDisplayName, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
                 subItem.Name = String.Format("RequestLevelRules_{0}", x++);
                 treeItem.Items.Add(subItem);
             }
@@ -206,8 +218,6 @@ namespace HttpWebTestingEditor
             }
         }
         #endregion
-
-
     }
 
     public class tvStackPanel : StackPanel

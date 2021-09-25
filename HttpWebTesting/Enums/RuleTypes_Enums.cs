@@ -42,11 +42,6 @@
         RequestRule_Extraction = 6,
 
         /// <summary>
-        /// Executes after EACH request in the test is executed. 
-        /// </summary>
-        TestRule_Extraction = 7,
-
-        /// <summary>
         /// Executes after the request is executed.
         /// </summary>
         RequestRule_PostRequest = 8,

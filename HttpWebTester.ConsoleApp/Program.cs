@@ -7,6 +7,7 @@ using System.Threading;
 using HttpWebTesting.SampleTest;
 using HttpWebTesting;
 using WebTestItemManager;
+using WebTestExecutionEngine;
 
 namespace HttpWebTester
 {
@@ -15,14 +16,14 @@ namespace HttpWebTester
 
         static void Main(string[] args)
         {
-            // Build and Serialize a webtest
-            //Sample sample = new Sample();
-            //HttpWebTestSerializer.SerializeTest(sample.httpWebTest, @"c:\temp\sampleHttpWebTest.json");
+            //Build and Serialize a webtest
+            //Sample sample = new Sample(@"c:\temp\sampleContosoTestFromUI.csv");
+            //HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, @"c:\temp\sampleContosoTestFromUI.json");
 
-            //// Make sure the test will deserialize
-            //HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleHttpWebTest.json");
-            //Console.WriteLine("");
-            ExecuteTests execute = new ExecuteTests();
+            // Make sure the test will deserialize
+            HttpWebTest newWebTest = HttpWebTestSerializer.DeserializeTest(@"c:\temp\sampleContosoTestFromUI.json");
+
+            ExecutionEngine execute = new ExecutionEngine(newWebTest);
             execute.ExecuteTheTests();
         }
     }

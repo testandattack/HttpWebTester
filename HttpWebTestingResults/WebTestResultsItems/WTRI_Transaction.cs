@@ -1,4 +1,5 @@
 ﻿using HttpWebTesting.WebTestItems;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,16 +9,19 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Transaction : WebTestResultsItem
     {
-        public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
+
+        [JsonProperty(PropertyName = "Transaction Results Items")]
+        public WebTestResultsItemCollection webTestResultsItems { get; set; }
 
         public TimeSpan totalElapsedTime { get; set; }
 
         public TimeSpan totalTransactionTime { get; set; }
 
-        public WTRI_Transaction(WTI_Transaction originalComment)
+        public WTRI_Transaction(Guid itemGuid)
         {
             objectItemType = WebTestResultItemType.Wtri_TransactionItem;
-            webTestItem = (WTI_Transaction)originalComment;
+            webTestItemId = itemGuid;
+            webTestResultsItems = new WebTestResultsItemCollection();
         }
     }
 }

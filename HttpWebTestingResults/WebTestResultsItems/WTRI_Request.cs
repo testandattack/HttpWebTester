@@ -13,10 +13,29 @@ namespace HttpWebTestingResults
 
         public ContextCollection contextCollection { get; set; }
         
-        public WTRI_Request(WTI_Request originalRequest)
+        public bool HttpResponseMessageWasNull { get; set; }
+
+        public TimeSpan ResponseTime { get; set; }
+
+        public TimeSpan TotalExecutionTime { get; set; }
+
+        public WTRI_Request(Guid itemGuid)
         {
             objectItemType = WebTestResultItemType.Wtri_RequestObject;
-            webTestItem = (WTI_Request)originalRequest;
+            webTestItemId = itemGuid;
+            HttpResponseMessageWasNull = false;
         }
+
+        //public override string ToString()
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    var request = webTestItemId as WTI_Request;
+        //    // Format       XXXXXXXXXXXXXXXX
+        //    sb.AppendLine($"Request         | {request.RequestUri}");
+        //    sb.AppendLine($"        Method  | {request.Method}");
+        //    sb.AppendLine($"    StatusCode  | {response.StatusCode}");
+        //    sb.AppendLine($"  ResponseTime  | {ResponseTime.TotalSeconds}");
+        //    return sb.ToString();
+        //}
     }
 }

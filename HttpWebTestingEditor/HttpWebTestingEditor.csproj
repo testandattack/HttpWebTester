@@ -62,7 +62,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
+    <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
+    <ProjectReference Include="..\WebTestingExecutionEngine\WebTestExecutionEngine.csproj" />
     <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
     <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />
   </ItemGroup>

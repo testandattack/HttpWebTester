@@ -30,12 +30,12 @@ namespace HttpWebTesting.WebTestItems
         [Category("General")]
         public string Description { get; set; }
 
-        /// <summary>
-        /// A flag that tells the test execution engine whether to 
-        /// execute the items in the loop or ignore them.
-        /// </summary>
-        [Category("General")]
-        public bool IsEnabled { get; set; }
+        ///// <summary>
+        ///// A flag that tells the test execution engine whether to 
+        ///// execute the items in the loop or ignore them.
+        ///// </summary>
+        //[Category("General")]
+        //public bool IsEnabled { get; set; }
 
         /// <summary>
         /// An enum that describes what type of comparison is used when 
@@ -75,12 +75,13 @@ namespace HttpWebTesting.WebTestItems
         [Category("Comparison")]
         public RuleProperty FirstOperand { get; set; }
 
-
         /// <summary>
         /// Contains the value on the right side of the comparison statement
         /// </summary>
         [Category("Comparison")]
         public RuleProperty SecondOperand { get; set; }
+
+        public bool IgnoreCase { get; set; }
 
         /// <summary>
         /// [OPTIONAL] The starting value for the control when run as a loop
@@ -127,6 +128,7 @@ namespace HttpWebTesting.WebTestItems
             Enabled = true;
             guid = Guid.NewGuid();
             itemComment = string.Empty;
+            IgnoreCase = false;
         }
 
         #endregion
@@ -139,9 +141,11 @@ namespace HttpWebTesting.WebTestItems
         public string GetLoopControlDisplayName()
         {
             if (this.ControlComparisonType == HttpWebTesting.Enums.ComparisonType.IsLoop)
-                return $"LOOP: {this.Name}";
+                return $"LOOP: From {this.LoopStartingValue} To {this.LoopEndingValue} Incremented by {this.LoopIncrementValue}";
             else
-                return $"CONDITION: {this.Name}";
+            {
+                return $"CONDITION: {this.ControlComparisonScope} {this.FirstOperand.Value} {this.ControlComparisonType.AsString()} {this.SecondOperand.Value}";
+            }
         }
     }
 }

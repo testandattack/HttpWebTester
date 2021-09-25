@@ -38,12 +38,15 @@ namespace HttpWebTesting
         [DefaultValue(true)]
         public bool StopOnError { get; set; }
 
-
         [DisplayName("Suppress All Comments In Results")]
         [Description("")]
         [Category(PropertyCategories.Behavior)]
         [DefaultValue(true)]
         public bool SuppressAllCommentsInResults { get; set; }
+
+        [Browsable(false)]
+        [JsonIgnore]
+        public string WorkingDirectoryLocation { get; set; }
         #endregion
 
         #region -- Test Level Collections -----
@@ -63,18 +66,26 @@ namespace HttpWebTesting
         #region -- Constructors -----
         public HttpWebTest() 
         {
+            Id = new Guid();
             InitializeObject();
         }
 
         public HttpWebTest(string WebtestName)
         {
             Name = WebtestName;
+            Id = new Guid();
+            InitializeObject();
+        }
+
+        public HttpWebTest(string WebtestName, Guid guid)
+        {
+            Name = WebtestName;
+            Id = guid;
             InitializeObject();
         }
 
         private void InitializeObject()
         {
-            Id = new Guid();
             StopOnError = true;
             SuppressAllCommentsInResults = false;
 

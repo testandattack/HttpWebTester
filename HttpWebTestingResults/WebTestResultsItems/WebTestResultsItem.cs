@@ -22,6 +22,14 @@ namespace HttpWebTestingResults
         /// <summary>
         /// The item in the webtest that this result is for
         /// </summary>
-        public WebTestItem webTestItem { get; set; }
+        [JsonProperty(PropertyName = "Original Item Id")]
+        public Guid? webTestItemId { get; set; }
+
+        public bool ItemExecutionFailed = false;
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

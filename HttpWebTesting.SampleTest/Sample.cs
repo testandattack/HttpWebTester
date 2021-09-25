@@ -7,9 +7,14 @@ using HttpWebTesting.Collections;
 using HttpWebTesting.CoreObjects;
 using HttpWebTesting.DataSources;
 using HttpWebTesting.Enums;
-using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using WebTestRules;
+using WebTestItemManager;
+using System.Data;
+using System.IO;
+using GTC.Extensions;
+using System.Linq;
+using HttpWebTesting.Rules;
 
 namespace HttpWebTesting.SampleTest
 {
@@ -23,10 +28,23 @@ namespace HttpWebTesting.SampleTest
             BuildWebtest();
         }
 
-        private void BuildWebtest()
+        public Sample(string csvFileName)
         {
+            httpWebTest = new HttpWebTest("Sample Web Test");
+            BuildWebtest(csvFileName.Substring(csvFileName.LastIndexOf("\\") + 1));
+            CreateAndSavePopulatedDataSource(csvFileName);
+        }
+
+        private void BuildWebtest(string CsvFile = "ExampleCsvDataSource.csv")
+        {
+            // set test level properties
+            httpWebTest.Description = "Web test for testing the execution engine.";
+            httpWebTest.StopOnError = true;
+            httpWebTest.SuppressAllCommentsInResults = true;
+
             // Add a data source
             CsvDataSource cds = new CsvDataSource();
+            cds.csvDataSourceFile = CsvFile;
             cds.Name = "ExampleCsvDataSource";
             cds.dataSourceCursorType = DataSourceCursorType.Sequential;
             httpWebTest.DataSources.Add(cds);
@@ -34,82 +52,92 @@ namespace HttpWebTesting.SampleTest
             // Add a couple of context properties
             Property property = new Property("Context1", "Value1");
             httpWebTest.ContextProperties.Add(property);
-            httpWebTest.ContextProperties.Add(new Property("Context2", "Value2"));
-            
-            // Add a comment
-            httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Comment"));
+            httpWebTest.ContextProperties.Add(new Property("MaxCreatedId", "25"));
+            httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
-            // Add a transaction
-            AddTransactionToSample("Sample Transaction");
+            // Add a comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment("Root Level Request"));
 
             // Add a request
-            AddRequest(httpWebTest.WebTestItems);
+            var requestItem = ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{ExampleCsvDataSource.IntColumn}}", HttpMethod.Get);
+            requestItem.Rules.Add(new ValidateResponseText("Original ContosoModel"));
+            httpWebTest.WebTestItems.Add(requestItem);
 
-            // Add a test level rule
-            var validateStatusCode = new ValidateStatusCode();
-            httpWebTest.Rules.Add(validateStatusCode);
+            // Add a spacer comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+
+            // Add a comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Transaction"));
+
+            // Add a transaction with some requests
+            var trans =  ItemManager.CreateNewTransaction("Crud Stuff", "Calling CRUD operations on the Contoso model");
+            trans.webTestItems.Add(new WTI_Comment("Create a new item and extract the Id from the call"));
+            var request1 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
+            request1.Rules.Add(new ExtractCreationId("CreatedId"));
+            request1.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
+            trans.webTestItems.Add(request1);
+            trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso", HttpMethod.Get));
+            trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Get));
+            trans.webTestItems.Add(ItemManager.CreateNewJsonPutRequest("http://localhost:5000/api/contoso", "{\"Id\": {{CreatedId}},\"Description\": \"Updated ContosoModel\"}"));
+            trans.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Delete));
+            httpWebTest.WebTestItems.Add(trans);
+
+            // Add a spacer comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+
+            // Create a couple of items to add to a loop control
+            var request2 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
+            request2.Rules.Add(new ExtractCreationId("CreatedId"));
+            request2.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
+            var ifLoop = ItemManager.CreateNew_IF_LoopControl(new RuleProperty("{{CreatedId}}"), ComparisonType.IsLessThan, new RuleProperty("{{MaxCreatedId}}"));
+            ifLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Get));
+
+            // Add a Loop Control and add the above items to it
+            var forLoop = ItemManager.CreateNew_FOR_LoopControl(1, 5, 2);
+            forLoop.webTestItems.Add(request2);
+            forLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso", HttpMethod.Get));
+            forLoop.webTestItems.Add(ifLoop);
+            forLoop.webTestItems.Add(ItemManager.CreateNewJsonPutRequest("http://localhost:5000/api/contoso", "{\"Id\": {{CreatedId}},\"Description\": \"Updated ContosoModel\"}"));
+            forLoop.webTestItems.Add(ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{CreatedId}}", HttpMethod.Delete));
+            httpWebTest.WebTestItems.Add(forLoop);
+
+            // Add test end comments. These are solely for ease of reading the test in the tree view            
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+            httpWebTest.WebTestItems.Add(new WTI_Comment("-- End of Test Items -----"));
         }
 
-        private void AddTransactionToSample(string tranName)
+        public void CreateAndSavePopulatedDataSource(string fileName)
         {
-            WTI_Transaction transaction = new WTI_Transaction();
-            transaction.Name = tranName;
-            transaction.webTestItems.Add(new WTI_Comment("Embedded Comment"));
-            
-            // This call adds a basic request, but no additional stuff
-            transaction.webTestItems.Add(new WTI_Request(BuildFormPostRequest("http://www.bing.com")));
+            DataTable table = CreateCsvData();
 
-            // This call adds a request with additional settings and a rule
-            AddRequest(transaction.webTestItems);
-
-            httpWebTest.WebTestItems.Add(transaction);
+            using (StreamWriter sw = new StreamWriter(fileName, false))
+            {
+                List<string> columns = new List<string>();
+                foreach (DataColumn column in table.Columns)
+                {
+                    columns.Add(column.ColumnName);
+                }
+                sw.WriteLine(columns.ToString(","));
+                foreach (DataRow row in table.Rows)
+                {
+                    sw.WriteLine(row.ItemArray.Select(e => e.ToString()).ToList().ToString(","));
+                }
+            }
         }
 
-        private void AddRequest(WebTestItemCollection items)
+        private DataTable CreateCsvData()
         {
-            // Build a request
-            WTI_Request req = new WTI_Request(BuildFormPostRequest("http://www.contoso.com"));
+            DataTable table = new DataTable();
 
-            // Set some properties
-            req.ThinkTime = 5;
-            req.ReportingName = "Contoso Home Page Post.";
+            table.Columns.Add("StringColumn", typeof(System.String));
+            table.Columns.Add("IntColumn", typeof(System.Int32));
+            table.Columns.Add("BoolColumn", typeof(System.Boolean));
 
-            // Add a rule to it
-            var responseContainsValidationRule = new ValidateResponseText();
-            responseContainsValidationRule.ValueToFind = "Phrase to look for in the response";
-            req.Rules.Add(responseContainsValidationRule);
-
-            //Add request to the collection
-            items.Add(req);
+            table.Rows.Add("Text", 1, true);
+            table.Rows.Add("More Text", 2, false);
+            table.Rows.Add(string.Empty, 3, true);
+            table.Rows.Add("The previous row has an empty string", 4, true);
+            return table;
         }
-
-        private HttpRequestMessage BuildFormPostRequest(string sUrl)
-        {
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
-            message.Headers.Add("CustomHeader", "customeHeaderValue");
-            
-            //MultipartFormDataContent content = new MultipartFormDataContent();
-
-            //content.Add(new StringContent(Guid.NewGuid().ToString()), "Id");
-            //content.Add(new StringContent("Value 2"), "Key2");
-            //message.Content = content;
-            return message;
-        }
-
-        private HttpRequestMessage BuildJsonPostMessage(string sUrl)
-        {
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, sUrl);
-            message.Headers.Add("CustomHeader", "customeHeaderValue");
-
-//            string jsonString = @"
-//{
-    
-//}";
-
-            //StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            //message.Content = content;
-            return message;
-        }
-
     }
 }

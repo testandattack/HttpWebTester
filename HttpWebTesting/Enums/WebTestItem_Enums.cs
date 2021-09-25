@@ -37,7 +37,13 @@
         /// <summary>
         /// This indicates an unknown item type and is used to handle parsing errors by the WebTestItemManager.
         /// </summary>
-        Wti_Unknown = 6
+        Wti_Unknown = 6,
+
+        /// <summary>
+        /// This item type is used only for webTestResults. It indicated that the particular item in the test
+        /// had the property <see cref="HttpWebTesting.WebTestItems.WebTestItem.Enabled"/> set to false.
+        /// </summary>
+        Wti_SkippedItem = 7
     };
 
 

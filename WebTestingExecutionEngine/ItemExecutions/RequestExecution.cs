@@ -1,4 +1,5 @@
-﻿using HttpWebTesting.Enums;
+﻿using HttpWebTesting;
+using HttpWebTesting.Enums;
 using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
@@ -7,72 +8,96 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GTC.Extensions;
+using System.Collections.Generic;
 
 namespace WebTestExecutionEngine
 {
-    public class RequestExecution : BaseExecution
+    public class RequestExecution
     {
         #region -- Properties -----
+        public HttpWebTest httpWebTest { get; set; }
+
         public WTI_Request request { get; set; }
 
         public HttpResponseMessage httpResponseMessage { get; set; }
 
         public string ResponseAsString = string.Empty;
+
+        private TimeSpan _responseTime = TimeSpan.MinValue;
         #endregion
 
         #region -- Constructors -----
-        public RequestExecution() { }
-
-        public RequestExecution(WTI_Request wTI_RequestObject)
+        public RequestExecution(WTI_Request wTI_RequestObject, HttpWebTest webTest)
         {
+            httpWebTest = webTest;
             request = wTI_RequestObject;
         }
         #endregion
 
-        public WTRI_Request ProcessRequest()
+        public async Task<WebTestResultsItem> ProcessRequest()
         {
             // Make sure we should execute the request. 
             if (request.Enabled == false)
-                return null;
+            {
+                WTI_SkippedItem skippedItem = new WTI_SkippedItem(
+                    request.RequestUri.GetLeftPart(UriPartial.Path)
+                    , WebTestItemType.Wti_LoopControl);
+                Log.ForContext("SourceContext", "RequestExecution").Debug("Skipping request {objectItemType}", request.RequestUri.GetLeftPart(UriPartial.Path));
+                return new WTRI_SkippedItem(skippedItem);
+            }
 
-            ExecutePreRequestSteps();
-            var response = ExecuteRequest(request).GetAwaiter().GetResult();
-            return ExecutePostRequestSteps(response);
+            // Start overall timer
+            DateTime dt = DateTime.UtcNow;
+
+            // Apply all context values to request objects
+            httpWebTest.ContextProperties.BuildRequestWithContextValues(request);
+
+            // trigger pre-request event to fire any handlers that were added.
+            HandlePreRequestEventProcessing();
+
+            // Execute the request
+            var response = await ExecuteRequest(request);
+
+            // Handle the various post-request steps
+            var results = ExecutePostRequestSteps(response);
+
+            // Add the request's response time to the result.
+            results.ResponseTime = _responseTime;
+
+            // Get the processing timer for the request
+            results.TotalExecutionTime = DateTime.UtcNow - dt;
+
+            results.ItemExecutionFailed = request.Rules.ContainsFailedRuleResult();
+
+            // return the results object to the test engine
+            return results;
         }
 
 
         #region -- Private Methods -----
-        private void ExecutePreRequestSteps()
+        private async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
         {
-            if (request.FirePreRequestHandlersAfterDataBinding == true)
-            {
-                BindDataSources();
-                HandlePreRequestEventProcessing();
-                ApplyContexts();
-            }
-            else
-            {
-                HandlePreRequestEventProcessing();
-                BindDataSources();
-                ApplyContexts();
-            }
-        }
+            var client = new System.Net.Http.HttpClient();
+            client.Timeout = new TimeSpan(0, 0, 30);
 
-        private static async Task<HttpResponseMessage> ExecuteRequest(WTI_Request request)
-        {
-            HttpClient client = new HttpClient();
-            var httpResponse = client.SendAsync(request.requestItem);
-            return await httpResponse;
+            DateTime dt = DateTime.UtcNow;
+            //var response = await RequestClient.SendAsync(request.requestItem);
+            var response = await client.SendAsync(request.requestItem);
+            _responseTime = DateTime.UtcNow - dt;
+            Log.ForContext("SourceContext", "RequestExecution").Debug("Request execution completed in {_time} seconds for {request}.", _responseTime.TotalSeconds, request.RequestUri.GetLeftPart(UriPartial.Path));
+            return response;
         }
 
         private WTRI_Request ExecutePostRequestSteps(HttpResponseMessage response)
         {
             if (response != null)
             {
+                WTRI_Request requestResults = GetResults(response);
                 HandleValidationEventProcessing(response);
                 HandleExtractionEventProcessing(response);
                 HandlePostRequestEventProcessing(response);
-                return GetResults(response);
+                return requestResults;
             }
             else if (httpWebTest.StopOnError == true)
             {
@@ -88,22 +113,35 @@ namespace WebTestExecutionEngine
         {
             if (request.RecordResults == true)
             {
-                WTRI_Request resultsItem = new WTRI_Request(request);
+                WTRI_Request resultsItem = new WTRI_Request(request.guid);
                 resultsItem.response = response;
                 resultsItem.contextCollection = httpWebTest.ContextProperties;
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri.GetLeftPart(UriPartial.Path));
                 return resultsItem;
+            }
+            else
+            {
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri.GetLeftPart(UriPartial.Path));
             }
             return null;
         }
 
-        private void BindDataSources()
+        private WTRI_Request GetResults()
         {
-            Log.ForContext("SourceContext", "RequestExecution").Debug("entering BindDataSources for {request}", request.guid);
-        }
-
-        private void ApplyContexts()
-        {
-            Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
+            if (request.RecordResults == true)
+            {
+                WTRI_Request resultsItem = new WTRI_Request(request.guid);
+                resultsItem.response = null;
+                resultsItem.HttpResponseMessageWasNull = true;
+                resultsItem.contextCollection = httpWebTest.ContextProperties;
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults() completed for {objectItemType}.", request.RequestUri.GetLeftPart(UriPartial.Path));
+                return resultsItem;
+            }
+            else
+            {
+                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri.GetLeftPart(UriPartial.Path));
+            }
+            return null;
         }
         #endregion
 
@@ -117,15 +155,6 @@ namespace WebTestExecutionEngine
                 PreRequestRule preRequestRule = rule as PreRequestRule;
                 PreRequest += preRequestRule.PreRequest;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
-            }
-            FirePreRequestHandler();
-
-            // Handle TestRule_PreRequest
-            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PreRequest))
-            {
-                PreRequestRule preRequestRule = rule as PreRequestRule;
-                PreRequest += preRequestRule.PreRequest;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
             }
             FirePreRequestHandler();
         }
@@ -162,10 +191,9 @@ namespace WebTestExecutionEngine
                 Validate += validationRule.Validate;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_Validation {rule} for {request}", rule.Name, request.guid);
             }
-            FireValidationRuleHandler(response);
 
             // Handle TestRule_Validation
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Validation))
+            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Validation))
             {
                 ValidationRule validationRule = rule as ValidationRule;
                 Validate += validationRule.Validate;
@@ -208,15 +236,6 @@ namespace WebTestExecutionEngine
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_Extraction {rule} for {request}", rule.Name, request.guid);
             }
             FireExtractionRuleHandler(response);
-
-            // Handle TestRule_Extraction
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Extraction))
-            {
-                ExtractionRule extractionRule = rule as ExtractionRule;
-                Extract += extractionRule.Extract;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_Extraction {rule} for {request}", rule.Name, request.guid);
-            }
-            FireExtractionRuleHandler(response);
         }
 
         public void FireExtractionRuleHandler(HttpResponseMessage response)
@@ -252,15 +271,14 @@ namespace WebTestExecutionEngine
                 PostRequest += postRequestRule.PostRequest;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
             }
-            FirePostRequestHandler(response);
 
-            // Handle TestRule_PostRequest
-            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PostRequest))
-            {
-                PostRequestRule postRequestRule = rule as PostRequestRule;
-                PostRequest += postRequestRule.PostRequest;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
-            }
+            //// Handle TestRule_PostRequest
+            //foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PostRequest))
+            //{
+            //    PostRequestRule postRequestRule = rule as PostRequestRule;
+            //    PostRequest += postRequestRule.PostRequest;
+            //    Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PostRequest {rule} for {request}", rule.Name, request.guid);
+            //}
             FirePostRequestHandler(response);
         }
 

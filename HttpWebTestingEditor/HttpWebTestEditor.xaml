@@ -23,7 +23,9 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Width="Auto" Height="20" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" >
             <MenuItem Header="_File" >
                 <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open a .webtest file for editing." Click="tsmiOpen_Click" />
+                <MenuItem x:Name="tsmiExecute" Header="_Execute" HorizontalAlignment="Left" ToolTip="Executes the currently loaded test" Click="tsmiExecute_Click" />
                 <MenuItem Background="#7F404040" Height="4" Margin="5,0" />
+                <MenuItem x:Name="tsmiCreateSampleTest" Header="Create Sample Test" HorizontalAlignment="Left" ToolTip="Creates and saves a new sample webtest." Click="tsmiCreateSampleTest_Click" />
                 <MenuItem x:Name="tsmiAppExit" Header="_Exit" HorizontalAlignment="Left" ToolTip="This will close the application. If the developer did his homework, the application will prompt you for saving any changes if you have not already saved it." Click="tsmiAppExit_Click"/>
             </MenuItem>
         </Menu>
@@ -46,6 +48,11 @@
                     </TreeView.ItemContainerStyle>
                 </TreeView>
             </TabItem>
+            <TabItem x:Name="tabResultsView" Header="Results">
+                <TextBox x:Name="tbResults" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    
+                </TextBox>
+            </TabItem>
         </TabControl>
 
         <!-- Main Window Grid Splitter -->
@@ -53,7 +60,9 @@
 
         <!-- Main Window Right Tab Control -->
         <TabControl Grid.Row="1" Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
-            <TabItem x:Name="tabProperties" Header="Properties" >
+            <TabItem x:Name="tabPropertyGrid" Header="Properties" >
+            </TabItem>
+            <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>
         </TabControl>

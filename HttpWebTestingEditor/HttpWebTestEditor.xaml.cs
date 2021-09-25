@@ -16,7 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebTestExecutionEngine;
 using WebTestItemManager;
+using HttpWebTestingResults;
+using HttpWebTesting.SampleTest;
+using System.IO;
+using Serilog;
 
 namespace HttpWebTestingEditor
 {
@@ -27,6 +32,7 @@ namespace HttpWebTestingEditor
     {
         private HttpWebTest _webTest;
         private ItemManager wtim;
+        private HttpWebTestResults _webTestResults;
 
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
@@ -106,6 +112,46 @@ namespace HttpWebTestingEditor
             if (SaveModifiedFile())
                 this.Close();
         }
+
+        private void tsmiExecute_Click(object sender, RoutedEventArgs e)
+        {
+            if (_webTest == null)
+            {
+                MessageBox.Show("No web test loaded. Please load a webtest, then try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            ExecutionEngine engine = new ExecutionEngine(_webTest);
+            _webTestResults = engine.ExecuteTheTests();
+            
+            if(_webTestResults != null)
+            {
+                tbResults.Text = _webTestResults.ToString();
+            }
+            else
+            {
+                tbResults.Text = "Results were null.";
+            }
+            tabResultsView.IsSelected = true;
+        }
+
+        private void tsmiCreateSampleTest_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog ofd = new Microsoft.Win32.SaveFileDialog();
+            ofd.DefaultExt = ".json";
+            ofd.Filter = "HttpWebTest Files (*.json)|*.json|All Files (*.*)|*.*";
+            Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+            if (fUserPickedFile == true)
+            {
+                Sample sample = new Sample(ofd.FileName.Replace(".json",".csv"));
+                HttpWebTestSerializer.SerializeAndSaveTest(sample.httpWebTest, ofd.FileName);
+                _webTest = sample.httpWebTest;
+                _currentlyLoadedFileName = ofd.FileName;
+                wtim = new ItemManager(_webTest);
+                tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                PopulateTreeView();
+            }
+        }
         #endregion
 
         private bool SaveModifiedFile()
@@ -117,7 +163,7 @@ namespace HttpWebTestingEditor
                 {
                     if (_currentlyLoadedFileName.EndsWith(" *"))
                         _currentlyLoadedFileName = _currentlyLoadedFileName.Remove(_currentlyLoadedFileName.LastIndexOf(" *"));
-                    HttpWebTestSerializer.SerializeTest(_webTest, _currentlyLoadedFileName);
+                    HttpWebTestSerializer.SerializeAndSaveTest(_webTest, _currentlyLoadedFileName);
                     _fileWasModified = false;
                     return true;
                 }
