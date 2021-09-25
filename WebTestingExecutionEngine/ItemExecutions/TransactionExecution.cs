@@ -2,9 +2,11 @@
 using HttpWebTesting.Enums;
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WebTestExecutionEngine
 {
@@ -22,7 +24,7 @@ namespace WebTestExecutionEngine
         }
         #endregion
 
-        public WebTestResultsItem ProcessTransaction()
+        public async Task<WebTestResultsItem> ProcessTransaction()
         {
             if (transaction.Enabled == false)
             {
@@ -30,8 +32,12 @@ namespace WebTestExecutionEngine
                 return new WTRI_SkippedItem(skippedItem);
             }
 
-            WTRI_Transaction transactionResults = new WTRI_Transaction(transaction);
-            transactionResults.webTestResultsItems = WebTestItemCollectionExecution.ExecuteWebTestItemCollection(httpWebTest, transaction.webTestItems);
+            WTRI_Transaction transactionResults = new WTRI_Transaction(transaction.guid);
+            transactionResults.webTestResultsItems = await WebTestItemCollectionExecution.ExecuteWebTestItemCollectionAsync(httpWebTest, transaction.webTestItems);
+            if (transactionResults.webTestResultsItems.ExecutionState == RuleResult.Failed)
+            {
+                transactionResults.ItemExecutionFailed = true;
+            }
             return transactionResults;
         }
 

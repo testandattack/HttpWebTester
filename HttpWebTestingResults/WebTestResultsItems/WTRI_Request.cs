@@ -19,10 +19,10 @@ namespace HttpWebTestingResults
 
         public TimeSpan TotalExecutionTime { get; set; }
 
-        public WTRI_Request(WTI_Request originalRequest)
+        public WTRI_Request(Guid itemGuid)
         {
             objectItemType = WebTestResultItemType.Wtri_RequestObject;
-            webTestItemId = originalRequest.guid;
+            webTestItemId = itemGuid;
             HttpResponseMessageWasNull = false;
         }
 

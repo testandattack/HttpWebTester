@@ -5,6 +5,7 @@ using HttpWebTestingResults;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WebTestExecutionEngine
 {
@@ -15,7 +16,6 @@ namespace WebTestExecutionEngine
 
         public WTI_LoopControl loopControl { get; set; }
 
-        private bool isSinglePassComparison;
         private StringComparison stringComp;
 
         #region -- Constructors -----
@@ -30,7 +30,7 @@ namespace WebTestExecutionEngine
         }
         #endregion
 
-        public WebTestResultsItem ProcessLoop()
+        public async Task<WebTestResultsItem> ProcessLoopAsync()
         {
             if(loopControl.Enabled == false)
             {
@@ -38,18 +38,18 @@ namespace WebTestExecutionEngine
                 return new WTRI_SkippedItem(skippedItem);
             }
 
-            WTRI_LoopControl loopControlResults = new WTRI_LoopControl(loopControl);
-
+            WTRI_LoopControl loopControlResults = new WTRI_LoopControl(loopControl.guid);
             if (loopControl.ControlComparisonType == ComparisonType.IsLoop)
-                HandleLoop(loopControlResults);
+                loopControlResults.ItemExecutionFailed = !(await HandleLoopAsync(loopControlResults));
             else if (loopControl.ControlComparisonScope == ControlComparisonScope.While)
-                HandleMultiPassComparison(loopControlResults);
+                loopControlResults.ItemExecutionFailed = !(await HandleMultiPassComparisonAsync(loopControlResults));
             else
-                HandleSinglePassComparison(loopControlResults);
+                loopControlResults.ItemExecutionFailed = !(await HandleSinglePassComparisonAsync(loopControlResults));
             return loopControlResults;
         }
 
-        private void HandleLoop(WTRI_LoopControl results)
+        #region -- Private Methods -----
+        private async Task<bool> HandleLoopAsync(WTRI_LoopControl results)
         {
             int start = (int)loopControl.LoopStartingValue;
             int end = (int)loopControl.LoopEndingValue;
@@ -57,33 +57,43 @@ namespace WebTestExecutionEngine
 
             for (int x = start; x < end; x += increment)
             {
-                ExecuteItemCollection(results, x);
+                var passed = await ExecuteItemCollectionAsync(results, x);
+                if (passed == false)
+                    return false;
             }
+            return true;
         }
 
-        private void HandleMultiPassComparison(WTRI_LoopControl results)
+        private async Task<bool> HandleMultiPassComparisonAsync(WTRI_LoopControl results)
         {
             int iterationNum = 1;
             while (PerformComparison() == true)
             {
-                ExecuteItemCollection(results, iterationNum++);
+                var passed = await ExecuteItemCollectionAsync(results, iterationNum++);
+                if (passed == false)
+                    return false;
             }
+            return true;
         }
 
-        private void HandleSinglePassComparison(WTRI_LoopControl results)
+        private async Task<bool> HandleSinglePassComparisonAsync(WTRI_LoopControl results)
         {
             if(PerformComparison() == true)
             {
-                ExecuteItemCollection(results, 1);
+                return await ExecuteItemCollectionAsync(results, 1);
             }
+            return true;
         }
 
-        private void ExecuteItemCollection(WTRI_LoopControl results, int iterationId)
+        private async Task<bool> ExecuteItemCollectionAsync(WTRI_LoopControl results, int iterationId)
         {
             string iteration = $"Iteration {iterationId}";
-            var result = WebTestItemCollectionExecution.ExecuteWebTestItemCollection(httpWebTest, loopControl.webTestItems);
-            results.webTestResultsItems.Add(iteration, result);
+            var result = await WebTestItemCollectionExecution.ExecuteWebTestItemCollectionAsync(httpWebTest, loopControl.webTestItems);
+            results.loopResultsItems.Add(iteration, result);
+            if (result.ExecutionState == RuleResult.Failed)
+                return false;
             HandleDataSourceCursorAdvance();
+            return true;
         }
 
         private bool PerformComparison()
@@ -150,5 +160,6 @@ namespace WebTestExecutionEngine
                 }
             }
         }
+        #endregion
     }
 }

@@ -22,5 +22,17 @@ namespace HttpWebTesting.Collections
             }
             return rules;
         }
+
+        public bool ContainsFailedRuleResult(bool includeAborted = false)
+        {
+            foreach (var rule in this.Items)
+            {
+                if (rule.RuleResult == RuleResult.Failed)
+                    return true;
+                if(includeAborted == true && rule.RuleResult == RuleResult.Aborted)
+                    return true;
+            }
+            return false;
+        }
     }
 }

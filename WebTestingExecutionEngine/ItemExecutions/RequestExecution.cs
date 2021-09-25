@@ -35,7 +35,7 @@ namespace WebTestExecutionEngine
         }
         #endregion
 
-        public WebTestResultsItem ProcessRequest()
+        public async Task<WebTestResultsItem> ProcessRequest()
         {
             // Make sure we should execute the request. 
             if (request.Enabled == false)
@@ -57,7 +57,7 @@ namespace WebTestExecutionEngine
             HandlePreRequestEventProcessing();
 
             // Execute the request
-            var response = ExecuteRequest(request).GetAwaiter().GetResult();
+            var response = await ExecuteRequest(request);
 
             // Handle the various post-request steps
             var results = ExecutePostRequestSteps(response);
@@ -67,6 +67,8 @@ namespace WebTestExecutionEngine
 
             // Get the processing timer for the request
             results.TotalExecutionTime = DateTime.UtcNow - dt;
+
+            results.ItemExecutionFailed = request.Rules.ContainsFailedRuleResult();
 
             // return the results object to the test engine
             return results;
@@ -111,7 +113,7 @@ namespace WebTestExecutionEngine
         {
             if (request.RecordResults == true)
             {
-                WTRI_Request resultsItem = new WTRI_Request(request);
+                WTRI_Request resultsItem = new WTRI_Request(request.guid);
                 resultsItem.response = response;
                 resultsItem.contextCollection = httpWebTest.ContextProperties;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri.GetLeftPart(UriPartial.Path));
@@ -128,7 +130,7 @@ namespace WebTestExecutionEngine
         {
             if (request.RecordResults == true)
             {
-                WTRI_Request resultsItem = new WTRI_Request(request);
+                WTRI_Request resultsItem = new WTRI_Request(request.guid);
                 resultsItem.response = null;
                 resultsItem.HttpResponseMessageWasNull = true;
                 resultsItem.contextCollection = httpWebTest.ContextProperties;
@@ -154,14 +156,6 @@ namespace WebTestExecutionEngine
                 PreRequest += preRequestRule.PreRequest;
                 Log.ForContext("SourceContext", "RequestExecution").Debug("adding RequestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
             }
-
-            //// Handle TestRule_PreRequest
-            //foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_PreRequest))
-            //{
-            //    PreRequestRule preRequestRule = rule as PreRequestRule;
-            //    PreRequest += preRequestRule.PreRequest;
-            //    Log.ForContext("SourceContext", "RequestExecution").Debug("adding TestRule_PreRequest {rule} for {request}", rule.Name, request.guid);
-            //}
             FirePreRequestHandler();
         }
 

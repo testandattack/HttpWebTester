@@ -7,10 +7,10 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Comment : WebTestResultsItem
     {
-        public WTRI_Comment(WTI_Comment originalComment)
+        public WTRI_Comment(Guid itemGuid)
         {
             objectItemType = WebTestResultItemType.Wtri_CommentItem;
-            webTestItemId = originalComment.guid;
+            webTestItemId = itemGuid;
         }
     }
 }

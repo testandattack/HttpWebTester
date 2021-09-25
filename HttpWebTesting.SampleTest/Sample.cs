@@ -37,6 +37,11 @@ namespace HttpWebTesting.SampleTest
 
         private void BuildWebtest(string CsvFile = "ExampleCsvDataSource.csv")
         {
+            // set test level properties
+            httpWebTest.Description = "Web test for testing the execution engine.";
+            httpWebTest.StopOnError = true;
+            httpWebTest.SuppressAllCommentsInResults = true;
+
             // Add a data source
             CsvDataSource cds = new CsvDataSource();
             cds.csvDataSourceFile = CsvFile;
@@ -51,7 +56,18 @@ namespace HttpWebTesting.SampleTest
             httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
             // Add a comment
-            httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Comment"));
+            httpWebTest.WebTestItems.Add(new WTI_Comment("Root Level Request"));
+
+            // Add a request
+            var requestItem = ItemManager.CreateNewRequest("http://localhost:5000/api/contoso/{{ExampleCsvDataSource.IntColumn}}", HttpMethod.Get);
+            requestItem.Rules.Add(new ValidateResponseText("Original ContosoModel"));
+            httpWebTest.WebTestItems.Add(requestItem);
+
+            // Add a spacer comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment(""));
+
+            // Add a comment
+            httpWebTest.WebTestItems.Add(new WTI_Comment("Sample Transaction"));
 
             // Add a transaction with some requests
             var trans =  ItemManager.CreateNewTransaction("Crud Stuff", "Calling CRUD operations on the Contoso model");

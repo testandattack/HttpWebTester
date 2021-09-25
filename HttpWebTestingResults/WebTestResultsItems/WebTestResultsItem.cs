@@ -25,6 +25,8 @@ namespace HttpWebTestingResults
         [JsonProperty(PropertyName = "Original Item Id")]
         public Guid? webTestItemId { get; set; }
 
+        public bool ItemExecutionFailed = false;
+
         public override string ToString()
         {
             return base.ToString();

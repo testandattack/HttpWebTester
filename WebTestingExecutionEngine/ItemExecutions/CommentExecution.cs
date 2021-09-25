@@ -23,7 +23,7 @@ namespace WebTestExecutionEngine
 
         public WebTestResultsItem ProcessComment()
         {
-            WTRI_Comment commentResults = new WTRI_Comment(comment);
+            WTRI_Comment commentResults = new WTRI_Comment(comment.guid);
             return commentResults;
         }
 

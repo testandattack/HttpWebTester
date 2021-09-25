@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpWebTestingResults", "Ht
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpWebTestingEditor", "HttpWebTestingEditor\HttpWebTestingEditor.csproj", "{8E3C9924-D96C-4988-9395-41E86C48C89E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestExecutionEngine", "WebTestingExecutionEngine\WebTestExecutionEngine.csproj", "{9C00A50D-0A2B-4358-ACFC-29CA85AAD6D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebTestExecutionEngine", "WebTestingExecutionEngine\WebTestExecutionEngine.csproj", "{9C00A50D-0A2B-4358-ACFC-29CA85AAD6D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

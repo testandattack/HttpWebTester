@@ -15,17 +15,21 @@ namespace HttpWebTestingResults
 
         public string Description { get; set; }
 
+        public string TestAgent { get; set; }
+
         public DateTime executionTime { get; set; }
 
-        [JsonProperty(PropertyName = "TestResultsItems")]
-        public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
+        public bool ContainsFailedExecutionItem = false;
 
-        [JsonProperty(PropertyName = "Copy of Executed Web Test")]
-        public HttpWebTest webTestCopy { get; set; }
+        [JsonProperty(PropertyName = "TestResultsItems")]
+        public WebTestResultsItemCollection webTestResultsItems { get; set; }
+
+        [JsonProperty(PropertyName = "Original Web Test")]
+        public HttpWebTest originalWebTest { get; set; }
 
         public HttpWebTestResults()
         {
-            webTestResultsItems = new Collection<WebTestResultsItem>();
+            webTestResultsItems = new WebTestResultsItemCollection();
             executionTime = DateTime.UtcNow;
             // Results design still under construction
             //throw new NotImplementedException();
@@ -42,16 +46,21 @@ namespace HttpWebTestingResults
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine($"Results for test '{Name}'");
-            sb.AppendLine($"Executed on {executionTime.ToString()}");
-            foreach(var item in webTestResultsItems)
-            {
-                sb.Append(item.ToString());
-            }
-
-            return sb.ToString();
+            return JsonConvert.SerializeObject(this, Formatting.Indented);//base.ToString();
         }
+
+        //public override string ToString()
+        //{
+        //    StringBuilder sb = new StringBuilder();
+
+        //    sb.AppendLine($"Results for test '{Name}'");
+        //    sb.AppendLine($"Executed on {executionTime.ToString()}");
+        //    foreach(var item in webTestResultsItems)
+        //    {
+        //        sb.Append(item.ToString());
+        //    }
+
+        //    return sb.ToString();
+        //}
     }
 }

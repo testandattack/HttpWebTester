@@ -12,6 +12,8 @@ using System.Net.Http;
 using WebTestExecutionEngine;
 using WebTestRules;
 using WebTestItemManager;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace WebTestExecutionEngine
 {
@@ -35,10 +37,20 @@ namespace WebTestExecutionEngine
                 .Enrich.FromLogContext()
                 .CreateLogger();
 
-            testingResults = new HttpWebTestResults();
             httpWebTest = webTest;
+            CreateTestResults();
         }
 
+        private void CreateTestResults()
+        {
+            testingResults = new HttpWebTestResults();
+            string CurrentTime = DateTime.Now.ToString("yyyyMMdd_hh-mm-ss");
+            testingResults.Name = $"{httpWebTest.Name} {CurrentTime}";
+            testingResults.Description = $"Results for the execution of the webtest {httpWebTest.Name} on {DateTime.Now}";
+            string webTestCopy = HttpWebTestSerializer.SerializeTest(httpWebTest);
+            testingResults.originalWebTest = HttpWebTestSerializer.DeserializeTestFromString(webTestCopy);
+            testingResults.TestAgent = Environment.MachineName;
+        }
 
         public HttpWebTestResults ExecuteTheTests()
         {
@@ -47,9 +59,8 @@ namespace WebTestExecutionEngine
             LoadDataSources();
             BindDataSources();
 
-            Log.ForContext("SourceContext", "ExecutionEngine").Debug("Calling {method}", "ExecuteWebTestItemCollection");
-            testingResults.webTestResultsItems = WebTestItemCollectionExecution
-                .ExecuteWebTestItemCollection(httpWebTest, httpWebTest.WebTestItems);
+            Log.ForContext("SourceContext", "ExecutionEngine").Debug("Calling {method}", "ExecuteItemCollectionAsync");
+            Task.Run(() => ExecuteItemCollectionAsync()).Wait();
 
             PostWebTestExecution postWebTestExecution = new PostWebTestExecution();
             Log.ForContext("SourceContext", "ExecutionEngine").Debug("Calling {method}", "ProcessPostWebTest");
@@ -59,6 +70,13 @@ namespace WebTestExecutionEngine
             Log.ForContext("SourceContext", "ExecutionEngine").Information("Finished Executing Test: {webTest}", httpWebTest.Name);
             Log.CloseAndFlush();
             return testingResults;
+        }
+
+        private async Task ExecuteItemCollectionAsync()
+        {
+            testingResults.webTestResultsItems = await WebTestItemCollectionExecution.ExecuteWebTestItemCollectionAsync(httpWebTest, httpWebTest.WebTestItems);
+            if (testingResults.webTestResultsItems.ExecutionState == RuleResult.Failed)
+                testingResults.ContainsFailedExecutionItem = true;
         }
 
         private void LoadDataSources()

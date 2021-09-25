@@ -41,5 +41,17 @@ namespace WebTestItemManager
                 return webTest;
             }
         }
+
+        public static HttpWebTest DeserializeTestFromString(string serializedTest)
+        {
+                HttpWebTest webTest;
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Objects;
+                settings.Converters.Add(new StringContentConverter());
+                settings.Converters.Add(new HttpContentConverter());
+                webTest = JsonConvert.DeserializeObject<HttpWebTest>(serializedTest, settings);
+                webTest.WorkingDirectoryLocation = serializedTest.Substring(0, serializedTest.LastIndexOf("\\"));
+                return webTest;
+        }
     }
 }

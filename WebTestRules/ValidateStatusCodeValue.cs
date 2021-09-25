@@ -12,7 +12,7 @@ namespace WebTestRules
 
         public ValidateStatusCodeValue(HttpStatusCode statusCode) 
         {
-            RuleType = RuleTypes_Enums.TestRule_Validation;
+            RuleType = RuleTypes_Enums.RequestRule_Validation;
             type = typeof(ValidateStatusCodeValue);
             Name = "Validate Status Code Value";
             HttpStatusCode = statusCode;
@@ -20,14 +20,16 @@ namespace WebTestRules
 
         public override void Validate(object sender, RuleEventArgs e)
         {
-            Log.ForContext("SourceContext", "ValidateStatusCodeValue").Debug("entering Validate for {request}", e.requestItem.guid);
+            Log.ForContext("SourceContext", "ValidateStatusCodeValue").Verbose("entering ValidateStatusCodeValue for {request}", e.requestItem.guid);
             if (e.response.StatusCode == HttpStatusCode)
             {
                 RuleResult = RuleResult.Passed;
+                Log.ForContext("SourceContext", "Rules").Information("PASS: ValidateStatusCodeValue for {request} passed.", e.requestItem.guid);
             }
             else
             {
                 RuleResult = RuleResult.Failed;
+                Log.ForContext("SourceContext", "Rules").Error("FAIL: ValidateStatusCodeValue for {request} Failed", e.requestItem.guid);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace HttpWebTestingResults
     public class WTRI_IncludedWebTest : WebTestResultsItem
     {
         [JsonProperty(PropertyName = "IncludedWebtestResultsItems")]
-        public Collection<WebTestResultsItem> webTestResultsItems { get; set; }
+        public WebTestResultsItemCollection webTestResultsItems { get; set; }
 
         public TimeSpan totalElapsedTime { get; set; }
 
@@ -19,11 +19,12 @@ namespace HttpWebTestingResults
 
         public HttpWebTest httpWebTest { get; set; }
 
-        public WTRI_IncludedWebTest(HttpWebTest originalIncludedWebTest)
+        public WTRI_IncludedWebTest(Guid itemGuid)
         {
-            objectItemType = WebTestResultItemType.Wtri_LoopControlItem;
-            httpWebTest = (HttpWebTest)originalIncludedWebTest;
-            webTestItemId = originalIncludedWebTest.Id;
+            objectItemType = WebTestResultItemType.Wtri_IncludedWebTestItem;
+            webTestItemId = itemGuid;
+            httpWebTest = null;
+            webTestResultsItems = new WebTestResultsItemCollection();
         }
     }
 }

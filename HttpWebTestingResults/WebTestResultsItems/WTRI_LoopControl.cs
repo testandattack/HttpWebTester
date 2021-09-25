@@ -9,18 +9,21 @@ namespace HttpWebTestingResults
 {
     public class WTRI_LoopControl : WebTestResultsItem
     {
-        [JsonProperty(PropertyName = "LoopResultsItems")]
-        public Dictionary<string, Collection<WebTestResultsItem>> webTestResultsItems { get; set; }
+        [JsonProperty(PropertyName = "Loop Results Items")]
+        public LoopControlResultsItemCollection loopResultsItems { get; set; }
+
+        public List<string> loopIterations { get; set; }
 
         public TimeSpan totalElapsedTime { get; set; }
 
         public TimeSpan totalLoopTime { get; set; }
 
-        public WTRI_LoopControl(WTI_LoopControl originalLoop)
+        public WTRI_LoopControl(Guid itemGuid)
         {
             objectItemType = WebTestResultItemType.Wtri_LoopControlItem;
-            webTestItemId = originalLoop.guid;
-            webTestResultsItems = new Dictionary<string, Collection<WebTestResultsItem>>();
+            webTestItemId = itemGuid;
+            loopResultsItems = new LoopControlResultsItemCollection();
+            loopIterations = new List<string>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
 using System;
+using System.Threading.Tasks;
 
 namespace WebTestExecutionEngine
 {
@@ -19,9 +20,9 @@ namespace WebTestExecutionEngine
             httpWebTest = webTest;
         }
 
-        public WebTestResultsItem ProcessIncludedWebTest()
+        public async Task<WebTestResultsItem> ProcessIncludedWebTest()
         {
-            WTRI_IncludedWebTest includedWebTestResults = new WTRI_IncludedWebTest(includedWebTest.HttpWebTest);
+            WTRI_IncludedWebTest includedWebTestResults = new WTRI_IncludedWebTest(includedWebTest.guid);
             throw new NotImplementedException("We ain't quite ready for this yet... But we'll get there soon.");
         }
 
