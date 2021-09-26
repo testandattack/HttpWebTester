@@ -140,7 +140,8 @@ namespace HttpWebTestingEditor
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
             WTI_Request wtr = (WTI_Request)item;
-            treeItem.Header = CustomizeTreeViewItem(wtr.RequestUri.AbsoluteUri.UrlDecode(), (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            string itemLabel = $"{wtr.Method.ToString().ToUpper()}  {wtr.RequestUri.AbsoluteUri.UrlDecode()}";
+            treeItem.Header = CustomizeTreeViewItem(itemLabel, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
             AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }

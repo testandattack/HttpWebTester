@@ -14,6 +14,14 @@ namespace HttpWebTesting.Collections
     {
         public void Add(string propertyName, string propertyValue)
         {
+            foreach (Property contextProperty in this)
+            {
+                if (contextProperty.Name == propertyName)
+                {
+                    contextProperty.Value = propertyValue;
+                    return;
+                }
+            }
             base.Add(new Property(propertyName, propertyValue));
         }
 

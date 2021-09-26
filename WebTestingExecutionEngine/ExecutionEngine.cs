@@ -30,7 +30,7 @@ namespace WebTestExecutionEngine
             string logFileName = @"c:\temp\HttpWebTester_Log.txt";
             if (File.Exists(logFileName)) File.Delete(logFileName);
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Verbose()
                 .WriteTo.Console(
                     outputTemplate: "{Timestamp:HH:mm} [{Level:u3}] ({ThreadId}) {Message:lj}{NewLine}{Exception}")
                 .WriteTo.File(logFileName)

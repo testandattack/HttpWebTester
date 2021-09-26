@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Serilog;
 using GTC.Extensions;
 using HttpWebTesting;
+using System.Data;
 
 namespace HttpWebTestingResults
 {
@@ -62,5 +63,57 @@ namespace HttpWebTestingResults
 
         //    return sb.ToString();
         //}
+
+        public DataTable GetResultsAsTable()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("Item Type", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Result", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Method", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Item", typeof(System.String)));
+            dt.Columns.Add(new DataColumn("Duration", typeof(System.String)));
+
+            ParseResultsToTable(webTestResultsItems, dt);
+            return dt;
+        }
+
+        private void ParseResultsToTable(WebTestResultsItemCollection items, DataTable table)
+        {
+            foreach(var item in items)
+            {
+                if(item.objectItemType == WebTestResultItemType.Wtri_CommentItem)
+                {
+                    table.Rows.Add("Comment", "N/A", "", "", "");
+                }
+                else if (item.objectItemType == WebTestResultItemType.Wtri_IncludedWebTestItem)
+                {
+                    throw new NotImplementedException("Not yet parsing inherited Web Test Results");
+                }
+                else if (item.objectItemType == WebTestResultItemType.Wtri_LoopControlItem)
+                {
+                    var result = item as WTRI_LoopControl;
+                    foreach(var iteration in result.loopIterations)
+                    {
+                        table.Rows.Add("LoopControl", (!result.ItemExecutionFailed).ToString(), "", iteration, result.totalElapsedTime.ToString());
+                        ParseResultsToTable(result.loopResultsItems.loopResultsItems[iteration], table);
+                    }
+                }
+                else if (item.objectItemType == WebTestResultItemType.Wtri_RequestObject)
+                {
+                    var result = item as WTRI_Request;
+                    table.Rows.Add("Request", (!result.ItemExecutionFailed).ToString(), result.response.RequestMessage.Method, result.response.RequestMessage.RequestUri.AbsoluteUri, result.ResponseTime.ToString());
+                }
+                else if (item.objectItemType == WebTestResultItemType.Wtri_SkippedItem)
+                {
+                    continue;
+                }
+                else if (item.objectItemType == WebTestResultItemType.Wtri_TransactionItem)
+                {
+                    var result = item as WTRI_Transaction;
+                    table.Rows.Add("Transaction", (!result.ItemExecutionFailed).ToString(), "", "", result.totalElapsedTime.ToString());
+                    ParseResultsToTable(result.webTestResultsItems, table);
+                }
+            }
+        }
     }
 }

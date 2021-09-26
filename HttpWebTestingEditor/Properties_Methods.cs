@@ -5,6 +5,7 @@ using HttpWebTesting.WebTestItems;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,8 +28,10 @@ namespace HttpWebTestingEditor
             _propertiesDataTable.Columns.Add(new DataColumn("Type", typeof(System.String)));
         }
 
-        private void GetWebTestItemCustomProperties(WebTestItem item)
+        private Dictionary<string, string> GetWebTestItemCustomProperties(WebTestItem item)
         {
+            Dictionary<string, string> properties = new Dictionary<string, string>();
+
             WebTestItem webTestItem;
             switch (item.objectItemType)
             {
@@ -48,11 +51,22 @@ namespace HttpWebTestingEditor
                     webTestItem = item as WTI_Transaction;
                     break;
                 default:
-                    return;
+                    return properties;
             }
-            var displayInfo = new PropertyDisplayInfoCollection();
-            displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
-            AddDisplayInfoData(displayInfo);
+
+            foreach (var prop in webTestItem.GetType().GetProperties())
+            {
+                var propValue = prop.GetValue(webTestItem, null);
+                if (propValue != null)
+                    properties.Add(prop.Name, propValue.ToString());
+                else
+                    properties.Add(prop.Name, "null");
+            }
+            return properties;
+
+            //var displayInfo = new PropertyDisplayInfoCollection();
+            //displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
+            //AddDisplayInfoData(displayInfo);
         }
 
         private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)

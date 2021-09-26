@@ -9,6 +9,8 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Request : WebTestResultsItem
     {
+        public string responseBody { get; set; }
+
         public HttpResponseMessage response { get; set; }
 
         public ContextCollection contextCollection { get; set; }

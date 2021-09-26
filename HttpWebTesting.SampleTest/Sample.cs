@@ -86,7 +86,7 @@ namespace HttpWebTesting.SampleTest
             httpWebTest.WebTestItems.Add(new WTI_Comment(""));
 
             // Create a couple of items to add to a loop control
-            var request2 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Third ContosoModel\"}");
+            var request2 = ItemManager.CreateNewJsonPostRequest("http://localhost:5000/api/contoso", "{\"Description\": \"Random ContosoModel\"}");
             request2.Rules.Add(new ExtractCreationId("CreatedId"));
             request2.Rules.Add(new ValidateStatusCodeValue(System.Net.HttpStatusCode.Created));
             var ifLoop = ItemManager.CreateNew_IF_LoopControl(new RuleProperty("{{CreatedId}}"), ComparisonType.IsLessThan, new RuleProperty("{{MaxCreatedId}}"));

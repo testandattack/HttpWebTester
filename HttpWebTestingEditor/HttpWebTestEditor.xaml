@@ -48,10 +48,8 @@
                     </TreeView.ItemContainerStyle>
                 </TreeView>
             </TabItem>
-            <TabItem x:Name="tabResultsView" Header="Results">
-                <TextBox x:Name="tbResults" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    
-                </TextBox>
+            <TabItem x:Name="tabResultsTreeView" Header="WebTest Results">
+                <DataGrid x:Name="dgTestResults" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>
         </TabControl>
 
@@ -61,6 +59,7 @@
         <!-- Main Window Right Tab Control -->
         <TabControl Grid.Row="1" Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabPropertyGrid" Header="Properties" >
+                <StackPanel x:Name="stackProperties" Orientation="Vertical" />
             </TabItem>
             <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
