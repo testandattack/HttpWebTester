@@ -71,34 +71,12 @@ namespace HttpWebTestingEditor
                 if(tvi.Name.StartsWith("Root_"))
                 {
                     string str = tvi.Name.Replace('_', '.');
-                    if (wtim.GetItemTreeType(str) == WebTestItemType.Wti_RequestObject)
-                    {
-                        stackProperties.Children.Clear();
-                        var stackPropertiesWidth = stackProperties.ActualWidth;
+                    stackProperties.Children.Clear();
+                    var stackPropertiesWidth = stackProperties.ActualWidth;
 
-                        WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
-                        var props = GetWebTestItemCustomProperties(selectedItem);
-                        foreach(var item in props)
-                        {
-                            TextBlock block = new TextBlock();
-                            block.Text = item.Key;
-//                            block.Margin = new Thickness(3);
-                            block.Width = 100;
-
-                            TextBox box = new TextBox();
-                            box.Text = item.Value;
-                            box.Width = stackPropertiesWidth - 120;
-//                            box.Margin = new Thickness(3);
-
-                            StackPanel stack = new StackPanel();
-                            stack.Orientation = Orientation.Horizontal;
-                            stack.Margin = new Thickness(3);
-
-                            stack.Children.Add(block);
-                            stack.Children.Add(box);
-                            stackProperties.Children.Add(stack);
-                        }
-                    }
+                    WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
+                    var props = GetWebTestItemProperties(selectedItem);
+                    PopulatePropertiesStack(props, stackPropertiesWidth);
                 }
             }
         }

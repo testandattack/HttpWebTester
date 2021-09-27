@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GTC.Extensions;
 using HttpWebTesting.Rules;
+using System.Collections;
+using System.Net.Http;
 
 namespace HttpWebTestingEditor
 {
@@ -217,6 +219,102 @@ namespace HttpWebTestingEditor
                 subItem.Name = String.Format("TestLevelRules_{0}", x++);
                 treeItem.Items.Add(subItem);
             }
+        }
+        #endregion
+
+        #region -- Property Display Methods -----
+        private void PopulatePropertiesStack(Dictionary<string, object> props, double width)
+        {
+            foreach (var item in props)
+            {
+                TextBlock block = new TextBlock();
+                block.Text = item.Key;
+                block.Width = 100;
+
+                StackPanel stack = new StackPanel();
+                stack.Orientation = Orientation.Horizontal;
+                stack.Margin = new Thickness(3);
+
+                stack.Children.Add(block);
+                stack.Children.Add(GetPropertyValueDisplayElement(item.Value, width - 120));
+                stackProperties.Children.Add(stack);
+            }
+        }
+
+        private UIElement GetPropertyValueDisplayElement(object propertyItem, double width)
+        {
+            if (propertyItem.GetType() == typeof(System.String))
+                return GetTextBox(propertyItem, width);
+
+            //else if (propertyItem.GetType() == typeof(System.Enum))
+            //    return GetTextBox(((Enum)propertyItem).ToString(), width);
+
+            else if (propertyItem.GetType() == typeof(System.Net.Http.HttpMethod))
+                return GetTextBox(((HttpMethod)propertyItem).Method, width);
+
+            else if (propertyItem.GetType() == typeof(System.Uri))
+                return GetTextBox(((Uri)propertyItem).AbsoluteUri.UrlDecode(), width);
+
+            else if (propertyItem.GetType() == typeof(System.Guid))
+                return GetGuidText(propertyItem.ToString(), width);
+
+            else if (propertyItem.GetType() == typeof(System.Boolean))
+                return GetCheckBox(propertyItem, width);
+
+            else if (propertyItem.GetType() == typeof(System.Int32) ||
+                propertyItem.GetType() == typeof(System.Double) ||
+                propertyItem.GetType() == typeof(System.Decimal) ||
+                propertyItem.GetType() == typeof(System.Single))
+                return GetNumberTextBox(propertyItem, width);
+
+            else if (propertyItem.GetType().GetInterface(nameof(ICollection)) != null)
+                return GetCollectionView(propertyItem, width);
+
+            else return GetGuidText("Undetermined Item Type", width);
+        }
+
+        private UIElement GetTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = (string)propertyItem;
+            box.Width = width;
+            return box;
+        }
+
+        private UIElement GetCheckBox(object propertyItem, double width)
+        {
+            CheckBox checkBox = new CheckBox();
+            checkBox.IsChecked = (bool)propertyItem;
+            return checkBox;
+        }
+
+        private UIElement GetNumberTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = propertyItem.ToString();
+            box.MinWidth = 50;
+            return box;
+        }
+
+        private UIElement GetGuidText(object propertyItem, double width)
+        {
+            TextBlock box = new TextBlock();
+            box.Text = propertyItem.ToString();
+            return box;
+        }
+
+        private UIElement GetCollectionView(object propertyItem, double width)
+        {
+            ComboBox comboBox = new ComboBox();
+            foreach(var item in (ICollection)propertyItem)
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = item;
+                comboBox.Items.Add(newItem);
+            }
+            comboBox.Width = width;
+            comboBox.Text = "<Collection>";
+            return comboBox;
         }
         #endregion
     }
