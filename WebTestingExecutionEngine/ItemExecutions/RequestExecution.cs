@@ -151,7 +151,7 @@ namespace WebTestExecutionEngine
         private void HandlePreRequestEventProcessing()
         {
             // Handle RequestRule_PreRequest items
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.RequestRule_PreRequest))
+            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleType.RequestRule_PreRequest))
             {
                 PreRequestRule preRequestRule = rule as PreRequestRule;
                 PreRequest += preRequestRule.PreRequest;
@@ -186,7 +186,7 @@ namespace WebTestExecutionEngine
         private void HandleValidationEventProcessing(HttpResponseMessage response)
         {
             // Handle RequestRule_Validation items
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.RequestRule_Validation))
+            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleType.RequestRule_Validation))
             {
                 ValidationRule validationRule = rule as ValidationRule;
                 Validate += validationRule.Validate;
@@ -194,7 +194,7 @@ namespace WebTestExecutionEngine
             }
 
             // Handle TestRule_Validation
-            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleTypes_Enums.TestRule_Validation))
+            foreach (var rule in httpWebTest.Rules.Where(r => r.RuleType == RuleType.TestRule_Validation))
             {
                 ValidationRule validationRule = rule as ValidationRule;
                 Validate += validationRule.Validate;
@@ -230,7 +230,7 @@ namespace WebTestExecutionEngine
         private void HandleExtractionEventProcessing(HttpResponseMessage response)
         {
             // Handle RequestRule_Extraction items
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.RequestRule_Extraction))
+            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleType.RequestRule_Extraction))
             {
                 ExtractionRule extractionRule = rule as ExtractionRule;
                 Extract += extractionRule.Extract;
@@ -266,7 +266,7 @@ namespace WebTestExecutionEngine
         private void HandlePostRequestEventProcessing(HttpResponseMessage response)
         {
             // Handle RequestRule_PostRequest items
-            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleTypes_Enums.RequestRule_PostRequest))
+            foreach (var rule in request.Rules.Where(r => r.RuleType == RuleType.RequestRule_PostRequest))
             {
                 PostRequestRule postRequestRule = rule as PostRequestRule;
                 PostRequest += postRequestRule.PostRequest;

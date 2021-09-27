@@ -4,16 +4,31 @@ namespace HttpWebTesting.CoreObjects
 {
     public class Property : ICloneable
     {
+        #region -- Properties -----
         public string Name { get; set; }
-        public string Value { get; set; }
-
+        public object Value
+        {
+            get
+            {
+                if (this.IsPassword)
+                    return (Value as Password).pwdValue;
+            }
+            private set
+            {
+                Value = value;
+            }
+        }
         public Type Type { get; set; }
+        public bool IsPassword { get; set; }
+        #endregion
 
+        #region -- Constructors -----
         public Property()
         {
             Name = string.Empty;
             Value = string.Empty;
             Type = typeof(object);
+            IsPassword = false;
         }
 
         public Property(string name, string value)
@@ -21,6 +36,15 @@ namespace HttpWebTesting.CoreObjects
             this.Name = name;
             this.Value = value;
             this.Type = typeof(System.String);
+            IsPassword = false;
+        }
+
+        public Property(string name, object value)
+        {
+            this.Name = name;
+            this.Value = value.ToString();
+            this.Type = value.GetType();
+            IsPassword = false;
         }
 
         public Property(string name, string value, Type type)
@@ -28,18 +52,80 @@ namespace HttpWebTesting.CoreObjects
             this.Name = name;
             this.Value = value;
             this.Type = type;
+            IsPassword = false;
         }
 
+        public Property(string name, string value, bool isPassword)
+        {
+            IsPassword = isPassword;
+            this.Name = name;
+            this.Value = new Password(value);
+            this.Type = typeof(Password);
+        }
+
+        public Property(string name, string value, Type type, bool isPassword)
+        {
+            this.Name = name;
+            this.Value = value;
+            this.Type = type;
+            IsPassword = isPassword;
+        }
+        #endregion
+
+        #region -- ICloneable  methods -----
         private Property(Property copy)
         {
             this.Name = copy.Name;
             this.Value = copy.Value;
             this.Type = copy.Type;
+            this.IsPassword = copy.IsPassword;
         }
 
         public object Clone()
         {
             return new Property(this);
         }
+        #endregion
+
+        public string GetPwdValue()
+        {
+            if (this.IsPassword)
+        }
+        //public bool ShouldSerializeValue()
+        //{
+        //    // Serialize the value property if it is NOT a password.
+        //    return !IsPassword;
+        //}
+    }
+
+    internal class Password
+    {
+        internal string pwdValue
+        {
+            get
+            {
+                return "********";
+            }
+            set
+            {
+                pwdValue = value;
+            }
+        }
+
+        #region -- Constructors -----
+        internal Password() { }
+
+        internal Password(string value)
+        {
+            pwdValue = value;
+        }
+        #endregion
+
+        internal string GetPwd()
+        {
+            return pwdValue;
+        }
+
+
     }
 }

@@ -52,7 +52,8 @@ namespace HttpWebTesting.SampleTest
             // Add a couple of context properties
             Property property = new Property("Context1", "Value1");
             httpWebTest.ContextProperties.Add(property);
-            httpWebTest.ContextProperties.Add(new Property("MaxCreatedId", "25"));
+            httpWebTest.ContextProperties.Add(new Property("MaxCreatedId", 25));
+            httpWebTest.ContextProperties.Add(new Property("Password", "P@ssw0rd", true));
             httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
             // Add a comment

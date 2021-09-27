@@ -25,32 +25,45 @@ namespace HttpWebTesting.Collections
             base.Add(new Property(propertyName, propertyValue));
         }
 
-        public string this[string propertyName]
+        public void Add(string propertyName, object propertyValue)
         {
-            get
+            foreach (Property contextProperty in this)
             {
-                foreach (Property contextProperty in this)
+                if (contextProperty.Name == propertyName)
                 {
-                    if (contextProperty.Name == propertyName)
-                    {
-                        return contextProperty.Value;
-                    }
+                    contextProperty.Value = propertyValue;
+                    return;
                 }
-                return null;
             }
-            set
-            {
-                foreach (Property contextProperty in this)
-                {
-                    if (contextProperty.Name == propertyName)
-                    {
-                        contextProperty.Value = value;
-                        return;
-                    }
-                }
-                base.Add(new Property(propertyName, value));
-            }
+            base.Add(new Property(propertyName, propertyValue));
         }
+
+        //public string this[string propertyName]
+        //{
+        //    get
+        //    {
+        //        foreach (Property contextProperty in this)
+        //        {
+        //            if (contextProperty.Name == propertyName)
+        //            {
+        //                return contextProperty.Value;
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //    set
+        //    {
+        //        foreach (Property contextProperty in this)
+        //        {
+        //            if (contextProperty.Name == propertyName)
+        //            {
+        //                contextProperty.Value = value;
+        //                return;
+        //            }
+        //        }
+        //        base.Add(new Property(propertyName, value));
+        //    }
+        //}
 
         /// <summary>
         /// This method is used to add or update context values that
@@ -71,12 +84,13 @@ namespace HttpWebTesting.Collections
             }
         }
 
-        public string GetValue(string contextName)
+        public string GetValueAsString(string contextName)
         {
             foreach(Property property in base.Items)
             {
                 if (property.Name == contextName)
-                    return property.Value;
+                    // NOTE: Must refactor this to do more validation
+                    return property.Value.ToString();
             }
             return string.Empty;
         }
@@ -105,7 +119,7 @@ namespace HttpWebTesting.Collections
             List<string> contextNames = outputString.FindSubStrings("{{", "}}");
             foreach (string name in contextNames)
             {
-                string value = this.GetValue(name);
+                string value = this.GetValueAsString(name);
                 if (value != string.Empty)
                 {
                     outputString = outputString.Replace(name.AddBraces(), value);

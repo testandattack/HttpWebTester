@@ -22,7 +22,7 @@ namespace HttpWebTesting.Rules
 
         public ValidationRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.RequestRule_Validation;
+            RuleType = Enums.RuleType.RequestRule_Validation;
             baseRuleType = BaseRuleType.Validation;
         }
 

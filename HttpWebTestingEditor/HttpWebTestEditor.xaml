@@ -59,7 +59,9 @@
         <!-- Main Window Right Tab Control -->
         <TabControl Grid.Row="1" Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabPropertyGrid" Header="Properties" >
-                <StackPanel x:Name="stackProperties" Orientation="Vertical" />
+                <StackPanel x:Name="stackProperties" Orientation="Vertical">
+<ListBox />
+                </StackPanel>
             </TabItem>
             <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />

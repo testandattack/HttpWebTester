@@ -72,26 +72,42 @@ namespace HttpWebTestingEditor
 
         }
 
-        private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)
+        private Dictionary<string, object> GetTestLevelItemProperties(object item)
         {
-            _propertiesDataTable.Rows.Clear();
-            foreach (var displayItem in displayInfo)
-            {
-                string sDefaultValue;
-                if (displayItem.DefaultValue == null)
-                    sDefaultValue = "null";
-                else
-                    sDefaultValue = displayItem.DefaultValue.ToString();
+            Dictionary<string, object> properties = new Dictionary<string, object>();
 
-                _propertiesDataTable.Rows.Add(
-                    displayItem.Browsable,
-                    displayItem.JsonIgnore,
-                    displayItem.DisplayName,
-                    displayItem.Description,
-                    displayItem.Category,
-                    sDefaultValue,
-                    displayItem.type.Name);
+            foreach (var prop in item.GetType().GetProperties())
+            {
+                var propValue = prop.GetValue(item, null);
+                if (propValue != null)
+                    properties.Add(prop.Name, propValue);
+                else
+                    properties.Add(prop.Name, "null");
             }
+            return properties;
+
         }
+
+        //private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)
+        //{
+        //    _propertiesDataTable.Rows.Clear();
+        //    foreach (var displayItem in displayInfo)
+        //    {
+        //        string sDefaultValue;
+        //        if (displayItem.DefaultValue == null)
+        //            sDefaultValue = "null";
+        //        else
+        //            sDefaultValue = displayItem.DefaultValue.ToString();
+
+        //        _propertiesDataTable.Rows.Add(
+        //            displayItem.Browsable,
+        //            displayItem.JsonIgnore,
+        //            displayItem.DisplayName,
+        //            displayItem.Description,
+        //            displayItem.Category,
+        //            sDefaultValue,
+        //            displayItem.type.Name);
+        //    }
+        //}
     }
  }

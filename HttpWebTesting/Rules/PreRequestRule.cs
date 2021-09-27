@@ -21,7 +21,7 @@ namespace HttpWebTesting.Rules
 
         public PreRequestRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.RequestRule_PreRequest;
+            RuleType = Enums.RuleType.RequestRule_PreRequest;
             baseRuleType = BaseRuleType.PreRequest;
         }
 

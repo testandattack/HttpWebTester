@@ -21,7 +21,7 @@ namespace HttpWebTesting.Rules
 
         public PostWebTestRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.PostTest;
+            RuleType = Enums.RuleType.PostTest;
             baseRuleType = BaseRuleType.PostTest;
         }
 

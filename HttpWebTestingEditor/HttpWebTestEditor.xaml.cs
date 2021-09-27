@@ -68,15 +68,37 @@ namespace HttpWebTestingEditor
             TreeViewItem tvi = ((TreeViewItem)e.NewValue);
             if (tvi != null)
             {
-                if(tvi.Name.StartsWith("Root_"))
+                stackProperties.Children.Clear();
+                var stackPropertiesWidth = stackProperties.ActualWidth;
+
+                if (tvi.Name.StartsWith("Root_"))
                 {
                     string str = tvi.Name.Replace('_', '.');
-                    stackProperties.Children.Clear();
-                    var stackPropertiesWidth = stackProperties.ActualWidth;
 
                     WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
                     var props = GetWebTestItemProperties(selectedItem);
-                    PopulatePropertiesStack(props, stackPropertiesWidth);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, selectedItem);
+                }
+                else if(tvi.Name.StartsWith(TVI_Name_ContextParameter))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_ContextParameter.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Context Name", _webTest.ContextProperties[x].Name);
+                    props.Add("Context Value", _webTest.ContextProperties[x].Value);
+                    props.Add("Type", _webTest.ContextProperties[x].Type);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.ContextProperties[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_TestRule))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_TestRule.Length));
+                    var props = GetTestLevelItemProperties(_webTest.Rules[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.Rules[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_DataSource))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_DataSource.Length));
+                    var props = GetTestLevelItemProperties(_webTest.DataSources[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.DataSources[x]);
                 }
             }
         }

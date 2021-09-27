@@ -78,8 +78,8 @@ namespace WebTestRules
             if(extractedValue != string.Empty)
             {
                 Log.ForContext("SourceContext", "Rules").Debug("Extract for {request} found {value} {@RuleInfo}", e.requestItem.guid, extractedValue, this);
-                //e.webTest.ContextProperties.Add(new Property(ContextName, extractedValue));
-                e.webTest.ContextProperties[ContextName] = extractedValue;
+                e.webTest.ContextProperties.Add(new Property(ContextName, extractedValue));
+                //e.webTest.ContextProperties[ContextName] = extractedValue;
                 RuleResult = RuleResult.Passed;
                 return;
             }
