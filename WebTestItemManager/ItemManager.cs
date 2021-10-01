@@ -83,17 +83,7 @@ namespace WebTestItemManager
         {
             WTI_Request wtr = (WTI_Request)items[nIndex];
             wtii.wtit = WebTestItemType.Wti_RequestObject;
-            wtii.Uri = wtr.RequestUri;
-
-            //--- Get Rule Counts
-            //wtii.extractionRuleCount = wtr.ExtractionRuleReferences.Count;
-            //wtii.validationRuleCount = wtr.ValidationRuleReferences.Count;
-            //wtii.requestPluginCount = wtr.WebTestRequestPluginReferences.Count;
-            //wtii.queryStringCount = wtr.QueryStringParameters.Count;
-
-            //GetHeaderHiddenReferences(wtr.Headers, ref wtii);
-            //GetQueryStringHiddenReferences(wtr.QueryStringParameters, ref wtii);
-            //GetHiddenExtractionReferencesInRequest(wtr, ref wtii);
+            wtii.Url = wtr.RequestUri;
 
             #region === Request Body dissection ==========
             if (wtr.Content == null)

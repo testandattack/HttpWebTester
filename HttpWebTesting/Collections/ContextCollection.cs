@@ -99,7 +99,7 @@ namespace HttpWebTesting.Collections
         {
             Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
 
-            string sUrl = ContextReplacement(request.RequestUri.AbsoluteUri);
+            string sUrl = ContextReplacement(request.RequestUri);
             request.requestItem = new HttpRequestMessage(request.Method, sUrl);
             request.requestItem.Headers.Clear();
 

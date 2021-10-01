@@ -11,13 +11,20 @@ namespace HttpWebTesting.CoreObjects
             get
             {
                 if (this.IsPassword)
-                    return (Value as Password).pwdValue;
+                    return (_value as Password).pwdValue;
+                else
+                    return this._value;
             }
-            private set
+            set
             {
-                Value = value;
+                if (this.IsPassword)
+                    this._value = new Password(value.ToString());
+                else
+                    this._value = value;
             }
         }
+        private object _value;
+
         public Type Type { get; set; }
         public bool IsPassword { get; set; }
         #endregion
@@ -65,10 +72,10 @@ namespace HttpWebTesting.CoreObjects
 
         public Property(string name, string value, Type type, bool isPassword)
         {
+            IsPassword = isPassword;
             this.Name = name;
             this.Value = value;
             this.Type = type;
-            IsPassword = isPassword;
         }
         #endregion
 
@@ -90,7 +97,11 @@ namespace HttpWebTesting.CoreObjects
         public string GetPwdValue()
         {
             if (this.IsPassword)
+                return (_value as Password).GetPwd();
+            else
+                return _value.ToString();
         }
+
         //public bool ShouldSerializeValue()
         //{
         //    // Serialize the value property if it is NOT a password.
@@ -108,22 +119,23 @@ namespace HttpWebTesting.CoreObjects
             }
             set
             {
-                pwdValue = value;
+                _pwdValue = value;
             }
         }
+        private string _pwdValue;
 
         #region -- Constructors -----
         internal Password() { }
 
         internal Password(string value)
         {
-            pwdValue = value;
+            _pwdValue = value;
         }
         #endregion
 
         internal string GetPwd()
         {
-            return pwdValue;
+            return _pwdValue;
         }
 
 

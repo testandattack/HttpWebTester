@@ -74,6 +74,7 @@ namespace HttpWebTesting.Rules
             this.Description = copy.Description;
             this.type = copy.type;
             this.RuleResult = copy.RuleResult;
+            this.Enabled = copy.Enabled;
         }
 
         protected BaseRule(Type type) : this()

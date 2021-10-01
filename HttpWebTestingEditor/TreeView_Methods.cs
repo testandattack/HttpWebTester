@@ -20,7 +20,10 @@ namespace HttpWebTestingEditor
     {
         private const string TVI_Name_ContextParameter = "ContextParameter_";
         private const string TVI_Name_TestRule = "TestLevelRules_";
+        private const string TVI_Name_RequestRule = "RequestLevelRules_";
         private const string TVI_Name_DataSource = "DataSources_";
+        private const string TVI_Name_Headers = "Headers_";
+        private const string TVI_Name_QueryParam = "QueryParam_";
 
         #region -- Treeview Population Methods -----
         private void PopulateTreeView()
@@ -36,7 +39,7 @@ namespace HttpWebTestingEditor
             RecurseTheWebTestItemCollection(_webTest.WebTestItems, treeItem);
 
             //// Add the webtest collections to the tree
-            //AddDataSources(treeItem);
+            AddDataSources(treeItem);
             AddContextParameters(treeItem);
             AddTestLevelRules(treeItem);
 
@@ -110,6 +113,7 @@ namespace HttpWebTestingEditor
                 {
                     WTI_Transaction transaction = items[nIndex] as WTI_Transaction;
                     treeItem.Header = CustomizeTreeViewItem(transaction.Name, (BitmapImage)Properties.Resources.TransactionTimer_24.ToWpfBitmap());
+                    treeItem.IsExpanded = true;
                     parentTreeViewItem.Items.Add(treeItem);
                     RecurseTheWebTestItemCollection(transaction.webTestItems, treeItem);
                 }
@@ -120,6 +124,7 @@ namespace HttpWebTestingEditor
                 {
                     WTI_LoopControl loop = items[nIndex] as WTI_LoopControl;
                     treeItem.Header = CustomizeTreeViewItem(loop.GetLoopControlDisplayName(), (BitmapImage)Properties.Resources.WebTestLoop_24.ToWpfBitmap());
+                    treeItem.IsExpanded = true;
                     parentTreeViewItem.Items.Add(treeItem);
                     RecurseTheWebTestItemCollection(loop.webTestItems, treeItem);
                 }
@@ -146,8 +151,10 @@ namespace HttpWebTestingEditor
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
             WTI_Request wtr = (WTI_Request)item;
-            string itemLabel = $"{wtr.Method.ToString().ToUpper()}  {wtr.RequestUri.AbsoluteUri.UrlDecode()}";
+            string itemLabel = $"{wtr.Method.ToString().ToUpper()}  {wtr.RequestUri.UrlDecode()}";
             treeItem.Header = CustomizeTreeViewItem(itemLabel, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            AddRequestHeaders(treeItem, wtr);
+            AddRequestQueryParams(treeItem, wtr);
             AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }
@@ -169,6 +176,58 @@ namespace HttpWebTestingEditor
                 string str = String.Format("{0} = {1}", param.Name, param.Value);
                 subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.ContextParameter_24.ToWpfBitmap());
                 subItem.Name = String.Format("{0}{1}", TVI_Name_ContextParameter, x++);
+                treeItem.Items.Add(subItem);
+            }
+        }
+
+        private void AddRequestHeaders(TreeViewItem parentItem, WTI_Request request)
+        {
+
+            if (request.Headers.Count == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Headers", (BitmapImage)Properties.Resources.Folder_24.ToWpfBitmap());
+            treeItem.Name = "RequestHeaders";
+            parentItem.Items.Add(treeItem);
+
+            int x = 0;
+            foreach (var header in request.Headers)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                string str = String.Format("{0} = {1}", header.Key, header.Value.ToString(";"));
+                subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.Header_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_Headers, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
+                treeItem.Items.Add(subItem);
+            }
+        }
+
+        private void AddRequestQueryParams(TreeViewItem parentItem, WTI_Request request)
+        {
+
+            if (request.QueryCollection.Count == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Query Parameters", (BitmapImage)Properties.Resources.Folder_24.ToWpfBitmap());
+            treeItem.Name = "QueryParameters";
+            parentItem.Items.Add(treeItem);
+
+            int x = 0;
+            foreach (var parm in request.QueryCollection.queryParams)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                string str = String.Format("{0} = {1}", parm.Key, parm.Value);
+                subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.QueryStringParam_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_QueryParam, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
                 treeItem.Items.Add(subItem);
             }
         }
@@ -199,7 +258,11 @@ namespace HttpWebTestingEditor
                     ruleDisplayName = $"{rule.Name}";
                 }
                 subItem.Header = CustomizeTreeViewItem(ruleDisplayName, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
-                subItem.Name = String.Format("RequestLevelRules_{0}", x++);
+                subItem.Name = String.Format("{0}{1}", TVI_Name_RequestRule, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
                 treeItem.Items.Add(subItem);
             }
         }
@@ -227,7 +290,6 @@ namespace HttpWebTestingEditor
 
         private void AddDataSources(TreeViewItem parentItem)
         {
-
             if (_webTest.DataSources.Count == 0)
                 return;
 
@@ -296,6 +358,12 @@ namespace HttpWebTestingEditor
 
             else if (propertyItem.GetType().GetInterface(nameof(ICollection)) != null)
                 return GetCollectionView(propertyItem, width);
+
+            else if (propertyItem.GetType() == typeof(RuleProperty))
+                return GetTextBox(((RuleProperty)propertyItem).Value, width);
+            
+            else if(propertyItem.GetType() == typeof(HttpContent))
+                return GetTextBox(((HttpContent)propertyItem).ReadAsStringAsync().GetAwaiter().GetResult(), width);
 
             else return CheckForEnum(propertyItem, width);
         }
@@ -378,8 +446,7 @@ namespace HttpWebTestingEditor
 
         private UIElement CheckForEnum(object propertyItem, double width)
         {
-            if (propertyItem.GetType() == typeof(WebTestItemType) ||
-                propertyItem.GetType() == typeof(BaseRuleType) ||
+            if (propertyItem.GetType() == typeof(BaseRuleType) ||
                 propertyItem.GetType() == typeof(ControlComparisonScope) ||
                 propertyItem.GetType() == typeof(DataSourceCursorType) ||
                 propertyItem.GetType() == typeof(DataSourceType) ||
@@ -392,6 +459,10 @@ namespace HttpWebTestingEditor
             {
                 // Eventually this one needs to incorporate the AsString() extension
                 return GetEnumView(propertyItem, width);
+            }
+            else if(propertyItem.GetType() == typeof(WebTestItemType))
+            {
+                return GetGuidText(propertyItem.ToString(), width);
             }
             else return GetGuidText("Undetermined Item Type", width);
         }

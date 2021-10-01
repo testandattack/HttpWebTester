@@ -18,17 +18,6 @@ namespace HttpWebTestingEditor
 {
     public partial class HttpWebTestEditor : Window
     {
-        private void CreatePropertiesDataTable()
-        {
-            _propertiesDataTable = new System.Data.DataTable();
-            _propertiesDataTable.Columns.Add(new DataColumn("Browsable", typeof(System.Boolean)));
-            _propertiesDataTable.Columns.Add(new DataColumn("JsonIgnore", typeof(System.Boolean)));
-            _propertiesDataTable.Columns.Add(new DataColumn("DisplayName", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Description", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Category", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("DefaultValue", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Type", typeof(System.String)));
-        }
 
         private Dictionary<string, object> GetWebTestItemProperties(WebTestItem item)
         {
@@ -56,9 +45,6 @@ namespace HttpWebTestingEditor
                     return properties;
             }
 
-            //var displayInfo = new PropertyDisplayInfoCollection();
-            //displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
-            //AddDisplayInfoData(displayInfo);
 
             foreach (var prop in webTestItem.GetType().GetProperties())
             {
@@ -88,6 +74,12 @@ namespace HttpWebTestingEditor
 
         }
 
+        // This code calls the below method and stores info in the data table below
+        //var displayInfo = new PropertyDisplayInfoCollection();
+        //displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
+        //AddDisplayInfoData(displayInfo);
+
+
         //private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)
         //{
         //    _propertiesDataTable.Rows.Clear();
@@ -109,5 +101,16 @@ namespace HttpWebTestingEditor
         //            displayItem.type.Name);
         //    }
         //}
+        //private void CreatePropertiesDataTable()
+        //{
+        //    _propertiesDataTable = new System.Data.DataTable();
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Browsable", typeof(System.Boolean)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("JsonIgnore", typeof(System.Boolean)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("DisplayName", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Description", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Category", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("DefaultValue", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Type", typeof(System.String)));
+        //}
     }
- }
+}

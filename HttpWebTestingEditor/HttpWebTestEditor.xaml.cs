@@ -48,7 +48,6 @@ namespace HttpWebTestingEditor
         {
             _currentlyLoadedFileName = "";
             _fileWasModified = false;
-            CreatePropertiesDataTable();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -88,6 +87,30 @@ namespace HttpWebTestingEditor
                     props.Add("Type", _webTest.ContextProperties[x].Type);
                     PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.ContextProperties[x]);
                 }
+                else if (tvi.Name.StartsWith(TVI_Name_Headers))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_Headers.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Header Name", parent.Headers.GetKey(x));
+                    props.Add("Header Value", parent.Headers.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.Headers);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_QueryParam))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_QueryParam.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Query Param Name", parent.QueryCollection.queryParams.GetKey(x));
+                    props.Add("Query Param Value", parent.QueryCollection.queryParams.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.QueryCollection);
+                }
                 else if (tvi.Name.StartsWith(TVI_Name_TestRule))
                 {
                     int x = Int32.Parse(tvi.Name.Substring(TVI_Name_TestRule.Length));
@@ -102,10 +125,26 @@ namespace HttpWebTestingEditor
                 }
             }
         }
-        #endregion
 
-        #region -- Menu Item Event Handlers -----------------------------------
-        private void tsmiOpen_Click(object sender, RoutedEventArgs e)
+        private WTI_Request GetParentRequest(TreeViewItem tvi)
+        {
+            TreeViewItem parent = tvi.Parent as TreeViewItem;
+            TreeViewItem grandParent = parent.Parent as TreeViewItem;
+
+            if (grandParent.Name.StartsWith("Root_"))
+            {
+                string str = grandParent.Name.Replace('_', '.');
+                return wtim.GetActualItem(str, _webTest.WebTestItems) as WTI_Request;
+            }
+            else
+            {
+                return null;
+            }
+        }
+            #endregion
+
+            #region -- Menu Item Event Handlers -----------------------------------
+            private void tsmiOpen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
