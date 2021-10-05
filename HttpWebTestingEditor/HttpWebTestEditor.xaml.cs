@@ -22,6 +22,7 @@ using HttpWebTestingResults;
 using HttpWebTesting.SampleTest;
 using System.IO;
 using Serilog;
+using Newtonsoft.Json;
 
 namespace HttpWebTestingEditor
 {
@@ -36,6 +37,8 @@ namespace HttpWebTestingEditor
 
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
+        private bool _wordWrap = true;
+        private bool _updatingDataGrid;
         private DataTable _propertiesDataTable;
 
         public HttpWebTestEditor()
@@ -141,10 +144,69 @@ namespace HttpWebTestingEditor
                 return null;
             }
         }
-            #endregion
 
-            #region -- Menu Item Event Handlers -----------------------------------
-            private void tsmiOpen_Click(object sender, RoutedEventArgs e)
+        private void dgTestResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(!_updatingDataGrid)
+            {
+                if(dgTestResults.SelectedItems.Count == 1)
+                {
+                    DataRowView row = (DataRowView)dgTestResults.SelectedItems[0];
+
+                }
+            }
+        }
+
+        private void tvWebTestResults_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            TreeViewItem tvi = ((TreeViewItem)e.NewValue);
+            if (tvi != null)
+            {
+                tabResponseBody.IsSelected = true;
+                if (tvi.Tag != null)
+                {
+                    tbResponseBody.Text = tvi.Tag.ToString();
+                }
+
+            }
+        }
+
+        private void btnGetToken_Click(object sender, RoutedEventArgs e)
+        {
+            webGetToken.Navigate(tbUrlForToken.Text);
+
+        }
+
+        private void webGetToken_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            tsslMessage.Content = "Navigating to URL.";
+            tsslMessage.Refresh();
+        }
+
+        private void webGetToken_Navigated(object sender, NavigationEventArgs e)
+        {
+            tsslMessage.Content = "Finished navigating to URL.";
+            tsslMessage.Refresh();
+        }
+
+        #region -- Response Text Box Menu Event Handlers -----
+        private void cmiWordWrap_Click(object sender, RoutedEventArgs e)
+        {
+            _wordWrap = !_wordWrap;
+            cmiWordWrap.IsChecked = _wordWrap;
+            tbResponseBody.TextWrapping = _wordWrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
+        }
+
+        private void cmiExpandJson_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(tbResponseBody.Text);
+            tbResponseBody.Text = JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
+        }
+        #endregion
+        #endregion
+
+        #region -- Menu Item Event Handlers -----------------------------------
+        private void tsmiOpen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -160,6 +222,34 @@ namespace HttpWebTestingEditor
                     wtim = new ItemManager(_webTest);
                     tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
                     PopulateTreeView();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void tsmiOpenResult_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.DefaultExt = ".json";
+                ofd.Filter = "HttpWebTest Results Files (*.json)|*.json|All Files (*.*)|*.*";
+                Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+                if (fUserPickedFile == true)
+                {
+                    _currentlyLoadedFileName = ofd.FileName;
+                    _webTestResults = HttpWebTestSerializer.DeserializeTestResults(_currentlyLoadedFileName);
+                    _webTest = _webTestResults.originalWebTest;
+                    wtim = new ItemManager(_webTest);
+                    tabResultsTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    tabTreeView.Header = _webTest.Name;
+                    PopulateTreeView();
+                    PopulateResultsTreeView();
+                    tabResultsTreeView.IsSelected = true;
                 }
             }
             catch (Exception ex)
@@ -187,7 +277,10 @@ namespace HttpWebTestingEditor
             
             if(_webTestResults != null)
             {
-                dgTestResults.ItemsSource = _webTestResults.GetResultsAsTable().AsDataView();
+                //_updatingDataGrid = true;
+                //dgTestResults.ItemsSource = _webTestResults.GetResultsAsTable().AsDataView();
+                //_updatingDataGrid = false;
+                PopulateResultsTreeView();
             }
             tabResultsTreeView.IsSelected = true;
         }

@@ -139,7 +139,7 @@ namespace HttpWebTesting.SampleTest
         {
             Dictionary<string, IEnumerable<string>> headers = new Dictionary<string, IEnumerable<string>>();
             headers.Add("X-api-key", new string[] { "dp-awin-api-gateway-api-key" });
-            headers.Add("Content-Type", new string[] { "application/json" });
+            headers.Add("Accept", new string[] { "application/json" });
             headers.Add("Authorization", new string[] { "Bearer {{token}}" });
             return headers;
         }

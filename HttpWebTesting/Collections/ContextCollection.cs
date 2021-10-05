@@ -99,7 +99,7 @@ namespace HttpWebTesting.Collections
         {
             Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
 
-            string sUrl = ContextReplacement(request.RequestUri);
+            string sUrl = ContextReplacement(PutParametersInUrl(request));
             request.requestItem = new HttpRequestMessage(request.Method, sUrl);
             request.requestItem.Headers.Clear();
 
@@ -111,6 +111,20 @@ namespace HttpWebTesting.Collections
             request.requestItem.Content = ApplyContextsToContent(request.Content);
             request.ReportingName = ContextReplacement(request.ReportingName);
 
+        }
+
+        private string PutParametersInUrl(WTI_Request request)
+        {
+            if (request.QueryCollection.queryParams.Count == 0)
+                return request.RequestUri;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in request.QueryCollection.queryParams)
+            {
+                sb.Append($"{item.Key}={item.Value}&");
+            }
+            sb.Remove(sb.Length - 1, 1); // Remove the last ampersand
+            return $"{request.RequestUri}?{sb.ToString()}";
         }
 
         private string ContextReplacement(string inputString)

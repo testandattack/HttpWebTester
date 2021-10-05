@@ -70,6 +70,8 @@ namespace WebTestExecutionEngine
 
             results.ItemExecutionFailed = request.Rules.ContainsFailedRuleResult();
 
+            results.RequestAsSent = request.requestItem;
+
             // return the results object to the test engine
             return results;
         }

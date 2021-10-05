@@ -8,7 +8,7 @@ using System.Linq;
 using GTC.Extensions;
 using HttpWebTesting;
 
-namespace WebTestItemManager.Utilities
+namespace HttpWebTestingResults.Utilities
 {
     class HttpContentConverter : JsonConverter<HttpContent>
     {
@@ -36,24 +36,6 @@ namespace WebTestItemManager.Utilities
         }
     }
 
-    class HttpWebTestConverter : JsonConverter<HttpWebTest>
-    {
-        public override HttpWebTest ReadJson(JsonReader reader, Type objectType, HttpWebTest existingValue, bool hasExistingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null)
-                return null;
-
-            JObject jo = JObject.Load(reader);
-            string str = jo.ToString();
-            return HttpWebTestSerializer.DeserializeTestFromString(str);
-
-        }
-
-        public override void WriteJson(JsonWriter writer,  HttpWebTest value, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
-    }
     class StringContentConverter : JsonConverter<StringContent>
     {
         public override StringContent ReadJson(JsonReader reader, Type objectType, StringContent existingValue, bool bValue, JsonSerializer serializer)

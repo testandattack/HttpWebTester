@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HttpWebTestingEditor"
         xmlns:pt="http://propertytools.org/wpf"
         mc:Ignorable="d"
-        Title="HttpWebTestEditor" Height="800" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="HttpWebTestEditor" Height="768" Width="1366" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="gridMenuRow" Height="22"/>
@@ -14,19 +14,22 @@
             <RowDefinition x:Name="gridStatusBarRow" Height="25" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="gridMainWindowLeftSide" Width="3*"/>
+            <ColumnDefinition x:Name="gridMainWindowLeftSide" Width="850"/>
             <ColumnDefinition x:Name="GridSplitter" Width="5"/>
-            <ColumnDefinition x:Name="gridMainWindowRightSide" Width="2*"/>
+            <ColumnDefinition x:Name="gridMainWindowRightSide" Width="*"/>
         </Grid.ColumnDefinitions>
         
         <!-- Menu Items-->
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Width="Auto" Height="20" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" >
             <MenuItem Header="_File" >
-                <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open a .webtest file for editing." Click="tsmiOpen_Click" />
-                <MenuItem x:Name="tsmiExecute" Header="_Execute" HorizontalAlignment="Left" ToolTip="Executes the currently loaded test" Click="tsmiExecute_Click" />
+                <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open an HttpWebTesting file for editing." Click="tsmiOpen_Click" />
+                <MenuItem x:Name="tsmiOpenResult" Header="_Open Results" HorizontalAlignment="Left" ToolTip="Allows you to open an HttpWebTesting Results file for viewing." Click="tsmiOpenResult_Click" />
                 <MenuItem Background="#7F404040" Height="4" Margin="5,0" />
-                <MenuItem x:Name="tsmiCreateSampleTest" Header="Create Sample Test" HorizontalAlignment="Left" ToolTip="Creates and saves a new sample webtest." Click="tsmiCreateSampleTest_Click" />
                 <MenuItem x:Name="tsmiAppExit" Header="_Exit" HorizontalAlignment="Left" ToolTip="This will close the application. If the developer did his homework, the application will prompt you for saving any changes if you have not already saved it." Click="tsmiAppExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Extras" >
+                <MenuItem x:Name="tsmiExecute" Header="_Execute" HorizontalAlignment="Left" ToolTip="Executes the currently loaded test" Click="tsmiExecute_Click" />
+                <MenuItem x:Name="tsmiCreateSampleTest" Header="Create Sample Test" HorizontalAlignment="Left" ToolTip="Creates and saves a new sample webtest." Click="tsmiCreateSampleTest_Click" />
             </MenuItem>
         </Menu>
 
@@ -48,8 +51,34 @@
                     </TreeView.ItemContainerStyle>
                 </TreeView>
             </TabItem>
+            <TabItem x:Name="tabResultsGridView" Header="WebTest Results" Visibility="Collapsed">
+                <DataGrid x:Name="dgTestResults" AutoGenerateColumns="True" IsReadOnly="True" SelectionChanged="dgTestResults_SelectionChanged"/>
+            </TabItem>
             <TabItem x:Name="tabResultsTreeView" Header="WebTest Results">
-                <DataGrid x:Name="dgTestResults" AutoGenerateColumns="True" IsReadOnly="True" />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Name" Text="Item" Width="500" Margin="3" Padding="1,0,0,0" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Status" Text="Status" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Time" Text="Time (in seconds)" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Size" Text="Response Size" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
+                    </StackPanel>
+                    <TreeView x:Name="tvWebTestResults" SelectedItemChanged="tvWebTestResults_SelectedItemChanged">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                </TreeView>
+                </StackPanel>
+            </TabItem>
+            <TabItem x:Name="tabWebBrowserForToken" Header="Get Token" Visibility="Collapsed">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbUrlForToken" Text="https://ui.caerodp-qa.com/home" Margin="3" Width="300"/>
+                        <Button x:Name="btnGetToken" Content="Get" Margin="3" Width="50" Click="btnGetToken_Click" />
+                    </StackPanel>
+                    <WebBrowser x:Name="webGetToken" Navigating="webGetToken_Navigating" Navigated="webGetToken_Navigated" />
+                </StackPanel>
             </TabItem>
         </TabControl>
 
@@ -60,9 +89,23 @@
         <TabControl Grid.Row="1" Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderBrush="{x:Null}">
             <TabItem x:Name="tabPropertyGrid" Header="Properties" >
                 <StackPanel x:Name="stackProperties" Orientation="Vertical">
-<ListBox />
                 </StackPanel>
             </TabItem>
+            <TabItem x:Name="tabResponseBody" Header="Response Body">
+                <TextBox x:Name="tbResponseBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
+                    <TextBox.ContextMenu>
+                        <ContextMenu x:Name="cmResponseBody">
+                            <MenuItem Name="cmiExpandJson" Header="Expand Json" Click="cmiExpandJson_Click" />
+                            <MenuItem Name="cmiWordWrap" Header="Word Wrap" Click="cmiWordWrap_Click" IsChecked="True"/>
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
+            </TabItem>
+            <TabItem x:Name="tabRequestBody" Header="Request Body" Visibility="Hidden">
+                <TextBox x:Name="tbRequestBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
+                </TextBox>
+            </TabItem>
+
             <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>

@@ -7,6 +7,7 @@ using Serilog;
 using GTC.Extensions;
 using HttpWebTesting;
 using System.Data;
+using HttpWebTestingResults.Utilities;
 
 namespace HttpWebTestingResults
 {
@@ -43,7 +44,10 @@ namespace HttpWebTestingResults
         {
             using (StreamWriter sw = new StreamWriter(fileName, false))
             {
-                sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Objects;
+                settings.Converters.Add(new StringContentConverter());
+                sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented, settings));
                 Log.ForContext<HttpWebTestResults>().Information("aved Test results to {fileName}");
             }
         }

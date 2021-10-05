@@ -41,7 +41,9 @@ namespace HttpWebTestingResults
         /// <summary>
         /// Indicates that this object represents an object that was not executed.
         /// </summary>
-        Wtri_SkippedItem = 6
+        Wtri_SkippedItem = 6,
+
+        Wtri_LoopControlIteration = 7
     };
 
 

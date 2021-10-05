@@ -42,5 +42,6 @@ namespace HttpWebTesting.Collections
             // values are in the collection.
             return sUrl.GetUrlWithoutQuery();
         }
+
     }
 }
