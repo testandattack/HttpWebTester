@@ -51,9 +51,6 @@
                     </TreeView.ItemContainerStyle>
                 </TreeView>
             </TabItem>
-            <TabItem x:Name="tabResultsGridView" Header="WebTest Results" Visibility="Collapsed">
-                <DataGrid x:Name="dgTestResults" AutoGenerateColumns="True" IsReadOnly="True" SelectionChanged="dgTestResults_SelectionChanged"/>
-            </TabItem>
             <TabItem x:Name="tabResultsTreeView" Header="WebTest Results">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
@@ -69,15 +66,6 @@
                         </Style>
                     </TreeView.ItemContainerStyle>
                 </TreeView>
-                </StackPanel>
-            </TabItem>
-            <TabItem x:Name="tabWebBrowserForToken" Header="Get Token" Visibility="Collapsed">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="tbUrlForToken" Text="https://ui.caerodp-qa.com/home" Margin="3" Width="300"/>
-                        <Button x:Name="btnGetToken" Content="Get" Margin="3" Width="50" Click="btnGetToken_Click" />
-                    </StackPanel>
-                    <WebBrowser x:Name="webGetToken" Navigating="webGetToken_Navigating" Navigated="webGetToken_Navigated" />
                 </StackPanel>
             </TabItem>
         </TabControl>
@@ -101,11 +89,10 @@
                     </TextBox.ContextMenu>
                 </TextBox>
             </TabItem>
-            <TabItem x:Name="tabRequestBody" Header="Request Body" Visibility="Hidden">
+            <TabItem x:Name="tabRequestBody" Header="Request Body" Visibility="Visible">
                 <TextBox x:Name="tbRequestBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
                 </TextBox>
             </TabItem>
-
             <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>

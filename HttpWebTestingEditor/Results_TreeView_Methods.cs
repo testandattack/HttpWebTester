@@ -235,6 +235,7 @@ namespace HttpWebTestingEditor
                     treeItem.IsExpanded = true;
                     parentTreeViewItem.Items.Add(treeItem);
                     RecurseTheWebTestResultsItemCollection(transaction.webTestResultsItems, treeItem);
+                    _treeCurrentDepth--;
                 }
                 #endregion
 
@@ -252,6 +253,7 @@ namespace HttpWebTestingEditor
                         loopIteration.LoopIterationName = $"Iteration {loopIndex}";
                         loopIteration.loopIterationResultsItems = loop.loopResultsItems.loopResultsItems[result];
                         ProcessLoopIteration(loopIteration, treeItem, loopIndex++);
+                        _treeCurrentDepth--;
                     }
                 }
                 #endregion
@@ -273,12 +275,14 @@ namespace HttpWebTestingEditor
 
         private void ProcessLoopIteration(WTRI_LoopControlIteration loopIteration, TreeViewItem parentTreeViewItem, int nIndex)
         {
+            _treeCurrentDepth++;
             TreeViewItem treeItem = new TreeViewItem();
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
             treeItem.Header = CustomizeResultsTreeViewItem(loopIteration, (BitmapImage)Properties.Resources.TransactionTimer_24.ToWpfBitmap());
             treeItem.IsExpanded = true;
             parentTreeViewItem.Items.Add(treeItem);
             RecurseTheWebTestResultsItemCollection(loopIteration.loopIterationResultsItems, treeItem);
+            _treeCurrentDepth--;
         }
 
         private TreeViewItem ProcessRequestResultsItem(WebTestResultsItem item, TreeViewItem parentTreeViewItem, int nIndex)
@@ -288,11 +292,7 @@ namespace HttpWebTestingEditor
 
             WTRI_Request wtr = (WTRI_Request)item;
             treeItem.Header = CustomizeResultsTreeViewItem(item, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
-            //AddRequestLevelRules(treeItem, wtr);
-            //List<string> wtr_TreeItemTag = new List<string>();
-            //wtr_TreeItemTag.Add(wtr.responseBody);
-            //wtr_TreeItemTag.Add(wtr.RequestAsSent.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-            treeItem.Tag = wtr.responseBody;
+            treeItem.Tag = wtr;
             return treeItem;
         }
 

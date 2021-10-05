@@ -31,9 +31,8 @@ namespace HttpWebTesting.SampleTest
         public Sample(string csvFileName)
         {
             httpWebTest = new HttpWebTest("Sample Web Test");
-            //BuildSampleWebtest(csvFileName.Substring(csvFileName.LastIndexOf("\\") + 1));
-            //CreateAndSavePopulatedDataSource(csvFileName);
-            BuildAwinTest();
+            BuildSampleWebtest(csvFileName.Substring(csvFileName.LastIndexOf("\\") + 1));
+            CreateAndSavePopulatedDataSource(csvFileName);
         }
 
         public Dictionary<string, IEnumerable<string>> CreateAwinHeaders()
