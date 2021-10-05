@@ -12,7 +12,7 @@ namespace WebTestRules
 
         public ValidateStatusCodeValue(HttpStatusCode statusCode) 
         {
-            RuleType = RuleTypes_Enums.RequestRule_Validation;
+            RuleType = RuleType.RequestRule_Validation;
             type = typeof(ValidateStatusCodeValue);
             Name = "Validate Status Code Value";
             HttpStatusCode = statusCode;

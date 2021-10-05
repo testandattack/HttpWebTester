@@ -28,7 +28,7 @@ namespace HttpWebTesting.Rules
 
         public ExtractionRule() 
         {
-            RuleType = Enums.RuleTypes_Enums.RequestRule_Extraction;
+            RuleType = Enums.RuleType.RequestRule_Extraction;
             baseRuleType = BaseRuleType.Extraction;
         }
 

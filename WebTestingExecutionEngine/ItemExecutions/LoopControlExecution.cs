@@ -39,12 +39,16 @@ namespace WebTestExecutionEngine
             }
 
             WTRI_LoopControl loopControlResults = new WTRI_LoopControl(loopControl.guid);
+            bool executionPassed = false;
+            
             if (loopControl.ControlComparisonType == ComparisonType.IsLoop)
-                loopControlResults.ItemExecutionFailed = !(await HandleLoopAsync(loopControlResults));
+                executionPassed = await HandleLoopAsync(loopControlResults);
             else if (loopControl.ControlComparisonScope == ControlComparisonScope.While)
-                loopControlResults.ItemExecutionFailed = !(await HandleMultiPassComparisonAsync(loopControlResults));
+                executionPassed = await HandleMultiPassComparisonAsync(loopControlResults);
             else
-                loopControlResults.ItemExecutionFailed = !(await HandleSinglePassComparisonAsync(loopControlResults));
+                executionPassed = await HandleSinglePassComparisonAsync(loopControlResults);
+            
+            loopControlResults.ItemExecutionFailed = !executionPassed;
             return loopControlResults;
         }
 
@@ -89,6 +93,7 @@ namespace WebTestExecutionEngine
         {
             string iteration = $"Iteration {iterationId}";
             var result = await WebTestItemCollectionExecution.ExecuteWebTestItemCollectionAsync(httpWebTest, loopControl.webTestItems);
+            results.loopIterations.Add(iteration);
             results.loopResultsItems.Add(iteration, result);
             if (result.ExecutionState == RuleResult.Failed)
                 return false;

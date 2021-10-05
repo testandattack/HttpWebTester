@@ -31,10 +31,10 @@ namespace HttpWebTesting.Rules
         protected Type type { get; set; }
 
         /// <summary>
-        /// the <see cref="RuleTypes_Enums">RuleType</see> of this rule
+        /// the <see cref="Enums.RuleType">RuleType</see> of this rule
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public RuleTypes_Enums RuleType { get; set; }
+        public RuleType RuleType { get; set; }
 
         /// <summary>
         /// A collection of properties for this rule
@@ -74,6 +74,7 @@ namespace HttpWebTesting.Rules
             this.Description = copy.Description;
             this.type = copy.type;
             this.RuleResult = copy.RuleResult;
+            this.Enabled = copy.Enabled;
         }
 
         protected BaseRule(Type type) : this()

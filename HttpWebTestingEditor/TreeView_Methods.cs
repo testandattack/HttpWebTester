@@ -11,11 +11,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GTC.Extensions;
 using HttpWebTesting.Rules;
+using System.Collections;
+using System.Net.Http;
 
 namespace HttpWebTestingEditor
 {
     public partial class HttpWebTestEditor : Window
     {
+        private const string TVI_Name_ContextParameter = "ContextParameter_";
+        private const string TVI_Name_TestRule = "TestLevelRules_";
+        private const string TVI_Name_RequestRule = "RequestLevelRules_";
+        private const string TVI_Name_DataSource = "DataSources_";
+        private const string TVI_Name_Headers = "Headers_";
+        private const string TVI_Name_QueryParam = "QueryParam_";
+
         #region -- Treeview Population Methods -----
         private void PopulateTreeView()
         {
@@ -30,7 +39,7 @@ namespace HttpWebTestingEditor
             RecurseTheWebTestItemCollection(_webTest.WebTestItems, treeItem);
 
             //// Add the webtest collections to the tree
-            //AddDataSources(treeItem);
+            AddDataSources(treeItem);
             AddContextParameters(treeItem);
             AddTestLevelRules(treeItem);
 
@@ -104,6 +113,7 @@ namespace HttpWebTestingEditor
                 {
                     WTI_Transaction transaction = items[nIndex] as WTI_Transaction;
                     treeItem.Header = CustomizeTreeViewItem(transaction.Name, (BitmapImage)Properties.Resources.TransactionTimer_24.ToWpfBitmap());
+                    treeItem.IsExpanded = true;
                     parentTreeViewItem.Items.Add(treeItem);
                     RecurseTheWebTestItemCollection(transaction.webTestItems, treeItem);
                 }
@@ -114,6 +124,7 @@ namespace HttpWebTestingEditor
                 {
                     WTI_LoopControl loop = items[nIndex] as WTI_LoopControl;
                     treeItem.Header = CustomizeTreeViewItem(loop.GetLoopControlDisplayName(), (BitmapImage)Properties.Resources.WebTestLoop_24.ToWpfBitmap());
+                    treeItem.IsExpanded = true;
                     parentTreeViewItem.Items.Add(treeItem);
                     RecurseTheWebTestItemCollection(loop.webTestItems, treeItem);
                 }
@@ -140,7 +151,10 @@ namespace HttpWebTestingEditor
             treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
             WTI_Request wtr = (WTI_Request)item;
-            treeItem.Header = CustomizeTreeViewItem(wtr.RequestUri.AbsoluteUri.UrlDecode(), (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            string itemLabel = $"{wtr.Method.ToString().ToUpper()}  {wtr.RequestUri.UrlDecode()}";
+            treeItem.Header = CustomizeTreeViewItem(itemLabel, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            AddRequestHeaders(treeItem, wtr);
+            AddRequestQueryParams(treeItem, wtr);
             AddRequestLevelRules(treeItem, wtr);
             return treeItem;
         }
@@ -161,7 +175,59 @@ namespace HttpWebTestingEditor
                 TreeViewItem subItem = new TreeViewItem();
                 string str = String.Format("{0} = {1}", param.Name, param.Value);
                 subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.ContextParameter_24.ToWpfBitmap());
-                subItem.Name = String.Format("ContextParameter_{0}", x++);
+                subItem.Name = String.Format("{0}{1}", TVI_Name_ContextParameter, x++);
+                treeItem.Items.Add(subItem);
+            }
+        }
+
+        private void AddRequestHeaders(TreeViewItem parentItem, WTI_Request request)
+        {
+
+            if (request.Headers.Count == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Headers", (BitmapImage)Properties.Resources.Folder_24.ToWpfBitmap());
+            treeItem.Name = "RequestHeaders";
+            parentItem.Items.Add(treeItem);
+
+            int x = 0;
+            foreach (var header in request.Headers)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                string str = String.Format("{0} = {1}", header.Key, header.Value.ToString(";"));
+                subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.Header_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_Headers, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
+                treeItem.Items.Add(subItem);
+            }
+        }
+
+        private void AddRequestQueryParams(TreeViewItem parentItem, WTI_Request request)
+        {
+
+            if (request.QueryCollection.Count == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Query Parameters", (BitmapImage)Properties.Resources.Folder_24.ToWpfBitmap());
+            treeItem.Name = "QueryParameters";
+            parentItem.Items.Add(treeItem);
+
+            int x = 0;
+            foreach (var parm in request.QueryCollection.queryParams)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                string str = String.Format("{0} = {1}", parm.Key, parm.Value);
+                subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.QueryStringParam_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_QueryParam, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
                 treeItem.Items.Add(subItem);
             }
         }
@@ -182,7 +248,7 @@ namespace HttpWebTestingEditor
             {
                 TreeViewItem subItem = new TreeViewItem();
                 string ruleDisplayName;
-                if (rule.RuleType == RuleTypes_Enums.RequestRule_Extraction)
+                if (rule.RuleType == RuleType.RequestRule_Extraction)
                 {
                     string contextName = (rule as ExtractionRule).ContextName;
                     ruleDisplayName = $"{rule.Name} to: {contextName.AddBraces()}";
@@ -192,7 +258,11 @@ namespace HttpWebTestingEditor
                     ruleDisplayName = $"{rule.Name}";
                 }
                 subItem.Header = CustomizeTreeViewItem(ruleDisplayName, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
-                subItem.Name = String.Format("RequestLevelRules_{0}", x++);
+                subItem.Name = String.Format("{0}{1}", TVI_Name_RequestRule, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
                 treeItem.Items.Add(subItem);
             }
         }
@@ -213,9 +283,188 @@ namespace HttpWebTestingEditor
             {
                 TreeViewItem subItem = new TreeViewItem();
                 subItem.Header = CustomizeTreeViewItem(rule.Name, (BitmapImage)Properties.Resources.RequestPlugin_24.ToWpfBitmap());
-                subItem.Name = String.Format("TestLevelRules_{0}", x++);
+                subItem.Name = String.Format("{0}{1}", TVI_Name_TestRule, x++);
                 treeItem.Items.Add(subItem);
             }
+        }
+
+        private void AddDataSources(TreeViewItem parentItem)
+        {
+            if (_webTest.DataSources.Count == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Data Sources", (BitmapImage)Properties.Resources.DataSources_24.ToWpfBitmap());
+            treeItem.Name = "DataSources";
+            parentItem.Items.Add(treeItem);
+
+            int x = 0;
+            foreach (var dataSource in _webTest.DataSources)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                subItem.Header = CustomizeTreeViewItem(dataSource.Name, (BitmapImage)Properties.Resources.DataSource_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_DataSource, x++);
+                treeItem.Items.Add(subItem);
+            }
+        }
+        #endregion
+
+        #region -- Property Display Methods -----
+        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object webTestItem)
+        {
+            foreach (var item in props)
+            {
+                TextBlock block = new TextBlock();
+                block.Text = item.Key;
+                block.Width = 100;
+
+                StackPanel stack = new StackPanel();
+                stack.Orientation = Orientation.Horizontal;
+                stack.Margin = new Thickness(3);
+
+                stack.Children.Add(block);
+                bool IsTypeDescriptor = (item.Key == "Type") ? true : false;
+                stack.Children.Add(GetPropertyValueDisplayElement(item.Value, width - 120, IsTypeDescriptor));
+                stackProperties.Children.Add(stack);
+            }
+            stackProperties.Tag = webTestItem;
+        }
+
+        private UIElement GetPropertyValueDisplayElement(object propertyItem, double width, bool IsTypeDescriptor = false)
+        {
+            if(IsTypeDescriptor == true)
+                return GetGuidText(propertyItem.ToString(), width);
+
+            else if (propertyItem.GetType() == typeof(System.String))
+                return GetTextBox(propertyItem, width);
+
+            else if (propertyItem.GetType() == typeof(System.Net.Http.HttpMethod))
+                return GetTextBox(((HttpMethod)propertyItem).Method, width);
+
+            else if (propertyItem.GetType() == typeof(System.Uri))
+                return GetTextBox(((Uri)propertyItem).AbsoluteUri.UrlDecode(), width);
+
+            else if (propertyItem.GetType() == typeof(System.Guid))
+                return GetGuidText(propertyItem.ToString(), width);
+
+            else if (propertyItem.GetType() == typeof(System.Boolean))
+                return GetCheckBox(propertyItem, width);
+
+            else if (propertyItem.GetType() == typeof(System.Int32) ||
+                propertyItem.GetType() == typeof(System.Double) ||
+                propertyItem.GetType() == typeof(System.Decimal) ||
+                propertyItem.GetType() == typeof(System.Single))
+                return GetNumberTextBox(propertyItem, width);
+
+            else if (propertyItem.GetType().GetInterface(nameof(ICollection)) != null)
+                return GetCollectionView(propertyItem, width);
+
+            else if (propertyItem.GetType() == typeof(RuleProperty))
+                return GetTextBox(((RuleProperty)propertyItem).Value, width);
+            
+            else if(propertyItem.GetType() == typeof(HttpContent))
+                return GetTextBox(((HttpContent)propertyItem).ReadAsStringAsync().GetAwaiter().GetResult(), width);
+
+            else return CheckForEnum(propertyItem, width);
+        }
+
+        private UIElement GetTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = (string)propertyItem;
+            box.Width = width;
+            return box;
+        }
+
+        private UIElement GetCheckBox(object propertyItem, double width)
+        {
+            CheckBox checkBox = new CheckBox();
+            checkBox.IsChecked = (bool)propertyItem;
+            return checkBox;
+        }
+
+        private UIElement GetNumberTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = propertyItem.ToString();
+            box.MinWidth = 50;
+            return box;
+        }
+
+        private UIElement GetGuidText(object propertyItem, double width)
+        {
+            TextBlock box = new TextBlock();
+            box.Text = propertyItem.ToString();
+            return box;
+        }
+
+        private UIElement GetCollectionView(object propertyItem, double width)
+        {
+            ListBox listBox = new ListBox();
+            foreach (var item in (ICollection)propertyItem)
+            {
+                ListBoxItem newItem = new ListBoxItem();
+                newItem.Content = item;
+                listBox.Items.Add(newItem);
+            }
+            listBox.Width = width;
+            //comboBox.Text = "<Collection>";
+            return listBox;
+
+
+            //ComboBox comboBox = new ComboBox();
+            //comboBox.IsEditable = true;
+            //foreach (var item in (ICollection)propertyItem)
+            //{
+            //    ComboBoxItem newItem = new ComboBoxItem();
+            //    newItem.Content = item;
+            //    comboBox.Items.Add(newItem);
+            //}
+            //comboBox.Width = width;
+            //comboBox.Text = "<Collection>";
+            //return comboBox;
+        }
+
+        private UIElement GetEnumView(object propertyItem, double width)
+        {
+            ComboBox comboBox = new ComboBox();
+            comboBox.IsEditable = false;
+            var enumNames = Enum.GetNames((propertyItem.GetType()));
+            foreach (string item in enumNames)
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = item;
+                if (item == propertyItem.ToString())
+                    newItem.IsSelected = true;
+                comboBox.Items.Add(newItem);
+            }
+            comboBox.Width = width;
+
+            comboBox.SelectedItem = propertyItem.ToString();
+            return comboBox;
+        }
+
+        private UIElement CheckForEnum(object propertyItem, double width)
+        {
+            if (propertyItem.GetType() == typeof(BaseRuleType) ||
+                propertyItem.GetType() == typeof(ControlComparisonScope) ||
+                propertyItem.GetType() == typeof(DataSourceCursorType) ||
+                propertyItem.GetType() == typeof(DataSourceType) ||
+                propertyItem.GetType() == typeof(RuleResult) ||
+                propertyItem.GetType() == typeof(RuleType))
+            {
+                return GetEnumView(propertyItem, width);
+            }
+            else if(propertyItem.GetType() == typeof(ComparisonType))
+            {
+                // Eventually this one needs to incorporate the AsString() extension
+                return GetEnumView(propertyItem, width);
+            }
+            else if(propertyItem.GetType() == typeof(WebTestItemType))
+            {
+                return GetGuidText(propertyItem.ToString(), width);
+            }
+            else return GetGuidText("Undetermined Item Type", width);
         }
         #endregion
     }

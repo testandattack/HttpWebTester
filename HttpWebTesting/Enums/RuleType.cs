@@ -4,7 +4,7 @@
     /// Lists the rule's scope and the location where a given rule should be executed
     /// </summary>
     /// <include file='Documentation/xml_include_tag.xml' path='MyDocs/MyMembers[@name="RuleExecutionOrder"]'/>
-    public enum RuleTypes_Enums
+    public enum RuleType
     {
 
         /// <summary>

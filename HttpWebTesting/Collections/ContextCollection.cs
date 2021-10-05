@@ -14,35 +14,56 @@ namespace HttpWebTesting.Collections
     {
         public void Add(string propertyName, string propertyValue)
         {
+            foreach (Property contextProperty in this)
+            {
+                if (contextProperty.Name == propertyName)
+                {
+                    contextProperty.Value = propertyValue;
+                    return;
+                }
+            }
             base.Add(new Property(propertyName, propertyValue));
         }
 
-        public string this[string propertyName]
+        public void Add(string propertyName, object propertyValue)
         {
-            get
+            foreach (Property contextProperty in this)
             {
-                foreach (Property contextProperty in this)
+                if (contextProperty.Name == propertyName)
                 {
-                    if (contextProperty.Name == propertyName)
-                    {
-                        return contextProperty.Value;
-                    }
+                    contextProperty.Value = propertyValue;
+                    return;
                 }
-                return null;
             }
-            set
-            {
-                foreach (Property contextProperty in this)
-                {
-                    if (contextProperty.Name == propertyName)
-                    {
-                        contextProperty.Value = value;
-                        return;
-                    }
-                }
-                base.Add(new Property(propertyName, value));
-            }
+            base.Add(new Property(propertyName, propertyValue));
         }
+
+        //public string this[string propertyName]
+        //{
+        //    get
+        //    {
+        //        foreach (Property contextProperty in this)
+        //        {
+        //            if (contextProperty.Name == propertyName)
+        //            {
+        //                return contextProperty.Value;
+        //            }
+        //        }
+        //        return null;
+        //    }
+        //    set
+        //    {
+        //        foreach (Property contextProperty in this)
+        //        {
+        //            if (contextProperty.Name == propertyName)
+        //            {
+        //                contextProperty.Value = value;
+        //                return;
+        //            }
+        //        }
+        //        base.Add(new Property(propertyName, value));
+        //    }
+        //}
 
         /// <summary>
         /// This method is used to add or update context values that
@@ -63,12 +84,13 @@ namespace HttpWebTesting.Collections
             }
         }
 
-        public string GetValue(string contextName)
+        public string GetValueAsString(string contextName)
         {
             foreach(Property property in base.Items)
             {
                 if (property.Name == contextName)
-                    return property.Value;
+                    // NOTE: Must refactor this to do more validation
+                    return property.Value.ToString();
             }
             return string.Empty;
         }
@@ -77,7 +99,7 @@ namespace HttpWebTesting.Collections
         {
             Log.ForContext("SourceContext", "RequestExecution").Debug("entering ApplyContexts for {request}", request.guid);
 
-            string sUrl = ContextReplacement(request.RequestUri.AbsoluteUri);
+            string sUrl = ContextReplacement(PutParametersInUrl(request));
             request.requestItem = new HttpRequestMessage(request.Method, sUrl);
             request.requestItem.Headers.Clear();
 
@@ -91,13 +113,27 @@ namespace HttpWebTesting.Collections
 
         }
 
+        private string PutParametersInUrl(WTI_Request request)
+        {
+            if (request.QueryCollection.queryParams.Count == 0)
+                return request.RequestUri;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in request.QueryCollection.queryParams)
+            {
+                sb.Append($"{item.Key}={item.Value}&");
+            }
+            sb.Remove(sb.Length - 1, 1); // Remove the last ampersand
+            return $"{request.RequestUri}?{sb.ToString()}";
+        }
+
         private string ContextReplacement(string inputString)
         {
             string outputString = inputString.UrlDecode();
             List<string> contextNames = outputString.FindSubStrings("{{", "}}");
             foreach (string name in contextNames)
             {
-                string value = this.GetValue(name);
+                string value = this.GetValueAsString(name);
                 if (value != string.Empty)
                 {
                     outputString = outputString.Replace(name.AddBraces(), value);

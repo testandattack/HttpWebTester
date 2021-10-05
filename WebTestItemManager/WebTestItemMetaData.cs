@@ -22,7 +22,7 @@ namespace WebTestItemManager
 
         public Guid guid { get; set; }
 
-        public Uri Uri { get; set; }
+        public string Url { get; set; }
 
         public WebTestItemMetaData() { }
     }

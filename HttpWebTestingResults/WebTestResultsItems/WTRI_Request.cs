@@ -9,7 +9,11 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Request : WebTestResultsItem
     {
+        public string responseBody { get; set; }
+
         public HttpResponseMessage response { get; set; }
+
+        public HttpRequestMessage RequestAsSent { get; set; }
 
         public ContextCollection contextCollection { get; set; }
         
@@ -24,6 +28,7 @@ namespace HttpWebTestingResults
             objectItemType = WebTestResultItemType.Wtri_RequestObject;
             webTestItemId = itemGuid;
             HttpResponseMessageWasNull = false;
+            RequestAsSent = new HttpRequestMessage();
         }
 
         //public override string ToString()

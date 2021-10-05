@@ -5,30 +5,24 @@ using HttpWebTesting.WebTestItems;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace HttpWebTestingEditor
 {
     public partial class HttpWebTestEditor : Window
     {
-        private void CreatePropertiesDataTable()
-        {
-            _propertiesDataTable = new System.Data.DataTable();
-            _propertiesDataTable.Columns.Add(new DataColumn("Browsable", typeof(System.Boolean)));
-            _propertiesDataTable.Columns.Add(new DataColumn("JsonIgnore", typeof(System.Boolean)));
-            _propertiesDataTable.Columns.Add(new DataColumn("DisplayName", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Description", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Category", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("DefaultValue", typeof(System.String)));
-            _propertiesDataTable.Columns.Add(new DataColumn("Type", typeof(System.String)));
-        }
 
-        private void GetWebTestItemCustomProperties(WebTestItem item)
+        private Dictionary<string, object> GetWebTestItemProperties(WebTestItem item)
         {
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+
             WebTestItem webTestItem;
             switch (item.objectItemType)
             {
@@ -48,33 +42,75 @@ namespace HttpWebTestingEditor
                     webTestItem = item as WTI_Transaction;
                     break;
                 default:
-                    return;
+                    return properties;
             }
-            var displayInfo = new PropertyDisplayInfoCollection();
-            displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
-            AddDisplayInfoData(displayInfo);
-        }
 
-        private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)
-        {
-            _propertiesDataTable.Rows.Clear();
-            foreach (var displayItem in displayInfo)
+
+            foreach (var prop in webTestItem.GetType().GetProperties())
             {
-                string sDefaultValue;
-                if (displayItem.DefaultValue == null)
-                    sDefaultValue = "null";
+                var propValue = prop.GetValue(webTestItem, null);
+                if (propValue != null)
+                    properties.Add(prop.Name, propValue);
                 else
-                    sDefaultValue = displayItem.DefaultValue.ToString();
-
-                _propertiesDataTable.Rows.Add(
-                    displayItem.Browsable,
-                    displayItem.JsonIgnore,
-                    displayItem.DisplayName,
-                    displayItem.Description,
-                    displayItem.Category,
-                    sDefaultValue,
-                    displayItem.type.Name);
+                    properties.Add(prop.Name, "null");
             }
+            return properties;
+
         }
+
+        private Dictionary<string, object> GetTestLevelItemProperties(object item)
+        {
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+
+            foreach (var prop in item.GetType().GetProperties())
+            {
+                var propValue = prop.GetValue(item, null);
+                if (propValue != null)
+                    properties.Add(prop.Name, propValue);
+                else
+                    properties.Add(prop.Name, "null");
+            }
+            return properties;
+
+        }
+
+        // This code calls the below method and stores info in the data table below
+        //var displayInfo = new PropertyDisplayInfoCollection();
+        //displayInfo.AddAllItems(webTestItem, webTestItem.objectItemType.ToString());
+        //AddDisplayInfoData(displayInfo);
+
+
+        //private void AddDisplayInfoData(PropertyDisplayInfoCollection displayInfo)
+        //{
+        //    _propertiesDataTable.Rows.Clear();
+        //    foreach (var displayItem in displayInfo)
+        //    {
+        //        string sDefaultValue;
+        //        if (displayItem.DefaultValue == null)
+        //            sDefaultValue = "null";
+        //        else
+        //            sDefaultValue = displayItem.DefaultValue.ToString();
+
+        //        _propertiesDataTable.Rows.Add(
+        //            displayItem.Browsable,
+        //            displayItem.JsonIgnore,
+        //            displayItem.DisplayName,
+        //            displayItem.Description,
+        //            displayItem.Category,
+        //            sDefaultValue,
+        //            displayItem.type.Name);
+        //    }
+        //}
+        //private void CreatePropertiesDataTable()
+        //{
+        //    _propertiesDataTable = new System.Data.DataTable();
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Browsable", typeof(System.Boolean)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("JsonIgnore", typeof(System.Boolean)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("DisplayName", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Description", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Category", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("DefaultValue", typeof(System.String)));
+        //    _propertiesDataTable.Columns.Add(new DataColumn("Type", typeof(System.String)));
+        //}
     }
- }
+}

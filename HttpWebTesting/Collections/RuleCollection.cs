@@ -10,7 +10,7 @@ namespace HttpWebTesting.Collections
             return base.MemberwiseClone();
         }
 
-        public RuleCollection GetRulesOfType(RuleTypes_Enums ruleType)
+        public RuleCollection GetRulesOfType(RuleType ruleType)
         {
             RuleCollection rules = new RuleCollection();
             foreach(var rule in this.Items)

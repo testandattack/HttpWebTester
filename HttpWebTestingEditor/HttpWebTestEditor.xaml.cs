@@ -22,6 +22,7 @@ using HttpWebTestingResults;
 using HttpWebTesting.SampleTest;
 using System.IO;
 using Serilog;
+using Newtonsoft.Json;
 
 namespace HttpWebTestingEditor
 {
@@ -36,6 +37,8 @@ namespace HttpWebTestingEditor
 
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
+        private bool _wordWrap = true;
+        private bool _updatingDataGrid;
         private DataTable _propertiesDataTable;
 
         public HttpWebTestEditor()
@@ -48,7 +51,6 @@ namespace HttpWebTestingEditor
         {
             _currentlyLoadedFileName = "";
             _fileWasModified = false;
-            CreatePropertiesDataTable();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -68,18 +70,139 @@ namespace HttpWebTestingEditor
             TreeViewItem tvi = ((TreeViewItem)e.NewValue);
             if (tvi != null)
             {
-                if(tvi.Name.StartsWith("Root_"))
+                stackProperties.Children.Clear();
+                var stackPropertiesWidth = stackProperties.ActualWidth;
+
+                if (tvi.Name.StartsWith("Root_"))
                 {
                     string str = tvi.Name.Replace('_', '.');
-                    if (wtim.GetItemTreeType(str) == WebTestItemType.Wti_RequestObject)
-                    {
-                        WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
-                        GetWebTestItemCustomProperties(selectedItem);
-                        dgPropertyList.ItemsSource = _propertiesDataTable.AsDataView();
-                    }
+
+                    WebTestItem selectedItem = wtim.GetActualItem(str, _webTest.WebTestItems);
+                    var props = GetWebTestItemProperties(selectedItem);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, selectedItem);
+                }
+                else if(tvi.Name.StartsWith(TVI_Name_ContextParameter))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_ContextParameter.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Context Name", _webTest.ContextProperties[x].Name);
+                    props.Add("Context Value", _webTest.ContextProperties[x].Value);
+                    props.Add("Type", _webTest.ContextProperties[x].Type);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.ContextProperties[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_Headers))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_Headers.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Header Name", parent.Headers.GetKey(x));
+                    props.Add("Header Value", parent.Headers.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.Headers);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_QueryParam))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_QueryParam.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Query Param Name", parent.QueryCollection.queryParams.GetKey(x));
+                    props.Add("Query Param Value", parent.QueryCollection.queryParams.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.QueryCollection);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_TestRule))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_TestRule.Length));
+                    var props = GetTestLevelItemProperties(_webTest.Rules[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.Rules[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_DataSource))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_DataSource.Length));
+                    var props = GetTestLevelItemProperties(_webTest.DataSources[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.DataSources[x]);
                 }
             }
         }
+
+        private WTI_Request GetParentRequest(TreeViewItem tvi)
+        {
+            TreeViewItem parent = tvi.Parent as TreeViewItem;
+            TreeViewItem grandParent = parent.Parent as TreeViewItem;
+
+            if (grandParent.Name.StartsWith("Root_"))
+            {
+                string str = grandParent.Name.Replace('_', '.');
+                return wtim.GetActualItem(str, _webTest.WebTestItems) as WTI_Request;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void dgTestResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(!_updatingDataGrid)
+            {
+                if(dgTestResults.SelectedItems.Count == 1)
+                {
+                    DataRowView row = (DataRowView)dgTestResults.SelectedItems[0];
+
+                }
+            }
+        }
+
+        private void tvWebTestResults_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            TreeViewItem tvi = ((TreeViewItem)e.NewValue);
+            if (tvi != null)
+            {
+                tabResponseBody.IsSelected = true;
+                if (tvi.Tag != null)
+                {
+                    tbResponseBody.Text = tvi.Tag.ToString();
+                }
+
+            }
+        }
+
+        private void btnGetToken_Click(object sender, RoutedEventArgs e)
+        {
+            webGetToken.Navigate(tbUrlForToken.Text);
+
+        }
+
+        private void webGetToken_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            tsslMessage.Content = "Navigating to URL.";
+            tsslMessage.Refresh();
+        }
+
+        private void webGetToken_Navigated(object sender, NavigationEventArgs e)
+        {
+            tsslMessage.Content = "Finished navigating to URL.";
+            tsslMessage.Refresh();
+        }
+
+        #region -- Response Text Box Menu Event Handlers -----
+        private void cmiWordWrap_Click(object sender, RoutedEventArgs e)
+        {
+            _wordWrap = !_wordWrap;
+            cmiWordWrap.IsChecked = _wordWrap;
+            tbResponseBody.TextWrapping = _wordWrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
+        }
+
+        private void cmiExpandJson_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(tbResponseBody.Text);
+            tbResponseBody.Text = JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
+        }
+        #endregion
         #endregion
 
         #region -- Menu Item Event Handlers -----------------------------------
@@ -107,6 +230,34 @@ namespace HttpWebTestingEditor
             }
         }
 
+        private void tsmiOpenResult_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.DefaultExt = ".json";
+                ofd.Filter = "HttpWebTest Results Files (*.json)|*.json|All Files (*.*)|*.*";
+                Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+                if (fUserPickedFile == true)
+                {
+                    _currentlyLoadedFileName = ofd.FileName;
+                    _webTestResults = HttpWebTestSerializer.DeserializeTestResults(_currentlyLoadedFileName);
+                    _webTest = _webTestResults.originalWebTest;
+                    wtim = new ItemManager(_webTest);
+                    tabResultsTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    tabTreeView.Header = _webTest.Name;
+                    PopulateTreeView();
+                    PopulateResultsTreeView();
+                    tabResultsTreeView.IsSelected = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void tsmiAppExit_Click(object sender, RoutedEventArgs e)
         {
             if (SaveModifiedFile())
@@ -126,13 +277,12 @@ namespace HttpWebTestingEditor
             
             if(_webTestResults != null)
             {
-                tbResults.Text = _webTestResults.ToString();
+                //_updatingDataGrid = true;
+                //dgTestResults.ItemsSource = _webTestResults.GetResultsAsTable().AsDataView();
+                //_updatingDataGrid = false;
+                PopulateResultsTreeView();
             }
-            else
-            {
-                tbResults.Text = "Results were null.";
-            }
-            tabResultsView.IsSelected = true;
+            tabResultsTreeView.IsSelected = true;
         }
 
         private void tsmiCreateSampleTest_Click(object sender, RoutedEventArgs e)
@@ -180,6 +330,5 @@ namespace HttpWebTestingEditor
             else
                 return true;
         }
-
     }
 }

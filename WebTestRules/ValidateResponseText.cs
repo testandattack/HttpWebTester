@@ -22,7 +22,6 @@ namespace WebTestRules
         /// </summary>
         [DisplayName("Pass If Text Is Found")]
         [Description("If true, the rule will pass if the text is found and fail if the text is not found.")]
-        [DefaultValue(true)]
         public bool PassIfTextIsFound { get; set; }
 
         /// <summary>
@@ -30,7 +29,6 @@ namespace WebTestRules
         /// </summary>
         [DisplayName("Ignore Case")]
         [Description("If true, the rulw will ignore UPPER/lower case when searching for a match.")]
-        [DefaultValue(false)]
         public bool IgnoreCase { get; set; }
         #endregion
 
@@ -39,6 +37,9 @@ namespace WebTestRules
         {
             type = typeof(ValidateResponseText);
             Name = "Validate Response Text";
+            ValueToFind = "";
+            PassIfTextIsFound = true;
+            IgnoreCase = false;
         }
 
         public ValidateResponseText(string textToFind)
@@ -46,6 +47,8 @@ namespace WebTestRules
             type = typeof(ValidateResponseText);
             Name = "Validate Response Text";
             ValueToFind = textToFind;
+            PassIfTextIsFound = true;
+            IgnoreCase = false;
         }
 
         public ValidateResponseText(string textToFind, bool ignoreCase)
@@ -53,6 +56,7 @@ namespace WebTestRules
             type = typeof(ValidateResponseText);
             Name = "Validate Response Text";
             ValueToFind = textToFind;
+            PassIfTextIsFound = true;
             IgnoreCase = ignoreCase;
         }
 

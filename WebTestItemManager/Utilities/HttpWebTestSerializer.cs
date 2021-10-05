@@ -1,4 +1,5 @@
 ﻿using HttpWebTesting;
+using HttpWebTestingResults;
 using Newtonsoft.Json;
 using System.IO;
 using WebTestItemManager.Utilities;
@@ -52,6 +53,21 @@ namespace WebTestItemManager
                 webTest = JsonConvert.DeserializeObject<HttpWebTest>(serializedTest, settings);
                 webTest.WorkingDirectoryLocation = serializedTest.Substring(0, serializedTest.LastIndexOf("\\"));
                 return webTest;
+        }
+
+        public static HttpWebTestResults DeserializeTestResults(string webTestFileName)
+        {
+            using (StreamReader sr = new StreamReader(webTestFileName))
+            {
+                HttpWebTestResults webTestResults;
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Objects;
+                settings.Converters.Add(new StringContentConverter());
+                settings.Converters.Add(new HttpContentConverter());
+                settings.Converters.Add(new HttpWebTestConverter());
+                webTestResults = JsonConvert.DeserializeObject<HttpWebTestResults>(sr.ReadToEnd(), settings);
+                return webTestResults;
+            }
         }
     }
 }

@@ -35,6 +35,11 @@ namespace HttpWebTesting.WebTestItems
         public Dictionary<string, IEnumerable<string>> Headers { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public QueryCollection QueryCollection { get; set; }
+
+        /// <summary>
         /// <see cref="HttpRequestMessage.Method"/>
         /// </summary>
         public HttpMethod Method { get; set; }
@@ -47,7 +52,7 @@ namespace HttpWebTesting.WebTestItems
         /// <summary>
         /// <see cref="HttpRequestMessage.RequestUri"/>
         /// </summary>
-        public Uri RequestUri { get; set; }
+        public string RequestUri { get; set; }
 
         /// <summary>
         /// <see cref="HttpRequestMessage.Version"/>
@@ -126,18 +131,18 @@ namespace HttpWebTesting.WebTestItems
         /// <item>FollowRedirects = true</item>
         /// </list>
         /// </remarks>
+        [JsonConstructor]
         public WTI_Request(string url, HttpMethod method) 
         {
             Method = method;
-            RequestUri = new Uri(url);
+            RequestUri = url;
             InitializeObject();
         }
 
-        [JsonConstructor]
         public WTI_Request(Uri uri, HttpMethod method)
         {
             Method = method;
-            RequestUri = uri;
+            RequestUri = uri.AbsoluteUri.ToString();
             InitializeObject();
         }
 
@@ -157,6 +162,7 @@ namespace HttpWebTesting.WebTestItems
             guid = Guid.NewGuid();
             itemComment = string.Empty;
             Rules = new RuleCollection();
+            QueryCollection = new QueryCollection();
         }
         #endregion
 

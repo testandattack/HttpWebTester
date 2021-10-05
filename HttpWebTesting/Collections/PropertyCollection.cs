@@ -16,31 +16,9 @@ namespace HttpWebTesting.Collections
             base.Add(new Property(propertyName, propertyValue, type));
         }
 
-        public string this[string propertyName]
+        public void Add(string propertyName, object propertyValue, Type type)
         {
-            get
-            {
-                foreach(Property property in this)
-                {
-                    if(property.Name == propertyName)
-                    {
-                        return property.Value;
-                    }
-                }
-                return null;
-            }
-            set
-            {
-                foreach (Property property in this)
-                {
-                    if (property.Name == propertyName)
-                    {
-                        property.Value = value;
-                        return;
-                    }
-                }
-                base.Add(new Property(propertyName, value));
-            }
+            base.Add(new Property(propertyName, propertyValue));
         }
 
         public object Clone()
@@ -51,6 +29,14 @@ namespace HttpWebTesting.Collections
         public void AddKeyValuePairs(Dictionary<string, string> dictionary)
         {
             foreach(var pair in dictionary)
+            {
+                base.Add(new Property(pair.Key, pair.Value));
+            }
+        }
+
+        public void AddKeyValuePairs(Dictionary<string, object> dictionary)
+        {
+            foreach (var pair in dictionary)
             {
                 base.Add(new Property(pair.Key, pair.Value));
             }

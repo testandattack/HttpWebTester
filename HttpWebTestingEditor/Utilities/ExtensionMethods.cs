@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using GTC.Extensions;
 
 namespace HttpWebTestingEditor
 {
@@ -50,5 +52,68 @@ namespace HttpWebTestingEditor
         //    //Example of using the delegate:
         //    tsslMessage.Content = sUpdated;
         //    tsslMessage.Refresh();
+    }
+
+    public static class DictionaryExtensionMethods
+    {
+        public static string GetKey(this Dictionary<string, IEnumerable<string>> source, int iIndex)
+        {
+            int x = 0;
+            if (source.Count <= iIndex)
+                return string.Empty;
+
+            foreach(var item in source)
+            {
+                if (iIndex == x)
+                    return item.Key;
+                x++;
+            }
+            return string.Empty;
+        }
+
+        public static string GetValue(this Dictionary<string, IEnumerable<string>> source, int iIndex)
+        {
+            int x = 0;
+            if (source.Count <= iIndex)
+                return string.Empty;
+
+            foreach (var item in source)
+            {
+                if (iIndex == x)
+                    return item.Value.ToString(";");
+                x++;
+            }
+            return string.Empty;
+        }
+
+        public static string GetKey(this Dictionary<string, string> source, int iIndex)
+        {
+            int x = 0;
+            if (source.Count <= iIndex)
+                return string.Empty;
+
+            foreach (var item in source)
+            {
+                if (iIndex == x)
+                    return item.Key;
+                x++;
+            }
+            return string.Empty;
+        }
+
+        public static string GetValue(this Dictionary<string, string> source, int iIndex)
+        {
+            int x = 0;
+            if (source.Count <= iIndex)
+                return string.Empty;
+
+            foreach (var item in source)
+            {
+                if (iIndex == x)
+                    return item.Value;
+                x++;
+            }
+            return string.Empty;
+        }
     }
 }

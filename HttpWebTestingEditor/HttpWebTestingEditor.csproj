@@ -19,9 +19,11 @@
     <None Remove="Resources\Folder_24.png" />
     <None Remove="Resources\FormPostParam_24.png" />
     <None Remove="Resources\Header_24.png" />
+    <None Remove="Resources\NotExecuted_16.png" />
     <None Remove="Resources\Passed_16.png" />
     <None Remove="Resources\QueryStringParam_24.png" />
     <None Remove="Resources\RequestPlugin_24.png" />
+    <None Remove="Resources\Skipped_16.png" />
     <None Remove="Resources\TransactionTimer_24.png" />
     <None Remove="Resources\ValidationRule_24.png" />
     <None Remove="Resources\WebRequest_24.png" />
@@ -48,6 +50,8 @@
     <Resource Include="Resources\Folder_24.png" />
     <Resource Include="Resources\FormPostParam_24.png" />
     <Resource Include="Resources\Header_24.png" />
+    <Resource Include="Resources\NotExecuted_16.png" />
+    <Resource Include="Resources\Skipped_16.png" />
     <Resource Include="Resources\Passed_16.png" />
     <Resource Include="Resources\QueryStringParam_24.png" />
     <Resource Include="Resources\RequestPlugin_24.png" />
