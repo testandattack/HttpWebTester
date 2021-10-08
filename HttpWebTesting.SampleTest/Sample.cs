@@ -35,15 +35,6 @@ namespace HttpWebTesting.SampleTest
             CreateAndSavePopulatedDataSource(csvFileName);
         }
 
-        public Dictionary<string, IEnumerable<string>> CreateAwinHeaders()
-        {
-            Dictionary<string, IEnumerable<string>> headers = new Dictionary<string, IEnumerable<string>>();
-            headers.Add("X-api-key", new string[] { "dp-awin-api-gateway-api-key" });
-            headers.Add("Accept", new string[] { "application/json" });
-            headers.Add("Authorization", new string[] { "Bearer {{token}}" });
-            return headers;
-        }
-
         private void BuildSampleWebtest(string CsvFile = "ExampleCsvDataSource.csv")
         {
             // set test level properties
@@ -62,7 +53,7 @@ namespace HttpWebTesting.SampleTest
             Property property = new Property("WebServer1", "localhost:5000");
             httpWebTest.ContextProperties.Add(property);
             httpWebTest.ContextProperties.Add(new Property("MaxCreatedId", 25));
-            //httpWebTest.ContextProperties.Add(new Property("Password", "P@ssw0rd", true));
+            httpWebTest.ContextProperties.Add(new Property("Password", "P@ssw0rd", true));
             httpWebTest.Rules.Add(new ValidateSuccessStatusCode());
 
             // Add a comment

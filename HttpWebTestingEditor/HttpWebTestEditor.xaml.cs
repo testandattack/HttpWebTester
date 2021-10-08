@@ -52,17 +52,17 @@ namespace HttpWebTestingEditor
             _fileWasModified = false;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            
-        }
-        #endregion
-
         #region -- Control Event Handlers -------------------------------------
         private void tvWebTest_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
+        #endregion
 
         private void tvWebTest_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {

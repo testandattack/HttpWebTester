@@ -14,6 +14,7 @@ using HttpWebTesting.Rules;
 using System.Collections;
 using System.Net.Http;
 using HttpWebTestingResults;
+using System.Net;
 
 namespace HttpWebTestingEditor
 {
@@ -22,7 +23,8 @@ namespace HttpWebTestingEditor
         private double _resultsTreeViewWidth;
         private double _rtvWidth_Url_Max;
         private double _rtvWidth_ResponseTime;
-        private double _rtvWidth_StatusCode;
+        private double _rtvWidth_Status;
+        private double _rtvWidth_Code;
         private double _rtvWidth_Payload;
         private int _treeCurrentDepth;
         
@@ -50,19 +52,21 @@ namespace HttpWebTestingEditor
 
         private void SetTreeViewWidths()
         {
+
             if(System.Double.IsNaN(tvWebTestResults.ActualWidth) || tvWebTestResults.ActualWidth == 0)
-                _resultsTreeViewWidth = 800;
+                _resultsTreeViewWidth = 840;
             else
                 _resultsTreeViewWidth = tvWebTestResults.ActualWidth;
 
-            _rtvWidth_ResponseTime = 100;
-            _rtvWidth_StatusCode = 100;
-            _rtvWidth_Payload = 100;
-            _rtvWidth_Url_Max = _resultsTreeViewWidth - 300;
+            _rtvWidth_Code = 50;
+            _rtvWidth_Status = 80;
+            _rtvWidth_ResponseTime = 80;
+            _rtvWidth_Payload = 80;
+            _rtvWidth_Url_Max = _resultsTreeViewWidth - (_rtvWidth_Code + _rtvWidth_Status + _rtvWidth_ResponseTime + _rtvWidth_Payload);
             
             // Also set the "header column width"
-            tbResultsTreeViewHeader_Name.Width = _resultsTreeViewWidth - 300;
-            _treeCurrentDepth = 0;
+            tbResultsTreeViewHeader_Name.Width = _rtvWidth_Url_Max;
+            _treeCurrentDepth = 2;
         }
 
         private StackPanel CustomizeResultsTreeViewItem(WebTestResultsItem itemObj, BitmapImage bmi, int tvItemId = 0)
@@ -99,10 +103,20 @@ namespace HttpWebTestingEditor
                 lbl.Background = new SolidColorBrush(color);
             }
 
+            // Create Code Entry
+            TextBlock code = new TextBlock();
+            code.Width = _rtvWidth_Code;
+            code.Text = values[1];
+            code.VerticalAlignment = VerticalAlignment.Center;
+            if (color != Colors.White)
+            {
+                code.Background = new SolidColorBrush(color);
+            }
+
             // Create Status Entry
             TextBlock status = new TextBlock();
-            status.Width = _rtvWidth_StatusCode;
-            status.Text = values[1];
+            status.Width = _rtvWidth_Status;
+            status.Text = values[2];
             status.VerticalAlignment = VerticalAlignment.Center;
             if (color != Colors.White)
             {
@@ -112,7 +126,7 @@ namespace HttpWebTestingEditor
             // Create Time Entry
             TextBlock time = new TextBlock();
             time.Width = _rtvWidth_ResponseTime;
-            time.Text = values[2];
+            time.Text = values[3];
             time.VerticalAlignment = VerticalAlignment.Center;
             if (color != Colors.White)
             {
@@ -121,8 +135,8 @@ namespace HttpWebTestingEditor
 
             // Create Size Entry
             TextBlock payload = new TextBlock();
-            payload.Width = _rtvWidth_ResponseTime;
-            payload.Text = values[3];
+            payload.Width = _rtvWidth_Payload;
+            payload.Text = values[4];
             payload.VerticalAlignment = VerticalAlignment.Center;
             if (color != Colors.White)
             {
@@ -132,6 +146,7 @@ namespace HttpWebTestingEditor
             // Add to stack
             stkPanel.Children.Add(img);
             stkPanel.Children.Add(lbl);
+            stkPanel.Children.Add(code);
             stkPanel.Children.Add(status);
             stkPanel.Children.Add(time);
             stkPanel.Children.Add(payload);
@@ -145,7 +160,8 @@ namespace HttpWebTestingEditor
             if(item.objectItemType == WebTestResultItemType.Wtri_RequestObject)
             {
                 var request = item as WTRI_Request;
-                itemValues.Add($"{request.RequestAsSent.Method.Method} - {request.RequestAsSent.RequestUri.AbsoluteUri}");
+                itemValues.Add($"{request.RequestAsSent.Method.Method} - {request.RequestAsSent.RequestUri.AbsolutePath}");
+                itemValues.Add(((int)request.response.StatusCode).ToString());
                 itemValues.Add(request.response.StatusCode.ToString());
                 itemValues.Add(request.ResponseTime.TotalSeconds.ToString("N2"));
                 itemValues.Add(request.responseBody.Length.ToString("D"));
@@ -157,10 +173,12 @@ namespace HttpWebTestingEditor
                 itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
+                itemValues.Add("");
             }
             else if (item.objectItemType == WebTestResultItemType.Wtri_IncludedWebTestItem)
             {
                 itemValues.Add("Included Webtest Not yet implemented");
+                itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
@@ -173,11 +191,13 @@ namespace HttpWebTestingEditor
                 //itemValues.Add(loop.totalElapsedTime.TotalSeconds.ToString("N2"));
                 itemValues.Add("");
                 itemValues.Add("");
+                itemValues.Add("");
             }
             else if (item.objectItemType == WebTestResultItemType.Wtri_SkippedItem)
             {
                 var skipped = item as WTRI_SkippedItem;
                 itemValues.Add($"SKIPPED {skipped.webTestItemId}");
+                itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
@@ -190,6 +210,7 @@ namespace HttpWebTestingEditor
                 //itemValues.Add(loop.totalElapsedTime.TotalSeconds.ToString("N2"));
                 itemValues.Add("");
                 itemValues.Add("");
+                itemValues.Add("");
             }
             else if (item.objectItemType == WebTestResultItemType.Wtri_LoopControlIteration)
             {
@@ -197,6 +218,7 @@ namespace HttpWebTestingEditor
                 itemValues.Add(loop.LoopIterationName);
                 itemValues.Add(loop.ItemResult);
                 //itemValues.Add(loop.totalElapsedTime.TotalSeconds.ToString("N2"));
+                itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
             }
@@ -292,8 +314,36 @@ namespace HttpWebTestingEditor
 
             WTRI_Request wtr = (WTRI_Request)item;
             treeItem.Header = CustomizeResultsTreeViewItem(item, (BitmapImage)Properties.Resources.WebRequest_24.ToWpfBitmap());
+            AddRequestQueryParams(treeItem, wtr);
             treeItem.Tag = wtr;
             return treeItem;
+        }
+
+        private void AddRequestQueryParams(TreeViewItem parentItem, WTRI_Request wtr)
+        {
+            if (wtr.RequestAsSent.RequestUri.Query.Length == 0)
+                return;
+
+            TreeViewItem treeItem = new TreeViewItem();
+            treeItem.Header = CustomizeTreeViewItem("Query Parameters", (BitmapImage)Properties.Resources.Folder_24.ToWpfBitmap());
+            treeItem.Name = "QueryParameters";
+            parentItem.Items.Add(treeItem);
+
+            string[] parms = wtr.RequestAsSent.RequestUri.Query.UrlDecode().Split("&", StringSplitOptions.RemoveEmptyEntries);
+
+            int x = 0;
+            foreach (var parm in parms)
+            {
+                TreeViewItem subItem = new TreeViewItem();
+                string str = String.Format("{0} = {1}", parm.GetLeftPart("="), parm.GetRightPart("="));
+                subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.Resources.QueryStringParam_24.ToWpfBitmap());
+                subItem.Name = String.Format("{0}{1}", TVI_Name_QueryParam, x++);
+
+                // This line adds the main request's tre view name here so we can get the actual collection item if we make changes to the
+                // item's properties
+                subItem.Tag = parentItem.Name;
+                treeItem.Items.Add(subItem);
+            }
         }
 
         private void AddRequestLevelRules(TreeViewItem parentItem, WTRI_Request request)
@@ -347,7 +397,7 @@ namespace HttpWebTestingEditor
 
                 stack.Children.Add(block);
                 bool IsTypeDescriptor = (item.Key == "Type") ? true : false;
-                stack.Children.Add(GetPropertyValueDisplayElement(item.Value, width - 120, IsTypeDescriptor));
+                stack.Children.Add(GetPropertyValueDisplayElement(item, width - 120, IsTypeDescriptor));
                 stackProperties.Children.Add(stack);
             }
             stackProperties.Tag = webTestItem;
@@ -387,9 +437,22 @@ namespace HttpWebTestingEditor
             
             else if(propertyItem.GetType() == typeof(HttpContent))
                 return GetTextBox(((HttpContent)propertyItem).ReadAsStringAsync().GetAwaiter().GetResult(), width);
+            
+            else if (propertyItem.GetType() == typeof(BaseRuleType) ||
+                propertyItem.GetType() == typeof(ControlComparisonScope) ||
+                propertyItem.GetType() == typeof(DataSourceCursorType) ||
+                propertyItem.GetType() == typeof(DataSourceType) ||
+                propertyItem.GetType() == typeof(RuleResult) ||
+                propertyItem.GetType() == typeof(ComparisonType) ||
+                propertyItem.GetType() == typeof(RuleType))
+            {
+                var uiElement = GetEnumView(propertyItem, width);
+                uiElement.Tag = propertyItem;
+                return uiElement;
+            }
+            else return GetGuidText("Undetermined Item Type", width);
 
-            else return CheckForEnum(propertyItem, width);
         }
         #endregion
     }
- }
+}

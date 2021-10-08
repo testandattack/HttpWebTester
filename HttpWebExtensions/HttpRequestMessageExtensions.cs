@@ -48,5 +48,19 @@ namespace HttpWebExtensions
             headers.Add(source.Headers.ContentType.MediaType);
             return headers;
         }
+
+        private static string ResponseStringDivider = "--------------------------------------------------------\r\n";
+        //public static string GetResponseAsString(this HttpResponseMessage source)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.AppendLine($"{ResponseStringDivider}REQUEST: {source.RequestMessage.Method.Method} - {source.RequestMessage.RequestUri.AbsolutePath}");
+        //    sb.AppendLine("Request Headers:");
+        //    foreach (var header in source.RequestMessage.Headers)
+        //    {
+        //        sb.
+        //    }
+
+        //    return "";
+        //}
     }
 }

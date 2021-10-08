@@ -38,39 +38,52 @@ namespace HttpWebTesting.Collections
             base.Add(new Property(propertyName, propertyValue));
         }
 
-        //public string this[string propertyName]
-        //{
-        //    get
-        //    {
-        //        foreach (Property contextProperty in this)
-        //        {
-        //            if (contextProperty.Name == propertyName)
-        //            {
-        //                return contextProperty.Value;
-        //            }
-        //        }
-        //        return null;
-        //    }
-        //    set
-        //    {
-        //        foreach (Property contextProperty in this)
-        //        {
-        //            if (contextProperty.Name == propertyName)
-        //            {
-        //                contextProperty.Value = value;
-        //                return;
-        //            }
-        //        }
-        //        base.Add(new Property(propertyName, value));
-        //    }
-        //}
 
-        /// <summary>
-        /// This method is used to add or update context values that
-        /// are derived from data sources.
-        /// </summary>
-        /// <param name="values"></param>
-        /// <param name="DataSourceName"></param>
+        public void Add(string propertyName, string propertyValue, bool isPassword)
+        {
+            foreach (Property contextProperty in this)
+            {
+                if (contextProperty.Name == propertyName)
+                {
+                    contextProperty.Value = propertyValue;
+                    return;
+                }
+            }
+            base.Add(new Property(propertyName, propertyValue, isPassword));
+        }
+            //public string this[string propertyName]
+            //{
+            //    get
+            //    {
+            //        foreach (Property contextProperty in this)
+            //        {
+            //            if (contextProperty.Name == propertyName)
+            //            {
+            //                return contextProperty.Value;
+            //            }
+            //        }
+            //        return null;
+            //    }
+            //    set
+            //    {
+            //        foreach (Property contextProperty in this)
+            //        {
+            //            if (contextProperty.Name == propertyName)
+            //            {
+            //                contextProperty.Value = value;
+            //                return;
+            //            }
+            //        }
+            //        base.Add(new Property(propertyName, value));
+            //    }
+            //}
+
+            /// <summary>
+            /// This method is used to add or update context values that
+            /// are derived from data sources.
+            /// </summary>
+            /// <param name="values"></param>
+            /// <param name="DataSourceName"></param>
         public void AddDataSourceRow(Dictionary<string, string> values, string DataSourceName)
         {
             foreach(var kvp in values)
@@ -84,13 +97,18 @@ namespace HttpWebTesting.Collections
             }
         }
 
-        public string GetValueAsString(string contextName)
+        private string GetValueAsString(string contextName)
         {
             foreach(Property property in base.Items)
             {
                 if (property.Name == contextName)
-                    // NOTE: Must refactor this to do more validation
-                    return property.Value.ToString();
+                // NOTE: Must refactor this to do more validation
+                {
+                    if(property.IsPassword)
+                        return property.GetPwdValue();
+                    else
+                        return property.Value.ToString();
+                }
             }
             return string.Empty;
         }
