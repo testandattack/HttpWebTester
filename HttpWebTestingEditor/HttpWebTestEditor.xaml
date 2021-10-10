@@ -51,16 +51,14 @@
                     </TreeView.ItemContainerStyle>
                 </TreeView>
             </TabItem>
-            <TabItem x:Name="tabResultsGridView" Header="WebTest Results" Visibility="Collapsed">
-                <DataGrid x:Name="dgTestResults" AutoGenerateColumns="True" IsReadOnly="True" SelectionChanged="dgTestResults_SelectionChanged"/>
-            </TabItem>
             <TabItem x:Name="tabResultsTreeView" Header="WebTest Results">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Width="844">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="tbResultsTreeViewHeader_Name" Text="Item" Width="500" Margin="3" Padding="1,0,0,0" Background="White" />
-                        <TextBlock x:Name="tbResultsTreeViewHeader_Status" Text="Status" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
-                        <TextBlock x:Name="tbResultsTreeViewHeader_Time" Text="Time (in seconds)" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
-                        <TextBlock x:Name="tbResultsTreeViewHeader_Size" Text="Response Size" Width="99" Margin="3" Padding="1,0,0,0" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Name" Text=" Item" Width="554" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Code" Text="| Code" Width="50" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Status" Text="| Status" Width="80" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Time" Text="| Time (secs)" Width="80" Background="White" />
+                        <TextBlock x:Name="tbResultsTreeViewHeader_Size" Text="| Payload" Width="80" Background="White" />
                     </StackPanel>
                     <TreeView x:Name="tvWebTestResults" SelectedItemChanged="tvWebTestResults_SelectedItemChanged">
                     <TreeView.ItemContainerStyle>
@@ -69,15 +67,6 @@
                         </Style>
                     </TreeView.ItemContainerStyle>
                 </TreeView>
-                </StackPanel>
-            </TabItem>
-            <TabItem x:Name="tabWebBrowserForToken" Header="Get Token" Visibility="Collapsed">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="tbUrlForToken" Text="https://ui.caerodp-qa.com/home" Margin="3" Width="300"/>
-                        <Button x:Name="btnGetToken" Content="Get" Margin="3" Width="50" Click="btnGetToken_Click" />
-                    </StackPanel>
-                    <WebBrowser x:Name="webGetToken" Navigating="webGetToken_Navigating" Navigated="webGetToken_Navigated" />
                 </StackPanel>
             </TabItem>
         </TabControl>
@@ -92,7 +81,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem x:Name="tabResponseBody" Header="Response Body">
-                <TextBox x:Name="tbResponseBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
+                <TextBox x:Name="tbResponseBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="12" IsUndoEnabled="False" >
                     <TextBox.ContextMenu>
                         <ContextMenu x:Name="cmResponseBody">
                             <MenuItem Name="cmiExpandJson" Header="Expand Json" Click="cmiExpandJson_Click" />
@@ -101,11 +90,10 @@
                     </TextBox.ContextMenu>
                 </TextBox>
             </TabItem>
-            <TabItem x:Name="tabRequestBody" Header="Request Body" Visibility="Hidden">
+            <TabItem x:Name="tabRequestBody" Header="Request Body" Visibility="Visible">
                 <TextBox x:Name="tbRequestBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
                 </TextBox>
             </TabItem>
-
             <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
             </TabItem>

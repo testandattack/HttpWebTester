@@ -31,6 +31,7 @@ namespace HttpWebTestingResults
             RequestAsSent = new HttpRequestMessage();
         }
 
+
         //public override string ToString()
         //{
         //    StringBuilder sb = new StringBuilder();

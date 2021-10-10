@@ -23,6 +23,7 @@ using HttpWebTesting.SampleTest;
 using System.IO;
 using Serilog;
 using Newtonsoft.Json;
+using HttpWebExtensions;
 
 namespace HttpWebTestingEditor
 {
@@ -38,8 +39,6 @@ namespace HttpWebTestingEditor
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
         private bool _wordWrap = true;
-        private bool _updatingDataGrid;
-        private DataTable _propertiesDataTable;
 
         public HttpWebTestEditor()
         {
@@ -53,17 +52,17 @@ namespace HttpWebTestingEditor
             _fileWasModified = false;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            
-        }
-        #endregion
-
         #region -- Control Event Handlers -------------------------------------
         private void tvWebTest_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+        }
+        #endregion
 
         private void tvWebTest_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -145,18 +144,6 @@ namespace HttpWebTestingEditor
             }
         }
 
-        private void dgTestResults_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(!_updatingDataGrid)
-            {
-                if(dgTestResults.SelectedItems.Count == 1)
-                {
-                    DataRowView row = (DataRowView)dgTestResults.SelectedItems[0];
-
-                }
-            }
-        }
-
         private void tvWebTestResults_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeViewItem tvi = ((TreeViewItem)e.NewValue);
@@ -165,28 +152,11 @@ namespace HttpWebTestingEditor
                 tabResponseBody.IsSelected = true;
                 if (tvi.Tag != null)
                 {
-                    tbResponseBody.Text = tvi.Tag.ToString();
+                    tbResponseBody.Text = (tvi.Tag as WTRI_Request).responseBody;
+                    tbRequestBody.Text = (tvi.Tag as WTRI_Request).RequestAsSent.GetRequestBody();
                 }
 
             }
-        }
-
-        private void btnGetToken_Click(object sender, RoutedEventArgs e)
-        {
-            webGetToken.Navigate(tbUrlForToken.Text);
-
-        }
-
-        private void webGetToken_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            tsslMessage.Content = "Navigating to URL.";
-            tsslMessage.Refresh();
-        }
-
-        private void webGetToken_Navigated(object sender, NavigationEventArgs e)
-        {
-            tsslMessage.Content = "Finished navigating to URL.";
-            tsslMessage.Refresh();
         }
 
         #region -- Response Text Box Menu Event Handlers -----

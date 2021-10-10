@@ -1,18 +1,14 @@
-﻿using HttpWebTesting.Collections;
+﻿using GTC.Extensions;
+using HttpWebTesting.Collections;
 using HttpWebTesting.CoreObjects;
 using HttpWebTesting.Enums;
+using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using GTC.Extensions;
-using HttpWebTesting.Rules;
-using System.Collections;
-using System.Net.Http;
 
 namespace HttpWebTestingEditor
 {
@@ -156,6 +152,7 @@ namespace HttpWebTestingEditor
             AddRequestHeaders(treeItem, wtr);
             AddRequestQueryParams(treeItem, wtr);
             AddRequestLevelRules(treeItem, wtr);
+            treeItem.Tag = wtr;
             return treeItem;
         }
 
@@ -308,165 +305,6 @@ namespace HttpWebTestingEditor
             }
         }
         #endregion
-
-        #region -- Property Display Methods -----
-        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object webTestItem)
-        {
-            foreach (var item in props)
-            {
-                TextBlock block = new TextBlock();
-                block.Text = item.Key;
-                block.Width = 100;
-
-                StackPanel stack = new StackPanel();
-                stack.Orientation = Orientation.Horizontal;
-                stack.Margin = new Thickness(3);
-
-                stack.Children.Add(block);
-                bool IsTypeDescriptor = (item.Key == "Type") ? true : false;
-                stack.Children.Add(GetPropertyValueDisplayElement(item.Value, width - 120, IsTypeDescriptor));
-                stackProperties.Children.Add(stack);
-            }
-            stackProperties.Tag = webTestItem;
-        }
-
-        private UIElement GetPropertyValueDisplayElement(object propertyItem, double width, bool IsTypeDescriptor = false)
-        {
-            if(IsTypeDescriptor == true)
-                return GetGuidText(propertyItem.ToString(), width);
-
-            else if (propertyItem.GetType() == typeof(System.String))
-                return GetTextBox(propertyItem, width);
-
-            else if (propertyItem.GetType() == typeof(System.Net.Http.HttpMethod))
-                return GetTextBox(((HttpMethod)propertyItem).Method, width);
-
-            else if (propertyItem.GetType() == typeof(System.Uri))
-                return GetTextBox(((Uri)propertyItem).AbsoluteUri.UrlDecode(), width);
-
-            else if (propertyItem.GetType() == typeof(System.Guid))
-                return GetGuidText(propertyItem.ToString(), width);
-
-            else if (propertyItem.GetType() == typeof(System.Boolean))
-                return GetCheckBox(propertyItem, width);
-
-            else if (propertyItem.GetType() == typeof(System.Int32) ||
-                propertyItem.GetType() == typeof(System.Double) ||
-                propertyItem.GetType() == typeof(System.Decimal) ||
-                propertyItem.GetType() == typeof(System.Single))
-                return GetNumberTextBox(propertyItem, width);
-
-            else if (propertyItem.GetType().GetInterface(nameof(ICollection)) != null)
-                return GetCollectionView(propertyItem, width);
-
-            else if (propertyItem.GetType() == typeof(RuleProperty))
-                return GetTextBox(((RuleProperty)propertyItem).Value, width);
-            
-            else if(propertyItem.GetType() == typeof(HttpContent))
-                return GetTextBox(((HttpContent)propertyItem).ReadAsStringAsync().GetAwaiter().GetResult(), width);
-
-            else return CheckForEnum(propertyItem, width);
-        }
-
-        private UIElement GetTextBox(object propertyItem, double width)
-        {
-            TextBox box = new TextBox();
-            box.Text = (string)propertyItem;
-            box.Width = width;
-            return box;
-        }
-
-        private UIElement GetCheckBox(object propertyItem, double width)
-        {
-            CheckBox checkBox = new CheckBox();
-            checkBox.IsChecked = (bool)propertyItem;
-            return checkBox;
-        }
-
-        private UIElement GetNumberTextBox(object propertyItem, double width)
-        {
-            TextBox box = new TextBox();
-            box.Text = propertyItem.ToString();
-            box.MinWidth = 50;
-            return box;
-        }
-
-        private UIElement GetGuidText(object propertyItem, double width)
-        {
-            TextBlock box = new TextBlock();
-            box.Text = propertyItem.ToString();
-            return box;
-        }
-
-        private UIElement GetCollectionView(object propertyItem, double width)
-        {
-            ListBox listBox = new ListBox();
-            foreach (var item in (ICollection)propertyItem)
-            {
-                ListBoxItem newItem = new ListBoxItem();
-                newItem.Content = item;
-                listBox.Items.Add(newItem);
-            }
-            listBox.Width = width;
-            //comboBox.Text = "<Collection>";
-            return listBox;
-
-
-            //ComboBox comboBox = new ComboBox();
-            //comboBox.IsEditable = true;
-            //foreach (var item in (ICollection)propertyItem)
-            //{
-            //    ComboBoxItem newItem = new ComboBoxItem();
-            //    newItem.Content = item;
-            //    comboBox.Items.Add(newItem);
-            //}
-            //comboBox.Width = width;
-            //comboBox.Text = "<Collection>";
-            //return comboBox;
-        }
-
-        private UIElement GetEnumView(object propertyItem, double width)
-        {
-            ComboBox comboBox = new ComboBox();
-            comboBox.IsEditable = false;
-            var enumNames = Enum.GetNames((propertyItem.GetType()));
-            foreach (string item in enumNames)
-            {
-                ComboBoxItem newItem = new ComboBoxItem();
-                newItem.Content = item;
-                if (item == propertyItem.ToString())
-                    newItem.IsSelected = true;
-                comboBox.Items.Add(newItem);
-            }
-            comboBox.Width = width;
-
-            comboBox.SelectedItem = propertyItem.ToString();
-            return comboBox;
-        }
-
-        private UIElement CheckForEnum(object propertyItem, double width)
-        {
-            if (propertyItem.GetType() == typeof(BaseRuleType) ||
-                propertyItem.GetType() == typeof(ControlComparisonScope) ||
-                propertyItem.GetType() == typeof(DataSourceCursorType) ||
-                propertyItem.GetType() == typeof(DataSourceType) ||
-                propertyItem.GetType() == typeof(RuleResult) ||
-                propertyItem.GetType() == typeof(RuleType))
-            {
-                return GetEnumView(propertyItem, width);
-            }
-            else if(propertyItem.GetType() == typeof(ComparisonType))
-            {
-                // Eventually this one needs to incorporate the AsString() extension
-                return GetEnumView(propertyItem, width);
-            }
-            else if(propertyItem.GetType() == typeof(WebTestItemType))
-            {
-                return GetGuidText(propertyItem.ToString(), width);
-            }
-            else return GetGuidText("Undetermined Item Type", width);
-        }
-        #endregion
     }
 
     public class tvStackPanel : StackPanel
@@ -474,4 +312,4 @@ namespace HttpWebTestingEditor
         public int TreeViewItemId { get; set; }
 
     }
- }
+}

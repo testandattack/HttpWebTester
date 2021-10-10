@@ -1,18 +1,14 @@
-﻿using HttpWebTesting.Collections;
+﻿using GTC.Extensions;
 using HttpWebTesting.CoreObjects;
 using HttpWebTesting.Enums;
+using HttpWebTesting.Rules;
 using HttpWebTesting.WebTestItems;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Reflection;
-using System.Text;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace HttpWebTestingEditor
 {
@@ -73,6 +69,198 @@ namespace HttpWebTestingEditor
             return properties;
 
         }
+
+        #region -- Property Display Methods -----
+        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object webTestItem)
+        {
+            foreach (var item in props)
+            {
+                TextBlock block = new TextBlock();
+                block.Text = item.Key;
+                block.Width = 100;
+
+                StackPanel stack = new StackPanel();
+                stack.Orientation = Orientation.Horizontal;
+                stack.Margin = new Thickness(3);
+
+                bool IsTypeDescriptor = (item.Key == "Type") ? true : false;
+                stack.Children.Add(block);
+                var uiElement = GetPropertyValueDisplayElement(item, width - 120, IsTypeDescriptor);
+                stack.Children.Add(uiElement);
+                stackProperties.Children.Add(stack);
+            }
+            stackProperties.Tag = webTestItem;
+        }
+
+        private UIElement GetPropertyValueDisplayElement(KeyValuePair<string, object> propertyItem, double width, bool IsTypeDescriptor = false)
+        {
+            if (IsTypeDescriptor == true)
+            {
+                TextBlock uiElement = GetGuidText(propertyItem.Value.ToString(), width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.String))
+            {
+                var uiElement = GetTextBox(propertyItem.Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.Net.Http.HttpMethod))
+            {
+                var uiElement = GetTextBox(((HttpMethod)propertyItem.Value).Method, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.Uri))
+            {
+                var uiElement = GetTextBox(((Uri)propertyItem.Value).AbsoluteUri.UrlDecode(), width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.Guid))
+            {
+                var uiElement = GetGuidText(propertyItem.Value.ToString(), width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.Boolean))
+            {
+                var uiElement = GetCheckBox(propertyItem.Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(System.Int32) ||
+                propertyItem.Value.GetType() == typeof(System.Double) ||
+                propertyItem.Value.GetType() == typeof(System.Decimal) ||
+                propertyItem.Value.GetType() == typeof(System.Single))
+            {
+                var uiElement = GetNumberTextBox(propertyItem, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType().GetInterface(nameof(ICollection)) != null)
+            {
+                var uiElement = GetCollectionView(propertyItem.Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(RuleProperty))
+            {
+                var uiElement = GetTextBox(((RuleProperty)propertyItem.Value).Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(Property))
+            {
+                var uiElement = GetTextBox(((Property)propertyItem.Value).Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(HttpContent))
+            {
+                var uiElement = GetTextBox(((HttpContent)propertyItem.Value).ReadAsStringAsync().GetAwaiter().GetResult(), width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.Value.GetType() == typeof(WebTestItemType))
+            {
+                var uiElement = GetGuidText(propertyItem.Value.ToString(), width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else if (propertyItem.GetType() == typeof(BaseRuleType) ||
+                propertyItem.GetType() == typeof(ControlComparisonScope) ||
+                propertyItem.GetType() == typeof(DataSourceCursorType) ||
+                propertyItem.GetType() == typeof(DataSourceType) ||
+                propertyItem.GetType() == typeof(RuleResult) ||
+                propertyItem.GetType() == typeof(ComparisonType) ||
+                propertyItem.GetType() == typeof(RuleType))
+            {
+                var uiElement = GetEnumView(propertyItem.Value, width);
+                uiElement.Tag = propertyItem.Value;
+                return uiElement;
+            }
+            else return GetGuidText("Undetermined Item Type", width);
+        }
+
+        private TextBox GetTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = propertyItem == null ? "" : (string)propertyItem;
+            box.Width = width;
+            return box;
+        }
+
+        private CheckBox GetCheckBox(object propertyItem, double width)
+        {
+            CheckBox checkBox = new CheckBox();
+            checkBox.IsChecked = (bool)propertyItem;
+            return checkBox;
+        }
+
+        private TextBox GetNumberTextBox(object propertyItem, double width)
+        {
+            TextBox box = new TextBox();
+            box.Text = propertyItem == null ? "" : propertyItem.ToString();
+            box.MinWidth = 50;
+            return box;
+        }
+
+        private TextBlock GetGuidText(object propertyItem, double width)
+        {
+            TextBlock box = new TextBlock();
+            box.Text = propertyItem == null ? "" : propertyItem.ToString();
+            return box;
+        }
+
+        private ListBox GetCollectionView(object propertyItem, double width)
+        {
+            ListBox listBox = new ListBox();
+            foreach (var item in (ICollection)propertyItem)
+            {
+                ListBoxItem newItem = new ListBoxItem();
+                newItem.Content = item == null ? "" : item;
+                listBox.Items.Add(newItem);
+            }
+            listBox.Width = width;
+            listBox.IsEnabled = false;
+            //comboBox.Text = "<Collection>";
+            return listBox;
+
+
+            //ComboBox comboBox = new ComboBox();
+            //comboBox.IsEditable = true;
+            //foreach (var item in (ICollection)propertyItem)
+            //{
+            //    ComboBoxItem newItem = new ComboBoxItem();
+            //    newItem.Content = item;
+            //    comboBox.Items.Add(newItem);
+            //}
+            //comboBox.Width = width;
+            //comboBox.Text = "<Collection>";
+            //return comboBox;
+        }
+
+        private ComboBox GetEnumView(object propertyItem, double width)
+        {
+            ComboBox comboBox = new ComboBox();
+            comboBox.IsEditable = false;
+            var enumNames = Enum.GetNames((propertyItem.GetType()));
+            foreach (string item in enumNames)
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = item == null ? "" : item;
+                if (item == propertyItem.ToString())
+                    newItem.IsSelected = true;
+                comboBox.Items.Add(newItem);
+            }
+            comboBox.Width = width;
+
+            comboBox.SelectedItem = propertyItem.ToString();
+            return comboBox;
+        }
+        #endregion
 
         // This code calls the below method and stores info in the data table below
         //var displayInfo = new PropertyDisplayInfoCollection();

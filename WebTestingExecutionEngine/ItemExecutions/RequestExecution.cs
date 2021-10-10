@@ -64,12 +64,8 @@ namespace WebTestExecutionEngine
 
             // Add the request's response time to the result.
             results.ResponseTime = _responseTime;
-
-            // Get the processing timer for the request
             results.TotalExecutionTime = DateTime.UtcNow - dt;
-
             results.ItemExecutionFailed = request.Rules.ContainsFailedRuleResult();
-
             results.RequestAsSent = request.requestItem;
 
             // return the results object to the test engine
