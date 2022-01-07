@@ -1,0 +1,25 @@
+{
+  "id": 9,
+  "project": {
+    "id": "fc21d8cf-d5b7-4711-97ab-c4cfad62abd8",
+    "name": "suppliers_portal",
+    "url": "https://dev.azure.com/utas-sp-net/_apis/projects/suppliers_portal",
+    "state": "unchanged",
+    "visibility": "unchanged",
+    "lastUpdateTime": "0001-01-01T00:00:00"
+  },
+  "name": "Windows 10 + Chrome",
+  "description": "Default operating system for testing",
+  "isDefault": true,
+  "values": [
+    {
+      "name": "Browser",
+      "value": "Chrome"
+    },
+    {
+      "name": "Operating System",
+      "value": "Windows 10"
+    }
+  ],
+  "state": "active"
+}

@@ -1,0 +1,42 @@
+{
+  {
+    "rss": 219348992,
+    "heapTotal": 63102976,
+    "heapUsed": 29893552,
+    "external": 2823585,
+    "arrayBuffers": 1309670
+  },
+  "resource usage": 
+  {
+    "userCPUTime": 2734670923,
+    "systemCPUTime": 240914089,
+    "maxRSS": 2374652,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 5032870,
+    "majorPageFault": 0,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 6755294,
+    "involuntaryContextSwitches": 133910
+  },
+  "heap statistics": 
+  {
+    "total_heap_size": 63102976,
+    "total_heap_size_executable": 2932736,
+    "total_physical_size": 62394688,
+    "total_available_size": 17199396504,
+    "used_heap_size": 29895416,
+    "heap_size_limit": 17230200832,
+    "malloced_memory": 65592,
+    "peak_malloced_memory": 3857496,
+    "does_zap_garbage": 0,
+    "number_of_native_contexts": 2,
+    "number_of_detached_contexts": 0
+  }
+}

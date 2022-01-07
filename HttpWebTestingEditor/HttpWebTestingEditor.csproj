@@ -23,6 +23,7 @@
     <None Remove="Resources\Passed_16.png" />
     <None Remove="Resources\QueryStringParam_24.png" />
     <None Remove="Resources\RequestPlugin_24.png" />
+    <None Remove="Resources\Response_24.png" />
     <None Remove="Resources\Skipped_16.png" />
     <None Remove="Resources\TransactionTimer_24.png" />
     <None Remove="Resources\ValidationRule_24.png" />
@@ -51,6 +52,7 @@
     <Resource Include="Resources\FormPostParam_24.png" />
     <Resource Include="Resources\Header_24.png" />
     <Resource Include="Resources\NotExecuted_16.png" />
+    <Resource Include="Resources\Response_24.png" />
     <Resource Include="Resources\Skipped_16.png" />
     <Resource Include="Resources\Passed_16.png" />
     <Resource Include="Resources\QueryStringParam_24.png" />
@@ -70,6 +72,8 @@
     <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
     <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
+    <ProjectReference Include="..\OpenApiSpec\Engines.ApiDocs\Engines.ApiDocs.csproj" />
+    <ProjectReference Include="..\OpenApiSpec\SwaggerParser\SwaggerParsing.csproj" />
     <ProjectReference Include="..\WebTestingExecutionEngine\WebTestExecutionEngine.csproj" />
     <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
     <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />

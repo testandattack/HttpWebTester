@@ -116,4 +116,19 @@ namespace HttpWebTestingEditor
             return string.Empty;
         }
     }
+
+    public static class StringExtensions
+    {
+        public static string ExcludePath(this string source)
+        {
+            int iStart = source.LastIndexOf("\\");
+
+            if (iStart == -1 || iStart + 1 >= source.Length)
+                return source;
+            else
+                return source.Substring(iStart + 1);
+        }
+    }
+
+
 }

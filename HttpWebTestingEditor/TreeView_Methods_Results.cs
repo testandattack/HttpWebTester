@@ -196,7 +196,7 @@ namespace HttpWebTestingEditor
             else if (item.objectItemType == WebTestResultItemType.Wtri_SkippedItem)
             {
                 var skipped = item as WTRI_SkippedItem;
-                itemValues.Add($"SKIPPED {skipped.webTestItemId}");
+                itemValues.Add($"SKIPPED {skipped.objectItemType}");
                 itemValues.Add("");
                 itemValues.Add("");
                 itemValues.Add("");
@@ -233,8 +233,17 @@ namespace HttpWebTestingEditor
                 TreeViewItem treeItem = new TreeViewItem();
                 treeItem.Name = parentTreeViewItem.Name + "_" + nIndex.ToString();
 
+                #region === Skipped =====================================
+                if (items[nIndex] is WTRI_SkippedItem)
+                {
+                    WTRI_SkippedItem skipped = items[nIndex] as WTRI_SkippedItem;
+                    treeItem.Header = CustomizeResultsTreeViewItem(skipped, (BitmapImage)Properties.Resources.Skipped_16.ToWpfBitmap());
+                    parentTreeViewItem.Items.Add(treeItem);
+                }
+                #endregion
+
                 #region === Request object ==============================
-                if (items[nIndex] is WTRI_Request)
+                else if(items[nIndex] is WTRI_Request)
                 {
                     parentTreeViewItem.Items.Add(ProcessRequestResultsItem(items[nIndex], parentTreeViewItem, nIndex));
                 }
@@ -244,7 +253,7 @@ namespace HttpWebTestingEditor
                 else if (items[nIndex] is WTRI_Comment)
                 {
                     WTRI_Comment cmt = items[nIndex] as WTRI_Comment;
-                    treeItem.Header = CustomizeResultsTreeViewItem(cmt, (BitmapImage)Properties.Resources.Comment_24.ToWpfBitmap());
+                    treeItem.Header = CustomizeResultsTreeViewItem(cmt, (BitmapImage)Properties.Resources.Skipped_16.ToWpfBitmap());
                     parentTreeViewItem.Items.Add(treeItem);
                 }
                 #endregion

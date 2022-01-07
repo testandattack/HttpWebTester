@@ -35,12 +35,16 @@ namespace HttpWebTestingResults
 
         public bool ItemExecutionFailed = false;
 
+        public bool ItemExecutionSkipped = false;
+
         public string ItemResult
         {
             get
             {
                 if (ItemExecutionFailed)
                     return "Failed";
+                else if (ItemExecutionSkipped)
+                    return "Skipped";
                 else
                     return "Passed";
             }

@@ -1,29 +1,19 @@
-﻿using HttpWebTesting;
-using HttpWebTesting.Enums;
+﻿using ApiTestGenerator.Models;
+using ApiTestGenerator.Models.ApiDocs;
+using HttpWebExtensions;
+using HttpWebTesting;
+using HttpWebTesting.SampleTest;
 using HttpWebTesting.WebTestItems;
+using HttpWebTestingResults;
+using Newtonsoft.Json;
+using SwaggerParsing;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebTestExecutionEngine;
 using WebTestItemManager;
-using HttpWebTestingResults;
-using HttpWebTesting.SampleTest;
-using System.IO;
-using Serilog;
-using Newtonsoft.Json;
-using HttpWebExtensions;
+using GTC.Extensions;
 
 namespace HttpWebTestingEditor
 {
@@ -40,6 +30,8 @@ namespace HttpWebTestingEditor
         private bool _fileWasModified;
         private bool _wordWrap = true;
 
+        private ApiSet _apiSet;
+
         public HttpWebTestEditor()
         {
             InitializeComponent();
@@ -52,17 +44,17 @@ namespace HttpWebTestingEditor
             _fileWasModified = false;
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+        #endregion
+
         #region -- Control Event Handlers -------------------------------------
         private void tvWebTest_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
 
         }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            
-        }
-        #endregion
 
         private void tvWebTest_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -159,6 +151,77 @@ namespace HttpWebTestingEditor
             }
         }
 
+        private void tvAPI_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            TreeViewItem tvi = ((TreeViewItem)e.NewValue);
+            if (tvi != null && _apiSet != null)
+            {
+                stackProperties.Children.Clear();
+                var stackPropertiesWidth = stackProperties.ActualWidth;
+
+                if (tvi.Name.StartsWith("Root_"))
+                {
+                    // Show the info set
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Title", _apiSet.Info.Title ?? "");
+                    props.Add("Description", _apiSet.Info.Description ?? "");
+                    props.Add("Version", _apiSet.Info.Version ?? "");
+                    props.Add("Terms Of Service", _apiSet.Info.TermsOfService);
+                    if(_apiSet.Info.Contact != null)
+                        props.Add("Contact", JsonConvert.SerializeObject(_apiSet.Info.Contact, Formatting.Indented));
+                    if (_apiSet.Info.License != null)
+                        props.Add("License", JsonConvert.SerializeObject(_apiSet.Info.License, Formatting.Indented));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _apiSet.Info);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_Endpoints))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_Endpoints.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    //props.Add("Context Name", _webTest.ContextProperties[x].Name);
+                    //props.Add("Context Value", _webTest.ContextProperties[x].Value);
+                    //props.Add("Type", _webTest.ContextProperties[x].Type);
+                    //PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.ContextProperties[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_Headers))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_Headers.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Header Name", parent.Headers.GetKey(x));
+                    props.Add("Header Value", parent.Headers.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.Headers);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_QueryParam))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_QueryParam.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Query Param Name", parent.QueryCollection.queryParams.GetKey(x));
+                    props.Add("Query Param Value", parent.QueryCollection.queryParams.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.QueryCollection);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_TestRule))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_TestRule.Length));
+                    var props = GetTestLevelItemProperties(_webTest.Rules[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.Rules[x]);
+                }
+                else if (tvi.Name.StartsWith(TVI_Name_DataSource))
+                {
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_DataSource.Length));
+                    var props = GetTestLevelItemProperties(_webTest.DataSources[x]);
+                    PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.DataSources[x]);
+                }
+            }
+        }
+        #endregion
+
         #region -- Response Text Box Menu Event Handlers -----
         private void cmiWordWrap_Click(object sender, RoutedEventArgs e)
         {
@@ -173,9 +236,9 @@ namespace HttpWebTestingEditor
             tbResponseBody.Text = JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
         }
         #endregion
-        #endregion
 
         #region -- Menu Item Event Handlers -----------------------------------
+        #region -- File Menu -----
         private void tsmiOpen_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -233,7 +296,9 @@ namespace HttpWebTestingEditor
             if (SaveModifiedFile())
                 this.Close();
         }
+        #endregion
 
+        #region -- Testing Menu -----
         private void tsmiExecute_Click(object sender, RoutedEventArgs e)
         {
             if (_webTest == null)
@@ -274,6 +339,79 @@ namespace HttpWebTestingEditor
         }
         #endregion
 
+        #region -- OAS Menu -----
+        private void tsmiReadOasFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.DefaultExt = ".json";
+                ofd.Filter = "Open API Spec Files (*.json)|*.json|All Files (*.*)|*.*";
+                Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+                if (fUserPickedFile == true)
+                {
+                    Settings settings = Settings.LoadSettings("settings.json");
+                    settings.swaggerSettings.SwaggerFileLocation = ofd.FileName;
+                    SwaggerParser sp = new SwaggerParser(settings);
+                    sp.PopulateApiDocument(true);
+                    tsslMessage.Content = $"Read {ofd.FileName.ExcludePath()} completed.";
+                    tsslMessage.Refresh();
+
+                    sp.SaveOriginalSwaggerDocument();
+                    ApiSet apiSet = sp.BuildApiSetFromOpenApiDocument();
+                    apiSet.SerializeAndSaveApiSet();
+                    tsslMessage.Content = $"Build API set from {ofd.FileName.ExcludePath()} completed.";
+                    tsslMessage.Refresh();
+
+                    PopulateAPITreeView(apiSet);
+                    tabApiTreeView.IsSelected = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void tsmiReadOasStream_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Feature not currently implemented.");
+        }
+        #endregion
+
+        #region -- APISet Menu -----
+        private void tsmiReadApiSetFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.DefaultExt = ".json";
+                ofd.Filter = "ApiSet Files (*.json)|*.json|All Files (*.*)|*.*";
+                Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+                if (fUserPickedFile == true)
+                {
+                    _currentlyLoadedFileName = ofd.FileName;
+                    _apiSet = ApiSet.LoadApiSetFromFile(ofd.FileName);
+                    tabApiTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    PopulateAPITreeView(_apiSet);
+                    tabApiTreeView.IsSelected = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void tsmiSaveApiSet_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        #endregion
+        #endregion
+
+        #region -- Utility Methods -----
         private bool SaveModifiedFile()
         {
             if (_fileWasModified)
@@ -300,5 +438,6 @@ namespace HttpWebTestingEditor
             else
                 return true;
         }
+        #endregion
     }
 }

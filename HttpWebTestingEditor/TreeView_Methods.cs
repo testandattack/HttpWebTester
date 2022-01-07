@@ -99,7 +99,7 @@ namespace HttpWebTestingEditor
                 else if (items[nIndex] is WTI_Comment)
                 {
                     WTI_Comment cmt = items[nIndex] as WTI_Comment;
-                    treeItem.Header = CustomizeTreeViewItem(cmt.CommentText, (BitmapImage)Properties.Resources.Comment_24.ToWpfBitmap());
+                    treeItem.Header = CustomizeTreeViewItem(cmt.CommentText, (BitmapImage)Properties.Resources.Skipped_16.ToWpfBitmap());
                     parentTreeViewItem.Items.Add(treeItem);
                 }
                 #endregion

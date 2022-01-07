@@ -107,23 +107,23 @@ namespace WebTestExecutionEngine
             }
         }
 
-        private WTRI_Request GetResults(HttpResponseMessage response)
-        {
-            if (request.RecordResults == true)
-            {
-                WTRI_Request resultsItem = new WTRI_Request(request.guid);
-                resultsItem.response = response;
-                resultsItem.responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                resultsItem.contextCollection = httpWebTest.ContextProperties;
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri);
-                return resultsItem;
-            }
-            else
-            {
-                Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri);
-            }
-            return null;
-        }
+private WTRI_Request GetResults(HttpResponseMessage response)
+{
+    if (request.RecordResults == true)
+    {
+        WTRI_Request resultsItem = new WTRI_Request(request.guid);
+        resultsItem.response = response;
+        resultsItem.responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        resultsItem.contextCollection = httpWebTest.ContextProperties;
+        Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) completed for {objectItemType}.", request.RequestUri);
+        return resultsItem;
+    }
+    else
+    {
+        Log.ForContext("SourceContext", "RequestExecution").Debug("GetResults(HttpResponseMessage) was skipped for {objectItemType}", request.RequestUri);
+    }
+    return null;
+}
 
         private WTRI_Request GetResults()
         {

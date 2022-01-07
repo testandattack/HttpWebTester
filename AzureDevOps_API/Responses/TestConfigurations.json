@@ -1,0 +1,38 @@
+{
+  "value": [
+    {
+      "id": 9,
+      "name": "Windows 10 + Chrome",
+      "description": "Default operating system for testing",
+      "isDefault": true,
+      "values": [
+        {
+          "name": "Browser",
+          "value": "Chrome"
+        },
+        {
+          "name": "Operating System",
+          "value": "Windows 10"
+        }
+      ],
+      "state": "active"
+    },
+    {
+      "id": 19,
+      "name": "Windows 10 + IE",
+      "description": "",
+      "values": [
+        {
+          "name": "Browser",
+          "value": "Internet Explorer 11.0"
+        },
+        {
+          "name": "Operating System",
+          "value": "Windows 10"
+        }
+      ],
+      "state": "active"
+    }
+  ],
+  "count": 2
+}

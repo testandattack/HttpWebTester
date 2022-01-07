@@ -71,7 +71,7 @@ namespace HttpWebTestingEditor
         }
 
         #region -- Property Display Methods -----
-        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object webTestItem)
+        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object parenttem)
         {
             foreach (var item in props)
             {
@@ -89,7 +89,7 @@ namespace HttpWebTestingEditor
                 stack.Children.Add(uiElement);
                 stackProperties.Children.Add(stack);
             }
-            stackProperties.Tag = webTestItem;
+            stackProperties.Tag = parenttem;
         }
 
         private UIElement GetPropertyValueDisplayElement(KeyValuePair<string, object> propertyItem, double width, bool IsTypeDescriptor = false)

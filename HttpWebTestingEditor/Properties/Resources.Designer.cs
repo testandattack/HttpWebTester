@@ -73,7 +73,7 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Comment_24 {
+        public static System.Drawing.Bitmap Skipped_16 {
             get {
                 object obj = ResourceManager.GetObject("Comment_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -199,7 +199,19 @@ namespace HttpWebTestingEditor.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Response_24
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Response_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
