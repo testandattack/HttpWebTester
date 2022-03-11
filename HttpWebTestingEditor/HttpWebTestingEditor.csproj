@@ -25,6 +25,7 @@
     <None Remove="Resources\RequestPlugin_24.png" />
     <None Remove="Resources\Response_24.png" />
     <None Remove="Resources\Skipped_16.png" />
+    <None Remove="Resources\StringBody_24.png" />
     <None Remove="Resources\TransactionTimer_24.png" />
     <None Remove="Resources\ValidationRule_24.png" />
     <None Remove="Resources\WebRequest_24.png" />
@@ -57,6 +58,7 @@
     <Resource Include="Resources\Passed_16.png" />
     <Resource Include="Resources\QueryStringParam_24.png" />
     <Resource Include="Resources\RequestPlugin_24.png" />
+    <Resource Include="Resources\StringBody_24.png" />
     <Resource Include="Resources\TransactionTimer_24.png" />
     <Resource Include="Resources\ValidationRule_24.png" />
     <Resource Include="Resources\WebRequest_24.png" />
@@ -68,6 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HttpArchiveItemManager\HttpArchiveItemManager.csproj" />
     <ProjectReference Include="..\HttpWebExtensions\HttpWebExtensions.csproj" />
     <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
     <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
@@ -80,17 +83,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\ImageResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>ImageResource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\ImageResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ImageResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

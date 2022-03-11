@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace ApiTestGenerator.Models.ApiDocs
@@ -114,6 +115,20 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <see cref="CustomEndPointObjectTypeEnum"/>
         /// </remarks>
         public List<CustomEndPointObject> customEndPointObjects { get; set; }
+
+        /// <summary>
+        /// This string holds the response body text that was present
+        /// for the given Http Endpoint. Note: This only applies when 
+        /// building an ApiSet from sources like HTTP Archive files.
+        /// </summary>
+        public string recordedResponseBody { get; set; }
+
+        /// <summary>
+        /// This object holds the response object that was present
+        /// for the given Http Endpoint. Note: This only applies when 
+        /// building an ApiSet from sources like HTTP Archive files.
+        /// </summary>
+        public HttpResponseMessage recordedResponseMessage { get; set; }
         #endregion
 
         #region -- Constructors -----

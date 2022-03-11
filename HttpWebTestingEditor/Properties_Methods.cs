@@ -90,6 +90,8 @@ namespace HttpWebTestingEditor
                 stackProperties.Children.Add(stack);
             }
             stackProperties.Tag = parenttem;
+            tabPropertyGrid.IsSelected = true;
+
         }
 
         private UIElement GetPropertyValueDisplayElement(KeyValuePair<string, object> propertyItem, double width, bool IsTypeDescriptor = false)
@@ -157,6 +159,12 @@ namespace HttpWebTestingEditor
                 uiElement.Tag = propertyItem.Value;
                 return uiElement;
             }
+            //else if (propertyItem.Value.GetType() == typeof(FormUrlEncodedContent))
+            //{
+            //    var uiElement = GetTextBox(((HttpContent)propertyItem.Value).ReadAsStringAsync().GetAwaiter().GetResult(), width);
+            //    uiElement.Tag = propertyItem.Value;
+            //    return uiElement;
+            //}
             else if (propertyItem.Value.GetType() == typeof(HttpContent))
             {
                 var uiElement = GetTextBox(((HttpContent)propertyItem.Value).ReadAsStringAsync().GetAwaiter().GetResult(), width);

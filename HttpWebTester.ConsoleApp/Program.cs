@@ -13,6 +13,7 @@ using Microsoft.TeamFoundation.TestManagement.WebApi;
 using Serilog;
 using Serilog.Formatting.Compact;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+using GTC_HttpArchiveReader;
 
 namespace HttpWebTester
 {
@@ -48,6 +49,15 @@ namespace HttpWebTester
             //SetAdoApiStuff("SP", client);
             ////LoadAdoApiStuff();
             //return;
+            #endregion
+
+            #region -- Http Archive Rerader Stuff -----
+            HttpArchiveReader harReader = new HttpArchiveReader();
+            harReader.LoadArchive(@"c:\temp\workflow\geoffgr-first-workflow.har");
+            harReader.BuildSortedListOfRequests();
+            harReader.BuildVsWebtest();
+            harReader.SaveLogFile(@"c:\temp\workflow\geoffgr-first-workflow.log");
+            harReader.SaveNewVsWebtest(@"c:\temp\workflow\geoffgr-first-workflow.webtest");
             #endregion
         }
 

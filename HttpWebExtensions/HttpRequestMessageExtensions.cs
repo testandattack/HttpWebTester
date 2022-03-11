@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Text;
+using GTC.Extensions;
 
 namespace HttpWebExtensions
 {
@@ -29,6 +30,11 @@ namespace HttpWebExtensions
                     sb.Append(Convert.ToChar(content[x]));
                 }
                 return sb.ToString();
+            }
+            else if (source.Content is FormUrlEncodedContent)
+            {
+                string content = source.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                return content;
             }
             else
             {
@@ -62,5 +68,21 @@ namespace HttpWebExtensions
 
         //    return "";
         //}
+
+        public static Dictionary<string, string> GetFormPostParamsFromContent(this FormUrlEncodedContent source)
+        {
+            string content = source.ReadAsStringAsync().GetAwaiter().GetResult();
+            Dictionary<string, string> parms = new Dictionary<string, string>();
+            foreach (string str in content.UrlDecode().Split("&", StringSplitOptions.RemoveEmptyEntries))
+            {
+                int x = str.IndexOf("=");
+                if ((x + 1) >= str.Length)
+                    parms.Add(str.Substring(0, x), "");
+                else
+                    parms.Add(str.Substring(0, x), str.Substring(x + 1));
+            }
+            return parms;
+
+        }
     }
 }

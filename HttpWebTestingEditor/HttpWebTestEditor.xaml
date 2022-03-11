@@ -24,11 +24,13 @@
             <MenuItem Header="_File" >
                 <MenuItem x:Name="tsmiOpen" Header="_Open" HorizontalAlignment="Left" ToolTip="Allows you to open an HttpWebTesting file for editing." Click="tsmiOpen_Click" />
                 <MenuItem x:Name="tsmiOpenResult" Header="Open Results" HorizontalAlignment="Left" ToolTip="Allows you to open an HttpWebTesting Results file for viewing." Click="tsmiOpenResult_Click" />
+                <!--<MenuItem x:Name="tsmiOpenHar" Header="Open Har File" HorizontalAlignment="Left" ToolTip="Allows you to open an Http Archive file for viewing." Click="tsmiOpenHar_Click" />-->
                 <MenuItem Background="#7F404040" Height="4" Margin="5,0" />
                 <MenuItem x:Name="tsmiAppExit" Header="_Exit" HorizontalAlignment="Left" ToolTip="This will close the application. If the developer did his homework, the application will prompt you for saving any changes if you have not already saved it." Click="tsmiAppExit_Click"/>
             </MenuItem>
             <MenuItem Header="_Testing" >
                 <MenuItem x:Name="tsmiExecute" Header="_Execute" HorizontalAlignment="Left" ToolTip="Executes the currently loaded test" Click="tsmiExecute_Click" />
+                <MenuItem x:Name="tsmiCreateTestFromHar" Header="Create Test From HAR File" HorizontalAlignment="Left" ToolTip="Creates and saves a new webtest from an HTTP Archive file." Click="tsmiCreateTestFromHar_Click" />
                 <MenuItem x:Name="tsmiCreateSampleTest" Header="Create Sample Test" HorizontalAlignment="Left" ToolTip="Creates and saves a new sample webtest." Click="tsmiCreateSampleTest_Click" />
             </MenuItem>
             <MenuItem Header="_OAS" >
@@ -114,8 +116,13 @@
                 <TextBox x:Name="tbRequestBody" Margin="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="10" IsUndoEnabled="False" >
                 </TextBox>
             </TabItem>
-            <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Hidden">
+            <TabItem x:Name="tabPropertyDataGrid" Header="Property Grid" Visibility="Collapsed">
                 <DataGrid x:Name="dgPropertyList" AutoGenerateColumns="True" IsReadOnly="True" />
+            </TabItem>
+            <TabItem x:Name="tabFindReplace" Header="Find/Replace">
+                <StackPanel x:Name="stackFindReplaceProperties" Orientation="Vertical">
+                    <Label Content="Select the Find and Replace options to use when searching a webtest:" />
+                </StackPanel>
             </TabItem>
         </TabControl>
 

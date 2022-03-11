@@ -3,8 +3,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using HttpWebExtensions;
 
 namespace HttpWebTesting.WebTestItems
 {
@@ -68,6 +70,26 @@ namespace HttpWebTesting.WebTestItems
         [JsonIgnore]
         public HttpRequestMessage requestItem { get; set; }
 
+        // NOTE: Consider making this a custom class that handles all of the back and forth with the Content object
+        [JsonIgnore]
+        public Dictionary<string, string> FormPostParams 
+        { 
+            get
+            {
+                if (Content == null)
+                    return null;
+
+                if (Content.GetType() != typeof(FormUrlEncodedContent))
+                    return new Dictionary<string, string>();
+                else 
+                    return (Content as FormUrlEncodedContent).GetFormPostParamsFromContent();
+            }
+            set
+            {
+                Content = new FormUrlEncodedContent(value);
+            }
+        }
+
         /// <summary>
         /// a collection of rules to execute either before or after the request gets executed.
         /// </summary>
@@ -116,6 +138,8 @@ namespace HttpWebTesting.WebTestItems
         [Category("Behavior")]
         [DefaultValue(true)]
         public bool FollowRedirects { get; set; }
+
+        public string RecordedResponseBody { get; set; }
         #endregion
 
         #region -- Constructors -----

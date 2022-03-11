@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using WebTestExecutionEngine;
 using WebTestItemManager;
 using GTC.Extensions;
+using GTC_HttpArchiveReader;
 
 namespace HttpWebTestingEditor
 {
@@ -29,7 +30,7 @@ namespace HttpWebTestingEditor
         private string _currentlyLoadedFileName;
         private bool _fileWasModified;
         private bool _wordWrap = true;
-
+        private FindReplaceOptions findReplaceOptions;
         private ApiSet _apiSet;
 
         public HttpWebTestEditor()
@@ -42,11 +43,14 @@ namespace HttpWebTestingEditor
         {
             _currentlyLoadedFileName = "";
             _fileWasModified = false;
+            findReplaceOptions = new FindReplaceOptions();
+            findReplaceOptions.LoadFindReplaceOptions();
+            PopulateFindReplaceProperties();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            findReplaceOptions.SaveFindReplaceOptions();
         }
         #endregion
 
@@ -105,6 +109,18 @@ namespace HttpWebTestingEditor
                     props.Add("Query Param Value", parent.QueryCollection.queryParams.GetValue(x));
                     PopulatePropertiesStack(props, stackPropertiesWidth, parent.QueryCollection);
                 }
+                else if (tvi.Name.StartsWith(TVI_Name_FormParam))
+                {
+                    WTI_Request parent = GetParentRequest(tvi);
+                    if (parent == null)
+                        return;
+
+                    int x = Int32.Parse(tvi.Name.Substring(TVI_Name_FormParam.Length));
+                    Dictionary<string, object> props = new Dictionary<string, object>();
+                    props.Add("Form Post Param Name", parent.FormPostParams.GetKey(x));
+                    props.Add("Form Post Param Value", parent.FormPostParams.GetValue(x));
+                    PopulatePropertiesStack(props, stackPropertiesWidth, parent.Content);
+                }
                 else if (tvi.Name.StartsWith(TVI_Name_TestRule))
                 {
                     int x = Int32.Parse(tvi.Name.Substring(TVI_Name_TestRule.Length));
@@ -117,23 +133,43 @@ namespace HttpWebTestingEditor
                     var props = GetTestLevelItemProperties(_webTest.DataSources[x]);
                     PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.DataSources[x]);
                 }
+                else if (tvi.Name == TVI_Name_RecordedResponse)
+                {
+                    // String body response is directly below thge request IN THE TREEVIEW
+                    // so do not go up 2 levels to figure out the actual request item.
+                    WTI_Request parent = GetParentRequest(tvi, false);
+                    if (parent == null)
+                        return;
+
+                    tbResponseBody.Text = parent.RecordedResponseBody;
+                    tabResponseBody.IsSelected = true;
+                }
             }
         }
 
-        private WTI_Request GetParentRequest(TreeViewItem tvi)
+        private WTI_Request GetParentRequest(TreeViewItem tvi, bool useGrandParentItem = true)
         {
             TreeViewItem parent = tvi.Parent as TreeViewItem;
-            TreeViewItem grandParent = parent.Parent as TreeViewItem;
-
-            if (grandParent.Name.StartsWith("Root_"))
+            if (useGrandParentItem == true)
             {
-                string str = grandParent.Name.Replace('_', '.');
-                return wtim.GetActualItem(str, _webTest.WebTestItems) as WTI_Request;
+                TreeViewItem grandParent = parent.Parent as TreeViewItem;
+                if (grandParent.Name.StartsWith("Root_"))
+                {
+                    string str = grandParent.Name.Replace('_', '.');
+                    return wtim.GetActualItem(str, _webTest.WebTestItems) as WTI_Request;
+                }
+
             }
+
             else
             {
-                return null;
+                if (parent.Name.StartsWith("Root_"))
+                {
+                    string str = parent.Name.Replace('_', '.');
+                    return wtim.GetActualItem(str, _webTest.WebTestItems) as WTI_Request;
+                }
             }
+            return null;
         }
 
         private void tvWebTestResults_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -218,6 +254,7 @@ namespace HttpWebTestingEditor
                     var props = GetTestLevelItemProperties(_webTest.DataSources[x]);
                     PopulatePropertiesStack(props, stackPropertiesWidth, _webTest.DataSources[x]);
                 }
+
             }
         }
         #endregion
@@ -291,6 +328,32 @@ namespace HttpWebTestingEditor
             }
         }
 
+        private void tsmiOpenHar_Click(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            //    //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+            //    Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+            //    ofd.DefaultExt = ".har";
+            //    ofd.Filter = "HttpArchive Files (*.har)|*.har|All Files (*.*)|*.*";
+            //    Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+            //    if (fUserPickedFile == true)
+            //    {
+            //        _currentlyLoadedFileName = ofd.FileName;
+            //        HttpArchiveReader harReader = new HttpArchiveReader();
+            //        harReader.LoadArchive(ofd.FileName);
+            //        harReader.BuildSortedListOfRequests();
+            //        harReader.BuildVsWebtest();
+            //        harReader.SaveLogFile(ofd.FileName.Replace(".har", ".log"));
+            //        harReader.SaveNewVsWebtest(ofd.FileName.Replace(".har", ".webtest"));
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.MessageBox.Show(ex.ToString());
+            //}
+        }
+
         private void tsmiAppExit_Click(object sender, RoutedEventArgs e)
         {
             if (SaveModifiedFile())
@@ -318,6 +381,37 @@ namespace HttpWebTestingEditor
                 PopulateResultsTreeView();
             }
             tabResultsTreeView.IsSelected = true;
+        }
+
+        private void tsmiCreateTestFromHar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Use the Win32 OpenFileDialog to allow the user to pick a file ...
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.DefaultExt = ".har";
+                ofd.Filter = "HttpArchive Files (*.har)|*.har|All Files (*.*)|*.*";
+                Nullable<bool> fUserPickedFile = ofd.ShowDialog(this);
+                if (fUserPickedFile == true)
+                {
+                    _currentlyLoadedFileName = ofd.FileName;
+                    HttpArchiveReader harReader = new HttpArchiveReader();
+                    harReader.LoadArchive(ofd.FileName);
+                    harReader.BuildSortedListOfRequests();
+                    harReader.BuildWebtest();
+                    harReader.SaveLogFile(ofd.FileName.Replace(".har", ".log"));
+                    harReader.SaveNewWebtest(ofd.FileName.Replace(".har", ".json"));
+
+                    _webTest = HttpWebTestSerializer.DeserializeTest(ofd.FileName.Replace(".har", ".json"));
+                    wtim = new ItemManager(_webTest);
+                    tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    PopulateTreeView();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
         }
 
         private void tsmiCreateSampleTest_Click(object sender, RoutedEventArgs e)
@@ -438,6 +532,22 @@ namespace HttpWebTestingEditor
             else
                 return true;
         }
+
+        private void PopulateFindReplaceProperties()
+        {
+            foreach (var prop in findReplaceOptions.GetType().GetProperties())
+            {
+                var propValue = prop.GetValue(findReplaceOptions, null);
+                if (propValue != null)
+                {
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.IsChecked = (bool)propValue;
+                    checkBox.Content = prop.Name;
+                    stackFindReplaceProperties.Children.Add(checkBox);
+                }
+            }
+        }
+
         #endregion
     }
 }

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WebTestReplacerSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <replaceOptions>URL QueryStringName QueryStringValue FormPostName FormPostValue StringBody TransactionName ReportingName ExpectedResponseURL MatchCase Headers</replaceOptions>
+  <previousFinds>
+    <string>http%3a%2f%2f</string>
+    <string>https%3a%2f%2f</string>
+  </previousFinds>
+  <previousReplaces>
+    <string>http://</string>
+    <string>https://</string>
+  </previousReplaces>
+</WebTestReplacerSettings>
