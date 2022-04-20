@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00940" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -14,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AzureDevOps_API\AzureDevOps_API.csproj" />
+    <ProjectReference Include="..\HttpArchiveItemManager\HttpArchiveItemManager.csproj" />
     <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
     <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />

@@ -71,7 +71,7 @@ namespace HttpWebTestingEditor
         }
 
         #region -- Property Display Methods -----
-        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object webTestItem)
+        private void PopulatePropertiesStack(Dictionary<string, object> props, double width, object parenttem)
         {
             foreach (var item in props)
             {
@@ -89,7 +89,9 @@ namespace HttpWebTestingEditor
                 stack.Children.Add(uiElement);
                 stackProperties.Children.Add(stack);
             }
-            stackProperties.Tag = webTestItem;
+            stackProperties.Tag = parenttem;
+            tabPropertyGrid.IsSelected = true;
+
         }
 
         private UIElement GetPropertyValueDisplayElement(KeyValuePair<string, object> propertyItem, double width, bool IsTypeDescriptor = false)
@@ -157,6 +159,12 @@ namespace HttpWebTestingEditor
                 uiElement.Tag = propertyItem.Value;
                 return uiElement;
             }
+            //else if (propertyItem.Value.GetType() == typeof(FormUrlEncodedContent))
+            //{
+            //    var uiElement = GetTextBox(((HttpContent)propertyItem.Value).ReadAsStringAsync().GetAwaiter().GetResult(), width);
+            //    uiElement.Tag = propertyItem.Value;
+            //    return uiElement;
+            //}
             else if (propertyItem.Value.GetType() == typeof(HttpContent))
             {
                 var uiElement = GetTextBox(((HttpContent)propertyItem.Value).ReadAsStringAsync().GetAwaiter().GetResult(), width);

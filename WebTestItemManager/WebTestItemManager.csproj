@@ -6,12 +6,19 @@
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="TestAndAttack.Extensions" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
     <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
     <ProjectReference Include="..\WebTestRules\WebTestRules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="findReplaceOptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

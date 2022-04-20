@@ -9,11 +9,20 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Request : WebTestResultsItem
     {
+        /// <summary>
+        /// <see cref="HttpRequestMessage.Headers"/>
+        /// </summary>
+        public Dictionary<string, IEnumerable<string>> responseHeaders { get; set; }
+
         public string responseBody { get; set; }
+
+        public string redirectUrl { get; set; }
 
         public HttpResponseMessage response { get; set; }
 
         public HttpRequestMessage RequestAsSent { get; set; }
+
+        public WTI_Request RequestAsSavedInTest { get; set; }
 
         public ContextCollection contextCollection { get; set; }
         

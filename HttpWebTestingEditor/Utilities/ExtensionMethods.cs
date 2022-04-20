@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using GTC.Extensions;
+using System.Net.Http;
 
 namespace HttpWebTestingEditor
 {
@@ -114,6 +115,37 @@ namespace HttpWebTestingEditor
                 x++;
             }
             return string.Empty;
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static string ExcludePath(this string source)
+        {
+            int iStart = source.LastIndexOf("\\");
+
+            if (iStart == -1 || iStart + 1 >= source.Length)
+                return source;
+            else
+                return source.Substring(iStart + 1);
+        }
+    }
+
+    public static class HttpContentExtensions
+    {
+        public static Dictionary<string, string> GetFormPostParams(this FormUrlEncodedContent source)
+        {
+            string parmsAsString = source.ReadAsStringAsync().GetAwaiter().GetResult().UrlDecode();
+            Dictionary<string, string> parms = new Dictionary<string, string>();
+            foreach(string str in parmsAsString.Split("&", StringSplitOptions.RemoveEmptyEntries))
+            {
+                int x = str.IndexOf("=");
+                if ((x + 1) >= str.Length)
+                    parms.Add(str.Substring(0, x), "");
+                else
+                    parms.Add(str.Substring(0, x), str.Substring(x+1));
+            }
+            return parms;
         }
     }
 }

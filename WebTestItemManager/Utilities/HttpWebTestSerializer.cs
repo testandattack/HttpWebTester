@@ -15,7 +15,7 @@ namespace WebTestItemManager
                 httpWebTest.WorkingDirectoryLocation = webTestFileName.Substring(0, webTestFileName.LastIndexOf("\\"));
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
-                settings.Converters.Add(new StringContentConverter());
+                settings.Converters.Add(new HttpContentConverter());
                 sw.Write(JsonConvert.SerializeObject(httpWebTest, Formatting.Indented, settings));
             }
         }
@@ -24,7 +24,7 @@ namespace WebTestItemManager
         {
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.TypeNameHandling = TypeNameHandling.Objects;
-            settings.Converters.Add(new StringContentConverter());
+            settings.Converters.Add(new HttpContentConverter());
             return JsonConvert.SerializeObject(httpWebTest, Formatting.Indented, settings);
         }
 
@@ -35,6 +35,7 @@ namespace WebTestItemManager
                 HttpWebTest webTest;
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
+                settings.Converters.Add(new FormUrlEncodedContentConverter());
                 settings.Converters.Add(new StringContentConverter());
                 settings.Converters.Add(new HttpContentConverter());
                 webTest = JsonConvert.DeserializeObject<HttpWebTest>(sr.ReadToEnd(), settings);
@@ -48,6 +49,7 @@ namespace WebTestItemManager
                 HttpWebTest webTest;
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
+                settings.Converters.Add(new FormUrlEncodedContentConverter());
                 settings.Converters.Add(new StringContentConverter());
                 settings.Converters.Add(new HttpContentConverter());
                 webTest = JsonConvert.DeserializeObject<HttpWebTest>(serializedTest, settings);

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebTestProcessingSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <coreSettings RunInDebugMode="false" remove404Requests="true" bAddCommentForEachChange="false" bAddSummaryComments="false" ShortenRefererHeaders="true"/>
+  <globalSettings setStopOnErrorToTrue="true" setPreAuthenticateToFalse="true" RemoveExpectedResponseUrlValidationRule="true" />
+  <loggingLevel>Debug</loggingLevel>
+  <RunExtraRoutines>true</RunExtraRoutines>
+  <startingNumberForWebServerParameterization>1</startingNumberForWebServerParameterization>
+  <UnwantedItems>
+    <string>olark.com</string>
+    <string>aadcdn.microsoftonline-p.com</string>
+    <string>mathtag.com</string>
+    <string>doubleclick.net</string>
+    <string>collective-media.net</string>
+    <string>tapad.com</string>
+    <string>navdmp.com</string>
+    <string>twitter.com</string>
+    <string>adsrvr.org</string>
+    <string>demdex.net</string>
+    <string>azureedge.net</string>
+    <string>clicktale.net</string>
+    <string>everesttech.net</string>
+    <string>tubemogul.com</string>
+    <string>mixpanel.com</string>
+    <string>optimizely.com</string>
+    <string>mktoresp.com</string>
+    <string>modpim.com</string>
+    <string>set-returning-user-cookie</string>
+    <string>dc.services.visualstudio.com</string>
+    <string>vortex.data.microsoft.com</string>
+    <string>http://placeholder</string>
+    <string>_public/_Bundling</string>
+    <string>doubleclick.net</string>
+    <string>google.com/ads</string>
+    <string>instrumentation/reportpageload</string>
+    <string>nps.onyx.azure.net</string>
+    <string>pubmatic.com</string>
+    <string>fonts.googleapis.com</string>
+    <string>cdn.vsassets.io</string>
+    <string>_static/tfs/</string>
+  </UnwantedItems>
+  <UnwantedPages>
+    <string>.gif</string>
+    <string>.jpg</string>
+    <string>.png</string>
+    <string>.ico</string>
+    <string>.css</string>
+    <string>.js</string>
+    <string>.eot</string>
+    <string>.json</string>
+    <string>.svg</string>
+    <string>.woff</string>
+    <string>.woff2</string>
+  </UnwantedPages>
+  <UnwantedReferers>
+    <string>demdex.net</string>
+  </UnwantedReferers>
+  <headersToSkipDuringMissingHeaderProcessing>
+    <string>User-Agent</string>
+    <string>Accept</string>
+    <string>Accept-Language</string>
+    <string>Accept-Encoding</string>
+    <string>Connection</string>
+  </headersToSkipDuringMissingHeaderProcessing>
+  <ContextParamsToAdd>
+    <ContextParam Name="PBI_Username" Value="mrgray@powermvps.com" IsWebUrl="false" AutoSearchReplace="true" />
+    <ContextParam Name="PBI_Password" Value="Pee@ssw0rd!" IsWebUrl="false" AutoSearchReplace="true" />
+    <ContextParam Name="VS_Username" Value="geoffgr@hotmail.com" IsWebUrl="false" AutoSearchReplace="true" />
+    <ContextParam Name="VS_Password" Value="Pro1Tech!" IsWebUrl="false" AutoSearchReplace="true" />
+    <ContextParam Name="PowerBi" Value="http://powerbi.com" IsWebUrl="true" AutoSearchReplace="true" />
+    <ContextParam Name="App_PowerBi" Value="https://app.powerbi.com" IsWebUrl="true" AutoSearchReplace="true" />
+    <ContextParam Name="PowerBi_MSFT" Value="https://powerbi.microsoft.com" IsWebUrl="true" AutoSearchReplace="true" />
+    <ContextParam Name="VSSPS_VisualStudio" Value="https://app.vssps.visualstudio.com" IsWebUrl="true" AutoSearchReplace="true" />
+    <ContextParam Name="Login_MicrosoftOnline" Value="https://login.microsoftonline.com" IsWebUrl="true" AutoSearchReplace="true" />
+    <ContextParam Name="Login_Live" Value="https://login.live.com" IsWebUrl="true" AutoSearchReplace="true" />
+  </ContextParamsToAdd>
+  <RulesCollection>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="client-request-id">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>HasQueryStringParameters</ruleConditionals>
+        <ContextParameterName>client-request-id</ContextParameterName>
+        <StartsWith>\u0026client-request-id=</StartsWith>
+        <EndsWith>",</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="canary">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>HasQueryStringParameters</ruleConditionals>
+        <ContextParameterName>canary</ContextParameterName>
+        <StartsWith>"canary":"</StartsWith>
+        <EndsWith>",</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="ctx">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>HasQueryStringParameters</ruleConditionals>
+        <ContextParameterName>ctx</ContextParameterName>
+        <StartsWith>"sCtx":"</StartsWith>
+        <EndsWith>",</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="flowToken">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>HasQueryStringParameters</ruleConditionals>
+        <ContextParameterName>flowToken</ContextParameterName>
+        <StartsWith>,"sFT":"</StartsWith>
+        <EndsWith>",</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="clusterUri">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>BodyIsFormPostParameters</ruleConditionals>
+        <ContextParameterName>clusterUri</ContextParameterName>
+        <StartsWith>var clusterUri =  '</StartsWith>
+        <EndsWith>'</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="AuthToken">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>BodyIsFormPostParameters</ruleConditionals>
+        <ContextParameterName>AuthToken</ContextParameterName>
+        <StartsWith>var powerBIAccessToken = '</StartsWith>
+        <EndsWith>'</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="ActivityId FormPost">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>https://app.powerbi.com</NamedRequestUrl>
+        <ruleConditionals>BodyIsFormPostParameters</ruleConditionals>
+        <ContextParameterName>ActivityId</ContextParameterName>
+        <StartsWith>var telemetrySessionId =  '</StartsWith>
+        <EndsWith>'</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="ActivityId: GET Method">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>metadata/groupmetadata/</NamedRequestUrl>
+        <ruleConditionals>MethodIsGET</ruleConditionals>
+        <ContextParameterName>ActivityId</ContextParameterName>
+        <StartsWith>{"id":</StartsWith>
+        <EndsWith>,"displayName":</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="groupObjectId">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>metadata/refreshusermetadata</NamedRequestUrl>
+        <ruleConditionals>MethodIsPUT</ruleConditionals>
+        <ContextParameterName>UserGroupId</ContextParameterName>
+        <StartsWith>"groupObjectId":"</StartsWith>
+        <EndsWith>"},</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="ExtractTextRule" ruleDescription="Nonce">
+      <ruleInfo xsi:type="ExtractTextRuleInfo" Index="0" IgnoreCase="false" UseRegularExpression="false" HtmlDecode="true" Required="true" ExtractRandomMatch="false" SearchInHeaders="true">
+        <searchWithinNamedRequestsOnly>true</searchWithinNamedRequestsOnly>
+        <NamedRequestUrl>app.vssps.visualstudio.com/_signin</NamedRequestUrl>
+        <ruleConditionals>NamedUrlIsRedirect ResponseRequiresUrlDecode</ruleConditionals>
+        <ContextParameterName>nonce</ContextParameterName>
+        <StartsWith>\u0026nonce=</StartsWith>
+        <EndsWith>\u0026</EndsWith>
+      </ruleInfo>
+    </RulesCollectionEntry>
+    <RulesCollectionEntry ruleType="FindTextValidationRule" ruleDescription="Validates that we did not hit a problem with the auth site.">
+      <ruleInfo xsi:type="FindTextValidationRuleInfo" passIfTextFound="false" IgnoreCase="false" UseRegularExpression="false" level="High" order="BeforeDependents">
+        <TextToFind>Microsoft account is experiencing technical problems</TextToFind>
+        <IsGlobalValidationRule>true</IsGlobalValidationRule>
+      </ruleInfo>
+    </RulesCollectionEntry>
+  </RulesCollection>
+</WebTestProcessingSettings>

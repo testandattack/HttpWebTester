@@ -22,14 +22,14 @@ namespace HttpWebTestingEditor.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class ImageResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ImageResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace HttpWebTestingEditor.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HttpWebTestingEditor.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HttpWebTestingEditor.Properties.ImageResource", typeof(ImageResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -173,6 +173,16 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap NotExecuted_16 {
+            get {
+                object obj = ResourceManager.GetObject("NotExecuted_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Passed_16 {
             get {
                 object obj = ResourceManager.GetObject("Passed_16", resourceCulture);
@@ -193,9 +203,49 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Redirect_24 {
+            get {
+                object obj = ResourceManager.GetObject("Redirect_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap RequestPlugin_24 {
             get {
                 object obj = ResourceManager.GetObject("RequestPlugin_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Response_24 {
+            get {
+                object obj = ResourceManager.GetObject("Response_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Skipped_16 {
+            get {
+                object obj = ResourceManager.GetObject("Skipped_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap StringBody_24 {
+            get {
+                object obj = ResourceManager.GetObject("StringBody_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,29 +273,9 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WebRequest_16 {
-            get {
-                object obj = ResourceManager.GetObject("WebRequest_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap WebRequest_24 {
             get {
                 object obj = ResourceManager.GetObject("WebRequest_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap WebTest_16 {
-            get {
-                object obj = ResourceManager.GetObject("WebTest_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +293,19 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WebTestCondition_16 {
+        public static System.Drawing.Bitmap WebTest_241 {
             get {
-                object obj = ResourceManager.GetObject("WebTestCondition_16", resourceCulture);
+                object obj = ResourceManager.GetObject("WebTest_241", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Webtest_Icons_Image {
+            get {
+                object obj = ResourceManager.GetObject("Webtest_Icons_Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,16 +316,6 @@ namespace HttpWebTestingEditor.Properties {
         public static System.Drawing.Bitmap WebTestCondition_24 {
             get {
                 object obj = ResourceManager.GetObject("WebTestCondition_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap WebTestLoop_16 {
-            get {
-                object obj = ResourceManager.GetObject("WebTestLoop_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,16 +336,6 @@ namespace HttpWebTestingEditor.Properties {
         public static System.Drawing.Bitmap WebTestPlugin_24 {
             get {
                 object obj = ResourceManager.GetObject("WebTestPlugin_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap WebTransaction_16 {
-            get {
-                object obj = ResourceManager.GetObject("WebTransaction_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

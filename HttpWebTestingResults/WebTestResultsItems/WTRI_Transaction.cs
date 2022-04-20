@@ -9,6 +9,7 @@ namespace HttpWebTestingResults
 {
     public class WTRI_Transaction : WebTestResultsItem
     {
+        public string Name { get; set; }
 
         [JsonProperty(PropertyName = "Transaction Results Items")]
         public WebTestResultsItemCollection webTestResultsItems { get; set; }
@@ -16,6 +17,13 @@ namespace HttpWebTestingResults
         public TimeSpan totalElapsedTime { get; set; }
 
         public TimeSpan totalTransactionTime { get; set; }
+
+        public WTRI_Transaction()
+        {
+            objectItemType = WebTestResultItemType.Wtri_TransactionItem;
+            webTestItemId = new Guid();
+            webTestResultsItems = new WebTestResultsItemCollection();
+        }
 
         public WTRI_Transaction(Guid itemGuid)
         {
