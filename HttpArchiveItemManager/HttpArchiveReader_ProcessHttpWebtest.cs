@@ -2,6 +2,7 @@
 using GTC.Extensions;
 using GTC.Utilities;
 using HttpWebTesting.WebTestItems;
+using HttpWebTestingResults;
 using Microsoft.VisualStudio.TestTools.WebTesting;
 using Newtonsoft.Json;
 using System;
@@ -47,7 +48,8 @@ namespace GTC_HttpArchiveReader
         {
             foreach (Automatonic.HttpArchive.Page page in mainPages.Values)
             {
-                var trans = ItemManager.CreateNewTransaction(GetPageTitleWithoutNoise(page.Title));
+                //var trans = ItemManager.CreateNewTransaction(GetPageTitleWithoutNoise(page.Title));
+                var trans = ItemManager.CreateNewTransaction($"PageGroup #{page.Id}");
                 httpWebTransactions.Add(page.Id, trans);
             }
         }
@@ -106,15 +108,19 @@ namespace GTC_HttpArchiveReader
                 ProcessRequestPayload(request.PostData, ref wtRequest);
             }
 
+            // Response (if present)
             Automatonic.HttpArchive.Response response = obj.entryEx.Response;
-            if(response.Content != null)
+            if(response.Status == 302)
+            {
+                wtRequest.RecordedResponseBody = $"Request resulted in a redirect to: {response.RedirectUrl}";
+            }
+            else if(response.Content != null)
             {
                 if (response.Content.Text != null)
                 {
                     wtRequest.RecordedResponseBody = response.Content.Text;
                 }
             }
-            // Response Body (if present)
 
             return wtRequest;
         }

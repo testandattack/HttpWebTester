@@ -283,7 +283,12 @@ namespace HttpWebTestingEditor
                 return;
 
             TreeViewItem treeItem = new TreeViewItem();
-            treeItem.Header = CustomizeTreeViewItem("Recorded Response Body", (BitmapImage)Properties.ImageResource.Response_24.ToWpfBitmap());
+            
+            if(request.RecordedResponseBody.StartsWith("Request resulted in a redirect"))
+                treeItem.Header = CustomizeTreeViewItem("Response was redirect", (BitmapImage)Properties.ImageResource.Redirect_24.ToWpfBitmap());
+            else
+                treeItem.Header = CustomizeTreeViewItem("Recorded Response Body", (BitmapImage)Properties.ImageResource.Response_24.ToWpfBitmap());
+
             treeItem.Name = TVI_Name_RecordedResponse;
             parentItem.Items.Add(treeItem);
         }

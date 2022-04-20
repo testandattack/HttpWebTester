@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System;
 using HttpWebTesting;
 using HttpWebTesting.WebTestItems;
+using HttpWebTestingResults;
 
 namespace GTC_HttpArchiveReader
 {
@@ -18,14 +19,21 @@ namespace GTC_HttpArchiveReader
         #region -- Public Properties ---------------------------------------
         public Document archiveDocument { get; set; }
         public mLogMsg logMsg { get; internal set; }
-        public DeclarativeWebTest webtest { get; private set; }
-        public HttpWebTest httpWebTest { get; set; }
-
         public SortedList<DateTime, HttpArchiveObjectEx> SortedEntries { get; set; }
         public Dictionary<int, HttpArchiveResponseObjectEx> Responses { get; set; }
         public SortedList<DateTime, Page> mainPages { get; set; }
+
+        // Visual Studio web test entries
+        public DeclarativeWebTest webtest { get; private set; }
         public Dictionary<string, TransactionTimer> vsWebTransactions { get; set; }
+
+        // Http Web test entries
+        public HttpWebTest httpWebTest { get; set; }
         public Dictionary<string, WTI_Transaction> httpWebTransactions { get; set; }
+
+        // Http Web test results entries
+        public HttpWebTestResults httpWebTestResults { get; set; }
+        public Dictionary<string, WTRI_Transaction> httpWebTransactionResults { get; set; }
         #endregion
 
         #region -- Private Properties --------------------------------------
@@ -68,13 +76,21 @@ namespace GTC_HttpArchiveReader
         private void ConstructorItems()
         {
             wtps = LoadWebTestProcessingSettings.LoadRecorderSettings("WebTestProcessingSettings.xml");
-            webtest = new DeclarativeWebTest();
-            httpWebTest = new HttpWebTest();
             mainPages = new SortedList<DateTime, Page>();
             SortedEntries = new SortedList<DateTime, HttpArchiveObjectEx>();
-            vsWebTransactions = new Dictionary<string, TransactionTimer>();
-            httpWebTransactions = new Dictionary<string, WTI_Transaction>();
             Responses = new Dictionary<int, HttpArchiveResponseObjectEx>();
+
+            // Visual Studio web test entries
+            webtest = new DeclarativeWebTest();
+            vsWebTransactions = new Dictionary<string, TransactionTimer>();
+
+            // Http Web test entries
+            httpWebTest = new HttpWebTest();
+            httpWebTransactions = new Dictionary<string, WTI_Transaction>();
+
+            // Http Web test results entries
+            httpWebTestResults = new HttpWebTestResults();
+            httpWebTransactionResults = new Dictionary<string, WTRI_Transaction>();
         }
         #endregion
     }

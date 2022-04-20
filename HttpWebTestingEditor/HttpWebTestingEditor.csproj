@@ -22,6 +22,7 @@
     <None Remove="Resources\NotExecuted_16.png" />
     <None Remove="Resources\Passed_16.png" />
     <None Remove="Resources\QueryStringParam_24.png" />
+    <None Remove="Resources\Redirect_24.png" />
     <None Remove="Resources\RequestPlugin_24.png" />
     <None Remove="Resources\Response_24.png" />
     <None Remove="Resources\Skipped_16.png" />
@@ -51,6 +52,7 @@
     <Resource Include="Resources\Failed_16.png" />
     <Resource Include="Resources\Folder_24.png" />
     <Resource Include="Resources\FormPostParam_24.png" />
+    <Resource Include="Resources\Redirect_24.png" />
     <Resource Include="Resources\Header_24.png" />
     <Resource Include="Resources\NotExecuted_16.png" />
     <Resource Include="Resources\Response_24.png" />

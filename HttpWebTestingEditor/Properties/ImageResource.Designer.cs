@@ -203,6 +203,16 @@ namespace HttpWebTestingEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Redirect_24 {
+            get {
+                object obj = ResourceManager.GetObject("Redirect_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap RequestPlugin_24 {
             get {
                 object obj = ResourceManager.GetObject("RequestPlugin_24", resourceCulture);

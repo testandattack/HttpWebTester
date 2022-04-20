@@ -398,14 +398,25 @@ namespace HttpWebTestingEditor
                     HttpArchiveReader harReader = new HttpArchiveReader();
                     harReader.LoadArchive(ofd.FileName);
                     harReader.BuildSortedListOfRequests();
-                    harReader.BuildWebtest();
-                    harReader.SaveLogFile(ofd.FileName.Replace(".har", ".log"));
-                    harReader.SaveNewWebtest(ofd.FileName.Replace(".har", ".json"));
 
-                    _webTest = HttpWebTestSerializer.DeserializeTest(ofd.FileName.Replace(".har", ".json"));
+                    //harReader.BuildWebtest();
+                    //harReader.SaveLogFile(ofd.FileName.Replace(".har", ".log"));
+                    //harReader.SaveNewWebtest(ofd.FileName.Replace(".har", ".json"));
+                    harReader.BuildWebtestResults();
+                    harReader.SaveNewWebtestResults(ofd.FileName.Replace(".har", ".results.json"));
+
+                    //_webTest = HttpWebTestSerializer.DeserializeTest(ofd.FileName.Replace(".har", ".json"));
+                    //wtim = new ItemManager(_webTest);
+                    //tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    //PopulateTreeView();
+                    _webTestResults = HttpWebTestSerializer.DeserializeTestResults(ofd.FileName.Replace(".har", ".results.json"));
+                    _webTest = _webTestResults.originalWebTest;
                     wtim = new ItemManager(_webTest);
-                    tabTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    tabResultsTreeView.Header = _currentlyLoadedFileName.Substring(_currentlyLoadedFileName.LastIndexOf('\\') + 1);
+                    tabTreeView.Header = _webTest.Name;
                     PopulateTreeView();
+                    PopulateResultsTreeView();
+                    tabResultsTreeView.IsSelected = true;
                 }
             }
             catch (Exception ex)
