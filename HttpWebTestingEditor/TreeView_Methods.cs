@@ -22,7 +22,7 @@ namespace HttpWebTestingEditor
         private const string TVI_Name_Headers = "Headers_";
         private const string TVI_Name_QueryParam = "QueryParam_";
         private const string TVI_Name_FormParam = "FormParam_";
-        private const string TVI_Name_StringBody = "StringBody_";
+        private const string TVI_Name_StringBody = "StringBody";
         private const string TVI_Name_RecordedResponse = "RecordedResponse_";
 
         #region -- Treeview Population Methods -----
@@ -175,8 +175,17 @@ namespace HttpWebTestingEditor
             int x = 0;
             foreach (Property param in _webTest.ContextProperties)
             {
+                string str;
+                if ((string)param.Value == string.Empty && param.IsPassword)
+                {
+                    // Found a password that has not been assigned a value. Most likely this 
+                    // is due to reading the test from a file. Passwords are not serialized in the files.
+                    str = String.Format("{0} = {1}", param.Name, "Password value is currently not set to anything.");
+                }
+                else
+                    str = String.Format("{0} = {1}", param.Name, param.Value);
+
                 TreeViewItem subItem = new TreeViewItem();
-                string str = String.Format("{0} = {1}", param.Name, param.Value);
                 subItem.Header = CustomizeTreeViewItem(str, (BitmapImage)Properties.ImageResource.ContextParameter_24.ToWpfBitmap());
                 subItem.Name = String.Format("{0}{1}", TVI_Name_ContextParameter, x++);
                 treeItem.Items.Add(subItem);
@@ -250,7 +259,7 @@ namespace HttpWebTestingEditor
         {
             TreeViewItem treeItem = new TreeViewItem();
             treeItem.Header = CustomizeTreeViewItem("String Body", (BitmapImage)Properties.ImageResource.StringBody_24.ToWpfBitmap());
-            treeItem.Name = "StringBody";
+            treeItem.Name = TVI_Name_StringBody;
             parentItem.Items.Add(treeItem);
         }
 

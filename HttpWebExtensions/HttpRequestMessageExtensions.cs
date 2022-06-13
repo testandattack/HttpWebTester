@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using GTC.Extensions;
 
 namespace HttpWebExtensions
@@ -12,18 +13,33 @@ namespace HttpWebExtensions
         {
             if (source.Content == null)
                 return "No request content found";
+            else
+                return source.Content.GetRequestBody();
+        }
 
-            else if (source.Content is StringContent)
+        public static List<string> GetRequestHeaders(this HttpRequestMessage source)
+        {
+            List<string> headers = new List<string>();
+            foreach(var header in source.Headers.AsEnumerable())
             {
-                return source.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                headers.Add($"{header.Key} = {header.Value.AsEnumerable().ToString(";")}");
             }
-            else if (source.Content is MultipartFormDataContent)
+            return headers;
+        }
+
+        public static string GetRequestBody(this HttpContent source)
+        {
+            if (source is StringContent)
+            {
+                return source.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            else if (source is MultipartFormDataContent)
             {
                 throw new NotImplementedException();
             }
-            else if (source.Content is ByteArrayContent)
+            else if (source is ByteArrayContent)
             {
-                byte[] content = source.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+                byte[] content = source.ReadAsByteArrayAsync().GetAwaiter().GetResult();
                 StringBuilder sb = new StringBuilder();
                 for (int x = 0; x < content.Length; x++)
                 {
@@ -31,15 +47,24 @@ namespace HttpWebExtensions
                 }
                 return sb.ToString();
             }
-            else if (source.Content is FormUrlEncodedContent)
+            else if (source is FormUrlEncodedContent)
             {
-                string content = source.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                string content = source.ReadAsStringAsync().GetAwaiter().GetResult();
                 return content;
             }
             else
             {
                 throw new NotImplementedException();
             }
+        }
+
+        public static int GetContentLength(this HttpRequestMessage source)
+        {
+            string contentStr = source.GetRequestBody();
+            if (contentStr == "No request content found")
+                return 0;
+            else
+                return contentStr.Length;
         }
 
         public static List<string> GetContentHeaders(this HttpRequestMessage source)

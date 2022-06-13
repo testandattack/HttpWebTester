@@ -11,7 +11,10 @@ namespace HttpWebTesting.CoreObjects
             get
             {
                 if (this.IsPassword)
-                    return (_value as Password).pwdValue;
+                    if (this.Value != null)
+                        return (_value as Password).pwdValue;
+                    else
+                        return string.Empty;
                 else
                     return this._value;
             }
@@ -102,11 +105,11 @@ namespace HttpWebTesting.CoreObjects
                 return _value.ToString();
         }
 
-        //public bool ShouldSerializeValue()
-        //{
-        //    // Serialize the value property if it is NOT a password.
-        //    return !IsPassword;
-        //}
+        public bool ShouldSerializeValue()
+        {
+            // Serialize the value property if it is NOT a password.
+            return !IsPassword;
+        }
     }
 
     internal class Password
