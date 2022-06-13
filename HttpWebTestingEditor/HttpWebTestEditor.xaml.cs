@@ -15,6 +15,7 @@ using WebTestExecutionEngine;
 using WebTestItemManager;
 using GTC.Extensions;
 using GTC_HttpArchiveReader;
+using HttpWebTesting.Extensions;
 
 namespace HttpWebTestingEditor
 {
@@ -143,6 +144,15 @@ namespace HttpWebTestingEditor
 
                     tbResponseBody.Text = parent.RecordedResponseBody;
                     tabResponseBody.IsSelected = true;
+                }
+                else if (tvi.Name == TVI_Name_StringBody)
+                {
+                    WTI_Request parent = GetParentRequest(tvi, false);
+                    if (parent == null)
+                        return;
+
+                    tbRequestBody.Text = parent.GetRequestBody();
+                    tabRequestBody.IsSelected = true;
                 }
             }
         }

@@ -1,0 +1,124 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ActionDetails</title>
+    <meta content="Microsoft Visual Studio.NET 7.0" name="GENERATOR">
+    <meta content="Visual Basic 7.0" name="CODE_LANGUAGE">
+    <meta content="JavaScript" name="vs_defaultClientScript">
+    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+
+    <script>
+        function ToggleAll(obj1) {
+            var masterOpt = obj1.options[obj1.selectedIndex].text;
+            var selCollection = document.getElementById('fTable').getElementsByTagName('select');
+
+            for (var i = 0; i < selCollection.length; i++) {
+                var optCollection = selCollection[i].options;
+                for (var j = 0; j < optCollection.length; j++) {
+                    if (optCollection[j].text == masterOpt) selCollection[i].selectedIndex = j;
+                }
+            }
+            obj1.selectedIndex = 0;
+        }
+    </script>
+    <script src="Scripts/xmlFormat.js" language="javascript"></script>
+
+</head>
+<body>
+    <form method="post" action="./ActionDetails.aspx?wid=108&amp;v=1&amp;aid=1" id="Form1">
+        <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTkxOTQ5NzAzOA9kFgICAQ9kFgoCAQ8PFgIeBFRleHQFqAgNCg0KPCEtLSBNeVdvcmtmbG93IENvcHlyaWdodCAoYykgMjAwMy0yMDIyIFVUQyBBZXJvc3BhY2UgU3lzdGVtcyAtLT4NCg0KPHRhYmxlIHdpZHRoPSIxMDAlIiBib3JkZXI9IjAiIGNlbGxzcGFjaW5nPSIwIiBjZWxscGFkZGluZz0iMCI+DQo8dHIgaGVpZ2h0PSIyIiBiZ2NvbG9yPSIjOTljY2ZmIj4NCjx0ZCBjb2xzcGFuPSI2Ij48L3RkPg0KPC90cj4NCjx0ciBiZ2NvbG9yPSIjOTljY2ZmIj4NCjx0ZD48L3RkPg0KPHRkIHZBbGlnbj0iY2VudGVyIiB3aWR0aD0iMTAyIj48YSBocmVmPSJBZG1pbmlzdHJhdGlvbi5hc3B4P09wZW49NTAxNiZ3PTEwOCNtayIgdGFyZ2V0PSJfdG9wIj48aW1hZ2UgaWQ9IkltYWdlMSIgc3JjPSJJbWFnZXMvd2tMb2dvLmdpZiIgYm9yZGVyPSIwIj48L2ltYWdlPjwvYT48L3RkPg0KPHRkPjwvdGQ+DQo8dGQgdkFsaWduPSJjZW50ZXIiIGFsaWduPSJsZWZ0Ij48Zm9udCBmYWNlPSJBcmlhbCIgY29sb3I9IndoaXRlIiBzaXplPSIrMSI+PGI+TXlXb3JrZmxvdzxicj5BZG1pbmlzdHJhdGlvbiA8L2I+PC9mb250Pg0KPC90ZD4NCjx0ZCBhbGlnbj0icmlnaHQiIHN0eWxlPSJwYWRkaW5nLXJpZ2h0OiAyMHB4Ij4NCjxiPlNhbXBsZVRlc3RpbmdXb3JrZmxvdzxici8+U2FtcGxlIFRlc3RpbmcgV29ya2Zsb3c8L2I+PGJyLz48Zm9udCBzaXplPSItMSI+RGV2ZWxvcG1lbnQgVmVyc2lvbiAxIDxhIGhyZWY9IlZpZXdYTUwuYXNweD93aWQ9MTA4JnY9MSIgdGFyZ2V0PSJfYmxhbmsiPltYTUxdPC9hPjxhIGhyZWY9IldvcmtmbG93Q2hlY2twb2ludC5hc3B4P3dpZD0xMDgmdj0xIj48aW1nIGJvcmRlcj0iMCIgYWx0PSJDaGVja3BvaW50IiBzcmM9IkltYWdlcy9DaGVjay5qcGciPjwvYT4mbmJzcDs8YSBocmVmPSJTZWFyY2guYXNweD93aWQ9MTA4JnY9MSI+PGltZyBib3JkZXI9IjAiIGFsdD0iU2VhcmNoIiBzcmM9IkltYWdlcy9zZWFyY2guZ2lmIj48L2E+PC9mb250Pg0KPC90ZD4NCjx0ZD48L3RkPg0KPC90cj4NCjx0ciBoZWlnaHQ9IjIiIGJnY29sb3I9IiM5OWNjZmYiPg0KPHRkIGNvbHNwYW49IjYiPjwvdGQ+DQo8L3RyPg0KPC90YWJsZT4NCmRkAgMPDxYCHwAFDlN0YXRlIE51bWJlciAyZGQCBQ9kFgICAQ9kFgICAQ9kFgJmDxBkZBYBZmQCBw8PFgIfAAUNQ29weSBBbmQgRXhpdGRkAgoPDxYCHwAFBENvcHlkZGTehu4fKrzkJMeXeZMgnhgufMVdh8amtX3E9Fr9nEtjWw==" />
+
+        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2DFEBD7" />
+        <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdACBrCzl1EXVOzo5uRGw66io6zuMr5SYi4oQqcdtw0ivLw0SYPA7KL+QxOSW136Y6F8bpXrSKJ6gfdrxObA+KDVgPXRv/bGUzZzDpD4uv/siryNx8hBRtqiwCbC7lT6iwyX3YLDVHv93d+Vcxa6gk5G3R6k4ydPs7ztlQcRWul1FO0YK36xh3h9SODPsuX+JtwLxgFpJcXFISbZNjlBqHQgLaW3muQZVtkjSKf//tVhmMBmk1mHDlolSMOXM5VqrS5S3m5IredPQf0ChBr2bPoVS/C/NF80jm+viwU8keJQ2LkmC5WoiK9u7pF9PPHH6SxSmS2y4YR+iTeW2JiM/cTFP8Tf63FUABGgXx5lvXYro/lzyaMp4n5O7dh3LAbDaIzbmOjpqqavwvTakHE4OvxaiRVKsAYzUY31GyZvBzV4pjlnh17PxvWp6PyhzPRkcT7VoARUh5ulwJLeeW/Bdp8gUvKtnQ6VrlgfcQnPYOmav15LfwFa3+bLO7m60k+XjBMIeai4oneMe9aeO4a/hBaMkEOVlVR/5mDFbPkOvQ2rQbbfZexyq/tVmIvR7lyEGA5080jsPFWUPd7zs+QMWsO6W6x5ZOoCJq0/tOJPs6mjJGTs34O/GfAV4V4n0wgFZHr3flsOoPW3rv9if9K2mThiNhP1jLJHiqNfRsonZfptdXU7z7nW37S2r4b5TtGvawhDHD0I//44VZ1jxs7wkfpEa2" />
+        <p align="center">
+            <span id="Label4"><font face="Arial">
+
+                <!-- MyWorkflow Copyright (c) 2003-2022 UTC Aerospace Systems -->
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr height="2" bgcolor="#99ccff">
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr bgcolor="#99ccff">
+                        <td></td>
+                        <td valign="center" width="102"><a href="Administration.aspx?Open=5016&w=108#mk" target="_top">
+                            <image id="Image1" src="Images/wkLogo.gif" border="0"></image>
+                        </a></td>
+                        <td></td>
+                        <td valign="center" align="left"><font face="Arial" color="white" size="+1"><b>MyWorkflow<br>
+                            Administration </b></font>
+                        </td>
+                        <td align="right" style="padding-right: 20px">
+                            <b>SampleTestingWorkflow<br />
+                                Sample Testing Workflow</b><br />
+                            <font size="-1">Development Version 1 <a href="ViewXML.aspx?wid=108&v=1" target="_blank">[XML]</a><a href="WorkflowCheckpoint.aspx?wid=108&v=1"><img border="0" alt="Checkpoint" src="Images/Check.jpg"></a>&nbsp;<a href="Search.aspx?wid=108&v=1"><img border="0" alt="Search" src="Images/search.gif"></a></font>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr height="2" bgcolor="#99ccff">
+                        <td colspan="6"></td>
+                    </tr>
+                </table>
+            </font></span>
+        </p>
+        <p align="center">
+            <span id="Label2"><b><font face="Arial">State Number 2</font></b></span>
+        </p>
+        <p align="center">
+            <table id="Table1">
+                <tr valign="top">
+                    <td align="right"><font face="Arial" color="Black">Action Title:</font></td>
+                    <td><font face="Arial">
+                        <input name="tb_actionName" type="text" maxlength="40" size="30" id="tb_actionName" /></font></td>
+                </tr>
+                <tr valign="top">
+                    <td align="right"><font face="Arial" color="Black">Action Type:</font></td>
+                    <td><font face="Arial">
+                        <select name="ddl_actionType" id="ddl_actionType">
+                            <option selected="selected" value="*Copy*">*Copy Settings From Another Activity*</option>
+                            <option value="Call">Call (reexecute) Another State</option>
+                            <option value="Cancel">Cancel Workflow</option>
+                            <option value="Case">Case Conditional Branch</option>
+                            <option value="Complete">Complete Workflow</option>
+                            <option value="SQL">Database Operation</option>
+                            <option value="SqlStream">Database to Database Stream</option>
+                            <option value="Discard">Discard Completed Workflow</option>
+                            <option value="Documentum">Documentum File Operation</option>
+                            <option value="FTP">FTP File Write</option>
+                            <option value="GenFile">Generate File Attachment</option>
+                            <option value="Http">Http Page Invoke</option>
+                            <option value="If">If-Test</option>
+                            <option value="Cascade">Initiate Another Workflow</option>
+                            <option value="Loop">Loop Based On Counter</option>
+                            <option value="Notify">Notify</option>
+                            <option value="Control">Remote Control Another Workflow</option>
+                            <option value="Review">Review/Approve</option>
+                            <option value="Ballot">Send For Ballot</option>
+                            <option value="Set">Set Field Value</option>
+                            <option value="Sync">Synchronize With External App</option>
+                            <option value="Timer">Timed Wait</option>
+                            <option value="Trap">Trap</option>
+                            <option value="Wait">Wait</option>
+                            <option value="WebSvc">Web Service Call</option>
+
+                        </select></font></td>
+                </tr>
+                <tr valign="top">
+                    <td align="right"><font face="Arial" color="Black">Select Activity To Copy:</font></td>
+                    <td><font face="Arial">
+                        <select name="ddl_CopyFrom" id="ddl_CopyFrom">
+                            <option value="1) Originate">1) Originate</option>
+                            <option value="3) Approval">3) Approval</option>
+
+                        </select></font></td>
+                </tr>
+            </table>
+        </p>
+        <p align="center">
+            <input type="submit" name="Button1" value="Copy And Exit" id="Button1" /><span id="Label3">&nbsp;&nbsp;</span>
+            <input type="submit" name="Button3" value="Copy" id="Button3" />
+            <span id="Label5">&nbsp;&nbsp;</span><input type="submit" name="Button2" value="Cancel Changes" id="Button2" />
+        </p>
+    </form>
+</body>
+</html>

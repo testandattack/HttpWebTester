@@ -27,9 +27,15 @@ namespace HttpWebTester
                     outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .WriteTo.File(
                     formatter: new CompactJsonFormatter(),
-                    path: @"c:\Temp\HttpWebTester_log.json")
+                    path: @"c:\Temp\WorkflowPageTester_log.json")
                 .Enrich.FromLogContext()
                 .CreateLogger();
+
+            #region Workflow Testing -----
+            //WalkWorkflowPages walk = new WalkWorkflowPages();
+            ////walk.RunTest();
+            //walk.CompareTestResults(@"c:\temp\workflow_pages.json", @"c:\temp\workflowc_pages.json");
+            #endregion
 
             #region -- HttpWebTester -----
             //Build and Serialize a webtest
@@ -51,13 +57,13 @@ namespace HttpWebTester
             //return;
             #endregion
 
-            #region -- Http Archive Rerader Stuff -----
-            HttpArchiveReader harReader = new HttpArchiveReader();
-            harReader.LoadArchive(@"c:\temp\workflow\geoffgr-first-workflow.har");
-            harReader.BuildSortedListOfRequests();
-            harReader.BuildVsWebtest();
-            harReader.SaveLogFile(@"c:\temp\workflow\geoffgr-first-workflow.log");
-            harReader.SaveNewVsWebtest(@"c:\temp\workflow\geoffgr-first-workflow.webtest");
+            #region -- Http Archive Reader Stuff -----
+            //HttpArchiveReader harReader = new HttpArchiveReader();
+            //harReader.LoadArchive(@"c:\temp\workflow\geoffgr-first-workflow.har");
+            //harReader.BuildSortedListOfRequests();
+            //harReader.BuildVsWebtest();
+            //harReader.SaveLogFile(@"c:\temp\workflow\geoffgr-first-workflow.log");
+            //harReader.SaveNewVsWebtest(@"c:\temp\workflow\geoffgr-first-workflow.webtest");
             #endregion
         }
 
