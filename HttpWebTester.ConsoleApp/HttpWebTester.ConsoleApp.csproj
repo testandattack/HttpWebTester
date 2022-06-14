@@ -13,16 +13,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="TestAndAttack.Extensions" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HttpArchiveItemManager\HttpArchiveItemManager.csproj" />
-    <ProjectReference Include="..\HttpWebTesting.SampleTest\HttpWebTesting.SampleTest.csproj" />
-    <ProjectReference Include="..\HttpWebTestingResults\HttpWebTestingResults.csproj" />
-    <ProjectReference Include="..\HttpWebTesting\HttpWebTesting.csproj" />
-    <ProjectReference Include="..\WebTestingExecutionEngine\WebTestExecutionEngine.csproj" />
-    <ProjectReference Include="..\WebTestItemManager\WebTestItemManager.csproj" />
+    <PackageReference Include="TestAndAttack.Extensions" Version="2.1.0" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using GTC.HttpWebTester.Settings;
 
 namespace ApiTestGenerator.Models.ApiDocs
 {

@@ -5,16 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DefaultDocumentation" Version="0.8.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Serilog" Version="2.10.1-dev-01265" />
-    <PackageReference Include="TestAndAttack.Extensions" Version="1.0.0" />
+    <PackageReference Include="TestAndAttack.Extensions" Version="2.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\graygeol\source\repos\HttpWebTester\OpenApiSpec\ApiTestGenerator.Models\MarkDown\ApiTestGenerator.Models.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\graygeol\source\repos\HttpWebTester\OpenApiSpec\ApiTestGenerator.Models\MarkDown\ApiTestGenerator.Models.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Settings\Settings.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="MarkDown\" />
   </ItemGroup>
 
 </Project>

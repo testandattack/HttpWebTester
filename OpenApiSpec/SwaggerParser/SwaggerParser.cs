@@ -1,35 +1,57 @@
-﻿using Engines.ApiDocs;
-using ApiTestGenerator.Models;
+﻿using ApiTestGenerator.Models;
 using ApiTestGenerator.Models.ApiDocs;
+using GTC.Extensions;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Readers;
 using Microsoft.OpenApi.Writers;
-using Newtonsoft.Json;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
-using GTC.Extensions;
+using GTC.HttpWebTester.Settings;
 
-namespace SwaggerParsing
+/// <summary>
+/// A simple utility to read/write Swagger Documentation from/to a URL or a static file and 
+/// convert it into a Microsoft OpenApiDocument object.
+/// </summary>
+namespace GTC.SwaggerParsing
 {
-    public partial class SwaggerParser
+    /// <summary>
+    /// This class contains all of the code to read from a serialized copy of an
+    /// Open API Specification document (from a json file or from the OAS definition URL on an API website)
+    /// and convert it into a <see href="https://github.com/Microsoft/OpenAPI.NET">
+    /// Microsoft OpenApiDocument</see>. It can also serialize and save the document to a local file system.
+    /// </summary>
+    public class SwaggerParser
     {
+        /// <summary>
+        /// the local instance of the <see cref="Settings"/> class containing 
+        /// </summary>
         public Settings settings { get; private set; }
         private string _sourceLocation = "";
 
+        /// <summary>
+        /// The object that holds the parsed OAS document
+        /// </summary>
         public OpenApiDocument apiDocument { get; private set; }
-        
-        //public ApiSet apiSet { get; private set; }
 
+        /// <summary>
+        /// Creates a new instance of the parser using the <c>settings.json</c> file in the
+        /// root directory of the application.
+        /// </summary>
         public SwaggerParser()
         {
             settings = Settings.LoadSettings("settings.json");
             InitializeLogging();
         }
 
+        /// <summary>
+        /// Creates a new instance of the parser using the <see cref="Settings"/> object 
+        /// that is passed in.
+        /// </summary>
+        /// <param name="Settings">the pre-loaded settings object to use with this instance.</param>
         public SwaggerParser(Settings Settings)
         {
             settings = Settings;
@@ -63,10 +85,7 @@ namespace SwaggerParsing
         /// </summary>
         public void PopulateApiDocument()
         {
-            if (settings.swaggerSettings.ReadSwaggerFromFile == true)
-                PopulateApiDocumentFromFile();
-            else
-                PopulateApiDocumentFromStream();
+            PopulateApiDocument(settings.swaggerSettings.ReadSwaggerFromFile);
         }
 
         /// <summary>
@@ -80,20 +99,40 @@ namespace SwaggerParsing
             else
                 PopulateApiDocumentFromStream();
         }
-        /// <summary>
-        /// call this to convert the doc into an ApiSet object
-        /// </summary>
-        /// <returns></returns>
-        public ApiSet BuildApiSetFromOpenApiDocument()
-        {
-            Log.ForContext<SwaggerParser>().Information("Building ApiSet");
-            ApiSetEngine apiSetEngine = new ApiSetEngine(apiDocument, _sourceLocation, settings.swaggerSettings.apiRoot);
-            //apiSet = apiSetengine.apiSet;
-            //apiSet.settings = settings;
 
-            apiSetEngine.apiSet.settings = settings;
-            return apiSetEngine.apiSet;
+        /// <summary>
+        /// call this to load the Swagger Document into memory
+        /// </summary>
+        /// <param name="fileName">The name of the json file to read.</param>
+        public void PopulateApiDocument(string fileName)
+        {
+            PopulateApiDocumentFromFile(fileName);
         }
+
+        /// <summary>
+        /// call this to load the Swagger Document into memory
+        /// </summary>
+        /// <param name="baseUriAddress">the base URI for the connection to the server hosting the OAS Document</param>
+        /// <param name="swaggerStreamLocation">the URI-Stem for the OAS document.</param>
+        public void PopulateApiDocument(string baseUriAddress, string swaggerStreamLocation)
+        {
+            PopulateApiDocumentFromStream(baseUriAddress, swaggerStreamLocation);
+        }
+
+        ///// <summary>
+        ///// call this to convert the doc into an ApiSet object
+        ///// </summary>
+        ///// <returns></returns>
+        //public ApiSet BuildApiSetFromOpenApiDocument()
+        //{
+        //    Log.ForContext<SwaggerParser>().Information("Building ApiSet");
+        //    ApiSetEngine apiSetEngine = new ApiSetEngine(apiDocument, _sourceLocation, settings.swaggerSettings.apiRoot);
+        //    //apiSet = apiSetengine.apiSet;
+        //    //apiSet.settings = settings;
+
+        //    apiSetEngine.apiSet.settings = settings;
+        //    return apiSetEngine.apiSet;
+        //}
         #endregion
 
         #region -- Write Results Methods -----
@@ -144,13 +183,23 @@ namespace SwaggerParsing
                 Log.ForContext<SwaggerParser>().Information("Writing OpenApiDoc completed in {elapsed} seconds", dt.GetElapsedSeconds());
             }
         }
-        #endregion
 
+        /// <summary>
+        /// This method uses the <see href="https://github.com/RicoSuter/NSwag">NSwag</see> Nuget package to generate
+        /// C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
+        /// specified in the settings file.
+        /// </summary>
         public void CreateAndSaveDtoCode()
         {
             CreateAndSaveDtoCode(settings.codeGenerationSettings.DtoCodeFileName);
         }
 
+        /// <summary>
+        /// This method uses the <see href="https://github.com/RicoSuter/NSwag">NSwag</see> Nuget package to generate
+        /// C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
+        /// specified in the settings file.
+        /// </summary>
+        /// <param name="fileName">the fully qualified name of the code file to save.</param>
         public void CreateAndSaveDtoCode(string fileName)
         {
             string sCode;
@@ -170,17 +219,24 @@ namespace SwaggerParsing
                 sw.Write(sCode);
             }
         }
+        #endregion
 
+        #region -- private methods -----
         private void PopulateApiDocumentFromStream()
         {
-            _sourceLocation = $"{settings.swaggerSettings.BaseUriAddress} + {settings.swaggerSettings.SwaggerStreamLocation}";
+            PopulateApiDocumentFromStream(settings.swaggerSettings.BaseUriAddress, settings.swaggerSettings.SwaggerStreamLocation);
+        }
+
+        private void PopulateApiDocumentFromStream(string baseUriAddress, string swaggerStreamLocation)
+        {
+            _sourceLocation = $"{baseUriAddress} + {swaggerStreamLocation}";
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri(settings.swaggerSettings.BaseUriAddress)
+                BaseAddress = new Uri(baseUriAddress)
             };
 
             Log.ForContext<SwaggerParser>().Information("Parsing doc at {endpoint}", _sourceLocation);
-            var stream = httpClient.GetStreamAsync(settings.swaggerSettings.SwaggerStreamLocation).GetAwaiter().GetResult();
+            var stream = httpClient.GetStreamAsync(swaggerStreamLocation).GetAwaiter().GetResult();
             OpenApiDiagnostic openApiDiagnostic;
             apiDocument = new OpenApiStreamReader().Read(stream, out openApiDiagnostic);
             Log.ForContext<SwaggerParser>().Debug("ApiDocument read. {@output}", openApiDiagnostic);
@@ -188,7 +244,12 @@ namespace SwaggerParsing
 
         private void PopulateApiDocumentFromFile()
         {
-            _sourceLocation = settings.swaggerSettings.SwaggerFileLocation;
+            PopulateApiDocumentFromFile(settings.swaggerSettings.SwaggerFileLocation);
+        }
+
+        private void PopulateApiDocumentFromFile(string fileName)
+        {
+            _sourceLocation = fileName;
             string serializedDocument;
 
             Log.ForContext<SwaggerParser>().Information("Reading input file from {endpoint}", _sourceLocation);
@@ -200,7 +261,8 @@ namespace SwaggerParsing
             Log.ForContext<SwaggerParser>().Information("Parsing file from {endpoint}", _sourceLocation);
             var openApiStringReader = new OpenApiStringReader();
             apiDocument = openApiStringReader.Read(serializedDocument, out OpenApiDiagnostic openApiDiagnostic);
-        }
 
+        }
+        #endregion
     }
 }

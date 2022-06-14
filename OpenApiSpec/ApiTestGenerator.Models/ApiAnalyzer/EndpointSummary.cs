@@ -52,14 +52,6 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         }
         #endregion
 
-        public bool ContainsMatchingRequests()
-        {
-            if (this.endpointParsingData == null)
-                return false;
-
-            return endpointParsingData.ContainsMatchingRequests();
-        }
-
         public EndpointSummary ShallowCopy()
         {
             return (EndpointSummary)this.MemberwiseClone();
