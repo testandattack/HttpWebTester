@@ -6,8 +6,9 @@ using System.IO;
 using NSwag;
 using Serilog;
 using ApiTestGenerator.Models;
+using GTC.HttpWebTester.Settings;
 
-namespace SwaggerParsing
+namespace GTC.SwaggerParsing
 {
     public static class NSwagDto
     {

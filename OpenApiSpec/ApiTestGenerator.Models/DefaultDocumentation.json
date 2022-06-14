@@ -1,0 +1,12 @@
+{
+  "LinksBaseUrl": "https://github.com/testandattack/HttpWebTester/blob/master/ApiTestGenerator.Models/MarkDown/",
+  "LinksOutputFilePath": "MarkDown\\ApiTestGenerator.Models.txt",
+  "GeneratedAccessModifiers": "Public,Protected,ProtectedInternal",
+  "Markdown": {
+    "IgnoreLineBreak": true,
+    "TableOfContentsModes": "IncludeKind,IncludeSummary"
+  },
+  "GeneratedPages": "Assembly,Types",
+  "AssemblyPageName": "ApiTestGenerator.Models",
+  "FileNameFactory": "Name"
+}

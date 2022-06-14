@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwaggerParsing</name>
+    </assembly>
+    <members>
+        <member name="T:GTC.SwaggerParsing.SwaggerParser">
+            <summary>
+            This class contains all of the code to read from a serialized copy of an
+            Open API Specification document (from a json file or from the OAS definition URL on an API website)
+            and convert it into a <see href="https://github.com/Microsoft/OpenAPI.NET">
+            Microsoft OpenApiDocument</see>. It can also serialize and save the document to a local file system.
+            </summary>
+        </member>
+        <member name="P:GTC.SwaggerParsing.SwaggerParser.settings">
+            <summary>
+            the local instance of the <see cref="T:GTC.HttpWebTester.Settings.Settings"/> class containing 
+            </summary>
+        </member>
+        <member name="P:GTC.SwaggerParsing.SwaggerParser.apiDocument">
+            <summary>
+            The object that holds the parsed OAS document
+            </summary>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.#ctor">
+            <summary>
+            Creates a new instance of the parser using the <c>settings.json</c> file in the
+            root directory of the application.
+            </summary>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.#ctor(GTC.HttpWebTester.Settings.Settings)">
+            <summary>
+            Creates a new instance of the parser using the <see cref="T:GTC.HttpWebTester.Settings.Settings"/> object 
+            that is passed in.
+            </summary>
+            <param name="Settings">the pre-loaded settings object to use with this instance.</param>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument">
+            <summary>
+            call this to load the Swagger Document into memory
+            </summary>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.Boolean)">
+            <summary>
+            call this to load the Swagger Document into memory
+            </summary>
+            <param name="readFromFile">If true, the OAS is read from a file</param>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.String)">
+            <summary>
+            call this to load the Swagger Document into memory
+            </summary>
+            <param name="fileName">The name of the json file to read.</param>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.String,System.String)">
+            <summary>
+            call this to load the Swagger Document into memory
+            </summary>
+            <param name="baseUriAddress">the base URI for the connection to the server hosting the OAS Document</param>
+            <param name="swaggerStreamLocation">the URI-Stem for the OAS document.</param>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.SaveListOfURLs(System.String,ApiTestGenerator.Models.ApiDocs.ApiSet)">
+            <summary>
+            call this to save a base list of all operations
+            </summary>
+            <param name="fileName"></param>
+            <param name="apiSet"></param>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.SaveOriginalSwaggerDocument">
+            <summary>
+            call this to save the original swagger file (if read from a stream)
+            </summary>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode">
+            <summary>
+            This method uses the <see href="https://github.com/RicoSuter/NSwag">NSwag</see> Nuget package to generate
+            C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
+            specified in the settings file.
+            </summary>
+        </member>
+        <member name="M:GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode(System.String)">
+            <summary>
+            This method uses the <see href="https://github.com/RicoSuter/NSwag">NSwag</see> Nuget package to generate
+            C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
+            specified in the settings file.
+            </summary>
+            <param name="fileName">the fully qualified name of the code file to save.</param>
+        </member>
+    </members>
+</doc>

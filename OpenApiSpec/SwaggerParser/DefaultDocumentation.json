@@ -1,0 +1,12 @@
+{
+  "LinksBaseUrl": "https://github.com/testandattack/HttpWebTester/blob/master/SwaggerParsing/MarkDown/",
+  "LinksOutputFilePath": "MarkDown\\SwaggerTesting.txt",
+  "GeneratedAccessModifiers": "Public,Protected,ProtectedInternal",
+  "Markdown": {
+    "IgnoreLineBreak": true,
+    "TableOfContentsModes": "IncludeKind,IncludeSummary"
+  },
+  "GeneratedPages": "Assembly,Types",
+  "AssemblyPageName": "SwaggerParsing",
+  "FileNameFactory": "Name"
+}

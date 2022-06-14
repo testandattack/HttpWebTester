@@ -1,7 +1,9 @@
 ﻿using ApiTestGenerator.Models;
 using ApiTestGenerator.Models.ApiDocs;
-using HttpWebExtensions;
+using GTC.HttpUtilities;
+using GTC_HttpArchiveReader;
 using HttpWebTesting;
+using HttpWebTesting.Extensions;
 using HttpWebTesting.SampleTest;
 using HttpWebTesting.WebTestItems;
 using HttpWebTestingResults;
@@ -13,9 +15,6 @@ using System.Windows;
 using System.Windows.Controls;
 using WebTestExecutionEngine;
 using WebTestItemManager;
-using GTC.Extensions;
-using GTC_HttpArchiveReader;
-using HttpWebTesting.Extensions;
 
 namespace HttpWebTestingEditor
 {
@@ -191,7 +190,7 @@ namespace HttpWebTestingEditor
                 if (tvi.Tag != null)
                 {
                     tbResponseBody.Text = (tvi.Tag as WTRI_Request).responseBody;
-                    tbRequestBody.Text = (tvi.Tag as WTRI_Request).RequestAsSent.GetRequestBody();
+                    tbRequestBody.Text = (tvi.Tag as WTRI_Request).RequestAsSent.GetRequestContentBody();
                 }
 
             }

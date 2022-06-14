@@ -36,46 +36,13 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         public List<string> Methods { get; set; }
 
         public string UriPath { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public RequestsMatchingThisEndpoint webLogRequestsMatchingThisEndpoint { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public RequestsMatchingThisEndpoint harRequestsMatchingThisEndpoint { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public RequestsMatchingThisEndpoint auditRecordRequestsMatchingThisEndpoint { get; set; }
         #endregion
 
         #region -- Constructors -----
         public EndpointParsingData()
         {
             slotLocations = new Dictionary<int, string>();
-            webLogRequestsMatchingThisEndpoint = new RequestsMatchingThisEndpoint();
-            harRequestsMatchingThisEndpoint = new RequestsMatchingThisEndpoint();
-            auditRecordRequestsMatchingThisEndpoint = new RequestsMatchingThisEndpoint();
         }
         #endregion
-
-        public bool ContainsMatchingRequests()
-        {
-            int iTotal = 0;
-            if (webLogRequestsMatchingThisEndpoint != null
-                && webLogRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint != null)
-                iTotal += (int)webLogRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint;
-
-            if (harRequestsMatchingThisEndpoint != null
-                && harRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint != null)
-                iTotal += (int)harRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint;
-
-            if (auditRecordRequestsMatchingThisEndpoint != null
-                && auditRecordRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint != null)
-                iTotal += (int)auditRecordRequestsMatchingThisEndpoint.NumRequestsUsingThisEndpoint;
-
-            if (iTotal > 0)
-                return true;
-            else
-                return false;
-        }
     }
 }
