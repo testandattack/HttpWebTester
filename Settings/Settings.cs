@@ -28,12 +28,6 @@ namespace GTC.HttpWebTester.Settings
         public ApiDocsSettings apiDocsSettings { get; set;}
 
         public ApiAnalysisSettings apiAnalysisSettings { get; set; }
-
-        public CodeGenerationSettings codeGenerationSettings { get; set; }
-
-        public HarFileProcessingSettings harFileProcessingSettings { get; set; }
-
-        public WebLogAnalysisSettings webLogAnalysisSettings { get; set; }
         #endregion
 
         public static Settings LoadSettings(string fileName)

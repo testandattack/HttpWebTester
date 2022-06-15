@@ -11,6 +11,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using GTC.HttpWebTester.Settings;
+using SharedResources;
 
 /// <summary>
 /// A simple utility to read/write Swagger Documentation from/to a URL or a static file and 
@@ -24,7 +25,7 @@ namespace GTC.SwaggerParsing
     /// and convert it into a <see href="https://github.com/Microsoft/OpenAPI.NET">
     /// Microsoft OpenApiDocument</see>. It can also serialize and save the document to a local file system.
     /// </summary>
-    public class SwaggerParser
+    public class SwaggerFileParser : ISwaggerParser
     {
         /// <summary>
         /// the local instance of the <see cref="Settings"/> class containing 
@@ -41,7 +42,7 @@ namespace GTC.SwaggerParsing
         /// Creates a new instance of the parser using the <c>settings.json</c> file in the
         /// root directory of the application.
         /// </summary>
-        public SwaggerParser()
+        public SwaggerFileParser()
         {
             settings = Settings.LoadSettings("settings.json");
             InitializeLogging();
@@ -52,7 +53,7 @@ namespace GTC.SwaggerParsing
         /// that is passed in.
         /// </summary>
         /// <param name="Settings">the pre-loaded settings object to use with this instance.</param>
-        public SwaggerParser(Settings Settings)
+        public SwaggerFileParser(Settings Settings)
         {
             settings = Settings;
             InitializeLogging();
@@ -81,42 +82,32 @@ namespace GTC.SwaggerParsing
 
         #region -- Creation methods -----
         /// <summary>
-        /// call this to load the Swagger Document into memory
+        /// 
         /// </summary>
         public void PopulateApiDocument()
         {
-            PopulateApiDocument(settings.swaggerSettings.ReadSwaggerFromFile);
+            PopulateApiDocument(settings.swaggerSettings.SwaggerFileLocation);
         }
 
         /// <summary>
-        /// call this to load the Swagger Document into memory
+        /// 
         /// </summary>
-        /// <param name="readFromFile">If true, the OAS is read from a file</param>
-        public void PopulateApiDocument(bool readFromFile)
-        {
-            if (readFromFile == true)
-                PopulateApiDocumentFromFile();
-            else
-                PopulateApiDocumentFromStream();
-        }
-
-        /// <summary>
-        /// call this to load the Swagger Document into memory
-        /// </summary>
-        /// <param name="fileName">The name of the json file to read.</param>
+        /// <param name="fileName"></param>
         public void PopulateApiDocument(string fileName)
         {
-            PopulateApiDocumentFromFile(fileName);
-        }
+            _sourceLocation = fileName;
+            string serializedDocument;
 
-        /// <summary>
-        /// call this to load the Swagger Document into memory
-        /// </summary>
-        /// <param name="baseUriAddress">the base URI for the connection to the server hosting the OAS Document</param>
-        /// <param name="swaggerStreamLocation">the URI-Stem for the OAS document.</param>
-        public void PopulateApiDocument(string baseUriAddress, string swaggerStreamLocation)
-        {
-            PopulateApiDocumentFromStream(baseUriAddress, swaggerStreamLocation);
+            Log.ForContext<SwaggerFileParser>().Information("Reading input file from {endpoint}", _sourceLocation);
+            using (StreamReader sr = new StreamReader(_sourceLocation))
+            {
+                serializedDocument = sr.ReadToEnd();
+            }
+
+            Log.ForContext<SwaggerFileParser>().Information("Parsing file from {endpoint}", _sourceLocation);
+            var openApiStringReader = new OpenApiStringReader();
+            apiDocument = openApiStringReader.Read(serializedDocument, out OpenApiDiagnostic openApiDiagnostic);
+
         }
 
         ///// <summary>
@@ -136,30 +127,30 @@ namespace GTC.SwaggerParsing
         #endregion
 
         #region -- Write Results Methods -----
-        /// <summary>
-        /// call this to save a base list of all operations
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="apiSet"></param>
-        public void SaveListOfURLs(string fileName, ApiSet apiSet)
-        {
-            StringBuilder sb = new StringBuilder();
+        ///// <summary>
+        ///// call this to save a base list of all operations
+        ///// </summary>
+        ///// <param name="fileName"></param>
+        ///// <param name="apiSet"></param>
+        //public void SaveListOfURLs(string fileName, ApiSet apiSet)
+        //{
+        //    StringBuilder sb = new StringBuilder();
 
-            foreach (Controller controller in apiSet.Controllers.Values)
-            {
-                sb.Append($"----- {controller.Name} -----\r\n");
-                foreach (EndPoint endPoint in controller.EndPoints.Values)
-                {
-                    sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
-                }
-                sb.Append("\r\n");
-            }
+        //    foreach (Controller controller in apiSet.Controllers.Values)
+        //    {
+        //        sb.Append($"----- {controller.Name} -----\r\n");
+        //        foreach (EndPoint endPoint in controller.EndPoints.Values)
+        //        {
+        //            sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
+        //        }
+        //        sb.Append("\r\n");
+        //    }
 
-            using (StreamWriter sw = new StreamWriter($"{settings.DefaultOutputLocation}\\{fileName}", false))
-            {
-                sw.Write(sb.ToString());
-            }
-        }
+        //    using (StreamWriter sw = new StreamWriter($"{settings.DefaultOutputLocation}\\{fileName}", false))
+        //    {
+        //        sw.Write(sb.ToString());
+        //    }
+        //}
 
         /// <summary>
         /// call this to save the original swagger file (if read from a stream)
@@ -171,16 +162,16 @@ namespace GTC.SwaggerParsing
                 DateTime dt = DateTime.UtcNow;
                 var stringWriter = new StringWriter();
                 OpenApiJsonWriter openApiJsonWriter = new OpenApiJsonWriter(stringWriter);
-                Log.ForContext<SwaggerParser>().Information("Serializing OpenApiDoc {docName}", apiDocument.Info.Title);
+                Log.ForContext<SwaggerFileParser>().Information("Serializing OpenApiDoc {docName}", apiDocument.Info.Title);
                 apiDocument.SerializeAsV3(openApiJsonWriter);
 
                 string fileName = $"{settings.DefaultOutputLocation}\\{apiDocument.Info.Title}.json";
                 using (StreamWriter sw = new StreamWriter(fileName, false))
                 {
-                    Log.ForContext<SwaggerParser>().Information("Writing OpenApiDoc to {fileName}", fileName);
+                    Log.ForContext<SwaggerFileParser>().Information("Writing OpenApiDoc to {fileName}", fileName);
                     sw.Write(stringWriter.ToString());
                 }
-                Log.ForContext<SwaggerParser>().Information("Writing OpenApiDoc completed in {elapsed} seconds", dt.GetElapsedSeconds());
+                Log.ForContext<SwaggerFileParser>().Information("Writing OpenApiDoc completed in {elapsed} seconds", dt.GetElapsedSeconds());
             }
         }
 
@@ -191,7 +182,7 @@ namespace GTC.SwaggerParsing
         /// </summary>
         public void CreateAndSaveDtoCode()
         {
-            CreateAndSaveDtoCode(settings.codeGenerationSettings.DtoCodeFileName);
+            CreateAndSaveDtoCode(settings.swaggerSettings.DtoCodeFileName);
         }
 
         /// <summary>
@@ -212,56 +203,17 @@ namespace GTC.SwaggerParsing
                 sCode = NSwagDto.GetDtoCodeFromStream(_sourceLocation, settings);
             }
 
-            string codeFileName = $"{settings.DefaultOutputLocation}\\{fileName}";
-            Log.ForContext<SwaggerParser>().Information("[{method}]: Saving generated DTO code to file {fileName}", "CreateAndSaveDtoCode", codeFileName);
+            string codeFileName = string.Empty;
+            if (fileName.Contains("\\") == false)
+                codeFileName = $"{settings.DefaultOutputLocation}\\{fileName}";
+            else
+                codeFileName = fileName;
+
+            Log.ForContext<SwaggerFileParser>().Information("[{method}]: Saving generated DTO code to file {fileName}", "CreateAndSaveDtoCode", codeFileName);
             using (StreamWriter sw = new StreamWriter(codeFileName, false))
             {
                 sw.Write(sCode);
             }
-        }
-        #endregion
-
-        #region -- private methods -----
-        private void PopulateApiDocumentFromStream()
-        {
-            PopulateApiDocumentFromStream(settings.swaggerSettings.BaseUriAddress, settings.swaggerSettings.SwaggerStreamLocation);
-        }
-
-        private void PopulateApiDocumentFromStream(string baseUriAddress, string swaggerStreamLocation)
-        {
-            _sourceLocation = $"{baseUriAddress} + {swaggerStreamLocation}";
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUriAddress)
-            };
-
-            Log.ForContext<SwaggerParser>().Information("Parsing doc at {endpoint}", _sourceLocation);
-            var stream = httpClient.GetStreamAsync(swaggerStreamLocation).GetAwaiter().GetResult();
-            OpenApiDiagnostic openApiDiagnostic;
-            apiDocument = new OpenApiStreamReader().Read(stream, out openApiDiagnostic);
-            Log.ForContext<SwaggerParser>().Debug("ApiDocument read. {@output}", openApiDiagnostic);
-        }
-
-        private void PopulateApiDocumentFromFile()
-        {
-            PopulateApiDocumentFromFile(settings.swaggerSettings.SwaggerFileLocation);
-        }
-
-        private void PopulateApiDocumentFromFile(string fileName)
-        {
-            _sourceLocation = fileName;
-            string serializedDocument;
-
-            Log.ForContext<SwaggerParser>().Information("Reading input file from {endpoint}", _sourceLocation);
-            using (StreamReader sr = new StreamReader(_sourceLocation))
-            {
-                serializedDocument = sr.ReadToEnd();
-            }
-
-            Log.ForContext<SwaggerParser>().Information("Parsing file from {endpoint}", _sourceLocation);
-            var openApiStringReader = new OpenApiStringReader();
-            apiDocument = openApiStringReader.Read(serializedDocument, out OpenApiDiagnostic openApiDiagnostic);
-
         }
         #endregion
     }

@@ -30,44 +30,36 @@ namespace Engines.ApiDocs
     /// </remarks>
     public class ApiSetEngine
     {
-        public ApiSet apiSet { get; set; }
 
         #region -- Constructors -----
-        public ApiSetEngine()
-        {
-            apiSet = new ApiSet();
-        }
+        public ApiSetEngine() { }
 
-        public ApiSetEngine(string ApiRoot)
+        public ApiSet BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
-            apiSet = new ApiSet(ApiRoot);
-        }
-
-        public ApiSetEngine(OpenApiDocument openApiDocument, string SourceLocation, string ApiRoot)
-        {
-            apiSet = new ApiSet(ApiRoot);
-            Log.ForContext<ApiSetEngine>().Debug("ApiSet_Constructor: Starting parse of {@value1}", openApiDocument.Info);
+            ApiSet apiSet = new ApiSet(ApiRoot);
+            Log.ForContext("SourceContext", "ApiSetEngine").Debug("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
-            AddServers(openApiDocument);
-            BuildControllerList(openApiDocument);
-            BuildComponentList(openApiDocument);
+            AddServers(openApiDocument, apiSet);
+            BuildControllerList(openApiDocument, apiSet);
+            BuildComponentList(openApiDocument, apiSet);
+            return apiSet;
         }
         #endregion
 
         #region -- Public Methods -----
-        public void BuildControllerList(OpenApiDocument openApiDocument)
+        public void BuildControllerList(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             int currentRequestId = 1;
             foreach (var path in openApiDocument.Paths)
             {
-                Controller controller = GetController(path);
+                Controller controller = GetController(path, apiSet);
                 currentRequestId = AddEndPoints(controller, path.Key, path.Value, currentRequestId);
             }
-            AddRequestBodyItems(openApiDocument);
-            AddResponseObjectDetails(openApiDocument);
+            AddRequestBodyItems(openApiDocument, apiSet);
+            AddResponseObjectDetails(openApiDocument, apiSet);
         }
 
-        public void BuildComponentList(OpenApiDocument openApiDocument)
+        public void BuildComponentList(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             int x = 0;
             foreach (var componentSchema in openApiDocument.Components.Schemas)
@@ -87,7 +79,7 @@ namespace Engines.ApiDocs
 
         }
 
-        public void AddServers(OpenApiDocument openApiDocument)
+        public void AddServers(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             if (openApiDocument.Servers != null)
             {
@@ -101,7 +93,7 @@ namespace Engines.ApiDocs
         #endregion
 
         #region -- Private Methods -----
-        private Controller GetController(KeyValuePair<string, OpenApiPathItem> path)
+        private Controller GetController(KeyValuePair<string, OpenApiPathItem> path, ApiSet apiSet)
         {
             // The path Key is the UriPath of the API endpoint. The controller name is
             // made by taking the first part of the path after the root.
@@ -111,7 +103,7 @@ namespace Engines.ApiDocs
             {
                 if (controller.Name == controllerName)
                 {
-                    Log.ForContext<ApiSetEngine>().Debug("GetController: found existing Controller: {controllerName}", controllerName);
+                    Log.ForContext("SourceContext", "ApiSetEngine").Debug("GetController: found existing Controller: {controllerName}", controllerName);
                     return controller;
                 }
             }
@@ -120,7 +112,7 @@ namespace Engines.ApiDocs
             Controller newController = new Controller();
             newController.Name = controllerName;
             apiSet.Controllers.Add(controllerName, newController);
-            Log.ForContext<ApiSetEngine>().Debug("GetController: Made new Controller: {controllerName}", controllerName);
+            Log.ForContext("SourceContext", "ApiSetEngine").Debug("GetController: Made new Controller: {controllerName}", controllerName);
             return newController;
         }
 
@@ -175,7 +167,7 @@ namespace Engines.ApiDocs
             return startingId;
         }
 
-        private void AddRequestBodyItems(OpenApiDocument openApiDocument)
+        private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {
@@ -196,7 +188,7 @@ namespace Engines.ApiDocs
             }
         }
 
-        private void AddResponseObjectDetails(OpenApiDocument openApiDocument)
+        private void AddResponseObjectDetails(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {

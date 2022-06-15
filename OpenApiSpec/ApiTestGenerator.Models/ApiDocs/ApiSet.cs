@@ -76,9 +76,14 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         public void SerializeAndSaveApiSet(bool append = false)
         {
+            SerializeAndSaveApiSet(settings.DefaultOutputLocation, append);
+        }
+
+        public void SerializeAndSaveApiSet(string fileName, bool append = false)
+        {
             try
             {
-                string filePath = settings.DefaultOutputLocation + "\\ApiSet.json";
+                string filePath = fileName + "\\ApiSet.json";
 
                 string str = JsonConvert.SerializeObject(this, Formatting.Indented);
 
