@@ -17,16 +17,16 @@ namespace Engines.ApiDocs.Extensions
         {
             if (openApiSchema.Description != null)
             {
-                if (openApiSchema.Description.Contains(ParseTokens.TKN_ClassName))
+                if (openApiSchema.Description.Contains(ParserTokens.TKN_ClassName))
                 {
-                    component.ClassName = openApiSchema.Description.FindSubString(ParseTokens.TKN_ClassName, ")");
+                    component.ClassName = openApiSchema.Description.FindSubString(ParserTokens.TKN_ClassName, ")");
                 }
                 else
                 {
                     component.ClassName = "Description didn't contain name";
                 }
             }
-            else if (openApiSchema.Type.ToLower() != "object" && openApiSchema.Enum != null)
+            else if (openApiSchema.Type != null && openApiSchema.Type.ToLower() != "object" && openApiSchema.Enum != null)
             {
                 component.ClassName = typeof(Enum).ToString();
             }

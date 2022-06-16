@@ -37,7 +37,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// and adds the <see cref="ProvidesValuesForTheseMethods"/> values to the object.
         /// </summary>
         /// <param name="endPoints">the name of the source code method as described in the 
-        /// <see cref="ParseTokens.TKN_ProvidesValuesFor"/> property of the Swagger Documentation.</param>
+        /// <see cref="ParserTokens.TKN_ProvidesValuesFor"/> property of the Swagger Documentation.</param>
         public ProvidesValuesFor(List<string> endPoints)
         {
             ProvidesValuesForTheseMethods = endPoints;

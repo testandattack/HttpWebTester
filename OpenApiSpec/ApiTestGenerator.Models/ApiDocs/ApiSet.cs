@@ -9,14 +9,24 @@ using GTC.HttpWebTester.Settings;
 
 namespace ApiTestGenerator.Models.ApiDocs
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApiSet
     {
         #region -- Properties -----
         [JsonIgnore]
         public Settings settings { get; set; }
 
-        [JsonIgnore]
+        /// <summary>
+        /// The left part of the UriStem that comes before 'controller' names.
+        /// </summary>
         public string apiRoot { get; set; }
+
+        /// <summary>
+        /// The Open API Specification version used for creating the document.
+        /// </summary>
+        public string OasVersion { get; set; }
 
         /// <summary>
         /// Contains the <see cref="OpenApiInfo"/> object from the Swagger Documentation
@@ -40,21 +50,54 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         //public SortedDictionary<string,Component> Components { get; private set; }
         public Dictionary<string, Component> Components { get; private set; }
+
+        /// <summary>
+        /// The list of OpenApiSecuritySchemes associated with this OAS Document
+        /// </summary>
+        public List<OpenApiSecurityScheme> SecuritySchemes { get; private set; }
+
+        /// <summary>
+        /// The transfer protocos(s) used by the API. [OAS v2.x only]
+        /// </summary>
+        [JsonProperty(PropertyName = "Schemes", NullValueHandling = NullValueHandling.Ignore)]
+        public List<string> Schemes { get; set; }
         #endregion
 
         #region -- Constructors -----
+        /// <summary>
+        /// Creates a new empty ApiSet instance.
+        /// </summary>
         public ApiSet()
         {
-            Controllers = new Dictionary<string, Controller>();
-            Components = new Dictionary<string, Component>();
-            apiRoot = string.Empty;
+            Initialize(string.Empty, null);
         }
 
-        public ApiSet(string ApiRoot)
+        /// <summary>
+        /// Creates a new empty ApiSet instance using the provided <paramref name="settings"/> object.
+        /// </summary>
+        /// <param name="settings"></param>
+        public ApiSet(Settings settings)
         {
+            Initialize(string.Empty, settings);
+        }
+
+        /// <summary>
+        /// Creates a new ApiSet instance using the provided <paramref name="ApiRoot"/> and <paramref name="settings"/> objects.
+        /// </summary>
+        /// <param name="ApiRoot"></param>
+        /// <param name="settings"></param>
+        public ApiSet(string ApiRoot, Settings settings)
+        {
+            Initialize(ApiRoot, settings);
+        }
+
+        private void Initialize(string ApiRoot, Settings Settings)
+        {
+            settings = Settings;
             apiRoot = ApiRoot;
             Controllers = new Dictionary<string, Controller>();
             Components = new Dictionary<string, Component>();
+            SecuritySchemes = new List<OpenApiSecurityScheme>();
         }
         #endregion
 

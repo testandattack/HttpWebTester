@@ -45,7 +45,7 @@ public RestrictTo(System.Collections.Generic.List<string> roles);
 `roles` [System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
 
 the name of the source code method as described in the   
-            [TKN_RestrictTo](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_RestrictTo 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_RestrictTo') property of the Swagger Documentation.
+            [TKN_RestrictTo](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_RestrictTo 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_RestrictTo') property of the Swagger Documentation.
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiDocs.RestrictTo.RestrictToRoles'></a>

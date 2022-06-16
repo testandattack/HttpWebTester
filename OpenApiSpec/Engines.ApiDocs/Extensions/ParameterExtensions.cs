@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using GTC.Extensions;
+using GTC.OpenApiUtilities;
 
 namespace Engines.ApiDocs
 {
@@ -34,7 +35,7 @@ namespace Engines.ApiDocs
 
         public static void CheckForTestDataFilter(this Parameter source, string description)
         {
-            string str = description.FindSubString(ParseTokens.TKN_TestDataFilter, ")");
+            string str = description.FindSubString(ParserTokens.TKN_TestDataFilter, ")");
 
             if (str != string.Empty)
             {
@@ -45,7 +46,7 @@ namespace Engines.ApiDocs
 
         public static void CheckForGetsInputFrom(this Parameter source, string description)
         {
-            string str = description.FindSubString(ParseTokens.TKN_GetsInputFrom, ")");
+            string str = description.FindSubString(ParserTokens.TKN_GetsInputFrom, ")");
 
             if (str != string.Empty)
             {
@@ -60,7 +61,7 @@ namespace Engines.ApiDocs
                 return;
 
  
-            string str = description.FindSubString(ParseTokens.PARAM_StartDate, ")");
+            string str = description.FindSubString(ParserTokens.PARAM_StartDate, ")");
             if (str != string.Empty)
             {
                 CalculatedDateValue calcultedDate = new CalculatedDateValue(str);
@@ -74,7 +75,7 @@ namespace Engines.ApiDocs
                 return;
 
 
-            string str = description.FindSubString(ParseTokens.PARAM_EndDate, ")");
+            string str = description.FindSubString(ParserTokens.PARAM_EndDate, ")");
             if (str != string.Empty)
             {
                 CalculatedDateValue calcultedDate = new CalculatedDateValue(str);

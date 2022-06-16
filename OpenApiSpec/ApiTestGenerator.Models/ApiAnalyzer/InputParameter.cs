@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ApiTestGenerator.Models.ApiAnalyzer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class InputParameter
     {
         #region -- Properties -----
@@ -85,16 +88,36 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// </remarks>
         public string arrayFormat { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Required { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string InputProvider { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> NameVariations { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> MatchesTheseComponents { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> UsedByTheseEndpoints { get; set; }
         #endregion
 
         #region -- Constructors -----
+        /// <summary>
+        /// 
+        /// </summary>
         public InputParameter()
         {
             Name = string.Empty;
@@ -109,7 +132,18 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             UsedByTheseEndpoints = new List<string>();
         }
 
-        public InputParameter(string name, string type, bool isArray,
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="type"></param>
+        /// <param name="isArray"></param>
+        /// <param name="ArrayType"></param>
+        /// <param name="format"></param>
+        /// <param name="required"></param>
+        /// <param name="inputProvider"></param>
+        public InputParameter(string name, string description, string type, bool isArray,
             string ArrayType, string format, bool required, string inputProvider)
         {
             Name = name;
@@ -125,6 +159,10 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         }
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             int hash = 19;

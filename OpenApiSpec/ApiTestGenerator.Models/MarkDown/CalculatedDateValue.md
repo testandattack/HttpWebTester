@@ -41,8 +41,8 @@ public CalculatedDateValue(string description);
 
 `description` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
-A string that contains a [PARAM_StartDate](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParseTokens.PARAM_StartDate') token  
-            and a set of [TKN_CalculatedDateStringFormat](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_CalculatedDateStringFormat 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_CalculatedDateStringFormat') values.
+A string that contains a [PARAM_StartDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate') token  
+            and a set of [TKN_CalculatedDateStringFormat](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_CalculatedDateStringFormat 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_CalculatedDateStringFormat') values.
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiDocs.CalculatedDateValue.BaseDate'></a>

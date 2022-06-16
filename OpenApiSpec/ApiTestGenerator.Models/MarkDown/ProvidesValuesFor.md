@@ -47,7 +47,7 @@ public ProvidesValuesFor(System.Collections.Generic.List<string> endPoints);
 `endPoints` [System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
 
 the name of the source code method as described in the   
-            [TKN_ProvidesValuesFor](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_ProvidesValuesFor 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_ProvidesValuesFor') property of the Swagger Documentation.
+            [TKN_ProvidesValuesFor](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_ProvidesValuesFor 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_ProvidesValuesFor') property of the Swagger Documentation.
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiDocs.ProvidesValuesFor.ProvidesValuesForTheseMethods'></a>

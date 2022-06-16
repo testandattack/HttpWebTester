@@ -8,6 +8,56 @@ public class InputParameter
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; InputParameter
+### Constructors
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter()'></a>
+
+## InputParameter() Constructor
+
+```csharp
+public InputParameter();
+```
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string)'></a>
+
+## InputParameter(string, string, string, bool, string, string, bool, string) Constructor
+
+```csharp
+public InputParameter(string name, string description, string type, bool isArray, string ArrayType, string format, bool required, string inputProvider);
+```
+#### Parameters
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).name'></a>
+
+`name` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).description'></a>
+
+`description` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).type'></a>
+
+`type` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).isArray'></a>
+
+`isArray` [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).ArrayType'></a>
+
+`ArrayType` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).format'></a>
+
+`format` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).required'></a>
+
+`required` [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputParameter(string,string,string,bool,string,string,bool,string).inputProvider'></a>
+
+`inputProvider` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.arrayFormat'></a>
@@ -94,6 +144,17 @@ specification. Types that are not accompanied by a format property follow the ty
 definition in the JSON Schema. Tools that do not recognize a specific format MAY default   
 back to the type alone, as if the format is not specified.
 
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputProvider'></a>
+
+## InputParameter.InputProvider Property
+
+```csharp
+public string InputProvider { get; set; }
+```
+
+#### Property Value
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
 <a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.IsArray'></a>
 
 ## InputParameter.IsArray Property
@@ -107,6 +168,17 @@ public bool IsArray { get; set; }
 #### Property Value
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.MatchesTheseComponents'></a>
+
+## InputParameter.MatchesTheseComponents Property
+
+```csharp
+public System.Collections.Generic.List<string> MatchesTheseComponents { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+
 <a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Name'></a>
 
 ## InputParameter.Name Property
@@ -119,6 +191,17 @@ public string Name { get; set; }
 
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.NameVariations'></a>
+
+## InputParameter.NameVariations Property
+
+```csharp
+public System.Collections.Generic.List<string> NameVariations { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
 
 <a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Reference'></a>
 
@@ -135,6 +218,17 @@ public string Reference { get; set; }
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Required'></a>
+
+## InputParameter.Required Property
+
+```csharp
+public bool Required { get; set; }
+```
+
+#### Property Value
+[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
+
 <a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Type'></a>
 
 ## InputParameter.Type Property
@@ -148,3 +242,26 @@ public string Type { get; set; }
 
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.UsedByTheseEndpoints'></a>
+
+## InputParameter.UsedByTheseEndpoints Property
+
+```csharp
+public System.Collections.Generic.List<string> UsedByTheseEndpoints { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+### Methods
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.InputParameter.GetHashCode()'></a>
+
+## InputParameter.GetHashCode() Method
+
+```csharp
+public override int GetHashCode();
+```
+
+#### Returns
+[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')

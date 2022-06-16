@@ -44,8 +44,7 @@ namespace GTC.SwaggerParsing
         /// </summary>
         public SwaggerUrlParser()
         {
-            settings = Settings.LoadSettings("settings.json");
-            InitializeLogging();
+            settings = new Settings("settings.json");
         }
 
         /// <summary>
@@ -56,28 +55,6 @@ namespace GTC.SwaggerParsing
         public SwaggerUrlParser(Settings Settings)
         {
             settings = Settings;
-            InitializeLogging();
-        }
-
-        private void InitializeLogging()
-        {
-            // SERILOG Config: https://github.com/serilog/serilog/wiki/Configuration-Basics
-
-            if (settings.logSettings.ClearLogFileOnStartup)
-            {
-                if (File.Exists(settings.logSettings.DefaultLogFileName))
-                    File.Delete(settings.logSettings.DefaultLogFileName);
-            }
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.FromLogContext()
-                .WriteTo.File(
-                    path: settings.logSettings.DefaultLogFileName,
-                    restrictedToMinimumLevel: settings.logSettings.MinLogEventLevel,
-                    formatter: new CompactJsonFormatter(),
-                    rollingInterval: RollingInterval.Infinite)
-                .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
-                .CreateLogger();
         }
 
         #region -- Creation methods -----
@@ -104,48 +81,9 @@ namespace GTC.SwaggerParsing
             apiDocument = new OpenApiStreamReader().Read(stream, out openApiDiagnostic);
             Log.ForContext<SwaggerUrlParser>().Debug("ApiDocument read. {@output}", openApiDiagnostic);
         }
-        ///// <summary>
-        ///// call this to convert the doc into an ApiSet object
-        ///// </summary>
-        ///// <returns></returns>
-        //public ApiSet BuildApiSetFromOpenApiDocument()
-        //{
-        //    Log.ForContext<SwaggerParser>().Information("Building ApiSet");
-        //    ApiSetEngine apiSetEngine = new ApiSetEngine(apiDocument, _sourceLocation, settings.swaggerSettings.apiRoot);
-        //    //apiSet = apiSetengine.apiSet;
-        //    //apiSet.settings = settings;
-
-        //    apiSetEngine.apiSet.settings = settings;
-        //    return apiSetEngine.apiSet;
-        //}
         #endregion
 
         #region -- Write Results Methods -----
-        ///// <summary>
-        ///// call this to save a base list of all operations
-        ///// </summary>
-        ///// <param name="fileName"></param>
-        ///// <param name="apiSet"></param>
-        //public void SaveListOfURLs(string fileName, ApiSet apiSet)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-
-        //    foreach (Controller controller in apiSet.Controllers.Values)
-        //    {
-        //        sb.Append($"----- {controller.Name} -----\r\n");
-        //        foreach (EndPoint endPoint in controller.EndPoints.Values)
-        //        {
-        //            sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
-        //        }
-        //        sb.Append("\r\n");
-        //    }
-
-        //    using (StreamWriter sw = new StreamWriter($"{settings.DefaultOutputLocation}\\{fileName}", false))
-        //    {
-        //        sw.Write(sb.ToString());
-        //    }
-        //}
-
         /// <summary>
         /// call this to save the original swagger file (if read from a stream)
         /// </summary>

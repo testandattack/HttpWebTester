@@ -1,4 +1,5 @@
 ﻿using ApiTestGenerator.Models.Enums;
+using GTC.OpenApiUtilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -7,6 +8,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
     public class EndpointSummary
     {
         #region -- Properties -----
+        public int endpointId { get; set; }
         public bool IsDepricated { get; set; }
         public bool IsTestMethod { get; set; }
 
@@ -27,14 +29,11 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         public string Responses { get; set; }
         
         /// <summary>
-        /// <see cref="RequestBody.RequestBodyContentType"/>
+        /// an enum defining the type of content in the request body
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public RequestBodyContentTypeEnum? RequestBodyContentType { get; set; }
-
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public EndpointParsingData endpointParsingData { get; set; }
         #endregion
 
         #region -- Constructors -----
@@ -49,6 +48,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             NumberOfParamsWithExample = 0;
             NumberOfParamsWithExamples = 0;
             customEndPointObjectTypes = string.Empty;
+            endpointId = -1;
         }
         #endregion
 

@@ -1,6 +1,7 @@
 https://github.com/testandattack/HttpWebTester/blob/master/SwaggerParsing/MarkDown/
 P:GTC.SwaggerParsing.SwaggerFileParser.settings|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.settings|settings
 P:GTC.SwaggerParsing.SwaggerFileParser.apiDocument|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.apiDocument|apiDocument
+P:GTC.SwaggerParsing.SwaggerFileParser.extraInfo|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.extraInfo|extraInfo
 M:GTC.SwaggerParsing.SwaggerFileParser.#ctor|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.SwaggerFileParser()|SwaggerFileParser()
 M:GTC.SwaggerParsing.SwaggerFileParser.#ctor(GTC.HttpWebTester.Settings.Settings)|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.SwaggerFileParser(GTC.HttpWebTester.Settings.Settings)|SwaggerFileParser(Settings)
 M:GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument()|PopulateApiDocument()

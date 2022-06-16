@@ -44,8 +44,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// Creates a new instance of the <see cref="CalculatedDateValue"/> object
         /// and populates the values from the provided input string
         /// </summary>
-        /// <param name="description">A string that contains a <see cref="ParseTokens.PARAM_StartDate"/> token
-        /// and a set of <see cref="ParseTokens.TKN_CalculatedDateStringFormat"/> values.</param>
+        /// <param name="description">A string that contains a <see cref="ParserTokens.PARAM_StartDate"/> token
+        /// and a set of <see cref="ParserTokens.TKN_CalculatedDateStringFormat"/> values.</param>
         public CalculatedDateValue(string description)
         {
             customEndPointObjectType = CustomEndPointObjectTypeEnum.CalculatedDateValue;

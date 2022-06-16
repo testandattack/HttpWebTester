@@ -57,8 +57,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// Creates a new instance of the <see cref="TestDataFilter"/> object
         /// and populates the values from the provided input string
         /// </summary>
-        /// <param name="description">A string that contains a <see cref="ParseTokens.TKN_TestDataFilter"/> token
-        /// and a set of values in the form of <see cref="ParseTokens.TKN_TestDataFilterStringFormat"/>.</param>
+        /// <param name="description">A string that contains a <see cref="ParserTokens.TKN_TestDataFilter"/> token
+        /// and a set of values in the form of <see cref="ParserTokens.TKN_TestDataFilterStringFormat"/>.</param>
         public TestDataFilter(string description)
         {
             customEndPointObjectType = CustomEndPointObjectTypeEnum.TestDataFilter;

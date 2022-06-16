@@ -9,33 +9,33 @@ namespace ApiTestGenerator.Models.Enums
     public enum CustomEndPointObjectTypeEnum
     {
         /// <summary>
-        /// <see cref="ParseTokens.TKN_RestrictTo"/>
+        /// <see cref="ParserTokens.TKN_RestrictTo"/>
         /// </summary>
         RestrictTo = 1,
 
         /// <summary>
-        /// <see cref="ParseTokens.TKN_ProvidesValuesFor"/>
+        /// <see cref="ParserTokens.TKN_ProvidesValuesFor"/>
         /// </summary>
         ProvidesValuesFor = 2,
 
         /// <summary>
-        /// <see cref="ParseTokens.TKN_MethodName"/>
+        /// <see cref="ParserTokens.TKN_MethodName"/>
         /// </summary>
         MethodName = 3,
 
         /// <summary>
-        /// <see cref="ParseTokens.TKN_TestDataFilter"/>
+        /// <see cref="ParserTokens.TKN_TestDataFilter"/>
         /// </summary>
         TestDataFilter = 4,
 
         /// <summary>
-        /// <see cref="ParseTokens.TKN_GetsInputFrom"/>
+        /// <see cref="ParserTokens.TKN_GetsInputFrom"/>
         /// </summary>
         GetsInputFrom = 5,
 
         /// <summary>
-        /// <see cref="ParseTokens.PARAM_StartDate"/> 
-        /// or <see cref="ParseTokens.PARAM_EndDate"/>
+        /// <see cref="ParserTokens.PARAM_StartDate"/> 
+        /// or <see cref="ParserTokens.PARAM_EndDate"/>
         /// </summary>
         CalculatedDateValue = 6
     }

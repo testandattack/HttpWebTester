@@ -45,7 +45,7 @@ public MethodName(string name);
 `name` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 the name of the source code method as described in the   
-            [TKN_MethodName](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_MethodName 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_MethodName') property of the Swagger Documentation.
+            [TKN_MethodName](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_MethodName 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_MethodName') property of the Swagger Documentation.
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiDocs.MethodName.methodName'></a>

@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using GTC.OpenApiUtilities;
+using ApiTestGenerator.Models.Enums;
+using ApiTestGenerator.Models.Consts;
 
 namespace ApiTestGenerator.Models.ApiDocs
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EndPoint
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int EndpointId { get; set; }
 
         #region -- Properties that map directly to OpenApiScec properties -----
@@ -82,7 +91,7 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         /// <summary>
         /// A boolean that describes if the method contains the
-        /// <see cref="ParseTokens.TKN_LookupMethod"/> tag indicating
+        /// <see cref="ParserTokens.TKN_LookupMethod"/> tag indicating
         /// that the method is used to grab lookup values for other
         /// methods in the API.
         /// </summary>
@@ -91,7 +100,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// A boolean that indicates if this method is exposed solely for
         /// the Tester Role and woill not be used by the application.
-        /// All Test methods contain <see cref="ParseTokens.DESC_ForTestingPurposes"/>
+        /// All Test methods contain <see cref="ParserTokens.DESC_ForTestingPurposes"/>
         /// in the Description field.
         /// </summary>
         public bool IsForTestingPurposes { get; set; }

@@ -16,7 +16,7 @@
     /// <item><c>DESC</c> These items are more generic and act as a 'catch-all' bucket for terms.</item>
     /// </list>
     /// </remarks>
-    public class ParseTokens
+    public class ParserTokens
     {
         /// <summary>
         /// Gets the fully qualified name of the property that will provide input into this parameter

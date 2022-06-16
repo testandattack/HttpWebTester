@@ -1,7 +1,8 @@
-﻿using ApiTestGenerator.Models.Enums;
+﻿using ApiTestGenerator.Models.ApiDocs;
+using ApiTestGenerator.Models.Enums;
 using System.Collections.Generic;
 
-namespace ApiTestGenerator.Models.ApiDocs
+namespace Engines.ApiDocs.Extensions
 {
     public static class CustomEndpointObjectExtensions
     {

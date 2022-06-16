@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using GTC.HttpWebTester.Settings;
 using SharedResources;
+using System.Collections.Generic;
 
 /// <summary>
 /// A simple utility to read/write Swagger Documentation from/to a URL or a static file and 
@@ -39,13 +40,18 @@ namespace GTC.SwaggerParsing
         public OpenApiDocument apiDocument { get; private set; }
 
         /// <summary>
+        /// This dictionary stores info from the serialized string that is not
+        /// picked up by the <c>OpenApiDocument</c> object.
+        /// </summary>
+        public Dictionary<string, string> extraInfo { get; set; }
+
+        /// <summary>
         /// Creates a new instance of the parser using the <c>settings.json</c> file in the
         /// root directory of the application.
         /// </summary>
         public SwaggerFileParser()
         {
-            settings = Settings.LoadSettings("settings.json");
-            InitializeLogging();
+            settings = new Settings("settings.json");
         }
 
         /// <summary>
@@ -56,28 +62,6 @@ namespace GTC.SwaggerParsing
         public SwaggerFileParser(Settings Settings)
         {
             settings = Settings;
-            InitializeLogging();
-        }
-
-        private void InitializeLogging()
-        {
-            // SERILOG Config: https://github.com/serilog/serilog/wiki/Configuration-Basics
-
-            if (settings.logSettings.ClearLogFileOnStartup)
-            {
-                if (File.Exists(settings.logSettings.DefaultLogFileName))
-                    File.Delete(settings.logSettings.DefaultLogFileName);
-            }
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .Enrich.FromLogContext()
-                .WriteTo.File(
-                    path: settings.logSettings.DefaultLogFileName,
-                    restrictedToMinimumLevel: settings.logSettings.MinLogEventLevel,
-                    formatter: new CompactJsonFormatter(),
-                    rollingInterval: RollingInterval.Infinite)
-                .WriteTo.Console(restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
-                .CreateLogger();
         }
 
         #region -- Creation methods -----
@@ -103,55 +87,25 @@ namespace GTC.SwaggerParsing
             {
                 serializedDocument = sr.ReadToEnd();
             }
+            
+            Log.ForContext<SwaggerFileParser>().Information("Getting extra info from the raw serialized string.");
+            GetExtraInfo(ref serializedDocument);
 
             Log.ForContext<SwaggerFileParser>().Information("Parsing file from {endpoint}", _sourceLocation);
             var openApiStringReader = new OpenApiStringReader();
-            apiDocument = openApiStringReader.Read(serializedDocument, out OpenApiDiagnostic openApiDiagnostic);
+            try
+            {
+                apiDocument = openApiStringReader.Read(serializedDocument, out OpenApiDiagnostic openApiDiagnostic);
+            }
+            catch(Exception ex)
+            {
+                Log.ForContext<SwaggerFileParser>().Error(ex, "Error in OpenApiStringReader().Read()");
+            }
 
         }
-
-        ///// <summary>
-        ///// call this to convert the doc into an ApiSet object
-        ///// </summary>
-        ///// <returns></returns>
-        //public ApiSet BuildApiSetFromOpenApiDocument()
-        //{
-        //    Log.ForContext<SwaggerParser>().Information("Building ApiSet");
-        //    ApiSetEngine apiSetEngine = new ApiSetEngine(apiDocument, _sourceLocation, settings.swaggerSettings.apiRoot);
-        //    //apiSet = apiSetengine.apiSet;
-        //    //apiSet.settings = settings;
-
-        //    apiSetEngine.apiSet.settings = settings;
-        //    return apiSetEngine.apiSet;
-        //}
         #endregion
 
         #region -- Write Results Methods -----
-        ///// <summary>
-        ///// call this to save a base list of all operations
-        ///// </summary>
-        ///// <param name="fileName"></param>
-        ///// <param name="apiSet"></param>
-        //public void SaveListOfURLs(string fileName, ApiSet apiSet)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-
-        //    foreach (Controller controller in apiSet.Controllers.Values)
-        //    {
-        //        sb.Append($"----- {controller.Name} -----\r\n");
-        //        foreach (EndPoint endPoint in controller.EndPoints.Values)
-        //        {
-        //            sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
-        //        }
-        //        sb.Append("\r\n");
-        //    }
-
-        //    using (StreamWriter sw = new StreamWriter($"{settings.DefaultOutputLocation}\\{fileName}", false))
-        //    {
-        //        sw.Write(sb.ToString());
-        //    }
-        //}
-
         /// <summary>
         /// call this to save the original swagger file (if read from a stream)
         /// </summary>
@@ -213,6 +167,46 @@ namespace GTC.SwaggerParsing
             using (StreamWriter sw = new StreamWriter(codeFileName, false))
             {
                 sw.Write(sCode);
+            }
+        }
+        #endregion
+
+        #region -- private methods -----
+        private void GetExtraInfo(ref string serializedDocument)
+        {
+            extraInfo = new Dictionary<string, string>();
+
+            GetOasVersion(ref serializedDocument);
+            GetSchemes(ref serializedDocument);
+        }
+
+        private void GetOasVersion(ref string serializedDocument)
+        {
+            string oasVersion = serializedDocument.FindSubString("\"swagger\": \"", "\"");
+            if (oasVersion == string.Empty)
+            {
+                oasVersion = serializedDocument.FindSubString("\"openapi\": \"", "\"");
+            }
+            if (oasVersion == string.Empty)
+            {
+                extraInfo.Add("OAS Version", "Could not determine version.");
+            }
+            else
+            {
+                extraInfo.Add("OAS Version", oasVersion);
+            }
+        }
+
+        private void GetSchemes(ref string serializedDocument)
+        {
+            string schemes = serializedDocument.FindSubString("\"schemes\": [", "]");
+            if (schemes == string.Empty)
+            {
+                extraInfo.Add("Schemes", "No schemes found.");
+            }
+            else
+            {
+                extraInfo.Add("Schemes", schemes.Flattened(2048));
             }
         }
         #endregion

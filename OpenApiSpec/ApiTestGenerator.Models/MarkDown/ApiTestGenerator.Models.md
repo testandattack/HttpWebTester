@@ -21,7 +21,6 @@
 | Classes | |
 | :--- | :--- |
 | [ApiSetAnalysis](ApiSetAnalysis.md 'ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis') | |
-| [EndpointParsingData](EndpointParsingData.md 'ApiTestGenerator.Models.ApiAnalyzer.EndpointParsingData') | |
 | [EndpointSummary](EndpointSummary.md 'ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary') | |
 | [InputParameter](InputParameter.md 'ApiTestGenerator.Models.ApiAnalyzer.InputParameter') | |
 | [LookupComponent](LookupComponent.md 'ApiTestGenerator.Models.ApiAnalyzer.LookupComponent') | |
@@ -58,7 +57,7 @@
 
 | Classes | |
 | :--- | :--- |
-| [ParseTokens](ParseTokens.md 'ApiTestGenerator.Models.Consts.ParseTokens') | This class contains constant string values that are used for parsing OAS documents. |
+| [ParserTokens](ParserTokens.md 'ApiTestGenerator.Models.Consts.ParserTokens') | This class contains constant string values that are used for parsing OAS documents. |
 
 <a name='ApiTestGenerator.Models.Enums'></a>
 
@@ -69,6 +68,6 @@
 | [AnalyzerErrorCategoryEnum](AnalyzerErrorCategoryEnum.md 'ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum') | Defines the category of error in the ApiSetAnalyzerError list |
 | [CustomEndPointObjectTypeEnum](CustomEndPointObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum') | Enumerates the types of [CustomEndPointObject](https://docs.microsoft.com/en-us/dotnet/api/CustomEndPointObject 'CustomEndPointObject')s that are currently supported. |
 | [ObjectTypeEnum](ObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.ObjectTypeEnum') | Enumerates the types of data objects that can be found in<br/>an [Microsoft.OpenApi.Models.OpenApiSchema](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema 'Microsoft.OpenApi.Models.OpenApiSchema') object |
-| [RequestBodyContentTypeEnum](RequestBodyContentTypeEnum.md 'ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum') | Enumerates the types of request body content types <br/>that can be found in a [RequestBody](https://docs.microsoft.com/en-us/dotnet/api/RequestBody 'RequestBody') object |
+| [ParameterIsInEnum](ParameterIsInEnum.md 'ApiTestGenerator.Models.Enums.ParameterIsInEnum') | Lists the locations within an OpenApiOperation that a parameter can show up. |
 | [ResponseTypeEnum](ResponseTypeEnum.md 'ApiTestGenerator.Models.Enums.ResponseTypeEnum') | Describes the type of object returned from the API. |
 | [RestrictToRolesEnum](RestrictToRolesEnum.md 'ApiTestGenerator.Models.Enums.RestrictToRolesEnum') | Enumerates the types of roles that can be seen in a <br/>[RestrictTo](https://docs.microsoft.com/en-us/dotnet/api/RestrictTo 'RestrictTo') object. |

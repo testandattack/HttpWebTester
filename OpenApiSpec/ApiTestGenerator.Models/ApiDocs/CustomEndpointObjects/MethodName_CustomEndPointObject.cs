@@ -29,7 +29,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// and adds the <see cref="methodName"/> value to the object.
         /// </summary>
         /// <param name="name">the name of the source code method as described in the 
-        /// <see cref="ParseTokens.TKN_MethodName"/> property of the Swagger Documentation.</param>
+        /// <see cref="ParserTokens.TKN_MethodName"/> property of the Swagger Documentation.</param>
         public MethodName(string name)
         {
             methodName = name;

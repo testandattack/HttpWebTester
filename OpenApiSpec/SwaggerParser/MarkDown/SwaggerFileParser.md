@@ -61,6 +61,20 @@ public Microsoft.OpenApi.Models.OpenApiDocument apiDocument { get; set; }
 #### Property Value
 [Microsoft.OpenApi.Models.OpenApiDocument](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiDocument 'Microsoft.OpenApi.Models.OpenApiDocument')
 
+<a name='GTC.SwaggerParsing.SwaggerFileParser.extraInfo'></a>
+
+## SwaggerFileParser.extraInfo Property
+
+This dictionary stores info from the serialized string that is not  
+picked up by the `OpenApiDocument` object.
+
+```csharp
+public System.Collections.Generic.Dictionary<string,string> extraInfo { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
+
 <a name='GTC.SwaggerParsing.SwaggerFileParser.settings'></a>
 
 ## SwaggerFileParser.settings Property

@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Writers;
 using System.IO;
 using GTC.Extensions;
 using System.Text.RegularExpressions;
+using GTC.HttpWebTester.Settings;
 
 namespace Engines.ApiDocs
 {
@@ -36,9 +37,12 @@ namespace Engines.ApiDocs
 
         public ApiSet BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
-            ApiSet apiSet = new ApiSet(ApiRoot);
+            Settings settings = new Settings();
+
+            ApiSet apiSet = new ApiSet(ApiRoot, settings);
             Log.ForContext("SourceContext", "ApiSetEngine").Debug("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
+            GetSecurityInfo(openApiDocument, apiSet);
             AddServers(openApiDocument, apiSet);
             BuildControllerList(openApiDocument, apiSet);
             BuildComponentList(openApiDocument, apiSet);
@@ -47,6 +51,11 @@ namespace Engines.ApiDocs
         #endregion
 
         #region -- Public Methods -----
+        public void GetSecurityInfo(OpenApiDocument openApiDocument, ApiSet apiSet)
+        {
+            apiSet.GetSecurityRequirementInfo(openApiDocument.SecurityRequirements.ToList());
+        }
+
         public void BuildControllerList(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             int currentRequestId = 1;
@@ -119,6 +128,7 @@ namespace Engines.ApiDocs
         private int AddEndPoints(Controller controller, string pathUri, OpenApiPathItem path, int startingId)
         {
             OpenApiPathItem item = path;
+
             foreach (var operation in item.Operations)
             {
                 Log.ForContext<Controller>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
@@ -130,7 +140,7 @@ namespace Engines.ApiDocs
                 endPoint.Depricated = operation.Value.Deprecated;
 
                 endPoint.Summary = operation.Value.Summary;
-                if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParseTokens.DESC_ForTestingPurposes))
+                if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParserTokens.DESC_ForTestingPurposes))
                 {
                     endPoint.IsForTestingPurposes = true;
                 }
@@ -145,7 +155,16 @@ namespace Engines.ApiDocs
                     .Replace("/", "-")
                     .Replace("{", "<")
                     .Replace("}", ">");
+
+
                 endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
+                foreach (var parm in item.Parameters)
+                {
+                    if (parm != null)
+                    {
+                        endPoint.AddParameter(controller.EndPoints.Count, parm);
+                    }
+                }
 
                 endPoint.CheckForDynamicDates(operation.Value);
                 endPoint.AddRestrictions(operation.Value);
@@ -175,7 +194,7 @@ namespace Engines.ApiDocs
                 {
                     if (endPoint.Value.requestBody != null
                         && endPoint.Value.requestBody.RequestBodySchemaType == "object"
-                        && endPoint.Value.requestBody.RequestBodyContentType == ParseTokens.OAS_JsonContentType)
+                        && endPoint.Value.requestBody.RequestBodyContentType == ParserTokens.OAS_JsonContentType)
                     {
                         var stringWriter = new StringWriter();
                         OpenApiJsonWriter writer = new OpenApiJsonWriter(stringWriter);
@@ -226,7 +245,7 @@ namespace Engines.ApiDocs
             // the C# type "Dynamic" properly, so we have to account for it here.
             if (property.Value.Type == null)
             {
-                item.type = ParseTokens.PARAM_MissingTypeField;
+                item.type = ParserTokens.PARAM_MissingTypeField;
                 Log.ForContext<AbbreviatedResponseObject>().Warning("[{method}]: Found ResponseObject in {EndPoint} without a Type. Assuming it is of type Dynamic"
                     , "BuildAndAddAbbreviatedResponseObject", endPointName);
             }
@@ -249,7 +268,7 @@ namespace Engines.ApiDocs
                 else if (property.Value.Items.Type != null)
                     item.reference = property.Value.Items.Type;
                 else
-                    item.reference = ParseTokens.PARAM_MissingInfo;
+                    item.reference = ParserTokens.PARAM_MissingInfo;
                 #endregion
 
                 #region -- handle Format -----

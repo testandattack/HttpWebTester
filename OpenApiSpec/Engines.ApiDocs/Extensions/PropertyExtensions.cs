@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GTC.OpenApiUtilities;
 
 namespace Engines.ApiDocs.Extensions
 {
@@ -74,10 +75,10 @@ namespace Engines.ApiDocs.Extensions
                 Log.ForContext<Property>().Verbose("[{method}]: Found  {propertyType} for {propertyName}"
                     , "AddProperties", gtcProperty.Type, gtcProperty.Name);
 
-                if (gtcProperty.Type.StartsWith(ParseTokens.PARAM_List_Precursor))
+                if (gtcProperty.Type.StartsWith(ParserTokens.PARAM_List_Precursor))
                 {
                     gtcProperty.IsArray = true;
-                    gtcProperty.arrayType = gtcProperty.Type.Remove(0, ParseTokens.PARAM_List_Precursor.Length);
+                    gtcProperty.arrayType = gtcProperty.Type.Remove(0, ParserTokens.PARAM_List_Precursor.Length);
                 }
 
                 if (property.Format != null)

@@ -1,18 +1,19 @@
 {
   "DefaultInputLocation": "c:\\Temp",
-  "DefaultOutputLocation": "c:\\SwaggerTesting\\output",
+  "DefaultOutputLocation": "c:\\Temp",
   "logSettings": {
-    "DefaultLogFileName": "c:\\SwaggerTesting\\output\\ApiSetParsingLog.log",
-    "MinLogEventLevel": "Debug",
+    "DefaultLogFileName": "c:\\Temp\\ApiSet_ParsingLog.log",
+    "MinLogEventLevel": "Information",
     "ClearLogFileOnStartup": true
   },
   "swaggerSettings": {
     "BaseUriAddress": "http://localhost:52321/",
     "SwaggerStreamLocation": "swagger/v1/swagger.json",
-    //"SwaggerFileLocation": "c:\\temp\\pratt new api spec.yaml",
-    "SwaggerFileLocation": "c:\\temp\\Ascentia_swagger.json",
+    //"SwaggerFileLocation": "c:\\temp\\Asc_swagger.json",
+    "SwaggerFileLocation": "c:\\temp\\twc_osmc.json",
     "ReadSwaggerFromFile": true,
-    "apiRoot": "/api/",
+    //"apiRoot": "/api/",
+    "apiRoot": "/osmc/",
     "DtoCodeFileName": "ResponseObjects.cs",
     "CodeNamespace": "ApiSet.Testing",
     "CoreClassName": "MyClass",
@@ -24,6 +25,7 @@
   },
   "apiAnalysisSettings": {
     "AnalyzeApiEndpoints": true,
+    "AnalyzeApiEndpointsWithMultipleMethods": true,
     "AnalyzeRequestBodies": true,
     "AnalyzeApiComponents": true,
     "AnalyzeInputParameters": true,
@@ -32,8 +34,6 @@
     "AnalyzeProperties": true,
     "AnalyzeLookupProperties": true,
     "AnalyzeInputParametersNotInProperties": true,
-    "AnalyzeInputParametersNotInLookupProperties": true,
-    "AddEndpointParsingData": true,
-    "IncludeOnlyEndpointSummariesWithMatchingRequests": false
+    "AnalyzeInputParametersNotInLookupProperties": true
   }
 }

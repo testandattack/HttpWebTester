@@ -54,8 +54,8 @@ public TestDataFilter(string description);
 
 `description` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
-A string that contains a [TKN_TestDataFilter](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter') token  
-            and a set of values in the form of [TKN_TestDataFilterStringFormat](ParseTokens.md#ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilterStringFormat 'ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilterStringFormat').
+A string that contains a [TKN_TestDataFilter](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter') token  
+            and a set of values in the form of [TKN_TestDataFilterStringFormat](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilterStringFormat 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilterStringFormat').
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiDocs.TestDataFilter.DependentDto'></a>

@@ -29,6 +29,11 @@
             A list of every endpoint with an <see cref="T:ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary"/> for each one.
             </summary>
         </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithMultipleMethods">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.requestBodySummary">
             <summary>
             A list showing the quantities and types of request bodies in the API
@@ -46,17 +51,6 @@
             A list of all the <see cref="!:ApiDocs.Engines.Property"/> items. 
             This lists all of the primitive values that get returned as part
             of the response objects.
-            </summary>
-        </member>
-        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointRestrictionSummary">
-            <summary>
-            A list of the different RestrictTo filters in the API along with
-            all of the endpoints that use the filter.
-            </summary>
-        </member>
-        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endPointRestrictions">
-            <summary>
-            A list of every endpoint showing what filter restrictions it allows.
             </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.lookupEndpoints">
@@ -92,33 +86,19 @@
             A list of all endpoints that have the 'Depricated' attribute.
             </summary>
         </member>
-        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.EndpointParsingData.patternString">
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithoutUrlParams">
             <summary>
-            The string that contains the regex pattern used to locate matching URLs in the HAR 
-            NOTE: If patternString == string.Empty, then there are no params in the URL and
-            the Regex search can be skipped and an exact string search can be performed.
-            </summary>
-        </member>
-        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.EndpointParsingData.slotLocations">
-            <summary>
-            int: The index of the url's subdirectory that contains the parameter
-            string: the parameter's name
-            </summary>
-            <remarks>
-            The following sample shows the "slots:"
-                   /api/Acmf/TailNumber/{tailNumber}/Report/{reportId}
-                   0   1    2          3            4      5
-            In the above call, TailNumber is in slot 3 and reportId is in slot 5       
-            </remarks>
-        </member>
-        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.EndpointParsingData.Method">
-            <summary>
-            <see cref="!:Automatonic.HttpArchive.Request.Method"/>
+            
             </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary.RequestBodyContentType">
             <summary>
-            <see cref="!:RequestBody.RequestBodyContentType"/>
+            an enum defining the type of content in the request body
+            </summary>
+        </member>
+        <member name="T:ApiTestGenerator.Models.ApiAnalyzer.InputParameter">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Name">
@@ -193,6 +173,55 @@
             definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
             back to the type alone, as if the format is not specified.
             </remarks>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.Required">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.InputProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.NameVariations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.MatchesTheseComponents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.UsedByTheseEndpoints">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.#ctor(System.String,System.String,System.String,System.Boolean,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="type"></param>
+            <param name="isArray"></param>
+            <param name="ArrayType"></param>
+            <param name="format"></param>
+            <param name="required"></param>
+            <param name="inputProvider"></param>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiAnalyzer.InputParameter.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.LookupComponent.EndpointNames">
             <summary>
@@ -279,6 +308,21 @@
             Enum describing the type of custom object 
             </summary>
         </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.ApiSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot">
+            <summary>
+            The left part of the UriStem that comes before 'controller' names.
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.OasVersion">
+            <summary>
+            The Open API Specification version used for creating the document.
+            </summary>
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.Info">
             <summary>
             Contains the <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> object from the Swagger Documentation
@@ -298,6 +342,34 @@
             <summary>
             A list of <see cref="T:ApiTestGenerator.Models.ApiDocs.Component"/> objects
             </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.SecuritySchemes">
+            <summary>
+            The list of OpenApiSecuritySchemes associated with this OAS Document
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.Schemes">
+            <summary>
+            The transfer protocos(s) used by the API. [OAS v2.x only]
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor">
+            <summary>
+            Creates a new empty ApiSet instance.
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(GTC.HttpWebTester.Settings.Settings)">
+            <summary>
+            Creates a new empty ApiSet instance using the provided <paramref name="settings"/> object.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(System.String,GTC.HttpWebTester.Settings.Settings)">
+            <summary>
+            Creates a new ApiSet instance using the provided <paramref name="ApiRoot"/> and <paramref name="settings"/> objects.
+            </summary>
+            <param name="ApiRoot"></param>
+            <param name="settings"></param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel">
             <summary>
@@ -495,8 +567,8 @@
             Creates a new instance of the <see cref="T:ApiTestGenerator.Models.ApiDocs.CalculatedDateValue"/> object
             and populates the values from the provided input string
             </summary>
-            <param name="description">A string that contains a <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_StartDate"/> token
-            and a set of <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_CalculatedDateStringFormat"/> values.</param>
+            <param name="description">A string that contains a <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate"/> token
+            and a set of <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_CalculatedDateStringFormat"/> values.</param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.GetsInputFrom">
             <summary>
@@ -553,7 +625,7 @@
             and adds the <see cref="P:ApiTestGenerator.Models.ApiDocs.MethodName.methodName"/> value to the object.
             </summary>
             <param name="name">the name of the source code method as described in the 
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_MethodName"/> property of the Swagger Documentation.</param>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_MethodName"/> property of the Swagger Documentation.</param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.ProvidesValuesFor">
             <summary>
@@ -585,7 +657,7 @@
             and adds the <see cref="P:ApiTestGenerator.Models.ApiDocs.ProvidesValuesFor.ProvidesValuesForTheseMethods"/> values to the object.
             </summary>
             <param name="endPoints">the name of the source code method as described in the 
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_ProvidesValuesFor"/> property of the Swagger Documentation.</param>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_ProvidesValuesFor"/> property of the Swagger Documentation.</param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.RestrictTo">
             <summary>
@@ -614,7 +686,7 @@
             and adds the <see cref="P:ApiTestGenerator.Models.ApiDocs.RestrictTo.RestrictToRoles"/> values to the object.
             </summary>
             <param name="roles">the name of the source code method as described in the 
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_RestrictTo"/> property of the Swagger Documentation.</param>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_RestrictTo"/> property of the Swagger Documentation.</param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.TestDataFilter">
             <summary>
@@ -668,8 +740,18 @@
             Creates a new instance of the <see cref="T:ApiTestGenerator.Models.ApiDocs.TestDataFilter"/> object
             and populates the values from the provided input string
             </summary>
-            <param name="description">A string that contains a <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter"/> token
-            and a set of values in the form of <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilterStringFormat"/>.</param>
+            <param name="description">A string that contains a <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter"/> token
+            and a set of values in the form of <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilterStringFormat"/>.</param>
+        </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.EndPoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.EndPoint.EndpointId">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath">
             <summary>
@@ -742,7 +824,7 @@
         <member name="P:ApiTestGenerator.Models.ApiDocs.EndPoint.IsLookupMethod">
             <summary>
             A boolean that describes if the method contains the
-            <see cref="!:ParseTokens.TKN_LookupMethod"/> tag indicating
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod"/> tag indicating
             that the method is used to grab lookup values for other
             methods in the API.
             </summary>
@@ -751,7 +833,7 @@
             <summary>
             A boolean that indicates if this method is exposed solely for
             the Tester Role and woill not be used by the application.
-            All Test methods contain <see cref="!:ParseTokens.DESC_ForTestingPurposes"/>
+            All Test methods contain <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes"/>
             in the Description field.
             </summary>
         </member>
@@ -772,7 +854,7 @@
             </summary>
             <remarks>
             The types of objects can be seen in this enum:
-            <see cref="!:CustomEndPointObjectTypeEnum"/>
+            <see cref="T:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum"/>
             </remarks>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.EndPoint.recordedResponseBody">
@@ -1169,7 +1251,7 @@
             [Extension] - This is a collection of objects in the response 
             </summary>
         </member>
-        <member name="T:ApiTestGenerator.Models.Consts.ParseTokens">
+        <member name="T:ApiTestGenerator.Models.Consts.ParserTokens">
             <summary>
             This class contains constant string values that are used for parsing OAS documents.
             </summary>
@@ -1187,101 +1269,101 @@
             </list>
             </remarks>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_GetsInputFrom">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_GetsInputFrom">
             <summary>
             Gets the fully qualified name of the property that will provide input into this parameter
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_ClassName">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_ClassName">
             <summary>
             Gets the fully qualified class name of this DTO
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter">
             <summary>
             Provides filtering/alignment information for retrieving input data from multiple response objects
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilterStringFormat">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilterStringFormat">
             <summary>
             Contains the arguments used when providing a 
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter"/> Token in XML Documentation
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter"/> Token in XML Documentation
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_startDate">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_startDate">
             <summary>
             Sets a dynamic value for the start date based on current day offset.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_endDate">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_endDate">
             <summary>
             Sets a dynamic value for the end date based on current day offset.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_CalculatedDateStringFormat">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_CalculatedDateStringFormat">
             <summary>
             Contains the arguments used when providing a 
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_startDate"/> or <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_endDate"/> Token in XML Documentation
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_startDate"/> or <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_endDate"/> Token in XML Documentation
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_ProvidesValuesFor">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_ProvidesValuesFor">
             <summary>
             A Swagger custom property that contains a list of methods that this endpoint can potentially provide values for.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_MethodName">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_MethodName">
             <summary>
             A Swagger custom property that contains the name of the method
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_RestrictTo">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_RestrictTo">
             <summary>
             A Swagger custom property that contains a list of roles that this method allows access to
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_LookupMethod">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod">
             <summary>
             This tag value, when present, indicates that this method is a lookup method.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_StartDate">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate">
             <summary>
             this string represents the name of an API operation's input parameter that contains a <see cref="!:DateTime"/> 
             value for the starting date of a query.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_EndDate">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate">
             <summary>
             this string represents the name of an API operation's input parameter that contains a <see cref="!:DateTime"/> 
             value for the ending date of a query.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_List_Precursor">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_List_Precursor">
             <summary>
             this string represents the precursor for an API operation's input parameter name that contains a List of values. 
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_MissingInfo">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_MissingInfo">
             <summary>
             this string represents an item in the OAS schema that has missing info.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_MissingTypeField">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_MissingTypeField">
             <summary>
             this string represents an item in the OAS schema that has a missing field type.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_JsonContentType">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.OAS_JsonContentType">
             <summary>
             the string to search for in the content-type that indicates the response is a JSON object
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_FormDataContentType">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.OAS_FormDataContentType">
             <summary>
             the string to search for in the content-type that indicates the response is a binary or form data object
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_NoContentFound">
+        <member name="F:ApiTestGenerator.Models.Consts.ParserTokens.OAS_NoContentFound">
             <summary>
             the string to search for in the content-type that indicates there was no response object.
             </summary>
@@ -1298,33 +1380,33 @@
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.RestrictTo">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_RestrictTo"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_RestrictTo"/>
             </summary>
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.ProvidesValuesFor">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_ProvidesValuesFor"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_ProvidesValuesFor"/>
             </summary>
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.MethodName">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_MethodName"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_MethodName"/>
             </summary>
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.TestDataFilter">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_TestDataFilter"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter"/>
             </summary>
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.GetsInputFrom">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.TKN_GetsInputFrom"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_GetsInputFrom"/>
             </summary>
         </member>
         <member name="F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.CalculatedDateValue">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_StartDate"/> 
-            or <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.PARAM_EndDate"/>
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate"/> 
+            or <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate"/>
             </summary>
         </member>
         <member name="T:ApiTestGenerator.Models.Enums.ObjectTypeEnum">
@@ -1503,30 +1585,34 @@
             The ApiSet parser was not able to determine the response object type.
             </summary>
         </member>
-        <member name="T:ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum">
+        <member name="T:ApiTestGenerator.Models.Enums.ParameterIsInEnum">
             <summary>
-            Enumerates the types of request body content types 
-            that can be found in a <see cref="!:RequestBody"/> object
+            Lists the locations within an OpenApiOperation that a parameter can show up.
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum.OAS_JsonContentType">
+        <member name="F:ApiTestGenerator.Models.Enums.ParameterIsInEnum.query">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_JsonContentType"/>
+            
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum.OAS_FormDataContentType">
+        <member name="F:ApiTestGenerator.Models.Enums.ParameterIsInEnum.header">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_FormDataContentType"/>
+            
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum.OAS_NoContentFound">
+        <member name="F:ApiTestGenerator.Models.Enums.ParameterIsInEnum.path">
             <summary>
-            <see cref="F:ApiTestGenerator.Models.Consts.ParseTokens.OAS_NoContentFound"/>
+            
             </summary>
         </member>
-        <member name="F:ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum.OAS_Other">
+        <member name="F:ApiTestGenerator.Models.Enums.ParameterIsInEnum.formData">
             <summary>
-            A requestBody type not yet handled by the parser.
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.ParameterIsInEnum.body">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:ApiTestGenerator.Models.Enums.ResponseTypeEnum">

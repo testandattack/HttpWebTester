@@ -10,15 +10,13 @@ namespace GTC.HttpWebTester.Settings
     {
         public bool AnalyzeApiEndpoints { get; set; }
 
+        public bool AnalyzeApiEndpointsWithMultipleMethods { get; set; }
+
         public bool AnalyzeRequestBodies { get; set; }
 
         public bool AnalyzeApiComponents { get; set; }
 
         public bool AnalyzeInputParameters { get; set; }
-
-        public bool AnalyzeEndPointRestrictions { get; set; }
-
-        public bool AnalyzeEndpointRestrictionSummary { get; set; }
 
         public bool AnalyzeProperties { get; set; }
 
@@ -27,9 +25,5 @@ namespace GTC.HttpWebTester.Settings
         public bool AnalyzeInputParametersNotInProperties { get; set; }
 
         public bool AnalyzeInputParametersNotInLookupProperties { get; set; }
-
-        public bool AddEndpointParsingData { get; set; }
-
-        public bool IncludeOnlyEndpointSummariesWithMatchingRequests { get; set; }
     }
 }
