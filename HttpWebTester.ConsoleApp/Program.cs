@@ -56,7 +56,7 @@ namespace HttpWebTester
             parser.PopulateApiDocument();
             //parser.CreateAndSaveDtoCode(@"c:\Temp\DtoCode.cs");
 
-            ApiSetEngine apiSetEngine = new ApiSetEngine();
+            ApiSetEngine apiSetEngine = new ApiSetEngine(settings);
             apiSetEngine.BuildApiSet(parser.apiDocument, parser.settings.swaggerSettings.apiRoot);
             apiSetEngine.SetOasVersion(parser.extraInfo);
             apiSetEngine.SetSchemes(parser.extraInfo);

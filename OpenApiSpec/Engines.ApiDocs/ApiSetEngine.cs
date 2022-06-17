@@ -31,15 +31,23 @@ namespace Engines.ApiDocs
     /// </remarks>
     public class ApiSetEngine
     {
+        private Settings settings;
+
         public ApiSet apiSet { get; private set; }
 
         #region -- Constructors -----
-        public ApiSetEngine() { }
+        public ApiSetEngine() 
+        {
+            settings = new Settings();
+        }
+
+        public ApiSetEngine(Settings Settings)
+        {
+            settings = Settings;
+        }
 
         public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
-            Settings settings = new Settings();
-
             apiSet = new ApiSet(ApiRoot, settings);
             Log.ForContext("SourceContext", "ApiSetEngine").Information("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
@@ -319,7 +327,7 @@ namespace Engines.ApiDocs
         public void SerializeAndSaveApiSet(bool append = false)
         {
             string str = $"{apiSet.settings.DefaultOutputLocation}\\OAS_ApiSet {apiSet.Info.Title}.json";
-            SerializeAndSaveApiSet(apiSet.settings.DefaultOutputLocation, append);
+            SerializeAndSaveApiSet(str, append);
         }
 
         public void SerializeAndSaveApiSet(string fileName, bool append = false)
