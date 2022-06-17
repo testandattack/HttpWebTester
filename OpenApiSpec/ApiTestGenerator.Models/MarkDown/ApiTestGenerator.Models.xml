@@ -14,6 +14,16 @@
             A collection of <see cref="T:ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary"/> items found while analyzing the ApiSet.
             </summary>
         </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisName">
+            <summary>
+            The name of the ApiSet that was analyzed
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisDate">
+            <summary>
+            The local Date-Time that the analysis was performed.
+            </summary>
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.summaryInfo">
             <summary>
             <see cref="T:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel"/>
@@ -87,6 +97,11 @@
             </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithoutUrlParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithUrlParams">
             <summary>
             
             </summary>

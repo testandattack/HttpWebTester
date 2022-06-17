@@ -12,6 +12,7 @@ using ApiTestGenerator.Models.Enums;
 using Engines.ApiDocs.Extensions;
 using GTC.OpenApiUtilities;
 using GTC.Extensions;
+using Newtonsoft.Json;
 
 namespace Engines.ApiDocs
 {
@@ -29,15 +30,18 @@ namespace Engines.ApiDocs
             asa = new ApiSetAnalysis();
             apiSet = asa.apiSet;
             summaryInfo = asa.summaryInfo;
+            asa.AnalysisName = summaryInfo.apiInfo.Title;
         }
 
         public ApiSetAnalysisEngine(ApiSet ApiSet, Settings Settings)
         {
             asa = new ApiSetAnalysis(ApiSet);
+            
             apiSet = asa.apiSet;
             summaryInfo = asa.summaryInfo;
             summaryInfo.apiInfo = apiSet.Info;
             summaryInfo.apiRoot = apiSet.apiRoot;
+            asa.AnalysisName = summaryInfo.apiInfo.Title;
             settings = Settings;
         }
         #endregion
@@ -82,34 +86,11 @@ namespace Engines.ApiDocs
                     }
                     else
                     {
-                        // Endpoint Summary
-                        EndpointSummary summary = new EndpointSummary();
-                        summary.BuildEndpointSummary(endPoint.Value);
-
-                        if (endPoint.Value.ResponseItems != null)
-                        {
-                            AddResponseStatuses(endPoint.Value.ResponseItems.Keys.ToList());
-                            AnalyzeResponseObjectProperties(endPoint.Value.ResponseItems.Values.ToList(), endPoint.Key);
-                        }
-
-                        string endpointSummaryName = endPoint.Key;
-                        if (summary.IsDepricated)
-                        {
-                            endpointSummaryName = $"Depricated - {endpointSummaryName}";
-                            summaryInfo.numDepricated++;
-                            summaryInfo.numActiveEndpoints--;
-                            asa.depricatedEndpoints.Add(endpointSummaryName);
-                        }
-                        if (summary.IsTestMethod)
-                        {
-                            endpointSummaryName = $"TestMethod - {endpointSummaryName}";
-                            summaryInfo.numTestMethods++;
-                        }
-
-                        asa.endpointSummaries.Add($"{endPoint.Value.EndpointId}_{endpointSummaryName}", summary);
-
-                        summaryInfo.NumEndpointsWithExample += summary.NumberOfParamsWithExample;
-                        summaryInfo.NumEndpointsWithExamples += summary.NumberOfParamsWithExamples;
+                        CreateEndpointSummary(endPoint);
+                        if (endPoint.Value.UriPath.Contains("{"))
+                            asa.endpointsWithUrlParams.Add(endPoint.Value.EndpointId);
+                        else
+                            asa.endpointsWithoutUrlParams.Add(endPoint.Value.EndpointId);
                     }
 
                     if (endPoint.Value.IsLookupMethod)
@@ -368,7 +349,9 @@ namespace Engines.ApiDocs
             }
             summaryInfo.numInputParametersWithoutProperty = asa.inputParametersNotInProperties.Count();
         }
+        #endregion
 
+        #region -- Load and Save methods -----
         /// <summary>
         /// call this to make a table-like summary of the ApiSet to load into excel.
         /// </summary>
@@ -385,9 +368,90 @@ namespace Engines.ApiDocs
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SerializeAndSaveApiSetAnalysis()
+        {
+            string str = $"{settings.DefaultOutputLocation}\\OAS_Analysis {asa.AnalysisName}.json";
+            SerializeAndSaveApiSetAnalysis(str);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void SerializeAndSaveApiSetAnalysis(string fileName)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(fileName, false))
+                {
+                    sw.Write(JsonConvert.SerializeObject(asa, Formatting.Indented));
+                }
+                Log.ForContext<ApiSetAnalysis>().Information("SerializeAndSaveApiSetAnalysis completed successfully");
+            }
+            catch (Exception ex)
+            {
+                Log.ForContext<ApiSetAnalysis>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSetAnalysis");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public void LoadApiSetAnalysisFromFile(string fileName)
+        {
+            asa = null;
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                asa = JsonConvert.DeserializeObject<ApiSetAnalysis>(sr.ReadToEnd());
+            }
+            if (asa == null)
+            {
+                Log.ForContext<ApiSetAnalysis>().Error("LoadApiSetAnalysisFromFile failed to load the set from {fileName}", fileName);
+                throw new NullReferenceException($"LoadApiSetAnalysisFromFile failed to load the set from {fileName}");
+            }
+            asa.apiSet = new ApiSet();
+        }
         #endregion
 
         #region -- Private Methods -----
+        private void CreateEndpointSummary(KeyValuePair<string, EndPoint> endPoint)
+        {
+            // Endpoint Summary
+            EndpointSummary summary = new EndpointSummary();
+            summary.BuildEndpointSummary(endPoint.Value);
+
+            if (endPoint.Value.ResponseItems != null)
+            {
+                AddResponseStatuses(endPoint.Value.ResponseItems.Keys.ToList());
+                AnalyzeResponseObjectProperties(endPoint.Value.ResponseItems.Values.ToList(), endPoint.Key);
+            }
+
+            string endpointSummaryName = endPoint.Key;
+            if (summary.IsDepricated)
+            {
+                endpointSummaryName = $"Depricated - {endpointSummaryName}";
+                summaryInfo.numDepricated++;
+                summaryInfo.numActiveEndpoints--;
+                asa.depricatedEndpoints.Add(endpointSummaryName);
+            }
+            if (summary.IsTestMethod)
+            {
+                endpointSummaryName = $"TestMethod - {endpointSummaryName}";
+                summaryInfo.numTestMethods++;
+            }
+
+            asa.endpointSummaries.Add($"{endPoint.Value.EndpointId}_{endpointSummaryName}", summary);
+
+            summaryInfo.NumEndpointsWithExample += summary.NumberOfParamsWithExample;
+            summaryInfo.NumEndpointsWithExamples += summary.NumberOfParamsWithExamples;
+        }
+
         private void AddResponseStatuses(List<string> statuses)
         {
             foreach (string status in statuses)

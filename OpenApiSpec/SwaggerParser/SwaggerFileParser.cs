@@ -92,6 +92,7 @@ namespace GTC.SwaggerParsing
             GetExtraInfo(ref serializedDocument);
 
             Log.ForContext<SwaggerFileParser>().Information("Parsing file from {endpoint}", _sourceLocation);
+            DateTime dt = DateTime.UtcNow;
             var openApiStringReader = new OpenApiStringReader();
             try
             {
@@ -101,7 +102,7 @@ namespace GTC.SwaggerParsing
             {
                 Log.ForContext<SwaggerFileParser>().Error(ex, "Error in OpenApiStringReader().Read()");
             }
-
+            Log.ForContext<SwaggerFileParser>().Information("OpenApiStringReader finished reading document in {duration} seconds.", dt.GetElapsedSecondsForDisplay());
         }
         #endregion
 

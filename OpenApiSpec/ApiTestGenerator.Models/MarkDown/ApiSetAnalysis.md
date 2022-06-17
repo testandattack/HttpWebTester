@@ -10,6 +10,32 @@ public class ApiSetAnalysis
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; ApiSetAnalysis
 ### Properties
 
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisDate'></a>
+
+## ApiSetAnalysis.AnalysisDate Property
+
+The local Date-Time that the analysis was performed.
+
+```csharp
+public System.DateTime AnalysisDate { get; set; }
+```
+
+#### Property Value
+[System.DateTime](https://docs.microsoft.com/en-us/dotnet/api/System.DateTime 'System.DateTime')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisName'></a>
+
+## ApiSetAnalysis.AnalysisName Property
+
+The name of the ApiSet that was analyzed
+
+```csharp
+public string AnalysisName { get; set; }
+```
+
+#### Property Value
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.analyzerErrors'></a>
 
 ## ApiSetAnalysis.analyzerErrors Property
@@ -79,6 +105,17 @@ public System.Collections.Generic.Dictionary<string,System.Collections.Generic.D
 
 ```csharp
 public System.Collections.Generic.List<int> endpointsWithoutUrlParams { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithUrlParams'></a>
+
+## ApiSetAnalysis.endpointsWithUrlParams Property
+
+```csharp
+public System.Collections.Generic.List<int> endpointsWithUrlParams { get; set; }
 ```
 
 #### Property Value

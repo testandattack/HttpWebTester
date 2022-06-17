@@ -11,38 +11,11 @@ namespace Engines.ApiDocs.Extensions
 {
     public static class ApiSetAnalysisExtensions
     {
-        public static void SerializeAndSaveApiSetAnalysis(this ApiSetAnalysis source, string fileName)
-        {
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(fileName, false))
-                {
-                    sw.Write(JsonConvert.SerializeObject(source, Formatting.Indented));
-                }
-                Log.ForContext<ApiSetAnalysis>().Information("SerializeAndSaveApiSetAnalysis completed successfully");
-            }
-            catch (Exception ex)
-            {
-                Log.ForContext<ApiSetAnalysis>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSetAnalysis");
-            }
-        }
-
-        public static ApiSetAnalysis LoadApiSetAnalysisFromFile(this ApiSetAnalysis source, string fileName)
-        {
-            ApiSetAnalysis apiSetAnalysis = null;
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                apiSetAnalysis = JsonConvert.DeserializeObject<ApiSetAnalysis>(sr.ReadToEnd());
-            }
-            if (apiSetAnalysis == null)
-            {
-                Log.ForContext<ApiSetAnalysis>().Error("LoadApiSetAnalysisFromFile failed to load the set from {fileName}", fileName);
-                throw new NullReferenceException($"LoadApiSetAnalysisFromFile failed to load the set from {fileName}");
-            }
-            apiSetAnalysis.apiSet = new ApiSet();
-            return apiSetAnalysis;
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source">The <c>ApiSetAnalysis</c> to which this method is exposed.</param>
+        /// <returns></returns>
         public static Dictionary<string, EndpointSummary> CopyEndpointSummary(this ApiSetAnalysis source)
         {
             Dictionary<string, EndpointSummary> summaries = new Dictionary<string, EndpointSummary>();
@@ -54,6 +27,11 @@ namespace Engines.ApiDocs.Extensions
             return summaries;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source">The <c>ApiSetAnalysis</c> to which this method is exposed.</param>
+        /// <param name="summaries"></param>
         public static void SetEndpointSummaryValues(this ApiSetAnalysis source, Dictionary<string, EndpointSummary> summaries)
         {
             source.endpointSummaries = summaries;

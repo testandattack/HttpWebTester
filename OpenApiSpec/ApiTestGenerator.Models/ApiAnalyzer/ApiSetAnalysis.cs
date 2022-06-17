@@ -22,6 +22,15 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         [JsonIgnore]
         public SortedDictionary<string, EndpointSummary> sortedEndpointSummaries { get; private set; }
 
+        /// <summary>
+        /// The name of the ApiSet that was analyzed
+        /// </summary>
+        public string AnalysisName { get; set; }
+
+        /// <summary>
+        /// The local Date-Time that the analysis was performed.
+        /// </summary>
+        public DateTime AnalysisDate { get; set; }
 
         /// <summary>
         /// <see cref="ApiSetSummaryModel"/>
@@ -100,6 +109,10 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// 
         /// </summary>
         public List<int> endpointsWithoutUrlParams { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<int> endpointsWithUrlParams { get; set; }
         #endregion
 
@@ -121,6 +134,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
 
         private void InitializeCollections()
         {
+            AnalysisDate = DateTime.Now;
             requestBodySummary = new RequestBodySummary();
             lookupEndpoints = new SortedDictionary<string, LookupEndPoint>();
             lookupComponents = new SortedDictionary<string, LookupComponent>();

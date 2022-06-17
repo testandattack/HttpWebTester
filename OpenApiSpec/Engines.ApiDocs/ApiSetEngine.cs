@@ -31,46 +31,47 @@ namespace Engines.ApiDocs
     /// </remarks>
     public class ApiSetEngine
     {
+        public ApiSet apiSet { get; private set; }
 
         #region -- Constructors -----
         public ApiSetEngine() { }
 
-        public ApiSet BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
+        public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
             Settings settings = new Settings();
 
-            ApiSet apiSet = new ApiSet(ApiRoot, settings);
-            Log.ForContext("SourceContext", "ApiSetEngine").Debug("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
+            apiSet = new ApiSet(ApiRoot, settings);
+            Log.ForContext("SourceContext", "ApiSetEngine").Information("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
-            GetSecurityInfo(openApiDocument, apiSet);
-            AddServers(openApiDocument, apiSet);
-            BuildControllerList(openApiDocument, apiSet);
-            BuildComponentList(openApiDocument, apiSet);
-            return apiSet;
+            GetSecurityInfo(openApiDocument);
+            AddServers(openApiDocument);
+            BuildControllerList(openApiDocument);
+            BuildComponentList(openApiDocument);
         }
         #endregion
 
         #region -- Public Methods -----
-        public void GetSecurityInfo(OpenApiDocument openApiDocument, ApiSet apiSet)
+        public void GetSecurityInfo(OpenApiDocument openApiDocument)
         {
-            apiSet.GetSecurityRequirementInfo(openApiDocument.SecurityRequirements.ToList());
+            this.GetSecurityRequirementInfo(openApiDocument.SecurityRequirements.ToList());
         }
 
-        public void BuildControllerList(OpenApiDocument openApiDocument, ApiSet apiSet)
+        public void BuildControllerList(OpenApiDocument openApiDocument)
         {
             int currentRequestId = 1;
             foreach (var path in openApiDocument.Paths)
             {
-                Controller controller = GetController(path, apiSet);
+                Controller controller = GetController(path);
                 currentRequestId = AddEndPoints(controller, path.Key, path.Value, currentRequestId);
             }
             AddRequestBodyItems(openApiDocument, apiSet);
             AddResponseObjectDetails(openApiDocument, apiSet);
         }
 
-        public void BuildComponentList(OpenApiDocument openApiDocument, ApiSet apiSet)
+        public void BuildComponentList(OpenApiDocument openApiDocument)
         {
             int x = 0;
+            Log.ForContext<ApiSetEngine>().Information("[{method}]: Adding Components to ApiSet", "BuildComponentList");
             foreach (var componentSchema in openApiDocument.Components.Schemas)
             {
                 Log.ForContext<ApiSetEngine>().Debug("[{method}]: {@ComponentSchema}", "BuildComponentList", componentSchema.Key);
@@ -88,7 +89,7 @@ namespace Engines.ApiDocs
 
         }
 
-        public void AddServers(OpenApiDocument openApiDocument, ApiSet apiSet)
+        public void AddServers(OpenApiDocument openApiDocument)
         {
             if (openApiDocument.Servers != null)
             {
@@ -102,7 +103,7 @@ namespace Engines.ApiDocs
         #endregion
 
         #region -- Private Methods -----
-        private Controller GetController(KeyValuePair<string, OpenApiPathItem> path, ApiSet apiSet)
+        private Controller GetController(KeyValuePair<string, OpenApiPathItem> path)
         {
             // The path Key is the UriPath of the API endpoint. The controller name is
             // made by taking the first part of the path after the root.
@@ -121,7 +122,7 @@ namespace Engines.ApiDocs
             Controller newController = new Controller();
             newController.Name = controllerName;
             apiSet.Controllers.Add(controllerName, newController);
-            Log.ForContext("SourceContext", "ApiSetEngine").Debug("GetController: Made new Controller: {controllerName}", controllerName);
+            Log.ForContext("SourceContext", "ApiSetEngine").Information("GetController: Made new Controller: {controllerName}", controllerName);
             return newController;
         }
 
@@ -131,7 +132,7 @@ namespace Engines.ApiDocs
 
             foreach (var operation in item.Operations)
             {
-                Log.ForContext<Controller>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
+                Log.ForContext<ApiSetEngine>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
                 EndPoint endPoint = new EndPoint(controller.Name);
                 endPoint.EndpointId = startingId;
 
@@ -183,6 +184,7 @@ namespace Engines.ApiDocs
                 controller.EndPoints.Add(endPointKey, endPoint);
                 startingId++;
             }
+            //Log.ForContext<ApiSetEngine>().Information("[{method}]: Added {num} endpoints.", "AddEndPoint", item.Operations.Count);
             return startingId;
         }
 
@@ -299,6 +301,66 @@ namespace Engines.ApiDocs
         }
         #endregion
 
+        #region -- Read and Write methods -----
+        public void LoadApiSetFromFile(string fileName)
+        {
+            ApiSet apiSet = null;
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                apiSet = JsonConvert.DeserializeObject<ApiSet>(sr.ReadToEnd());
+            }
+            if (apiSet == null)
+            {
+                Log.ForContext<ApiSet>().Error("LoadApiSetFromFile failed to load the set from {fileName}", fileName);
+                throw new NullReferenceException($"LoadApiSetFromFile failed to load the set from {fileName}");
+            }
+        }
+
+        public void SerializeAndSaveApiSet(bool append = false)
+        {
+            string str = $"{apiSet.settings.DefaultOutputLocation}\\OAS_ApiSet {apiSet.Info.Title}.json";
+            SerializeAndSaveApiSet(apiSet.settings.DefaultOutputLocation, append);
+        }
+
+        public void SerializeAndSaveApiSet(string fileName, bool append = false)
+        {
+            try
+            {
+                string str = JsonConvert.SerializeObject(this, Formatting.Indented);
+
+                using (StreamWriter sw = new StreamWriter(fileName, false))
+                {
+                    sw.Write(str);
+                }
+                Log.ForContext<ApiSet>().Information("SerializeAndSaveApiSet completed successfully");
+            }
+            catch (Exception ex)
+            {
+                Log.ForContext<ApiSet>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSet");
+            }
+        }
+
+        public void SaveListOfURLs(string fileName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Controller controller in apiSet.Controllers.Values)
+            {
+                sb.Append($"----- {controller.Name} -----\r\n");
+                foreach (EndPoint endPoint in controller.EndPoints.Values)
+                {
+                    sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
+                }
+                sb.Append("\r\n");
+            }
+
+            using (StreamWriter sw = new StreamWriter($"{apiSet.settings.DefaultOutputLocation}\\{fileName}", false))
+            {
+                sw.Write(sb.ToString());
+            }
+        }
+
+        #endregion
 
     }
 

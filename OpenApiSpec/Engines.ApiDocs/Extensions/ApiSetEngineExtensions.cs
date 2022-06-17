@@ -8,18 +8,18 @@ using Microsoft.OpenApi.Models;
 
 namespace Engines.ApiDocs.Extensions
 {
-    public static class ApiSetExtensions
+    public static class ApiSetEngineExtensions
     {
         /// <summary>
         /// call this to save a base list of all operations
         /// </summary>
-        /// <param name="source">The <c>ApiSet</c> to which this method is exposed.</param>
+        /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
         /// <param name="fileName"></param>
-        public static void SaveListOfURLs(this ApiSet source, string fileName)
+        public static void SaveListOfURLs(this ApiSetEngine source, string fileName)
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (Controller controller in source.Controllers.Values)
+            foreach (Controller controller in source.apiSet.Controllers.Values)
             {
                 sb.Append($"----- {controller.Name} -----\r\n");
                 foreach (EndPoint endPoint in controller.EndPoints.Values)
@@ -29,7 +29,7 @@ namespace Engines.ApiDocs.Extensions
                 sb.Append("\r\n");
             }
 
-            using (StreamWriter sw = new StreamWriter($"{source.settings.DefaultOutputLocation}\\{fileName}", false))
+            using (StreamWriter sw = new StreamWriter($"{source.apiSet.settings.DefaultOutputLocation}\\{fileName}", false))
             {
                 sw.Write(sb.ToString());
             }
@@ -38,12 +38,12 @@ namespace Engines.ApiDocs.Extensions
         /// <summary>
         /// call this to retrieve a list of all operations in string format
         /// </summary>
-        /// <param name="source">The <c>ApiSet</c> to which this method is exposed.</param>
-        public static string GetListOfURLs(this ApiSet source)
+        /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+        public static string GetListOfURLs(this ApiSetEngine source)
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (Controller controller in source.Controllers.Values)
+            foreach (Controller controller in source.apiSet.Controllers.Values)
             {
                 sb.Append($"----- {controller.Name} -----\r\n");
                 foreach (EndPoint endPoint in controller.EndPoints.Values)
@@ -58,43 +58,43 @@ namespace Engines.ApiDocs.Extensions
         /// <summary>
         /// Sets the Open API Scec version used for the document
         /// </summary>
-        /// <param name="source">The <c>ApiSet</c> to which this method is exposed.</param>
+        /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
         /// <param name="extraInfo"></param>
-        public static void SetOasVersion(this ApiSet source, Dictionary<string, string> extraInfo)
+        public static void SetOasVersion(this ApiSetEngine source, Dictionary<string, string> extraInfo)
         {
             if(extraInfo.ContainsKey("OAS Version"))
             {
-                source.OasVersion = extraInfo["OAS Version"];
+                source.apiSet.OasVersion = extraInfo["OAS Version"];
             }
         }
 
         /// <summary>
         /// Gets any schemes that were defined in the OAS document [OAS v2.x only]
         /// </summary>
-        /// <param name="source">The <c>ApiSet</c> to which this method is exposed.</param>
+        /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
         /// <param name="extraInfo">A dictionary of extra data retrieved during the initial reading of the serialized OAS document.</param>
-        public static void SetSchemes(this ApiSet source, Dictionary<string, string> extraInfo)
+        public static void SetSchemes(this ApiSetEngine source, Dictionary<string, string> extraInfo)
         {
             if (extraInfo.ContainsKey("Schemes"))
             {
-                source.Schemes = new List<string>();
+                source.apiSet.Schemes = new List<string>();
 
                 foreach(string str in extraInfo["Schemes"].Split(","))
                 {
-                    source.Schemes.Add(str.Trim().Replace("\"", ""));
+                    source.apiSet.Schemes.Add(str.Trim().Replace("\"", ""));
                 }
             }
         }
 
-        public static void GetSecuritySchemeInfo(this ApiSet source, OpenApiSecurityScheme scheme)
+        public static void GetSecuritySchemeInfo(this ApiSetEngine source, OpenApiSecurityScheme scheme)
         {
             if(scheme != null)
             {
-                source.SecuritySchemes.Add(scheme);
+                source.apiSet.SecuritySchemes.Add(scheme);
             }
         }
 
-        public static void GetSecurityRequirementInfo(this ApiSet source, List<OpenApiSecurityRequirement> requirements)
+        public static void GetSecurityRequirementInfo(this ApiSetEngine source, List<OpenApiSecurityRequirement> requirements)
         {
             if (requirements != null)
             {

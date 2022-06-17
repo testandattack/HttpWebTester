@@ -21,7 +21,8 @@ namespace HttpWebTester
             // Step 2 - Analyze the ApiSet
             ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSet, settings);
             analyzer.PerformAnalysis();
-            analyzer.asa.SerializeAndSaveApiSetAnalysis(@"c:\temp\ApiSetAnalysis.json");
+            //analyzer.asa.SerializeAndSaveApiSetAnalysis(@"c:\temp\ApiSetAnalysis.json");
+            analyzer.SerializeAndSaveApiSetAnalysis();
         }
 
         static Settings CreateLogger()
@@ -56,12 +57,12 @@ namespace HttpWebTester
             //parser.CreateAndSaveDtoCode(@"c:\Temp\DtoCode.cs");
 
             ApiSetEngine apiSetEngine = new ApiSetEngine();
-            ApiSet apiSet = apiSetEngine.BuildApiSet(parser.apiDocument, parser.settings.swaggerSettings.apiRoot);
-            apiSet.SetOasVersion(parser.extraInfo);
-            apiSet.SetSchemes(parser.extraInfo);
-            apiSet.SerializeAndSaveApiSet(@"c:\temp");
+            apiSetEngine.BuildApiSet(parser.apiDocument, parser.settings.swaggerSettings.apiRoot);
+            apiSetEngine.SetOasVersion(parser.extraInfo);
+            apiSetEngine.SetSchemes(parser.extraInfo);
+            apiSetEngine.SerializeAndSaveApiSet();
 
-            return apiSet;
+            return apiSetEngine.apiSet;
         }
     }
 }
