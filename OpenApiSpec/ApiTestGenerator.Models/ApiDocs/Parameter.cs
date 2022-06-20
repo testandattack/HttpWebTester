@@ -8,6 +8,7 @@ namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
     /// An object the contains information about input parameters for OpenApi endpoint calls
+    /// It is based on the <see href="https://spec.openapis.org/oas/v3.0.0#parameter-object"/> OAS object.
     /// </summary>
     public class Parameter : IComparable
     {
@@ -93,9 +94,9 @@ namespace ApiTestGenerator.Models.ApiDocs
         public string arrayFormat { get; set; }
 
         /// <summary>
-        /// A list of <see cref="CustomEndPointObject"/> items that may be added to the parameter.
+        /// A list of <see cref="CustomOasObjectCollection"/> items that may be added to the parameter.
         /// </summary>
-        public List<CustomEndPointObject> customEndPointObjects { get; set; }
+        public CustomOasObjectCollection customEndPointObjects { get; set; }
         #endregion
 
 
@@ -200,7 +201,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             Reference = string.Empty;
             Format = string.Empty;
             IsArray = false;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
 
             //ExampleValue - null allowed
             //ExampleValues - null allowed
@@ -230,7 +231,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             uriMethod = string.Empty;
             operationId = operationNumber;
             controllerName = ControllerName;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
         }
         #endregion
 

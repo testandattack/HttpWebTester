@@ -13,7 +13,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// assigned to test users and then formulate whether the user should
     /// be denied access to the endpoint.
     /// </remarks>
-    public class RestrictTo : CustomEndPointObject
+    public class RestrictTo : CustomOasObjectEngine
     {
         /// <summary>
         /// A list of the roles that are ALLOWED to access this endpoint.

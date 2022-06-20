@@ -7,6 +7,9 @@ using System.IO;
 
 namespace ApiTestGenerator.Models.ApiAnalyzer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApiSetAnalysis
     {
         #region -- Properties -----
@@ -48,7 +51,8 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         public Dictionary<string, EndpointSummary> endpointSummaries { get; set; }
 
         /// <summary>
-        /// 
+        /// A list of all endpoints that have the same URL, but offer different
+        /// methods for calling. 
         /// </summary>
         public Dictionary<string, Dictionary<int, string>> endpointsWithMultipleMethods { get; set; }
 
@@ -60,7 +64,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// <summary>
         /// A list of all the <see cref="ApiDocs.Engines.Parameter"/> items.
         /// these are all of the items that will be used at some point as
-        /// inpouts to the API calls.
+        /// inputs to the API calls.
         /// </summary>
         public Dictionary<string, InputParameter> inputParameters { get; set; }
 
@@ -99,24 +103,28 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// </summary>
         public SortedDictionary<string, InputParameter> inputParametersNotInLookupProperties { get; private set; }
 
-
         /// <summary>
         /// A list of all endpoints that have the 'Depricated' attribute.
         /// </summary>
         public List<string> depricatedEndpoints { get; private set; }
 
         /// <summary>
-        /// 
+        /// A List containing the EndpointIds of all endpoints that do NOT contain an
+        /// input parameter in the URL
         /// </summary>
         public List<int> endpointsWithoutUrlParams { get; set; }
 
         /// <summary>
-        /// 
+        /// A List containing the EndpointIds of all endpoints that contain an
+        /// input parameter in the URL
         /// </summary>
         public List<int> endpointsWithUrlParams { get; set; }
         #endregion
 
         #region -- Constructors -----
+        /// <summary>
+        /// The default constructor
+        /// </summary>
         public ApiSetAnalysis()
         {
             apiSet = new ApiSet();
@@ -124,6 +132,11 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             InitializeCollections();
         }
 
+        /// <summary>
+        /// A constructor that lets you provide a pre-populated ApiSet
+        /// to this object.
+        /// </summary>
+        /// <param name="ApiSet">The <see cref="ApiSet"/> to add to this Analysis model.</param>
         public ApiSetAnalysis(ApiSet ApiSet)
         {
             apiSet = ApiSet;
@@ -152,71 +165,5 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         }
         #endregion
 
-
-        #region -- Read and Write methods -----
-        //public void SerializeAndSaveApiSetAnalysis(string fileName)
-        //{
-        //    try
-        //    {
-        //        using (StreamWriter sw = new StreamWriter(fileName, false))
-        //        {
-        //            sw.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
-        //        }
-        //        Log.ForContext<ApiSetAnalysis>().Information("SerializeAndSaveApiSetAnalysis completed successfully");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.ForContext<ApiSetAnalysis>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSetAnalysis");
-        //    }
-        //}
-
-        //public static ApiSetAnalysis LoadApiSetAnalysisFromFile(string fileName)
-        //{
-        //    ApiSetAnalysis apiSetAnalysis = null;
-        //    using (StreamReader sr = new StreamReader(fileName))
-        //    {
-        //        apiSetAnalysis = JsonConvert.DeserializeObject<ApiSetAnalysis>(sr.ReadToEnd());
-        //    }
-        //    if (apiSetAnalysis == null)
-        //    {
-        //        Log.ForContext<ApiSetAnalysis>().Error("LoadApiSetAnalysisFromFile failed to load the set from {fileName}", fileName);
-        //        throw new NullReferenceException($"LoadApiSetAnalysisFromFile failed to load the set from {fileName}");
-        //    }
-        //    apiSetAnalysis.apiSet = new ApiSet();
-        //    return apiSetAnalysis;
-        //}
-
-        //public static Dictionary<int, EndpointParsingData> GetEndpointParsingData(string fileName)
-        //{
-        //    using (StreamReader sr = new StreamReader(fileName))
-        //    {
-        //        var analysis = JsonConvert.DeserializeObject<ApiSetAnalysis>(sr.ReadToEnd());
-
-        //        Dictionary<int, EndpointParsingData> data = new Dictionary<int, EndpointParsingData>();
-        //        foreach (var item in analysis.endpointSummaries.Values)
-        //        {
-        //            data.Add(item.endpointParsingData.EndpointId, item.endpointParsingData);
-        //        }
-        //        return data;
-        //    }
-
-        //}
-
-        //public Dictionary<string, EndpointSummary> CopyEndpointSummary()
-        //{
-        //    Dictionary<string, EndpointSummary> summaries = new Dictionary<string, EndpointSummary>();
-        //    foreach(var item in endpointSummaries)
-        //    {
-        //        summaries.Add(item.Key, item.Value.ShallowCopy());
-        //    }
-
-        //    return summaries;
-        //}
-
-        //public void SetEndpointSummaryValues(Dictionary<string, EndpointSummary> summaries)
-        //{
-        //    endpointSummaries = summaries;
-        //}
-        #endregion
     }
 }

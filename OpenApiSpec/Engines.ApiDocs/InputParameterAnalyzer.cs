@@ -63,7 +63,8 @@ namespace Engines.ApiDocs
                         , parameter.arrayType
                         , parameter.Format
                         , parameter.Required
-                        , parameter.inputProvider);
+                        , parameter.inputProvider
+                        , parameter.ShowsUpIn);
 
                     inputParameter.UsedByTheseEndpoints.Add(endpointName);
                     inputParameter.MatchesTheseComponents = GetMatchingComponents(inputParameter);

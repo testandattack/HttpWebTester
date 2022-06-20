@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// A <see cref="CustomEndPointObject"/> class designed to hold a
+    /// A <see cref="CustomOasObjectEngine"/> class designed to hold a
     /// list of class names that this method's response object can
     /// provide values to.
     /// </summary>
@@ -15,7 +15,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// using the <see cref="MethodName"/> entries in
     /// other endpoints. 
     /// </remarks>
-    public class ProvidesValuesFor : CustomEndPointObject
+    public class ProvidesValuesFor : CustomOasObjectEngine
     {
         /// <summary>
         /// A list of class names that can get input values from this endpoint's 

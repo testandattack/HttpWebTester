@@ -9,6 +9,9 @@ using Serilog;
 
 namespace Engines.ApiDocs.Extensions
 {
+    /// <summary>
+    /// A set of extension methods for operating on an <see cref="ApiSetAnalysis"/> model
+    /// </summary>
     public static class ApiSetAnalysisExtensions
     {
         /// <summary>

@@ -24,7 +24,7 @@ namespace Engines.ApiDocs.Extensions
             source.NumberOfRequiredParams = endPoint.parameters.Where(p =>
                 p.Value.Required == true).ToList().Count;
 
-            source.customEndPointObjectTypes = CustomEndPointObject.GetCustomEndPointObjectTypesAsString(endPoint.customEndPointObjects);
+            //source.customEndPointObjectTypes = CustomOasObjectEngine.GetCustomEndPointObjectTypesAsString(endPoint.customEndPointObjects);
             
             if (endPoint.requestBody != null)
                 source.RequestBodyContentType = GetRequestBodyContentType(endPoint.requestBody.RequestBodyContentType);

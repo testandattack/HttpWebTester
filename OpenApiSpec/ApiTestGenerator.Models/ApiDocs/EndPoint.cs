@@ -9,7 +9,7 @@ using ApiTestGenerator.Models.Consts;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// 
+    /// This object is the equivalent to an OAS "Operation" object.
     /// </summary>
     public class EndPoint
     {
@@ -37,7 +37,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         public string Method { get; set; }
 
         /// <summary>
-        /// The version of the API that contains this operation.
+        /// This will allow people to extend the ApiSet to manage versioning of endpoints
+        /// at a future time. 
         /// </summary>
         public string Version { get; set; }
 
@@ -116,14 +117,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         public RequestBody requestBody { get; set; }
 
         /// <summary>
-        /// A list of <see cref="CustomEndPointObject"/> items discovered in
+        /// A list of <see cref="CustomOasObjectEngine"/> items discovered in
         /// the Api Document json.
         /// </summary>
         /// <remarks>
         /// The types of objects can be seen in this enum:
         /// <see cref="CustomEndPointObjectTypeEnum"/>
         /// </remarks>
-        public List<CustomEndPointObject> customEndPointObjects { get; set; }
+        public CustomOasObjectCollection customEndPointObjects { get; set; }
 
         /// <summary>
         /// This string holds the response body text that was present
@@ -158,7 +159,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             controllerName = string.Empty;
             IsLookupMethod = false;
             IsForTestingPurposes = false;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
 
         }
 
@@ -181,7 +182,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             controllerName = ControllerName;
             IsLookupMethod = false;
             IsForTestingPurposes = false;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
         }
         #endregion
     }

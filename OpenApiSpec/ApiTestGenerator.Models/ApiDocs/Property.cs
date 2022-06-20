@@ -94,9 +94,9 @@ namespace ApiTestGenerator.Models.ApiDocs
         public string arrayFormat { get; set; }
 
         /// <summary>
-        /// A list of <see cref="CustomEndPointObject"/> items that may be added to the parameter.
+        /// A <see cref="CustomOasObjectCollection"/> that may be added to the parameter.
         /// </summary>
-        public List<CustomEndPointObject> customEndPointObjects { get; set; }
+        public CustomOasObjectCollection customEndPointObjects { get; set; }
 
         /// <summary>
         /// A string that holds any error message that arose while parsing the component
@@ -117,7 +117,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             IsArray = false;
             arrayType = string.Empty;
             arrayFormat = string.Empty;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
         }
 
         public Property(string errorMsg)
@@ -130,7 +130,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             IsArray = false;
             arrayType = string.Empty;
             arrayFormat = string.Empty;
-            customEndPointObjects = new List<CustomEndPointObject>();
+            customEndPointObjects = new CustomOasObjectCollection();
             propertyParsingError = errorMsg;
         }
         #endregion

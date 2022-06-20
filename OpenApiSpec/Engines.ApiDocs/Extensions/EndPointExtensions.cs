@@ -75,25 +75,25 @@ namespace Engines.ApiDocs.Extensions
             source.parameters.Add(parameter.Name, gtcParam);
         }
 
-        /// <summary>
-        /// Adds any <see cref="RestrictTo"/> items to the endpoint.
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddRestrictions(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
-            {
-                foreach (var operationExtension in openApiOperation.Extensions)
-                {
-                    if (operationExtension.Key == ParserTokens.TKN_RestrictTo && ((OpenApiString)(operationExtension.Value)).Value != "")
-                    {
-                        RestrictTo endPointObject = new RestrictTo();
-                        endPointObject.RestrictToRoles.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
-                }
-            }
-        }
+        ///// <summary>
+        ///// Adds any <see cref="RestrictTo"/> items to the endpoint.
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddRestrictions(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_RestrictTo && ((OpenApiString)(operationExtension.Value)).Value != "")
+        //            {
+        //                RestrictTo endPointObject = new RestrictTo();
+        //                endPointObject.RestrictToRoles.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Adds any <see cref="ProvidesValuesFor"/> items to the endpoint
@@ -115,38 +115,38 @@ namespace Engines.ApiDocs.Extensions
             }
         }
 
-        /// <summary>
-        /// Adds the <see cref="MethodName"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddSourceMethodName(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
-            {
-                foreach (var operationExtension in openApiOperation.Extensions)
-                {
-                    if (operationExtension.Key == ParserTokens.TKN_MethodName)
-                    {
-                        MethodName endPointObject = new MethodName((((OpenApiString)(operationExtension.Value)).Value));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
-                }
-            }
-        }
+        ///// <summary>
+        ///// Adds the <see cref="MethodName"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddSourceMethodName(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_MethodName)
+        //            {
+        //                MethodName endPointObject = new MethodName((((OpenApiString)(operationExtension.Value)).Value));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Adds any <see cref="TestDataFilter"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddTestDataFilter(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParserTokens.TKN_TestDataFilter))
-            {
-                TestDataFilter endPointObject =
-                    new TestDataFilter(openApiOperation.Description.FindSubString(ParserTokens.TKN_TestDataFilter, ")"));
-                source.customEndPointObjects.Add(endPointObject);
-            }
-        }
+        ///// <summary>
+        ///// Adds any <see cref="TestDataFilter"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddTestDataFilter(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParserTokens.TKN_TestDataFilter))
+        //    {
+        //        TestDataFilter endPointObject =
+        //            new TestDataFilter(openApiOperation.Description.FindSubString(ParserTokens.TKN_TestDataFilter, ")"));
+        //        source.customEndPointObjects.Add(endPointObject);
+        //    }
+        //}
 
         /// <summary>
         /// Adds any <see cref="ParserTokens.PARAM_StartDate"/> or 

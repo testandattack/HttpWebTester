@@ -10,11 +10,23 @@ using GTC.HttpWebTester.Settings;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// 
+    /// This class defines a Model used for translating various different web based API 
+    /// calls between the different formats. It is based on the Open API Specification.
+    /// The idea is to allow an engine to populate this model with information from
+    /// sources like:
+    /// <list type="bullet">
+    /// <item>An OAS document</item>
+    /// <item>An Http Archive (HAR) file.</item>
+    /// <item>A Postman request collection.</item>
+    /// </list>
+    /// and turn the results into a test harness that can be executed.
     /// </summary>
     public class ApiSet
     {
         #region -- Properties -----
+        /// <summary>
+        /// The <see cref="Settings"/> to use with this ApiSet.
+        /// </summary>
         [JsonIgnore]
         public Settings settings { get; set; }
 
@@ -61,6 +73,11 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         [JsonProperty(PropertyName = "Schemes", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Schemes { get; set; }
+
+        /// <summary>
+        /// A list containing any custom endpoint objects and their handlers
+        /// </summary>
+        public CustomOasObjectCollection CustomObjects { get; set; }
         #endregion
 
         #region -- Constructors -----
@@ -98,6 +115,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             Controllers = new Dictionary<string, Controller>();
             Components = new Dictionary<string, Component>();
             SecuritySchemes = new List<OpenApiSecurityScheme>();
+            CustomObjects = new CustomOasObjectCollection();
         }
         #endregion
 

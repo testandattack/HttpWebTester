@@ -3,6 +3,15 @@
 
 ## ApiSet Class
 
+This class defines a Model used for translating various different web based API   
+calls between the different formats. It is based on the Open API Specification.  
+The idea is to allow an engine to populate this model with information from  
+sources like:  
+- An OAS document  
+- An Http Archive (HAR) file.  
+- A Postman request collection.  
+and turn the results into a test harness that can be executed.
+
 ```csharp
 public class ApiSet
 ```
@@ -94,6 +103,19 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiD
 #### Property Value
 [System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[Controller](Controller.md 'ApiTestGenerator.Models.ApiDocs.Controller')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
 
+<a name='ApiTestGenerator.Models.ApiDocs.ApiSet.CustomObjects'></a>
+
+## ApiSet.CustomObjects Property
+
+A list containing any custom endpoint objects and their handlers
+
+```csharp
+public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection CustomObjects { get; set; }
+```
+
+#### Property Value
+[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
+
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSet.Info'></a>
 
 ## ApiSet.Info Property
@@ -158,3 +180,16 @@ public System.Collections.Generic.List<Microsoft.OpenApi.Models.OpenApiServer> S
 
 #### Property Value
 [System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[Microsoft.OpenApi.Models.OpenApiServer](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiServer 'Microsoft.OpenApi.Models.OpenApiServer')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+
+<a name='ApiTestGenerator.Models.ApiDocs.ApiSet.settings'></a>
+
+## ApiSet.settings Property
+
+The [GTC.HttpWebTester.Settings.Settings](https://docs.microsoft.com/en-us/dotnet/api/GTC.HttpWebTester.Settings.Settings 'GTC.HttpWebTester.Settings.Settings') to use with this ApiSet.
+
+```csharp
+public GTC.HttpWebTester.Settings.Settings settings { get; set; }
+```
+
+#### Property Value
+[GTC.HttpWebTester.Settings.Settings](https://docs.microsoft.com/en-us/dotnet/api/GTC.HttpWebTester.Settings.Settings 'GTC.HttpWebTester.Settings.Settings')

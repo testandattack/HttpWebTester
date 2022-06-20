@@ -91,6 +91,11 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// <summary>
         /// 
         /// </summary>
+        public string ShowsUpIn { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Required { get; set; }
 
         /// <summary>
@@ -143,8 +148,9 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// <param name="format"></param>
         /// <param name="required"></param>
         /// <param name="inputProvider"></param>
+        /// <param name="showsUpIn"></param>
         public InputParameter(string name, string description, string type, bool isArray,
-            string ArrayType, string format, bool required, string inputProvider)
+            string ArrayType, string format, bool required, string inputProvider, string showsUpIn)
         {
             Name = name;
             Type = type;
@@ -153,7 +159,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             Format = format;
             Required = required;
             InputProvider = inputProvider;
-
+            ShowsUpIn = showsUpIn;
             MatchesTheseComponents = new List<string>();
             UsedByTheseEndpoints = new List<string>();
         }

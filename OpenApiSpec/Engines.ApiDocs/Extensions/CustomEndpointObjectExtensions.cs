@@ -1,37 +1,28 @@
 ﻿using ApiTestGenerator.Models.ApiDocs;
 using ApiTestGenerator.Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Engines.ApiDocs.Extensions
 {
     public static class CustomEndpointObjectExtensions
     {
-        public static bool Contains(this IEnumerable<CustomEndPointObject> source, CustomEndPointObjectTypeEnum type)
+        public static bool Contains(this IEnumerable<CustomOasObjectEngine> source, Type type)
         {
             foreach(var endpointObject in source)
             {
-                if (endpointObject.customEndPointObjectType == type)
+                if (endpointObject.CustomOasObjectEngineType == type)
                     return true;
             }
             return false;
         }
 
-        public static CustomEndPointObject GetSpecificObject(this IEnumerable<CustomEndPointObject> source, CustomEndPointObjectTypeEnum type)
+        public static CustomOasObjectEngine GetSpecificObject(this IEnumerable<CustomOasObjectEngine> source, Type type)
         {
             foreach (var endpointObject in source)
             {
-                if (endpointObject.customEndPointObjectType == type)
+                if (endpointObject.CustomOasObjectEngineType == type)
                     return endpointObject;
-            }
-            return null;
-        }
-
-        public static List<string> GetRestrictsToList(this IEnumerable<CustomEndPointObject> source)
-        {
-            foreach (var endpointObject in source)
-            {
-                if (endpointObject.customEndPointObjectType == CustomEndPointObjectTypeEnum.RestrictTo)
-                    return ((RestrictTo)endpointObject).RestrictToRoles;
             }
             return null;
         }

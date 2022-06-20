@@ -3,6 +3,8 @@
 
 ## EndPoint Class
 
+This object is the equivalent to an OAS "Operation" object.
+
 ```csharp
 public class EndPoint
 ```
@@ -57,15 +59,15 @@ public string controllerName { get; set; }
 
 ## EndPoint.customEndPointObjects Property
 
-A list of [CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject') items discovered in  
+A list of [CustomOasObjectEngine](https://docs.microsoft.com/en-us/dotnet/api/CustomOasObjectEngine 'CustomOasObjectEngine') items discovered in  
 the Api Document json.
 
 ```csharp
-public System.Collections.Generic.List<ApiTestGenerator.Models.ApiDocs.CustomEndPointObject> customEndPointObjects { get; set; }
+public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection customEndPointObjects { get; set; }
 ```
 
 #### Property Value
-[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
 
 ### Remarks
 The types of objects can be seen in this enum:  
@@ -287,7 +289,8 @@ public string UriPath { get; set; }
 
 ## EndPoint.Version Property
 
-The version of the API that contains this operation.
+This will allow people to extend the ApiSet to manage versioning of endpoints  
+at a future time.
 
 ```csharp
 public string Version { get; set; }

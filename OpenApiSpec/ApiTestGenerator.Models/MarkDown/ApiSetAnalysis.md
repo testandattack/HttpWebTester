@@ -8,6 +8,35 @@ public class ApiSetAnalysis
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; ApiSetAnalysis
+### Constructors
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis()'></a>
+
+## ApiSetAnalysis() Constructor
+
+The default constructor
+
+```csharp
+public ApiSetAnalysis();
+```
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet)'></a>
+
+## ApiSetAnalysis(ApiSet) Constructor
+
+A constructor that lets you provide a pre-populated ApiSet  
+to this object.
+
+```csharp
+public ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet ApiSet);
+```
+#### Parameters
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet).ApiSet'></a>
+
+`ApiSet` [ApiSet](ApiSet.md 'ApiTestGenerator.Models.ApiDocs.ApiSet')
+
+The [ApiSet](ApiSet.md 'ApiTestGenerator.Models.ApiDocs.ApiSet') to add to this Analysis model.
 ### Properties
 
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisDate'></a>
@@ -92,6 +121,9 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiA
 
 ## ApiSetAnalysis.endpointsWithMultipleMethods Property
 
+A list of all endpoints that have the same URL, but offer different  
+methods for calling.
+
 ```csharp
 public System.Collections.Generic.Dictionary<string,System.Collections.Generic.Dictionary<int,string>> endpointsWithMultipleMethods { get; set; }
 ```
@@ -103,6 +135,9 @@ public System.Collections.Generic.Dictionary<string,System.Collections.Generic.D
 
 ## ApiSetAnalysis.endpointsWithoutUrlParams Property
 
+A List containing the EndpointIds of all endpoints that do NOT contain an  
+input parameter in the URL
+
 ```csharp
 public System.Collections.Generic.List<int> endpointsWithoutUrlParams { get; set; }
 ```
@@ -113,6 +148,9 @@ public System.Collections.Generic.List<int> endpointsWithoutUrlParams { get; set
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithUrlParams'></a>
 
 ## ApiSetAnalysis.endpointsWithUrlParams Property
+
+A List containing the EndpointIds of all endpoints that contain an  
+input parameter in the URL
 
 ```csharp
 public System.Collections.Generic.List<int> endpointsWithUrlParams { get; set; }
@@ -127,7 +165,7 @@ public System.Collections.Generic.List<int> endpointsWithUrlParams { get; set; }
 
 A list of all the [ApiDocs.Engines.Parameter](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Parameter 'ApiDocs.Engines.Parameter') items.  
 these are all of the items that will be used at some point as  
-inpouts to the API calls.
+inputs to the API calls.
 
 ```csharp
 public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiAnalyzer.InputParameter> inputParameters { get; set; }

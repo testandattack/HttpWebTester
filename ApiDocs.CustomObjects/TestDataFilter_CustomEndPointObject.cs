@@ -4,7 +4,7 @@ using ApiTestGenerator.Models.Enums;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// A <see cref="CustomEndPointObject"/> class designed to hold 
+    /// A <see cref="CustomOasObjectEngine"/> class designed to hold 
     /// information about filters that should be applied to result
     /// sets when extracting input data for the method this filter
     /// is associated with.
@@ -22,7 +22,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// </code>
     /// 
     /// </remarks>
-    public class TestDataFilter : CustomEndPointObject
+    public class TestDataFilter : CustomOasObjectEngine
     {
         /// <summary>
         /// The name of the property that will be in both of the objects

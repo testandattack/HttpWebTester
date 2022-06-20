@@ -4,7 +4,7 @@ using ApiTestGenerator.Models.Enums;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// A <see cref="CustomEndPointObject"/> class designed to hold the
+    /// A <see cref="CustomOasObjectEngine"/> class designed to hold the
     /// class name of the API method in the Endpoint. 
     /// </summary>
     /// <remarks>
@@ -12,7 +12,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// <see cref="ProvidesValuesFor"/> entries in
     /// other endpoints. 
     /// </remarks>
-    public class MethodName : CustomEndPointObject
+    public class MethodName : CustomOasObjectEngine
     {
         /// <summary>
         /// The class name of the method housing this endpoint.

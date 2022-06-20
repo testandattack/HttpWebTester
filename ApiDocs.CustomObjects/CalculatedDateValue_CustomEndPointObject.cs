@@ -5,12 +5,12 @@ using System;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// A <see cref="CustomEndPointObject"/> class designed to hold the
+    /// A <see cref="CustomOasObjectEngine"/> class designed to hold the
     /// class name of the API method in the Endpoint. 
     /// </summary>
     /// <remarks>
     /// </remarks>
-    public class CalculatedDateValue : CustomEndPointObject
+    public class CalculatedDateValue : CustomOasObjectEngine
     {
 
         /// <summary>

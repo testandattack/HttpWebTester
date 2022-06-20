@@ -27,13 +27,13 @@ namespace Engines.ApiDocs
                 return;
 
             source.Description = parameter.Description;
-            source.CheckForTestDataFilter(parameter.Description);
-            source.CheckForGetsInputFrom(parameter.Description);
-            source.CheckForStartDate(parameter.Description);
-            source.CheckForEndDate(parameter.Description);
+            //source.CheckForTestDataFilter(parameter.Description);
+            //source.CheckForGetsInputFrom(parameter.Description);
+            //source.CheckForStartDate(parameter.Description);
+            //source.CheckForEndDate(parameter.Description);
         }
 
-        public static void CheckForTestDataFilter(this Parameter source, string description)
+/*        public static void CheckForTestDataFilter(this Parameter source, string description)
         {
             string str = description.FindSubString(ParserTokens.TKN_TestDataFilter, ")");
 
@@ -82,6 +82,7 @@ namespace Engines.ApiDocs
                 source.customEndPointObjects.Add(calcultedDate);
             }
         }
+*/
 
         public static void GetParameterExamples(this Parameter source, OpenApiParameter parameter)
         {
