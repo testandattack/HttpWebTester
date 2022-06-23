@@ -74,10 +74,11 @@ namespace ApiTestGenerator.Models.ApiDocs
         [JsonProperty(PropertyName = "Schemes", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Schemes { get; set; }
 
-        /// <summary>
-        /// A list containing any custom endpoint objects and their handlers
-        /// </summary>
-        public CustomOasObjectCollection CustomObjects { get; set; }
+        ///// <summary>
+        ///// A list containing any custom endpoint objects and their handlers
+        ///// </summary>
+        //[JsonIgnore]
+        //public CustomOasObjectCollection CustomObjects { get; set; }
         #endregion
 
         #region -- Constructors -----
@@ -115,7 +116,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             Controllers = new Dictionary<string, Controller>();
             Components = new Dictionary<string, Component>();
             SecuritySchemes = new List<OpenApiSecurityScheme>();
-            CustomObjects = new CustomOasObjectCollection();
+            //CustomObjects = new CustomOasObjectCollection();
         }
         #endregion
 

@@ -103,19 +103,6 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiD
 #### Property Value
 [System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[Controller](Controller.md 'ApiTestGenerator.Models.ApiDocs.Controller')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
 
-<a name='ApiTestGenerator.Models.ApiDocs.ApiSet.CustomObjects'></a>
-
-## ApiSet.CustomObjects Property
-
-A list containing any custom endpoint objects and their handlers
-
-```csharp
-public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection CustomObjects { get; set; }
-```
-
-#### Property Value
-[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
-
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSet.Info'></a>
 
 ## ApiSet.Info Property

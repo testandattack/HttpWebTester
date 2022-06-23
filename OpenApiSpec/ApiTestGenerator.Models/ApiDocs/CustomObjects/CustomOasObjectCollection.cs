@@ -13,14 +13,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// ther dictionary that contains the collection of custom object.
         /// </summary>
-        public Dictionary<string, CustomOasObject> collection { get; set; }
+        public List<CustomOasObject> collection { get; set; }
 
         /// <summary>
         /// The default constructor
         /// </summary>
         public CustomOasObjectCollection()
         {
-            collection = new Dictionary<string, CustomOasObject>();
+            collection = new List<CustomOasObject>();
         }
 
         #region -- Enumeration -----------------------------------------------------
@@ -31,17 +31,17 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         private class CollectionEnumerator : IEnumerator, IDisposable
         {
-            private Dictionary<string, CustomOasObject>.Enumerator _Enumerator;
+            private List<CustomOasObject>.Enumerator _Enumerator;
 
-            public object Current { get { return _Enumerator.Current.Value; } }
+            public object Current { get { return _Enumerator.Current; } }
             public void Dispose() { _Enumerator.Dispose(); }
             public bool MoveNext() { return _Enumerator.MoveNext(); }
             public void Reset() { throw new NotImplementedException("Reset not implmented"); }
 
 
-            public CollectionEnumerator(Dictionary<string, CustomOasObject> dictionary)
+            public CollectionEnumerator(List<CustomOasObject> list)
             {
-                _Enumerator = dictionary.GetEnumerator();
+                _Enumerator = list.GetEnumerator();
             }
 
         } // end class 

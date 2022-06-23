@@ -147,20 +147,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         public EndPoint()
         {
-            UriPath = string.Empty;
-            Method = string.Empty;
-            Version = "Not Implemenmted";
-            parameters = new Dictionary<string, Parameter>(StringComparer.InvariantCultureIgnoreCase);
-            Depricated = false;
-            Description = string.Empty;
-            Summary = string.Empty;
-
-            ReportingName = string.Empty;
             controllerName = string.Empty;
-            IsLookupMethod = false;
-            IsForTestingPurposes = false;
-            customEndPointObjects = new CustomOasObjectCollection();
-
+            Initialize();
         }
 
         /// <summary>
@@ -170,6 +158,12 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <param name="ControllerName">the name of the API controller that houses this endpoint.</param>
         public EndPoint(string ControllerName)
         {
+            controllerName = ControllerName;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             UriPath = string.Empty;
             Method = string.Empty;
             Version = "Not Implemenmted";
@@ -177,12 +171,11 @@ namespace ApiTestGenerator.Models.ApiDocs
             Depricated = false;
             Description = string.Empty;
             Summary = string.Empty;
+            customEndPointObjects = new CustomOasObjectCollection();
 
             ReportingName = string.Empty;
-            controllerName = ControllerName;
             IsLookupMethod = false;
             IsForTestingPurposes = false;
-            customEndPointObjects = new CustomOasObjectCollection();
         }
         #endregion
     }

@@ -97,7 +97,6 @@ P:ApiTestGenerator.Models.ApiDocs.ApiSet.Controllers|ApiSet.md#ApiTestGenerator.
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.Components|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.Components|Components
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.SecuritySchemes|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.SecuritySchemes|SecuritySchemes
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.Schemes|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.Schemes|Schemes
-P:ApiTestGenerator.Models.ApiDocs.ApiSet.CustomObjects|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.CustomObjects|CustomObjects
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet()|ApiSet()
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(GTC.HttpWebTester.Settings.Settings)|ApiSet(Settings)
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(System.String,GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(string,GTC.HttpWebTester.Settings.Settings)|ApiSet(string, Settings)
@@ -129,11 +128,16 @@ T:ApiTestGenerator.Models.ApiDocs.Component|Component.md|Component
 P:ApiTestGenerator.Models.ApiDocs.Controller.Name|Controller.md#ApiTestGenerator.Models.ApiDocs.Controller.Name|Name
 P:ApiTestGenerator.Models.ApiDocs.Controller.EndPoints|Controller.md#ApiTestGenerator.Models.ApiDocs.Controller.EndPoints|EndPoints
 T:ApiTestGenerator.Models.ApiDocs.Controller|Controller.md|Controller
+P:ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectName|CustomOasObject.md#ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectName|CustomObjectName
+P:ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectValue|CustomOasObject.md#ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectValue|CustomObjectValue
 T:ApiTestGenerator.Models.ApiDocs.CustomOasObject|CustomOasObject.md|CustomOasObject
 P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.collection|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.collection|collection
 M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.#ctor|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.CustomOasObjectCollection()|CustomOasObjectCollection()
 M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator()|GetEnumerator()
 T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection|CustomOasObjectCollection.md|CustomOasObjectCollection
+P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.operation|CustomOasObjectEventArgs.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.operation|operation
+P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.customObjects|CustomOasObjectEventArgs.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.customObjects|customObjects
+T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs|CustomOasObjectEventArgs.md|CustomOasObjectEventArgs
 P:ApiTestGenerator.Models.ApiDocs.EndPoint.EndpointId|EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.EndpointId|EndpointId
 P:ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath|EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath|UriPath
 P:ApiTestGenerator.Models.ApiDocs.EndPoint.Method|EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.Method|Method

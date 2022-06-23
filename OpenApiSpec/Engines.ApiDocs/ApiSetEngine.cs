@@ -15,6 +15,7 @@ using System.IO;
 using GTC.Extensions;
 using System.Text.RegularExpressions;
 using GTC.HttpWebTester.Settings;
+using ApiDocs.CustomObjects;
 
 namespace Engines.ApiDocs
 {
@@ -49,6 +50,9 @@ namespace Engines.ApiDocs
         public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
             apiSet = new ApiSet(ApiRoot, settings);
+            // This call adds all of the custom objects that have been registered in the "ApiDocs.CustomObjects" namespace.
+            //apiSet.CustomObjects.collection = AddAllCustomObjects.BuildCustomObjects();
+
             Log.ForContext("SourceContext", "ApiSetEngine").Information("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
             GetSecurityInfo(openApiDocument);
@@ -140,67 +144,67 @@ namespace Engines.ApiDocs
 
             foreach (var operation in item.Operations)
             {
-                var endpointEngine = new EndPointEngine(apiSet.CustomObjects, operation, settings);
+                var endpointEngine = new EndPointEngine(operation, settings);
                 startingId = endpointEngine.ParseEndpoint(controller, pathUri, startingId, item);
             }
             return startingId;
         }
 
-        private static int ParseEndpoint_Temp(Controller controller, string pathUri, int startingId, OpenApiPathItem item, KeyValuePair<OperationType, OpenApiOperation> operation)
-        {
-            Log.ForContext<ApiSetEngine>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
-            EndPoint endPoint = new EndPoint(controller.Name);
-            endPoint.EndpointId = startingId;
+        //private static int ParseEndpoint_Temp(Controller controller, string pathUri, int startingId, OpenApiPathItem item, KeyValuePair<OperationType, OpenApiOperation> operation)
+        //{
+        //    Log.ForContext<ApiSetEngine>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
+        //    EndPoint endPoint = new EndPoint(controller.Name);
+        //    endPoint.EndpointId = startingId;
 
-            endPoint.UriPath = pathUri;
-            endPoint.Method = operation.Key.ToString();
-            endPoint.Depricated = operation.Value.Deprecated;
+        //    endPoint.UriPath = pathUri;
+        //    endPoint.Method = operation.Key.ToString();
+        //    endPoint.Depricated = operation.Value.Deprecated;
 
-            endPoint.Summary = operation.Value.Summary;
-            if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParserTokens.DESC_ForTestingPurposes))
-            {
-                endPoint.IsForTestingPurposes = true;
-            }
+        //    endPoint.Summary = operation.Value.Summary;
+        //    if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParserTokens.DESC_ForTestingPurposes))
+        //    {
+        //        endPoint.IsForTestingPurposes = true;
+        //    }
 
-            if (operation.Value.Description != null)
-            {
-                endPoint.Description = operation.Value.Description.Replace("\r\n", "");
-            }
+        //    if (operation.Value.Description != null)
+        //    {
+        //        endPoint.Description = operation.Value.Description.Replace("\r\n", "");
+        //    }
 
-            endPoint.ReportingName = pathUri
-                .Replace("/api/", "")
-                .Replace("/", "-")
-                .Replace("{", "<")
-                .Replace("}", ">");
+        //    endPoint.ReportingName = pathUri
+        //        .Replace("/api/", "")
+        //        .Replace("/", "-")
+        //        .Replace("{", "<")
+        //        .Replace("}", ">");
 
 
-            endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
-            foreach (var parm in item.Parameters)
-            {
-                if (parm != null)
-                {
-                    endPoint.AddParameter(controller.EndPoints.Count, parm);
-                }
-            }
+        //    endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
+        //    foreach (var parm in item.Parameters)
+        //    {
+        //        if (parm != null)
+        //        {
+        //            endPoint.AddParameter(controller.EndPoints.Count, parm);
+        //        }
+        //    }
 
-            endPoint.CheckForDynamicDates(operation.Value);
-            //endPoint.AddRestrictions(operation.Value);
-            //endPoint.AddMethodsThatUseThisResponse(operation.Value);
-            //endPoint.AddSourceMethodName(operation.Value);
-            //endPoint.AddTestDataFilter(operation.Value);
-            endPoint.CheckFor_IsLookupMethod(operation.Value);
+        //    endPoint.CheckForDynamicDates(operation.Value);
+        //    //endPoint.AddRestrictions(operation.Value);
+        //    //endPoint.AddMethodsThatUseThisResponse(operation.Value);
+        //    //endPoint.AddSourceMethodName(operation.Value);
+        //    //endPoint.AddTestDataFilter(operation.Value);
+        //    endPoint.CheckFor_IsLookupMethod(operation.Value);
 
-            if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
-            {
-                endPoint.AddRequestBody(operation.Value);
-            }
-            endPoint.AddResponseItems(operation.Value);
+        //    if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
+        //    {
+        //        endPoint.AddRequestBody(operation.Value);
+        //    }
+        //    endPoint.AddResponseItems(operation.Value);
 
-            string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
-            controller.EndPoints.Add(endPointKey, endPoint);
-            startingId++;
-            return startingId;
-        }
+        //    string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
+        //    controller.EndPoints.Add(endPointKey, endPoint);
+        //    startingId++;
+        //    return startingId;
+        //}
 
         private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiSet apiSet)
         {

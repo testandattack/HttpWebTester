@@ -397,11 +397,6 @@
             The transfer protocos(s) used by the API. [OAS v2.x only]
             </summary>
         </member>
-        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.CustomObjects">
-            <summary>
-            A list containing any custom endpoint objects and their handlers
-            </summary>
-        </member>
         <member name="M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor">
             <summary>
             Creates a new empty ApiSet instance.
@@ -584,8 +579,33 @@
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.CustomOasObject">
             <summary>
-            This is the base class for creating custom objects and object parsers.
+            This is the base class for creating custom objects.
             </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectName">
+            <summary>
+            The name of the custom object.
+            </summary>
+            <remarks>
+            The preferred convention (per the OAS standards) is to make the name of any custom entry 
+            use "x-" at the beginning of the custom entry. The two samples included with the ApiSet
+            code have names of:
+            <list type="bullet">
+            <item>x-provides-values-for</item>
+            <item>x-method-name</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectValue">
+            <summary>
+            The value of the custom item.
+            </summary>
+            <remarks>
+            The ApiSet parsing engine assumes that the value is stored in the OAS as a string.
+            The custom methods you can provide may convert the string into a standard object,
+            such as a List or Dictionary, but you will have to provide the parser to convert 
+            the string into that object.
+            </remarks>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection">
             <summary>
@@ -605,6 +625,24 @@
         <member name="M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator">
             <summary>
             Gets the enumerator for the dictionary of objects making up this collection.
+            </summary>
+        </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs">
+            <summary>
+            The class to hold the properties that get passed into any event handler for
+            custom objects.
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.operation">
+            <summary>
+            The <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain custom objects
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs.customObjects">
+            <summary>
+            The <see cref="T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection"/> for the endpoint being processed.
+            This is passed to the event handler so that the method can add the new object
+            to the collection.
             </summary>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.EndPoint">

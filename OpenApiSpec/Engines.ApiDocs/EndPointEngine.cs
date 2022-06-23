@@ -17,35 +17,14 @@ namespace Engines.ApiDocs
 
         public KeyValuePair<OperationType, OpenApiOperation> operation { get; set; }
 
-        public CustomOas_Operation_ObjectEngine customEndPointEngine { get; set; }
-
+        public CustomOasObjectEngine customEngine { get; set; }
         #endregion
 
         #region -- Constructors -----
-        public EndPointEngine() 
+        public EndPointEngine(KeyValuePair<OperationType, OpenApiOperation> apiOperation, Settings Settings)
         {
-            customEndPointEngine = new CustomOas_Operation_ObjectEngine();
-            operation = new KeyValuePair<OperationType, OpenApiOperation>();
-            settings = new Settings();
-        }
-
-        public EndPointEngine(CustomOas_Operation_ObjectEngine customObjects)
-        {
-            customEndPointEngine = customObjects;
-            operation = new KeyValuePair<OperationType, OpenApiOperation>();
-            settings = new Settings();
-        }
-
-        public EndPointEngine(CustomOas_Operation_ObjectEngine customObjects, KeyValuePair<OperationType, OpenApiOperation> apiOperation)
-        {
-            customEndPointEngine = customObjects;
-            operation = apiOperation;
-            settings = new Settings();
-        }
-
-        public EndPointEngine(CustomOasObjectCollection customObjects, KeyValuePair<OperationType, OpenApiOperation> apiOperation, Settings Settings)
-        {
-            customEndPointEngine = new CustomOas_Operation_ObjectEngine(customObjects);
+            CustomOasObjectCollection objectCollection = new CustomOasObjectCollection();
+            customEngine = new CustomOasObjectEngine();
             operation = apiOperation;
             settings = Settings;
         }
@@ -90,7 +69,7 @@ namespace Engines.ApiDocs
             endPoint.CheckFor_IsLookupMethod(operation.Value);
 
             // Call the custom object engine to look for any custom object handlers that need to be executed.
-            customEndPointEngine.LookForCustomObjects(operation.Value);
+            customEngine.LookForCustomObjects(operation.Value, endPoint.customEndPointObjects);
 
             // Look for and add request body info
             if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT" || endPoint.Method.ToUpper() == "PATCH")
@@ -106,6 +85,5 @@ namespace Engines.ApiDocs
             return startingId;
         }
         #endregion
-
     }
 }
