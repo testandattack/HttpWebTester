@@ -1,15 +1,23 @@
 https://github.com/testandattack/HttpWebTester/blob/master/SwaggerParsing/MarkDown/
-P:GTC.SwaggerParsing.SwaggerParser.settings|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.settings|settings
-P:GTC.SwaggerParsing.SwaggerParser.apiDocument|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.apiDocument|apiDocument
-M:GTC.SwaggerParsing.SwaggerParser.#ctor|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.SwaggerParser()|SwaggerParser()
-M:GTC.SwaggerParsing.SwaggerParser.#ctor(GTC.HttpWebTester.Settings.Settings)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.SwaggerParser(GTC.HttpWebTester.Settings.Settings)|SwaggerParser(Settings)
-M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument()|PopulateApiDocument()
-M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.Boolean)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(bool)|PopulateApiDocument(bool)
-M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.String)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(string)|PopulateApiDocument(string)
-M:GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(System.String,System.String)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.PopulateApiDocument(string,string)|PopulateApiDocument(string, string)
-M:GTC.SwaggerParsing.SwaggerParser.SaveListOfURLs(System.String,ApiTestGenerator.Models.ApiDocs.ApiSet)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.SaveListOfURLs(string,ApiTestGenerator.Models.ApiDocs.ApiSet)|SaveListOfURLs(string, ApiSet)
-M:GTC.SwaggerParsing.SwaggerParser.SaveOriginalSwaggerDocument|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.SaveOriginalSwaggerDocument()|SaveOriginalSwaggerDocument()
-M:GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode()|CreateAndSaveDtoCode()
-M:GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode(System.String)|SwaggerParser.md#GTC.SwaggerParsing.SwaggerParser.CreateAndSaveDtoCode(string)|CreateAndSaveDtoCode(string)
+P:GTC.SwaggerParsing.SwaggerFileParser.settings|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.settings|settings
+P:GTC.SwaggerParsing.SwaggerFileParser.apiDocument|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.apiDocument|apiDocument
+P:GTC.SwaggerParsing.SwaggerFileParser.extraInfo|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.extraInfo|extraInfo
+M:GTC.SwaggerParsing.SwaggerFileParser.#ctor|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.SwaggerFileParser()|SwaggerFileParser()
+M:GTC.SwaggerParsing.SwaggerFileParser.#ctor(GTC.HttpWebTester.Settings.Settings)|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.SwaggerFileParser(GTC.HttpWebTester.Settings.Settings)|SwaggerFileParser(Settings)
+M:GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument()|PopulateApiDocument()
+M:GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument(System.String)|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.PopulateApiDocument(string)|PopulateApiDocument(string)
+M:GTC.SwaggerParsing.SwaggerFileParser.SaveOriginalSwaggerDocument|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.SaveOriginalSwaggerDocument()|SaveOriginalSwaggerDocument()
+M:GTC.SwaggerParsing.SwaggerFileParser.CreateAndSaveDtoCode|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.CreateAndSaveDtoCode()|CreateAndSaveDtoCode()
+M:GTC.SwaggerParsing.SwaggerFileParser.CreateAndSaveDtoCode(System.String)|SwaggerFileParser.md#GTC.SwaggerParsing.SwaggerFileParser.CreateAndSaveDtoCode(string)|CreateAndSaveDtoCode(string)
 N:GTC.SwaggerParsing|SwaggerParsing.md#GTC.SwaggerParsing|GTC.SwaggerParsing
-T:GTC.SwaggerParsing.SwaggerParser|SwaggerParser.md|SwaggerParser
+T:GTC.SwaggerParsing.SwaggerFileParser|SwaggerFileParser.md|SwaggerFileParser
+P:GTC.SwaggerParsing.SwaggerUrlParser.settings|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.settings|settings
+P:GTC.SwaggerParsing.SwaggerUrlParser.apiDocument|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.apiDocument|apiDocument
+M:GTC.SwaggerParsing.SwaggerUrlParser.#ctor|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.SwaggerUrlParser()|SwaggerUrlParser()
+M:GTC.SwaggerParsing.SwaggerUrlParser.#ctor(GTC.HttpWebTester.Settings.Settings)|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.SwaggerUrlParser(GTC.HttpWebTester.Settings.Settings)|SwaggerUrlParser(Settings)
+M:GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument()|PopulateApiDocument()
+M:GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument(System.String)|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument(string)|PopulateApiDocument(string)
+M:GTC.SwaggerParsing.SwaggerUrlParser.SaveOriginalSwaggerDocument|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.SaveOriginalSwaggerDocument()|SaveOriginalSwaggerDocument()
+M:GTC.SwaggerParsing.SwaggerUrlParser.CreateAndSaveDtoCode|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.CreateAndSaveDtoCode()|CreateAndSaveDtoCode()
+M:GTC.SwaggerParsing.SwaggerUrlParser.CreateAndSaveDtoCode(System.String)|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.CreateAndSaveDtoCode(string)|CreateAndSaveDtoCode(string)
+T:GTC.SwaggerParsing.SwaggerUrlParser|SwaggerUrlParser.md|SwaggerUrlParser

@@ -61,14 +61,14 @@ Schema Object, which is an extended subset of JSON Schema Specification Wright D
 
 ## Property.customEndPointObjects Property
 
-A list of [CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject') items that may be added to the parameter.
+A [CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection') that may be added to the parameter.
 
 ```csharp
-public System.Collections.Generic.List<ApiTestGenerator.Models.ApiDocs.CustomEndPointObject> customEndPointObjects { get; set; }
+public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection customEndPointObjects { get; set; }
 ```
 
 #### Property Value
-[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
 
 <a name='ApiTestGenerator.Models.ApiDocs.Property.Description'></a>
 

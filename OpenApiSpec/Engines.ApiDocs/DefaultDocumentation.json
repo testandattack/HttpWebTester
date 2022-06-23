@@ -1,0 +1,12 @@
+{
+  "LinksBaseUrl": "https://github.com/testandattack/HttpWebTester/blob/master/Engines.ApiDocs/MarkDown/",
+  "LinksOutputFilePath": "MarkDown\\Engines.ApiDocs.txt",
+  "GeneratedAccessModifiers": "Public,Protected,ProtectedInternal",
+  "Markdown": {
+    "IgnoreLineBreak": true,
+    "TableOfContentsModes": "IncludeKind,IncludeSummary"
+  },
+  "GeneratedPages": "Assembly,Types",
+  "AssemblyPageName": "Engines.ApiDocs",
+  "FileNameFactory": "Name"
+}

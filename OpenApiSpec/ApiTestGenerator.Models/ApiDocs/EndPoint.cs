@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using GTC.OpenApiUtilities;
+using ApiTestGenerator.Models.Enums;
+using ApiTestGenerator.Models.Consts;
 
 namespace ApiTestGenerator.Models.ApiDocs
 {
+    /// <summary>
+    /// This object is the equivalent to an OAS "Operation" object.
+    /// </summary>
     public class EndPoint
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int EndpointId { get; set; }
 
         #region -- Properties that map directly to OpenApiScec properties -----
@@ -28,7 +37,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         public string Method { get; set; }
 
         /// <summary>
-        /// The version of the API that contains this operation.
+        /// This will allow people to extend the ApiSet to manage versioning of endpoints
+        /// at a future time. 
         /// </summary>
         public string Version { get; set; }
 
@@ -82,7 +92,7 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         /// <summary>
         /// A boolean that describes if the method contains the
-        /// <see cref="ParseTokens.TKN_LookupMethod"/> tag indicating
+        /// <see cref="ParserTokens.TKN_LookupMethod"/> tag indicating
         /// that the method is used to grab lookup values for other
         /// methods in the API.
         /// </summary>
@@ -91,7 +101,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// A boolean that indicates if this method is exposed solely for
         /// the Tester Role and woill not be used by the application.
-        /// All Test methods contain <see cref="ParseTokens.DESC_ForTestingPurposes"/>
+        /// All Test methods contain <see cref="ParserTokens.DESC_ForTestingPurposes"/>
         /// in the Description field.
         /// </summary>
         public bool IsForTestingPurposes { get; set; }
@@ -107,14 +117,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         public RequestBody requestBody { get; set; }
 
         /// <summary>
-        /// A list of <see cref="CustomEndPointObject"/> items discovered in
+        /// A list of <see cref="CustomOasObjectEngine"/> items discovered in
         /// the Api Document json.
         /// </summary>
         /// <remarks>
         /// The types of objects can be seen in this enum:
         /// <see cref="CustomEndPointObjectTypeEnum"/>
         /// </remarks>
-        public List<CustomEndPointObject> customEndPointObjects { get; set; }
+        public CustomOasObjectCollection customEndPointObjects { get; set; }
 
         /// <summary>
         /// This string holds the response body text that was present
@@ -137,20 +147,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         public EndPoint()
         {
-            UriPath = string.Empty;
-            Method = string.Empty;
-            Version = "Not Implemenmted";
-            parameters = new Dictionary<string, Parameter>(StringComparer.InvariantCultureIgnoreCase);
-            Depricated = false;
-            Description = string.Empty;
-            Summary = string.Empty;
-
-            ReportingName = string.Empty;
             controllerName = string.Empty;
-            IsLookupMethod = false;
-            IsForTestingPurposes = false;
-            customEndPointObjects = new List<CustomEndPointObject>();
-
+            Initialize();
         }
 
         /// <summary>
@@ -160,6 +158,12 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <param name="ControllerName">the name of the API controller that houses this endpoint.</param>
         public EndPoint(string ControllerName)
         {
+            controllerName = ControllerName;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             UriPath = string.Empty;
             Method = string.Empty;
             Version = "Not Implemenmted";
@@ -167,12 +171,11 @@ namespace ApiTestGenerator.Models.ApiDocs
             Depricated = false;
             Description = string.Empty;
             Summary = string.Empty;
+            customEndPointObjects = new CustomOasObjectCollection();
 
             ReportingName = string.Empty;
-            controllerName = ControllerName;
             IsLookupMethod = false;
             IsForTestingPurposes = false;
-            customEndPointObjects = new List<CustomEndPointObject>();
         }
         #endregion
     }

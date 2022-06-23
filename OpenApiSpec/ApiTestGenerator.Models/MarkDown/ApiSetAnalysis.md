@@ -8,7 +8,62 @@ public class ApiSetAnalysis
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; ApiSetAnalysis
+### Constructors
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis()'></a>
+
+## ApiSetAnalysis() Constructor
+
+The default constructor
+
+```csharp
+public ApiSetAnalysis();
+```
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet)'></a>
+
+## ApiSetAnalysis(ApiSet) Constructor
+
+A constructor that lets you provide a pre-populated ApiSet  
+to this object.
+
+```csharp
+public ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet ApiSet);
+```
+#### Parameters
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.ApiSetAnalysis(ApiTestGenerator.Models.ApiDocs.ApiSet).ApiSet'></a>
+
+`ApiSet` [ApiSet](ApiSet.md 'ApiTestGenerator.Models.ApiDocs.ApiSet')
+
+The [ApiSet](ApiSet.md 'ApiTestGenerator.Models.ApiDocs.ApiSet') to add to this Analysis model.
 ### Properties
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisDate'></a>
+
+## ApiSetAnalysis.AnalysisDate Property
+
+The local Date-Time that the analysis was performed.
+
+```csharp
+public System.DateTime AnalysisDate { get; set; }
+```
+
+#### Property Value
+[System.DateTime](https://docs.microsoft.com/en-us/dotnet/api/System.DateTime 'System.DateTime')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisName'></a>
+
+## ApiSetAnalysis.AnalysisName Property
+
+The name of the ApiSet that was analyzed
+
+```csharp
+public string AnalysisName { get; set; }
+```
+
+#### Property Value
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.analyzerErrors'></a>
 
@@ -49,33 +104,6 @@ public System.Collections.Generic.List<string> depricatedEndpoints { get; set; }
 #### Property Value
 [System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
 
-<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endPointRestrictions'></a>
-
-## ApiSetAnalysis.endPointRestrictions Property
-
-A list of every endpoint showing what filter restrictions it allows.
-
-```csharp
-public System.Collections.Generic.Dictionary<string,string> endPointRestrictions { get; set; }
-```
-
-#### Property Value
-[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
-
-<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointRestrictionSummary'></a>
-
-## ApiSetAnalysis.endpointRestrictionSummary Property
-
-A list of the different RestrictTo filters in the API along with  
-all of the endpoints that use the filter.
-
-```csharp
-public ApiTestGenerator.Models.ApiAnalyzer.EndpointRestrictionSummary endpointRestrictionSummary { get; set; }
-```
-
-#### Property Value
-[ApiTestGenerator.Models.ApiAnalyzer.EndpointRestrictionSummary](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiAnalyzer.EndpointRestrictionSummary 'ApiTestGenerator.Models.ApiAnalyzer.EndpointRestrictionSummary')
-
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointSummaries'></a>
 
 ## ApiSetAnalysis.endpointSummaries Property
@@ -89,13 +117,55 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiA
 #### Property Value
 [System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[EndpointSummary](EndpointSummary.md 'ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
 
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithMultipleMethods'></a>
+
+## ApiSetAnalysis.endpointsWithMultipleMethods Property
+
+A list of all endpoints that have the same URL, but offer different  
+methods for calling.
+
+```csharp
+public System.Collections.Generic.Dictionary<string,System.Collections.Generic.Dictionary<int,string>> endpointsWithMultipleMethods { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithoutUrlParams'></a>
+
+## ApiSetAnalysis.endpointsWithoutUrlParams Property
+
+A List containing the EndpointIds of all endpoints that do NOT contain an  
+input parameter in the URL
+
+```csharp
+public System.Collections.Generic.List<int> endpointsWithoutUrlParams { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+
+<a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithUrlParams'></a>
+
+## ApiSetAnalysis.endpointsWithUrlParams Property
+
+A List containing the EndpointIds of all endpoints that contain an  
+input parameter in the URL
+
+```csharp
+public System.Collections.Generic.List<int> endpointsWithUrlParams { get; set; }
+```
+
+#### Property Value
+[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+
 <a name='ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.inputParameters'></a>
 
 ## ApiSetAnalysis.inputParameters Property
 
 A list of all the [ApiDocs.Engines.Parameter](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Parameter 'ApiDocs.Engines.Parameter') items.  
 these are all of the items that will be used at some point as  
-inpouts to the API calls.
+inputs to the API calls.
 
 ```csharp
 public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiAnalyzer.InputParameter> inputParameters { get; set; }

@@ -28,15 +28,27 @@ namespace GTC.HttpWebTester.Settings
         public ApiDocsSettings apiDocsSettings { get; set;}
 
         public ApiAnalysisSettings apiAnalysisSettings { get; set; }
-
-        public CodeGenerationSettings codeGenerationSettings { get; set; }
-
-        public HarFileProcessingSettings harFileProcessingSettings { get; set; }
-
-        public WebLogAnalysisSettings webLogAnalysisSettings { get; set; }
         #endregion
 
-        public static Settings LoadSettings(string fileName)
+        public Settings() { }
+
+        public Settings(string fileName)
+        {
+            LoadSettings(fileName);
+        }
+
+        public void LoadSettings(string fileName)
+        {
+            var tempSettings = ReadSettingsFromFile(fileName);
+            this.DefaultInputLocation = tempSettings.DefaultInputLocation;
+            this.DefaultOutputLocation = tempSettings.DefaultOutputLocation;
+            this.logSettings = tempSettings.logSettings;
+            this.swaggerSettings = tempSettings.swaggerSettings;
+            this.apiDocsSettings = tempSettings.apiDocsSettings;
+            this.apiAnalysisSettings = tempSettings.apiAnalysisSettings;
+        }
+
+        private static Settings ReadSettingsFromFile(string fileName)
         {
             using (StreamReader sr = new StreamReader(fileName))
             {

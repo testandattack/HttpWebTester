@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Engines.ApiDocs</name>
+    </assembly>
+    <members>
+        <member name="M:Engines.ApiDocs.ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(System.String)">
+            <summary>
+            call this to make a table-like summary of the ApiSet to load into excel.
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.ApiSetAnalysisEngine.LoadApiSetAnalysisFromFile(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Engines.ApiDocs.ApiSetEngine">
+            <summary>
+            A collection of objects and information that cn be used to 
+            generate webtests for the API.
+            </summary>
+            <remarks>
+            This set of information is language agnostic and built from OpenApi 
+            Documentation so that it can be consumed by test creation software
+            directly. The reason for this extra step is because the ApiSet object
+            incorporates custom code and OpenApiSchema extensions that enhance
+            the swagger documentation way beyond the normal information available.
+            </remarks>
+        </member>
+        <member name="T:Engines.ApiDocs.Extensions.ApiSetAnalysisExtensions">
+            <summary>
+            A set of extension methods for operating on an <see cref="T:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis"/> model
+            </summary>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetAnalysisExtensions.CopyEndpointSummary(ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis)">
+            <summary>
+            
+            </summary>
+            <param name="source">The <c>ApiSetAnalysis</c> to which this method is exposed.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetAnalysisExtensions.SetEndpointSummaryValues(ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis,System.Collections.Generic.Dictionary{System.String,ApiTestGenerator.Models.ApiAnalyzer.EndpointSummary})">
+            <summary>
+            
+            </summary>
+            <param name="source">The <c>ApiSetAnalysis</c> to which this method is exposed.</param>
+            <param name="summaries"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SaveListOfURLs(Engines.ApiDocs.ApiSetEngine,System.String)">
+            <summary>
+            call this to save a base list of all operations
+            </summary>
+            <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.GetListOfURLs(Engines.ApiDocs.ApiSetEngine)">
+            <summary>
+            call this to retrieve a list of all operations in string format
+            </summary>
+            <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetOasVersion(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Sets the Open API Scec version used for the document
+            </summary>
+            <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+            <param name="extraInfo"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetSchemes(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Gets any schemes that were defined in the OAS document [OAS v2.x only]
+            </summary>
+            <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+            <param name="extraInfo">A dictionary of extra data retrieved during the initial reading of the serialized OAS document.</param>
+        </member>
+        <member name="T:Engines.ApiDocs.Extensions.EndPointExtensions">
+            <summary>
+            An object that is based on the <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/>
+            object, but is enhanced with extra information to help with test generation.
+            The 'Name' of the object is stored in the Key of the KeyValuePair and is made 
+            by combining the <see cref="!:Method"/> and <see cref="!:UriPath"/> objects
+            </summary>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.EndPointExtensions.AddParameters(ApiTestGenerator.Models.ApiDocs.EndPoint,Microsoft.OpenApi.Models.OpenApiOperation,System.Int32)">
+            <summary>
+            Adds the input parameters to the object
+            </summary>
+            <param name="openApiOperation"></param>
+            <param name="operationId"></param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.EndPointExtensions.CheckForDynamicDates(ApiTestGenerator.Models.ApiDocs.EndPoint,Microsoft.OpenApi.Models.OpenApiOperation)">
+            <summary>
+            Adds any <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate"/> or 
+            <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate"/> items to parameters that
+            have the same name.
+            </summary>
+            <param name="openApiOperation">the <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain user defined extensions.</param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.EndPointExtensions.CheckFor_IsLookupMethod(ApiTestGenerator.Models.ApiDocs.EndPoint,Microsoft.OpenApi.Models.OpenApiOperation)">
+            <summary>
+            Sets the <see cref="!:IsLookupMethod"/> flag based on the
+            presence or absence of the <see cref="F:ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod"/> custom extension
+            </summary>
+            <param name="openApiOperation">the <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain user defined extensions.</param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.EndPointExtensions.AddResponseItem(Microsoft.OpenApi.Models.OpenApiResponse,System.String)">
+            <summary>
+            Walks the operation's Response array to find the response object associated with 
+            ResponseItem type of '200'.
+            </summary>
+            <param name="openApiOperation">the <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain user defined extensions.</param>
+            <param name="ResponseItem"> the response item to look for. Defaults to '200'</param>
+            <param name="ContentItem">Describes the type of response object to look for</param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.EndPointExtensions.AddRequestBody(ApiTestGenerator.Models.ApiDocs.EndPoint,Microsoft.OpenApi.Models.OpenApiOperation)">
+            <summary>
+            Adds any request body item to the endpoint.
+            </summary>
+            <param name="openApiOperation">the <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain user defined extensions.</param>
+        </member>
+        <member name="M:Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(ApiTestGenerator.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema)">
+            <summary>
+            Parses the <see cref="P:Microsoft.OpenApi.Models.OpenApiSchema.Description"/> string (if present)
+            and finds any custom objects added to it.
+            </summary>
+            <param name="source">the <see cref="T:ApiTestGenerator.Models.ApiDocs.Property"/> object to add items to.</param>
+            <param name="property">the <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> object that contains the Description to parse.</param>
+        </member>
+        <member name="M:Engines.ApiDocs.ParameterExtensions.GetDescriptionAndCustomObjects(ApiTestGenerator.Models.ApiDocs.Parameter,Microsoft.OpenApi.Models.OpenApiParameter)">
+            <summary>
+            Parses the <see cref="P:Microsoft.OpenApi.Models.OpenApiParameter.Description"/> string (if present)
+            and finds any custom objects added to it.
+            </summary>
+            <param name="source">the <see cref="T:ApiTestGenerator.Models.ApiDocs.Parameter"/> object to add items to.</param>
+            <param name="parameter">the <see cref="T:Microsoft.OpenApi.Models.OpenApiParameter"/> object that contains the Description to parse.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiDocs.CustomObjects</name>
+    </assembly>
+    <members>
+        <member name="T:ApiDocs.CustomObjects.AddAllCustomObjectEngines">
+            <summary>
+            This class houses the method to add all custom objects to the parser
+            </summary>
+        </member>
+        <member name="M:ApiDocs.CustomObjects.AddAllCustomObjectEngines.BuildCustomObjects">
+            <summary>
+            As you create custom objects, Add them to the engine by updating this method's code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApiDocs.CustomObjects.CustomOasObjectEngine">
+            <summary>
+            Base Abstract class for describing custom objects that can be added
+            to Swagger Documentation.
+            </summary>
+        </member>
+        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection)">
+            <summary>
+            This method triggers the building of event handlers and the triggering of the
+            events themselves. It is called by the <c>Endpoint Engine</c>.
+            </summary>
+            <param name="openApiOperation"></param>
+        </member>
+        <member name="T:ApiDocs.CustomObjects.ICustomOasObjectEngine`1">
+            <summary>
+            Interface for describing custom objects that can be added
+            to Swagger Documentation.
+            </summary>
+        </member>
+        <member name="P:ApiDocs.CustomObjects.ICustomOasObjectEngine`1.CustomOasObjectEngineType">
+            <summary>
+            the type of custom object
+            </summary>
+        </member>
+        <member name="M:ApiDocs.CustomObjects.ICustomOasObjectEngine`1.CheckForObject(`0)">
+            <summary>
+            This method is the entry point for parsing a custom object added to the OpenApiDocument.
+            The default immplementation returns null. This allows the custom object event handler to
+            get wired up to any OAS type and not fail if that type doesn't have any custome events.
+            </summary>
+            <param name="item">the item which might contain the custom object.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiDocs.CustomObjects.ProvidesValuesFor_CustomOasObjectEngine">
+            <summary>
+            A custom Operation Object parser
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ApiDocs.CustomObjects.ProvidesValuesFor_CustomOasObjectEngine.ParseObject(System.Object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)" -->
+    </members>
+</doc>

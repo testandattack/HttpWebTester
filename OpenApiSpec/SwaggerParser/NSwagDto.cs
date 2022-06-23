@@ -30,20 +30,20 @@ namespace GTC.SwaggerParsing
             return ProcessNSwagDoc(document, settings);
         }
 
-        public static string ProcessNSwagDoc(OpenApiDocument document, Settings swaggerSettings)
+        public static string ProcessNSwagDoc(OpenApiDocument document, Settings localSettings)
         {
             var settings = new CSharpClientGeneratorSettings
             {
                 // https://github.com/RicoSuter/NSwag/wiki/CSharpClientGeneratorSettings
-                ClassName = swaggerSettings.codeGenerationSettings.CoreClassName,
+                ClassName = localSettings.swaggerSettings.CoreClassName,
                 CSharpGeneratorSettings =
                     {
                         // https://github.com/RicoSuter/NJsonSchema/wiki/CSharpGeneratorSettings
-                        Namespace = swaggerSettings.codeGenerationSettings.CodeNamespace,
+                        Namespace = localSettings.swaggerSettings.CodeNamespace,
                         GenerateDataAnnotations = true
                     },
-                GenerateExceptionClasses = swaggerSettings.codeGenerationSettings.GenerateExceptionClasses,
-                GenerateClientClasses = swaggerSettings.codeGenerationSettings.GenerateClientClasses
+                GenerateExceptionClasses = localSettings.swaggerSettings.GenerateExceptionClasses,
+                GenerateClientClasses = localSettings.swaggerSettings.GenerateClientClasses
             };
             Log.ForContext("SourceContext","NSwagDto").Information("[{method}]: Generating DTO Code with NSwag - {CSharpClientGeneratorSettings}", "", settings.CodeGeneratorSettings);
             var generator = new CSharpClientGenerator(document, settings);

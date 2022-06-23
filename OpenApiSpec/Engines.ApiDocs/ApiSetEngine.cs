@@ -14,6 +14,8 @@ using Microsoft.OpenApi.Writers;
 using System.IO;
 using GTC.Extensions;
 using System.Text.RegularExpressions;
+using GTC.HttpWebTester.Settings;
+using ApiDocs.CustomObjects;
 
 namespace Engines.ApiDocs
 {
@@ -30,24 +32,30 @@ namespace Engines.ApiDocs
     /// </remarks>
     public class ApiSetEngine
     {
-        public ApiSet apiSet { get; set; }
+        private Settings settings;
+
+        public ApiSet apiSet { get; private set; }
 
         #region -- Constructors -----
-        public ApiSetEngine()
+        public ApiSetEngine() 
         {
-            apiSet = new ApiSet();
+            settings = new Settings();
         }
 
-        public ApiSetEngine(string ApiRoot)
+        public ApiSetEngine(Settings Settings)
         {
-            apiSet = new ApiSet(ApiRoot);
+            settings = Settings;
         }
 
-        public ApiSetEngine(OpenApiDocument openApiDocument, string SourceLocation, string ApiRoot)
+        public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
         {
-            apiSet = new ApiSet(ApiRoot);
-            Log.ForContext<ApiSetEngine>().Debug("ApiSet_Constructor: Starting parse of {@value1}", openApiDocument.Info);
+            apiSet = new ApiSet(ApiRoot, settings);
+            // This call adds all of the custom objects that have been registered in the "ApiDocs.CustomObjects" namespace.
+            //apiSet.CustomObjects.collection = AddAllCustomObjects.BuildCustomObjects();
+
+            Log.ForContext("SourceContext", "ApiSetEngine").Information("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
             apiSet.Info = openApiDocument.Info;
+            GetSecurityInfo(openApiDocument);
             AddServers(openApiDocument);
             BuildControllerList(openApiDocument);
             BuildComponentList(openApiDocument);
@@ -55,6 +63,11 @@ namespace Engines.ApiDocs
         #endregion
 
         #region -- Public Methods -----
+        public void GetSecurityInfo(OpenApiDocument openApiDocument)
+        {
+            this.GetSecurityRequirementInfo(openApiDocument.SecurityRequirements.ToList());
+        }
+
         public void BuildControllerList(OpenApiDocument openApiDocument)
         {
             int currentRequestId = 1;
@@ -63,13 +76,14 @@ namespace Engines.ApiDocs
                 Controller controller = GetController(path);
                 currentRequestId = AddEndPoints(controller, path.Key, path.Value, currentRequestId);
             }
-            AddRequestBodyItems(openApiDocument);
-            AddResponseObjectDetails(openApiDocument);
+            AddRequestBodyItems(openApiDocument, apiSet);
+            AddResponseObjectDetails(openApiDocument, apiSet);
         }
 
         public void BuildComponentList(OpenApiDocument openApiDocument)
         {
             int x = 0;
+            Log.ForContext<ApiSetEngine>().Information("[{method}]: Adding Components to ApiSet", "BuildComponentList");
             foreach (var componentSchema in openApiDocument.Components.Schemas)
             {
                 Log.ForContext<ApiSetEngine>().Debug("[{method}]: {@ComponentSchema}", "BuildComponentList", componentSchema.Key);
@@ -111,7 +125,7 @@ namespace Engines.ApiDocs
             {
                 if (controller.Name == controllerName)
                 {
-                    Log.ForContext<ApiSetEngine>().Debug("GetController: found existing Controller: {controllerName}", controllerName);
+                    Log.ForContext("SourceContext", "ApiSetEngine").Debug("GetController: found existing Controller: {controllerName}", controllerName);
                     return controller;
                 }
             }
@@ -120,62 +134,79 @@ namespace Engines.ApiDocs
             Controller newController = new Controller();
             newController.Name = controllerName;
             apiSet.Controllers.Add(controllerName, newController);
-            Log.ForContext<ApiSetEngine>().Debug("GetController: Made new Controller: {controllerName}", controllerName);
+            Log.ForContext("SourceContext", "ApiSetEngine").Information("GetController: Made new Controller: {controllerName}", controllerName);
             return newController;
         }
 
         private int AddEndPoints(Controller controller, string pathUri, OpenApiPathItem path, int startingId)
         {
             OpenApiPathItem item = path;
+
             foreach (var operation in item.Operations)
             {
-                Log.ForContext<Controller>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
-                EndPoint endPoint = new EndPoint(controller.Name);
-                endPoint.EndpointId = startingId;
-
-                endPoint.UriPath = pathUri;
-                endPoint.Method = operation.Key.ToString();
-                endPoint.Depricated = operation.Value.Deprecated;
-
-                endPoint.Summary = operation.Value.Summary;
-                if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParseTokens.DESC_ForTestingPurposes))
-                {
-                    endPoint.IsForTestingPurposes = true;
-                }
-
-                if (operation.Value.Description != null)
-                {
-                    endPoint.Description = operation.Value.Description.Replace("\r\n", "");
-                }
-
-                endPoint.ReportingName = pathUri
-                    .Replace("/api/", "")
-                    .Replace("/", "-")
-                    .Replace("{", "<")
-                    .Replace("}", ">");
-                endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
-
-                endPoint.CheckForDynamicDates(operation.Value);
-                endPoint.AddRestrictions(operation.Value);
-                endPoint.AddMethodsThatUseThisResponse(operation.Value);
-                endPoint.AddSourceMethodName(operation.Value);
-                endPoint.AddTestDataFilter(operation.Value);
-                endPoint.CheckFor_IsLookupMethod(operation.Value);
-
-                if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
-                {
-                    endPoint.AddRequestBody(operation.Value);
-                }
-                endPoint.AddResponseItems(operation.Value);
-
-                string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
-                controller.EndPoints.Add(endPointKey, endPoint);
-                startingId++;
+                var endpointEngine = new EndPointEngine(operation, settings);
+                startingId = endpointEngine.ParseEndpoint(controller, pathUri, startingId, item);
             }
             return startingId;
         }
 
-        private void AddRequestBodyItems(OpenApiDocument openApiDocument)
+        //private static int ParseEndpoint_Temp(Controller controller, string pathUri, int startingId, OpenApiPathItem item, KeyValuePair<OperationType, OpenApiOperation> operation)
+        //{
+        //    Log.ForContext<ApiSetEngine>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
+        //    EndPoint endPoint = new EndPoint(controller.Name);
+        //    endPoint.EndpointId = startingId;
+
+        //    endPoint.UriPath = pathUri;
+        //    endPoint.Method = operation.Key.ToString();
+        //    endPoint.Depricated = operation.Value.Deprecated;
+
+        //    endPoint.Summary = operation.Value.Summary;
+        //    if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParserTokens.DESC_ForTestingPurposes))
+        //    {
+        //        endPoint.IsForTestingPurposes = true;
+        //    }
+
+        //    if (operation.Value.Description != null)
+        //    {
+        //        endPoint.Description = operation.Value.Description.Replace("\r\n", "");
+        //    }
+
+        //    endPoint.ReportingName = pathUri
+        //        .Replace("/api/", "")
+        //        .Replace("/", "-")
+        //        .Replace("{", "<")
+        //        .Replace("}", ">");
+
+
+        //    endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
+        //    foreach (var parm in item.Parameters)
+        //    {
+        //        if (parm != null)
+        //        {
+        //            endPoint.AddParameter(controller.EndPoints.Count, parm);
+        //        }
+        //    }
+
+        //    endPoint.CheckForDynamicDates(operation.Value);
+        //    //endPoint.AddRestrictions(operation.Value);
+        //    //endPoint.AddMethodsThatUseThisResponse(operation.Value);
+        //    //endPoint.AddSourceMethodName(operation.Value);
+        //    //endPoint.AddTestDataFilter(operation.Value);
+        //    endPoint.CheckFor_IsLookupMethod(operation.Value);
+
+        //    if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
+        //    {
+        //        endPoint.AddRequestBody(operation.Value);
+        //    }
+        //    endPoint.AddResponseItems(operation.Value);
+
+        //    string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
+        //    controller.EndPoints.Add(endPointKey, endPoint);
+        //    startingId++;
+        //    return startingId;
+        //}
+
+        private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {
@@ -183,7 +214,7 @@ namespace Engines.ApiDocs
                 {
                     if (endPoint.Value.requestBody != null
                         && endPoint.Value.requestBody.RequestBodySchemaType == "object"
-                        && endPoint.Value.requestBody.RequestBodyContentType == ParseTokens.OAS_JsonContentType)
+                        && endPoint.Value.requestBody.RequestBodyContentType == ParserTokens.OAS_JsonContentType)
                     {
                         var stringWriter = new StringWriter();
                         OpenApiJsonWriter writer = new OpenApiJsonWriter(stringWriter);
@@ -196,7 +227,7 @@ namespace Engines.ApiDocs
             }
         }
 
-        private void AddResponseObjectDetails(OpenApiDocument openApiDocument)
+        private void AddResponseObjectDetails(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {
@@ -234,7 +265,7 @@ namespace Engines.ApiDocs
             // the C# type "Dynamic" properly, so we have to account for it here.
             if (property.Value.Type == null)
             {
-                item.type = ParseTokens.PARAM_MissingTypeField;
+                item.type = ParserTokens.PARAM_MissingTypeField;
                 Log.ForContext<AbbreviatedResponseObject>().Warning("[{method}]: Found ResponseObject in {EndPoint} without a Type. Assuming it is of type Dynamic"
                     , "BuildAndAddAbbreviatedResponseObject", endPointName);
             }
@@ -257,7 +288,7 @@ namespace Engines.ApiDocs
                 else if (property.Value.Items.Type != null)
                     item.reference = property.Value.Items.Type;
                 else
-                    item.reference = ParseTokens.PARAM_MissingInfo;
+                    item.reference = ParserTokens.PARAM_MissingInfo;
                 #endregion
 
                 #region -- handle Format -----
@@ -288,6 +319,67 @@ namespace Engines.ApiDocs
         }
         #endregion
 
+
+        #region -- Read and Write methods -----
+        public void LoadApiSetFromFile(string fileName)
+        {
+            ApiSet apiSet = null;
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                apiSet = JsonConvert.DeserializeObject<ApiSet>(sr.ReadToEnd());
+            }
+            if (apiSet == null)
+            {
+                Log.ForContext<ApiSet>().Error("LoadApiSetFromFile failed to load the set from {fileName}", fileName);
+                throw new NullReferenceException($"LoadApiSetFromFile failed to load the set from {fileName}");
+            }
+        }
+
+        public void SerializeAndSaveApiSet(bool append = false)
+        {
+            string str = $"{apiSet.settings.DefaultOutputLocation}\\OAS_ApiSet {apiSet.Info.Title}.json";
+            SerializeAndSaveApiSet(str, append);
+        }
+
+        public void SerializeAndSaveApiSet(string fileName, bool append = false)
+        {
+            try
+            {
+                string str = JsonConvert.SerializeObject(this, Formatting.Indented);
+
+                using (StreamWriter sw = new StreamWriter(fileName, false))
+                {
+                    sw.Write(str);
+                }
+                Log.ForContext<ApiSet>().Information("SerializeAndSaveApiSet completed successfully");
+            }
+            catch (Exception ex)
+            {
+                Log.ForContext<ApiSet>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSet");
+            }
+        }
+
+        public void SaveListOfURLs(string fileName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Controller controller in apiSet.Controllers.Values)
+            {
+                sb.Append($"----- {controller.Name} -----\r\n");
+                foreach (EndPoint endPoint in controller.EndPoints.Values)
+                {
+                    sb.Append($"[{endPoint.Method}] {endPoint.UriPath}\r\n");
+                }
+                sb.Append("\r\n");
+            }
+
+            using (StreamWriter sw = new StreamWriter($"{apiSet.settings.DefaultOutputLocation}\\{fileName}", false))
+            {
+                sw.Write(sb.ToString());
+            }
+        }
+
+        #endregion
 
     }
 

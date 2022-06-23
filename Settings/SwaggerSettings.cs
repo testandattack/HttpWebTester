@@ -52,5 +52,30 @@ namespace GTC.HttpWebTester.Settings
         /// <see cref="BaseUriAddress"/> and <see cref="SwaggerStreamLocation"/>
         /// </summary>
         public bool ReadSwaggerFromFile { get; set; }
+
+        /// <summary>
+        /// The name of the file to use when saving the generated DTO code.
+        /// </summary>
+        public string DtoCodeFileName { get; set; }
+
+        /// <summary>
+        /// The namespace to use when generating DTO code.
+        /// </summary>
+        public string CodeNamespace { get; set; }
+
+        /// <summary>
+        /// The core name to use for classes when generating DTO code.
+        /// </summary>
+        public string CoreClassName { get; set; }
+
+        /// <summary>
+        /// Should exception classes be generated?
+        /// </summary>
+        public bool GenerateExceptionClasses { get; set; }
+
+        /// <summary>
+        /// Should client classes be generated?
+        /// </summary>
+        public bool GenerateClientClasses { get; set; }
     }
 }

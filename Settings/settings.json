@@ -1,24 +1,31 @@
 {
   "DefaultInputLocation": "c:\\Temp",
-  "DefaultOutputLocation": "c:\\SwaggerTesting\\output",
+  "DefaultOutputLocation": "c:\\Temp",
   "logSettings": {
-    "DefaultLogFileName": "c:\\SwaggerTesting\\output\\ApiSetParsingLog.log",
-    "MinLogEventLevel": "Debug",
-    "ClearLogFileOnStartup": true
+    "DefaultLogFileName": "c:\\Temp\\ApiSet_ParsingLog.log",
+    "MinLogEventLevel": "Information",
+    "ClearLogFileOnStartup": false
   },
   "swaggerSettings": {
     "BaseUriAddress": "http://localhost:52321/",
     "SwaggerStreamLocation": "swagger/v1/swagger.json",
-    //"SwaggerFileLocation": "c:\\temp\\pratt new api spec.yaml",
-    "SwaggerFileLocation": "c:\\temp\\swagger.json",
+    "SwaggerFileLocation": "c:\\temp\\Asc_swagger.json",
+    //"SwaggerFileLocation": "c:\\temp\\twc_osmc.json",
     "ReadSwaggerFromFile": true,
-    "apiRoot": "/api/"
+    "apiRoot": "/api/",
+    //"apiRoot": "/osmc/",
+    "DtoCodeFileName": "ResponseObjects.cs",
+    "CodeNamespace": "ApiSet.Testing",
+    "CoreClassName": "MyClass",
+    "GenerateExceptionClasses": false,
+    "GenerateClientClasses": false
   },
   "apiDocsSettings": {
 
   },
   "apiAnalysisSettings": {
     "AnalyzeApiEndpoints": true,
+    "AnalyzeApiEndpointsWithMultipleMethods": true,
     "AnalyzeRequestBodies": true,
     "AnalyzeApiComponents": true,
     "AnalyzeInputParameters": true,
@@ -27,89 +34,6 @@
     "AnalyzeProperties": true,
     "AnalyzeLookupProperties": true,
     "AnalyzeInputParametersNotInProperties": true,
-    "AnalyzeInputParametersNotInLookupProperties": true,
-    "AddEndpointParsingData": true,
-    "IncludeOnlyEndpointSummariesWithMatchingRequests": false
-  },
-  "CodeGenerationSettings": {
-    "DtoCodeFileName": "ResponseObjects.cs",
-    "CodeNamespace": "ApiSet.Testing",
-    "CoreClassName": "MyClass",
-    "GenerateExceptionClasses": false,
-    "GenerateClientClasses": false
-  },
-  "HarFileProcessingSettings": {
-    "AddEndpointParsingDataFromHar": true,
-    "HarFileName": "c:\\temp\\Ascentia.har",
-    "processMultipleHarFiles": false,
-    "HarFileFolderLocation": "",
-    "IncludeResponseContentInSummaryJson": true,
-    "IncludeResponseTextInSummaryJson": false,
-    "IncludeTimingsInSummaryJson": true,
-    "IncludeEntriesInSummaryJson": false,
-    "SaveParsedHttpArchiveInsteadOfSummary": false,
-    "minimumMillisecondsForSlowPage": 4000,
-    "EncodeResponseText": false,
-    "DomainsToInclude": [
-      "collins-ascentia-web.azurefd.net",
-      "iao-ascentia-web"
-    ],
-    "UnwantedItems": [
-      "olark.com",
-      "aadcdn.microsoftonline-p.com",
-      "mathtag.com",
-      "doubleclick.net",
-      "collective-media.net",
-      "tapad.com",
-      "navdmp.com",
-      "twitter.com",
-      "adsrvr.org",
-      "demdex.net",
-      "azureedge.net",
-      "clicktale.net",
-      "everesttech.net",
-      "tubemogul.com",
-      "mixpanel.com",
-      "optimizely.com",
-      "mktoresp.com",
-      "modpim.com",
-      "set-returning-user-cookie",
-      "dc.services.visualstudio.com",
-      "vortex.data.microsoft.com",
-      "_public/_Bundling",
-      "doubleclick.net",
-      "google.com/ads",
-      "instrumentation/reportpageload",
-      "nps.onyx.azure.net",
-      "pubmatic.com",
-      "fonts.googleapis.com",
-      "fonts.gstatic.com",
-      "cdn.vsassets.io",
-      "_static/tfs/"
-    ],
-    "UnwantedPages": [
-      ".gif",
-      ".jpg",
-      ".png",
-      ".ico",
-      ".css",
-      ".js",
-      ".eot",
-      ".json",
-      ".svg",
-      ".woff",
-      ".woff2"
-    ],
-    "UnwantedReferers": [
-      "demdex.net"
-    ]
-  },
-  "WebLogAnalysisSettings": {
-    "minimumNumRequestsForSlowEndpointProcessing": 5,
-    "minimumNumRequestsForPercentileProcessing": 10,
-    "useNormal_StdDev": true,
-    "includeTheseStatusCodesForTimingAnalysis": [
-      "2xx"
-    ]
+    "AnalyzeInputParametersNotInLookupProperties": true
   }
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ApiTestGenerator.Models.ApiAnalyzer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class InputParameter
     {
         #region -- Properties -----
@@ -85,16 +88,41 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// </remarks>
         public string arrayFormat { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ShowsUpIn { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Required { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string InputProvider { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> NameVariations { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> MatchesTheseComponents { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> UsedByTheseEndpoints { get; set; }
         #endregion
 
         #region -- Constructors -----
+        /// <summary>
+        /// 
+        /// </summary>
         public InputParameter()
         {
             Name = string.Empty;
@@ -109,8 +137,20 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             UsedByTheseEndpoints = new List<string>();
         }
 
-        public InputParameter(string name, string type, bool isArray,
-            string ArrayType, string format, bool required, string inputProvider)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="type"></param>
+        /// <param name="isArray"></param>
+        /// <param name="ArrayType"></param>
+        /// <param name="format"></param>
+        /// <param name="required"></param>
+        /// <param name="inputProvider"></param>
+        /// <param name="showsUpIn"></param>
+        public InputParameter(string name, string description, string type, bool isArray,
+            string ArrayType, string format, bool required, string inputProvider, string showsUpIn)
         {
             Name = name;
             Type = type;
@@ -119,12 +159,16 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             Format = format;
             Required = required;
             InputProvider = inputProvider;
-
+            ShowsUpIn = showsUpIn;
             MatchesTheseComponents = new List<string>();
             UsedByTheseEndpoints = new List<string>();
         }
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             int hash = 19;

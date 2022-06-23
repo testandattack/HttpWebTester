@@ -14,11 +14,11 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## EndpointSummary.RequestBodyContentType Property
 
-[RequestBody.RequestBodyContentType](https://docs.microsoft.com/en-us/dotnet/api/RequestBody.RequestBodyContentType 'RequestBody.RequestBodyContentType')
+an enum defining the type of content in the request body
 
 ```csharp
-public System.Nullable<ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum> RequestBodyContentType { get; set; }
+public System.Nullable<GTC.OpenApiUtilities.RequestBodyContentTypeEnum> RequestBodyContentType { get; set; }
 ```
 
 #### Property Value
-[System.Nullable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Nullable-1 'System.Nullable`1')[RequestBodyContentTypeEnum](RequestBodyContentTypeEnum.md 'ApiTestGenerator.Models.Enums.RequestBodyContentTypeEnum')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Nullable-1 'System.Nullable`1')
+[System.Nullable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Nullable-1 'System.Nullable`1')[GTC.OpenApiUtilities.RequestBodyContentTypeEnum](https://docs.microsoft.com/en-us/dotnet/api/GTC.OpenApiUtilities.RequestBodyContentTypeEnum 'GTC.OpenApiUtilities.RequestBodyContentTypeEnum')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Nullable-1 'System.Nullable`1')

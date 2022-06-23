@@ -3,6 +3,8 @@
 
 ## EndPoint Class
 
+This object is the equivalent to an OAS "Operation" object.
+
 ```csharp
 public class EndPoint
 ```
@@ -57,19 +59,19 @@ public string controllerName { get; set; }
 
 ## EndPoint.customEndPointObjects Property
 
-A list of [CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject') items discovered in  
+A list of [CustomOasObjectEngine](https://docs.microsoft.com/en-us/dotnet/api/CustomOasObjectEngine 'CustomOasObjectEngine') items discovered in  
 the Api Document json.
 
 ```csharp
-public System.Collections.Generic.List<ApiTestGenerator.Models.ApiDocs.CustomEndPointObject> customEndPointObjects { get; set; }
+public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection customEndPointObjects { get; set; }
 ```
 
 #### Property Value
-[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
 
 ### Remarks
 The types of objects can be seen in this enum:  
-[CustomEndPointObjectTypeEnum](https://docs.microsoft.com/en-us/dotnet/api/CustomEndPointObjectTypeEnum 'CustomEndPointObjectTypeEnum')
+[CustomEndPointObjectTypeEnum](CustomEndPointObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum')
 
 <a name='ApiTestGenerator.Models.ApiDocs.EndPoint.Depricated'></a>
 
@@ -107,13 +109,24 @@ public string Description { get; set; }
 A verbose explanation of the operation behavior. CommonMark syntax MAY be used   
 for rich text representation.
 
+<a name='ApiTestGenerator.Models.ApiDocs.EndPoint.EndpointId'></a>
+
+## EndPoint.EndpointId Property
+
+```csharp
+public int EndpointId { get; set; }
+```
+
+#### Property Value
+[System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')
+
 <a name='ApiTestGenerator.Models.ApiDocs.EndPoint.IsForTestingPurposes'></a>
 
 ## EndPoint.IsForTestingPurposes Property
 
 A boolean that indicates if this method is exposed solely for  
 the Tester Role and woill not be used by the application.  
-All Test methods contain [ParseTokens.DESC_ForTestingPurposes](https://docs.microsoft.com/en-us/dotnet/api/ParseTokens.DESC_ForTestingPurposes 'ParseTokens.DESC_ForTestingPurposes')  
+All Test methods contain [ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes 'ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes')  
 in the Description field.
 
 ```csharp
@@ -128,7 +141,7 @@ public bool IsForTestingPurposes { get; set; }
 ## EndPoint.IsLookupMethod Property
 
 A boolean that describes if the method contains the  
-[ParseTokens.TKN_LookupMethod](https://docs.microsoft.com/en-us/dotnet/api/ParseTokens.TKN_LookupMethod 'ParseTokens.TKN_LookupMethod') tag indicating  
+[TKN_LookupMethod](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod') tag indicating  
 that the method is used to grab lookup values for other  
 methods in the API.
 
@@ -276,7 +289,8 @@ public string UriPath { get; set; }
 
 ## EndPoint.Version Property
 
-The version of the API that contains this operation.
+This will allow people to extend the ApiSet to manage versioning of endpoints  
+at a future time.
 
 ```csharp
 public string Version { get; set; }

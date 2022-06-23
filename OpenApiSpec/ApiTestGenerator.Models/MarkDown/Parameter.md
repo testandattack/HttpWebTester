@@ -3,7 +3,8 @@
 
 ## Parameter Class
 
-An object the contains information about input parameters for OpenApi endpoint calls
+An object the contains information about input parameters for OpenApi endpoint calls  
+It is based on the [https://spec.openapis.org/oas/v3.0.0#parameter-object](https://spec.openapis.org/oas/v3.0.0#parameter-object 'https://spec.openapis.org/oas/v3.0.0#parameter-object') OAS object.
 
 ```csharp
 public class Parameter :
@@ -111,14 +112,14 @@ public string controllerName { get; set; }
 
 ## Parameter.customEndPointObjects Property
 
-A list of [CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject') items that may be added to the parameter.
+A list of [CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection') items that may be added to the parameter.
 
 ```csharp
-public System.Collections.Generic.List<ApiTestGenerator.Models.ApiDocs.CustomEndPointObject> customEndPointObjects { get; set; }
+public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection customEndPointObjects { get; set; }
 ```
 
 #### Property Value
-[System.Collections.Generic.List&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')[CustomEndPointObject](CustomEndPointObject.md 'ApiTestGenerator.Models.ApiDocs.CustomEndPointObject')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1')
+[CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
 
 <a name='ApiTestGenerator.Models.ApiDocs.Parameter.Description'></a>
 

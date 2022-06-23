@@ -16,7 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engines.ApiDocs", "OpenApiS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerParsing", "OpenApiSpec\SwaggerParser\SwaggerParsing.csproj", "{8D9BFF6C-5F28-40FB-9449-87171D4B29D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settings", "Settings\Settings.csproj", "{7A67AC01-B356-4F89-818E-9ADBC3891F55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Settings", "Settings\Settings.csproj", "{7A67AC01-B356-4F89-818E-9ADBC3891F55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedResources", "SharedResources\SharedResources.csproj", "{3F1C4037-63D3-4D70-B355-362F48D1DA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDocs.CustomObjects", "ApiDocs.CustomObjects\ApiDocs.CustomObjects.csproj", "{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,14 @@ Global
 		{7A67AC01-B356-4F89-818E-9ADBC3891F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A67AC01-B356-4F89-818E-9ADBC3891F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A67AC01-B356-4F89-818E-9ADBC3891F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1C4037-63D3-4D70-B355-362F48D1DA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1C4037-63D3-4D70-B355-362F48D1DA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1C4037-63D3-4D70-B355-362F48D1DA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1C4037-63D3-4D70-B355-362F48D1DA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

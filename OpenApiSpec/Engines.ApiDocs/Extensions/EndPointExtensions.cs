@@ -32,149 +32,154 @@ namespace Engines.ApiDocs.Extensions
         {
             foreach (var parameter in openApiOperation.Parameters)
             {
-                Log.ForContext<EndPoint>().Verbose("[{method}]: Adding {@parameterName}", "AddParameters", parameter.Name);
-                Parameter gtcParam = new Parameter(operationId, source.controllerName);
-
-                gtcParam.Name = parameter.Name;
-                gtcParam.Type = parameter.Schema.Type;
-                gtcParam.Required = parameter.Required;
-                gtcParam.ShowsUpIn = parameter.In.HasValue ? parameter.In.ToString() : string.Empty;
-                gtcParam.uriPath = source.UriPath;
-                gtcParam.uriMethod = source.Method;
-
-                gtcParam.GetDescriptionAndCustomObjects(parameter);
-
-                if(parameter.Schema.Format != null)
-                {
-                    gtcParam.Format = parameter.Schema.Format;
-                }
-
-                if (gtcParam.Type == "array")
-                {
-                    gtcParam.IsArray = true;
-                    gtcParam.arrayType = parameter.Schema.Items.Type;
-                    if(parameter.Schema.Items.Format != null)
-                    {
-                        gtcParam.Format = parameter.Schema.Items.Format;
-                    }
-                }
-
-                // Since the two items below are mutually exclusive in the OpenApiSchema
-                // and since the plural takes precidence over the singular, we will populate 
-                // the singular from the plural (if it exists), so we must call the plural
-                // processor first.
-                gtcParam.GetParameterExamples(parameter);
-                gtcParam.GetParameterExample(parameter);
-
-                source.parameters.Add(parameter.Name, gtcParam);
+                source.AddParameter(operationId, parameter);
             }
         }
 
-        /// <summary>
-        /// Adds any <see cref="RestrictTo"/> items to the endpoint.
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddRestrictions(this EndPoint source, OpenApiOperation openApiOperation)
+        public static void AddParameter(this EndPoint source, int operationId, OpenApiParameter parameter)
         {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+            Log.ForContext<EndPoint>().Verbose("[{method}]: Adding {@parameterName}", "AddParameters", parameter.Name);
+            Parameter gtcParam = new Parameter(operationId, source.controllerName);
+
+            gtcParam.Name = parameter.Name;
+            gtcParam.Type = parameter.Schema.Type;
+            gtcParam.Required = parameter.Required;
+            gtcParam.ShowsUpIn = parameter.In.HasValue ? parameter.In.ToString() : string.Empty;
+            gtcParam.uriPath = source.UriPath;
+            gtcParam.uriMethod = source.Method;
+
+            gtcParam.GetDescriptionAndCustomObjects(parameter);
+
+            if (parameter.Schema.Format != null)
             {
-                foreach (var operationExtension in openApiOperation.Extensions)
+                gtcParam.Format = parameter.Schema.Format;
+            }
+
+            if (gtcParam.Type == "array")
+            {
+                gtcParam.IsArray = true;
+                gtcParam.arrayType = parameter.Schema.Items.Type;
+                if (parameter.Schema.Items.Format != null)
                 {
-                    if (operationExtension.Key == ParseTokens.TKN_RestrictTo && ((OpenApiString)(operationExtension.Value)).Value != "")
-                    {
-                        RestrictTo endPointObject = new RestrictTo();
-                        endPointObject.RestrictToRoles.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
+                    gtcParam.Format = parameter.Schema.Items.Format;
                 }
             }
+
+            // Since the two items below are mutually exclusive in the OpenApiSchema
+            // and since the plural takes precidence over the singular, we will populate 
+            // the singular from the plural (if it exists), so we must call the plural
+            // processor first.
+            gtcParam.GetParameterExamples(parameter);
+            gtcParam.GetParameterExample(parameter);
+
+            source.parameters.Add(parameter.Name, gtcParam);
         }
 
-        /// <summary>
-        /// Adds any <see cref="ProvidesValuesFor"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddMethodsThatUseThisResponse(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
-            {
-                foreach (var operationExtension in openApiOperation.Extensions)
-                {
-                    if (operationExtension.Key == ParseTokens.TKN_ProvidesValuesFor && ((OpenApiString)(operationExtension.Value)).Value != "")
-                    {
-                        ProvidesValuesFor endPointObject = new ProvidesValuesFor();
-                        endPointObject.ProvidesValuesForTheseMethods.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
-                }
-            }
-        }
+        ///// <summary>
+        ///// Adds any <see cref="RestrictTo"/> items to the endpoint.
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddRestrictions(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_RestrictTo && ((OpenApiString)(operationExtension.Value)).Value != "")
+        //            {
+        //                RestrictTo endPointObject = new RestrictTo();
+        //                endPointObject.RestrictToRoles.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Adds any <see cref="ProvidesValuesFor"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddMethodsThatUseThisResponse(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_ProvidesValuesFor && ((OpenApiString)(operationExtension.Value)).Value != "")
+        //            {
+        //                ProvidesValuesFor endPointObject = new ProvidesValuesFor();
+        //                endPointObject.ProvidesValuesForTheseMethods.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Adds the <see cref="MethodName"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddSourceMethodName(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_MethodName)
+        //            {
+        //                MethodName endPointObject = new MethodName((((OpenApiString)(operationExtension.Value)).Value));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Adds any <see cref="TestDataFilter"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddTestDataFilter(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParserTokens.TKN_TestDataFilter))
+        //    {
+        //        TestDataFilter endPointObject =
+        //            new TestDataFilter(openApiOperation.Description.FindSubString(ParserTokens.TKN_TestDataFilter, ")"));
+        //        source.customEndPointObjects.Add(endPointObject);
+        //    }
+        //}
 
         /// <summary>
-        /// Adds the <see cref="MethodName"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddSourceMethodName(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
-            {
-                foreach (var operationExtension in openApiOperation.Extensions)
-                {
-                    if (operationExtension.Key == ParseTokens.TKN_MethodName)
-                    {
-                        MethodName endPointObject = new MethodName((((OpenApiString)(operationExtension.Value)).Value));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Adds any <see cref="TestDataFilter"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddTestDataFilter(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParseTokens.TKN_TestDataFilter))
-            {
-                TestDataFilter endPointObject =
-                    new TestDataFilter(openApiOperation.Description.FindSubString(ParseTokens.TKN_TestDataFilter, ")"));
-                source.customEndPointObjects.Add(endPointObject);
-            }
-        }
-
-        /// <summary>
-        /// Adds any <see cref="ParseTokens.PARAM_StartDate"/> or 
-        /// <see cref="ParseTokens.PARAM_EndDate"/> items to parameters that
+        /// Adds any <see cref="ParserTokens.PARAM_StartDate"/> or 
+        /// <see cref="ParserTokens.PARAM_EndDate"/> items to parameters that
         /// have the same name.
         /// </summary>
         /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
         public static void CheckForDynamicDates(this EndPoint source, OpenApiOperation openApiOperation)
         {
-            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParseTokens.TKN_startDate))
+            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParserTokens.TKN_startDate))
             {
-                if (source.parameters.ContainsKey(ParseTokens.PARAM_StartDate))
+                if (source.parameters.ContainsKey(ParserTokens.PARAM_StartDate))
                 {
-                    ExampleValue example = new ExampleValue("OpenApiDate", ParseTokens.TKN_startDate);
-                    example.GeneratedValue = openApiOperation.Description.FindSubString(ParseTokens.TKN_startDate + "(", ")");
-                    source.parameters[ParseTokens.PARAM_StartDate].ExampleValue = example;
+                    ExampleValue example = new ExampleValue("OpenApiDate", ParserTokens.TKN_startDate);
+                    example.GeneratedValue = openApiOperation.Description.FindSubString(ParserTokens.TKN_startDate + "(", ")");
+                    source.parameters[ParserTokens.PARAM_StartDate].ExampleValue = example;
                 }
             }
 
-            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParseTokens.TKN_endDate))
+            if (openApiOperation.Description != null && openApiOperation.Description.Contains(ParserTokens.TKN_endDate))
             {
-                if (source.parameters.ContainsKey(ParseTokens.PARAM_EndDate))
+                if (source.parameters.ContainsKey(ParserTokens.PARAM_EndDate))
                 {
-                    ExampleValue example = new ExampleValue("OpenApiDate", ParseTokens.TKN_endDate);
-                    example.GeneratedValue = openApiOperation.Description.FindSubString(ParseTokens.TKN_endDate + "(", ")");
-                    source.parameters[ParseTokens.PARAM_EndDate].ExampleValue = example;
+                    ExampleValue example = new ExampleValue("OpenApiDate", ParserTokens.TKN_endDate);
+                    example.GeneratedValue = openApiOperation.Description.FindSubString(ParserTokens.TKN_endDate + "(", ")");
+                    source.parameters[ParserTokens.PARAM_EndDate].ExampleValue = example;
                 }
             }
         }
 
         /// <summary>
         /// Sets the <see cref="IsLookupMethod"/> flag based on the
-        /// presence or absence of the <see cref="ParseTokens.TKN_LookupMethod"/> custom extension
+        /// presence or absence of the <see cref="ParserTokens.TKN_LookupMethod"/> custom extension
         /// </summary>
         /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
         public static void CheckFor_IsLookupMethod(this EndPoint source, OpenApiOperation openApiOperation)
@@ -183,7 +188,7 @@ namespace Engines.ApiDocs.Extensions
             {
                 foreach (var tag in openApiOperation.Tags)
                 {
-                    if (tag.Name == ParseTokens.TKN_LookupMethod)
+                    if (tag.Name == ParserTokens.TKN_LookupMethod)
                     {
                         source.IsLookupMethod = true;
                         break;
@@ -410,11 +415,11 @@ else
             source.requestBody = new RequestBody();
             if (openApiOperation.RequestBody != null && openApiOperation.RequestBody.Content.Count > 0)
             {
-                if (openApiOperation.RequestBody.Content.ContainsKey(ParseTokens.OAS_JsonContentType))
+                if (openApiOperation.RequestBody.Content.ContainsKey(ParserTokens.OAS_JsonContentType))
                 {
                     Add_ApplicationJson_RequestBody(source, openApiOperation);
                 }
-                else if (openApiOperation.RequestBody.Content.ContainsKey(ParseTokens.OAS_FormDataContentType))
+                else if (openApiOperation.RequestBody.Content.ContainsKey(ParserTokens.OAS_FormDataContentType))
                 {
                     Add_FormData_RequestBody(source, openApiOperation);
                 }
@@ -425,58 +430,65 @@ else
             }
             else
             {
-                source.requestBody.RequestBodyContentType = ParseTokens.OAS_NoContentFound;
+                source.requestBody.RequestBodyContentType = ParserTokens.OAS_NoContentFound;
             }
         }
 
         private static void Add_ApplicationJson_RequestBody(this EndPoint source, OpenApiOperation openApiOperation)
         {
-            source.requestBody.RequestBodyContentType = ParseTokens.OAS_JsonContentType;
+            if (openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema != null)
+            {
+                source.requestBody.RequestBodyContentType = ParserTokens.OAS_JsonContentType;
 
-            if (openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Items != null)
-            {
-                if (openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Items.Type == "object")
+                if (openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Items != null)
                 {
-                    source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Items.Reference.Id;
-                }
-                else
-                {
-                    source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Items.Type;
-                }
-            }
-            else
-            {
-                if (openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Type == "object")
-                {
-                    if (openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Reference == null)
+                    if (openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Items.Type == "object")
                     {
-                        source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.AdditionalProperties.Type;
+                        source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Items.Reference.Id;
                     }
                     else
                     {
-                        source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Reference.Id;
+                        source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Items.Type;
                     }
                 }
                 else
                 {
-                    source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Type;
+                    if (openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Type == "object")
+                    {
+                        if (openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Reference == null)
+                        {
+                            source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.AdditionalProperties.Type;
+                        }
+                        else
+                        {
+                            source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Reference.Id;
+                        }
+                    }
+                    else
+                    {
+                        source.requestBody.RequestBodyJsonObject = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Type;
+                    }
                 }
+                source.requestBody.RequestBodySchemaType = openApiOperation.RequestBody.Content[ParserTokens.OAS_JsonContentType].Schema.Type;
             }
-            source.requestBody.RequestBodySchemaType = openApiOperation.RequestBody.Content[ParseTokens.OAS_JsonContentType].Schema.Type;
+            else
+            {
+                source.requestBody.RequestBodyString = "The RequestBody.Content.Schema was null.";
+            }
         }
 
         private static void Add_FormData_RequestBody(this EndPoint source, OpenApiOperation openApiOperation)
         {
-            source.requestBody.RequestBodyContentType = ParseTokens.OAS_FormDataContentType;
+            source.requestBody.RequestBodyContentType = ParserTokens.OAS_FormDataContentType;
 
-            if (openApiOperation.RequestBody.Content[ParseTokens.OAS_FormDataContentType].Schema.Type != null)
+            if (openApiOperation.RequestBody.Content[ParserTokens.OAS_FormDataContentType].Schema.Type != null)
             {
-                source.requestBody.RequestBodyFormObjectOrType = openApiOperation.RequestBody.Content[ParseTokens.OAS_FormDataContentType].Schema.Type;
+                source.requestBody.RequestBodyFormObjectOrType = openApiOperation.RequestBody.Content[ParserTokens.OAS_FormDataContentType].Schema.Type;
             }
 
-            if (openApiOperation.RequestBody.Content[ParseTokens.OAS_FormDataContentType].Schema.Properties != null)
+            if (openApiOperation.RequestBody.Content[ParserTokens.OAS_FormDataContentType].Schema.Properties != null)
             {
-                source.requestBody.AddProperties(openApiOperation.RequestBody.Content[ParseTokens.OAS_FormDataContentType].Schema, $"{source.Method} - {source.UriPath}");
+                source.requestBody.AddProperties(openApiOperation.RequestBody.Content[ParserTokens.OAS_FormDataContentType].Schema, $"{source.Method} - {source.UriPath}");
             }
         }
         #endregion
