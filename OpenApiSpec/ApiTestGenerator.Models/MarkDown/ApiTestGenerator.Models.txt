@@ -129,6 +129,7 @@ T:ApiTestGenerator.Models.ApiDocs.Component|Component.md|Component
 P:ApiTestGenerator.Models.ApiDocs.Controller.Name|Controller.md#ApiTestGenerator.Models.ApiDocs.Controller.Name|Name
 P:ApiTestGenerator.Models.ApiDocs.Controller.EndPoints|Controller.md#ApiTestGenerator.Models.ApiDocs.Controller.EndPoints|EndPoints
 T:ApiTestGenerator.Models.ApiDocs.Controller|Controller.md|Controller
+T:ApiTestGenerator.Models.ApiDocs.CustomOasObject|CustomOasObject.md|CustomOasObject
 P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.collection|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.collection|collection
 M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.#ctor|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.CustomOasObjectCollection()|CustomOasObjectCollection()
 M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator|CustomOasObjectCollection.md#ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator()|GetEnumerator()

@@ -8,19 +8,19 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// <summary>
     /// A class that contains a collection of custom objects added to the OAS documentation.
     /// </summary>
-    public class CustomOasObjectCollection :IEnumerable
+    public class CustomOasObjectCollection : IEnumerable
     {
         /// <summary>
-        /// ther dictionary that contains the collection of custom objects.
+        /// ther dictionary that contains the collection of custom object.
         /// </summary>
-        public Dictionary<string, object> collection { get; set; }
+        public Dictionary<string, CustomOasObject> collection { get; set; }
 
         /// <summary>
         /// The default constructor
         /// </summary>
         public CustomOasObjectCollection()
         {
-            collection = new Dictionary<string, object>();
+            collection = new Dictionary<string, CustomOasObject>();
         }
 
         #region -- Enumeration -----------------------------------------------------
@@ -31,7 +31,7 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         private class CollectionEnumerator : IEnumerator, IDisposable
         {
-            private Dictionary<string, object>.Enumerator _Enumerator;
+            private Dictionary<string, CustomOasObject>.Enumerator _Enumerator;
 
             public object Current { get { return _Enumerator.Current.Value; } }
             public void Dispose() { _Enumerator.Dispose(); }
@@ -39,7 +39,7 @@ namespace ApiTestGenerator.Models.ApiDocs
             public void Reset() { throw new NotImplementedException("Reset not implmented"); }
 
 
-            public CollectionEnumerator(Dictionary<string, object> dictionary)
+            public CollectionEnumerator(Dictionary<string, CustomOasObject> dictionary)
             {
                 _Enumerator = dictionary.GetEnumerator();
             }

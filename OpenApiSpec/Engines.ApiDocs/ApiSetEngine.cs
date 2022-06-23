@@ -140,7 +140,7 @@ namespace Engines.ApiDocs
 
             foreach (var operation in item.Operations)
             {
-                var endpointEngine = new EndPointEngine(apiSet.CustomObjects, operation);
+                var endpointEngine = new EndPointEngine(apiSet.CustomObjects, operation, settings);
                 startingId = endpointEngine.ParseEndpoint(controller, pathUri, startingId, item);
             }
             return startingId;
@@ -185,7 +185,7 @@ namespace Engines.ApiDocs
 
             endPoint.CheckForDynamicDates(operation.Value);
             //endPoint.AddRestrictions(operation.Value);
-            endPoint.AddMethodsThatUseThisResponse(operation.Value);
+            //endPoint.AddMethodsThatUseThisResponse(operation.Value);
             //endPoint.AddSourceMethodName(operation.Value);
             //endPoint.AddTestDataFilter(operation.Value);
             endPoint.CheckFor_IsLookupMethod(operation.Value);

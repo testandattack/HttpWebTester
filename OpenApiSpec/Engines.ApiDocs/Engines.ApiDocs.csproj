@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ApiDocs.CustomObjects\ApiDocs.CustomObjects.csproj" />
     <ProjectReference Include="..\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
   </ItemGroup>
 

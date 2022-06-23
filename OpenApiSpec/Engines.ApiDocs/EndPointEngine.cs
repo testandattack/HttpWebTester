@@ -5,34 +5,49 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Serilog;
+using ApiDocs.CustomObjects;
+using GTC.HttpWebTester.Settings;
 
 namespace Engines.ApiDocs
 {
     public class EndPointEngine
     {
         #region -- Properties -----
+        private Settings settings;
+
         public KeyValuePair<OperationType, OpenApiOperation> operation { get; set; }
 
-        public CustomOasObjectCollection customEndPointObjects { get; set; }
+        public CustomOas_Operation_ObjectEngine customEndPointEngine { get; set; }
+
         #endregion
 
         #region -- Constructors -----
         public EndPointEngine() 
         {
-            customEndPointObjects = new CustomOasObjectCollection();
+            customEndPointEngine = new CustomOas_Operation_ObjectEngine();
             operation = new KeyValuePair<OperationType, OpenApiOperation>();
+            settings = new Settings();
         }
 
-        public EndPointEngine(CustomOasObjectCollection customObjects)
+        public EndPointEngine(CustomOas_Operation_ObjectEngine customObjects)
         {
-            customEndPointObjects = customObjects;
+            customEndPointEngine = customObjects;
             operation = new KeyValuePair<OperationType, OpenApiOperation>();
+            settings = new Settings();
         }
 
-        public EndPointEngine(CustomOasObjectCollection customObjects, KeyValuePair<OperationType, OpenApiOperation> apiOperation)
+        public EndPointEngine(CustomOas_Operation_ObjectEngine customObjects, KeyValuePair<OperationType, OpenApiOperation> apiOperation)
         {
-            customEndPointObjects = customObjects;
+            customEndPointEngine = customObjects;
             operation = apiOperation;
+            settings = new Settings();
+        }
+
+        public EndPointEngine(CustomOasObjectCollection customObjects, KeyValuePair<OperationType, OpenApiOperation> apiOperation, Settings Settings)
+        {
+            customEndPointEngine = new CustomOas_Operation_ObjectEngine(customObjects);
+            operation = apiOperation;
+            settings = Settings;
         }
         #endregion
 
@@ -47,20 +62,20 @@ namespace Engines.ApiDocs
             endPoint.Method = operation.Key.ToString();
             endPoint.Depricated = operation.Value.Deprecated;
 
+            // Add a summary if present
             endPoint.Summary = operation.Value.Summary;
 
+            // Add a description if present
             if (operation.Value.Description != null)
-            {
                 endPoint.Description = operation.Value.Description.Replace("\r\n", "");
-            }
 
-            endPoint.ReportingName = pathUri
-                .Replace("/api/", "")
+            // Build a reporting name
+            endPoint.ReportingName = pathUri.Replace(settings.swaggerSettings.apiRoot, "")
                 .Replace("/", "-")
                 .Replace("{", "<")
                 .Replace("}", ">");
 
-
+            // Add the parameters
             endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
             foreach (var parm in item.Parameters)
             {
@@ -70,19 +85,21 @@ namespace Engines.ApiDocs
                 }
             }
 
+            // Handle extra parsing here
             endPoint.CheckForDynamicDates(operation.Value);
-            //endPoint.AddRestrictions(operation.Value);
-            endPoint.AddMethodsThatUseThisResponse(operation.Value);
-            //endPoint.AddSourceMethodName(operation.Value);
-            //endPoint.AddTestDataFilter(operation.Value);
             endPoint.CheckFor_IsLookupMethod(operation.Value);
 
-            if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
-            {
+            // Call the custom object engine to look for any custom object handlers that need to be executed.
+            customEndPointEngine.LookForCustomObjects(operation.Value);
+
+            // Look for and add request body info
+            if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT" || endPoint.Method.ToUpper() == "PATCH")
                 endPoint.AddRequestBody(operation.Value);
-            }
+
+            // Add response items
             endPoint.AddResponseItems(operation.Value);
 
+            // Build the endpoint name, add the endpoint to the controller, increment and return the id
             string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
             controller.EndPoints.Add(endPointKey, endPoint);
             startingId++;
@@ -90,32 +107,5 @@ namespace Engines.ApiDocs
         }
         #endregion
 
-        #region -- Custom Object Event Handler Code -----
-        public event EventHandler<OpenApiOperationEventArgs> OpenApiPathItemEvent;
-
-        protected virtual void OnOpenApiPathItemEvent(OpenApiOperationEventArgs e)
-        {
-            EventHandler<OpenApiOperationEventArgs> handler = OpenApiPathItemEvent;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        private void HandleCustomObjectEventProcesssing()
-        {
-            foreach (var customObject in customEndPointObjects.collection)
-            {
-                CustomOasObjectEngine item = customObject;
-                OpenApiPathItemEvent += item.OpenApiPathItemParsing;
-            }
-        }
-
-        public void FireOpenApiPathItemEventHandler()
-        {
-            OpenApiOperationEventArgs args = new OpenApiOperationEventArgs();
-            args.operation = operation;
-        }
-        #endregion
     }
 }

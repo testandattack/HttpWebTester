@@ -4,16 +4,16 @@
   "logSettings": {
     "DefaultLogFileName": "c:\\Temp\\ApiSet_ParsingLog.log",
     "MinLogEventLevel": "Information",
-    "ClearLogFileOnStartup": true
+    "ClearLogFileOnStartup": false
   },
   "swaggerSettings": {
     "BaseUriAddress": "http://localhost:52321/",
     "SwaggerStreamLocation": "swagger/v1/swagger.json",
-    "SwaggerFileLocation": "c:\\temp\\Asc_swagger.json",
-    //"SwaggerFileLocation": "c:\\temp\\twc_osmc.json",
+    //"SwaggerFileLocation": "c:\\temp\\Asc_swagger.json",
+    "SwaggerFileLocation": "c:\\temp\\twc_osmc.json",
     "ReadSwaggerFromFile": true,
-    "apiRoot": "/api/",
-    //"apiRoot": "/osmc/",
+    //"apiRoot": "/api/",
+    "apiRoot": "/osmc/",
     "DtoCodeFileName": "ResponseObjects.cs",
     "CodeNamespace": "ApiSet.Testing",
     "CoreClassName": "MyClass",

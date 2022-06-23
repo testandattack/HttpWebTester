@@ -582,6 +582,11 @@
             A collection of <see cref="T:ApiTestGenerator.Models.ApiDocs.EndPoint"/> objects and their names
             </summary>
         </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.CustomOasObject">
+            <summary>
+            This is the base class for creating custom objects and object parsers.
+            </summary>
+        </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection">
             <summary>
             A class that contains a collection of custom objects added to the OAS documentation.
@@ -589,7 +594,7 @@
         </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.collection">
             <summary>
-            ther dictionary that contains the collection of custom objects.
+            ther dictionary that contains the collection of custom object.
             </summary>
         </member>
         <member name="M:ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.#ctor">

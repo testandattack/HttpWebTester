@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System;
+using ApiTestGenerator.Models.ApiDocs;
 
-namespace Engines.ApiDocs
+namespace ApiDocs.CustomObjects
 {
     /// <summary>
     /// Interface for describing custom objects that can be added

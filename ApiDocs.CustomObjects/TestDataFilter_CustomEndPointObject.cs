@@ -1,7 +1,9 @@
 ﻿using ApiTestGenerator.Models.Consts;
 using ApiTestGenerator.Models.Enums;
+using ApiDocs.CustomObjects.Extensions;
+using ApiTestGenerator.Models.ApiDocs;
 
-namespace ApiTestGenerator.Models.ApiDocs
+namespace ApiDocs.CustomObjects
 {
     /// <summary>
     /// A <see cref="CustomOasObjectEngine"/> class designed to hold 
@@ -22,7 +24,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// </code>
     /// 
     /// </remarks>
-    public class TestDataFilter : CustomOasObjectEngine
+    public class TestDataFilter : CustomOasObject
     {
         /// <summary>
         /// The name of the property that will be in both of the objects
@@ -50,7 +52,8 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         public TestDataFilter()
         {
-            customEndPointObjectType = CustomEndPointObjectTypeEnum.TestDataFilter;
+            base.CustomObjectName = string.Empty;
+            base.CustomObjectType = "TestDataFilter";
         }
 
         /// <summary>
@@ -61,46 +64,16 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// and a set of values in the form of <see cref="ParserTokens.TKN_TestDataFilterStringFormat"/>.</param>
         public TestDataFilter(string description)
         {
-            customEndPointObjectType = CustomEndPointObjectTypeEnum.TestDataFilter;
-            ParseDescription(description);
+            base.CustomObjectName = string.Empty;
+            base.CustomObjectType = "TestDataFilter";
+            this.ParseDescription(description);
         }
 
-        private void ParseDescription(string description)
+        public TestDataFilter(string description, string name)
         {
-            /*
-             * This is the full entry as added to the API Code
-            {{TestDataFilter}}("PRIMARY","App.Models.Model.NameOfDto1.propertyName","DEPENDENT","App.Models.Model.NameOfDto2.propertyName")
-
-            This is the string that get's passed in to this method:
-            "PRIMARY","App.Models.Model.NameOfDto1.propertyName","DEPENDENT","App.Models.Model.NameOfDto2.propertyName"
-
-            This is the array of strings after massaging it.
-
-            [0] PRIMARY
-            [1] App.Models.Model.NameOfDto1.propertyName
-            [2] DEPENDENT
-            [3] App.Models.Model.NameOfDto2.propertyName
-            */
-
-            PrimaryDto = string.Empty;
-            DependentDto = string.Empty;
-
-            string[] items = description
-                .Replace("\"", "")
-                .Split(',');
-
-            if (items != null && items.Length == 4)
-            {
-                if (items[0].ToUpper() == "PRIMARY")
-                {
-                    PrimaryDto = items[1].Substring(0, items[1].LastIndexOf("."));
-                }
-                if (items[2].ToUpper() == "DEPENDENT")
-                {
-                    DependentDto = items[3].Substring(0, items[3].LastIndexOf("."));
-                }
-                SharedPropertyName = items[1].Substring(items[1].LastIndexOf(".") + 1);
-            }
+            base.CustomObjectName = name;
+            base.CustomObjectType = "TestDataFilter";
+            this.ParseDescription(description);
         }
     }
 }

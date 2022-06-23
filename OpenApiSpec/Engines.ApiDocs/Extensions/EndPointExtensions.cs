@@ -95,25 +95,25 @@ namespace Engines.ApiDocs.Extensions
         //    }
         //}
 
-        /// <summary>
-        /// Adds any <see cref="ProvidesValuesFor"/> items to the endpoint
-        /// </summary>
-        /// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
-        public static void AddMethodsThatUseThisResponse(this EndPoint source, OpenApiOperation openApiOperation)
-        {
-            if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
-            {
-                foreach (var operationExtension in openApiOperation.Extensions)
-                {
-                    if (operationExtension.Key == ParserTokens.TKN_ProvidesValuesFor && ((OpenApiString)(operationExtension.Value)).Value != "")
-                    {
-                        ProvidesValuesFor endPointObject = new ProvidesValuesFor();
-                        endPointObject.ProvidesValuesForTheseMethods.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
-                        source.customEndPointObjects.Add(endPointObject);
-                    }
-                }
-            }
-        }
+        ///// <summary>
+        ///// Adds any <see cref="ProvidesValuesFor"/> items to the endpoint
+        ///// </summary>
+        ///// <param name="openApiOperation">the <see cref="OpenApiOperation"/> that might contain user defined extensions.</param>
+        //public static void AddMethodsThatUseThisResponse(this EndPoint source, OpenApiOperation openApiOperation)
+        //{
+        //    if (openApiOperation.Extensions != null && openApiOperation.Extensions.Count > 0)
+        //    {
+        //        foreach (var operationExtension in openApiOperation.Extensions)
+        //        {
+        //            if (operationExtension.Key == ParserTokens.TKN_ProvidesValuesFor && ((OpenApiString)(operationExtension.Value)).Value != "")
+        //            {
+        //                ProvidesValuesFor endPointObject = new ProvidesValuesFor();
+        //                endPointObject.ProvidesValuesForTheseMethods.AddRange(((OpenApiString)(operationExtension.Value)).Value.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        //                source.customEndPointObjects.Add(endPointObject);
+        //            }
+        //        }
+        //    }
+        //}
 
         ///// <summary>
         ///// Adds the <see cref="MethodName"/> items to the endpoint

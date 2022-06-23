@@ -30,14 +30,14 @@ public CustomOasObjectCollection();
 
 ## CustomOasObjectCollection.collection Property
 
-ther dictionary that contains the collection of custom objects.
+ther dictionary that contains the collection of custom object.
 
 ```csharp
-public System.Collections.Generic.Dictionary<string,object> collection { get; set; }
+public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiDocs.CustomOasObject> collection { get; set; }
 ```
 
 #### Property Value
-[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
+[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[CustomOasObject](CustomOasObject.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObject')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
 ### Methods
 
 <a name='ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator()'></a>

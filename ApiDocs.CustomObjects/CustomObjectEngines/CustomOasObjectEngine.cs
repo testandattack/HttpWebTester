@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Engines.ApiDocs
+namespace ApiDocs.CustomObjects
 {
     /// <summary>
     /// Base Abstract class for describing custom objects that can be added
@@ -15,22 +15,22 @@ namespace Engines.ApiDocs
     public class CustomOasObjectEngine : ICustomOasObjectEngine<CustomOasObjectEngine>
     {
         /// <summary>
+        /// 
+        /// </summary>
+        public CustomOasObjectCollection customObjects { get; internal set; }
+
+        /// <summary>
         /// A string representing the type of custom object
         /// </summary>
         public Type CustomOasObjectEngineType { get; }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the engine.
         /// </summary>
-        public CustomOasObjectEngine() { }
-
-        /// <summary>
-        /// This is the event to register for if your custoim object resides in the OpenApiPathItem portion
-        /// of the OAS document.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public virtual void OpenApiPathItemParsing(object sender, OpenApiOperationEventArgs e) { }
+        public CustomOasObjectEngine() 
+        {
+            customObjects = new CustomOasObjectCollection();
+        }
 
         /// <summary>
         /// 
@@ -52,5 +52,6 @@ namespace Engines.ApiDocs
 
             return sb.ToString();
         }
+
     }
 }
