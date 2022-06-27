@@ -24,7 +24,7 @@ public ApiSetAnalysis();
 
 ## ApiSetAnalysis(ApiSet) Constructor
 
-A constructor that lets you provide a pre-populated ApiSet  
+A constructor that lets you provide a pre-populated ApiSet
 to this object.
 
 ```csharp
@@ -121,7 +121,7 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiA
 
 ## ApiSetAnalysis.endpointsWithMultipleMethods Property
 
-A list of all endpoints that have the same URL, but offer different  
+A list of all endpoints that have the same URL, but offer different
 methods for calling.
 
 ```csharp
@@ -135,7 +135,7 @@ public System.Collections.Generic.Dictionary<string,System.Collections.Generic.D
 
 ## ApiSetAnalysis.endpointsWithoutUrlParams Property
 
-A List containing the EndpointIds of all endpoints that do NOT contain an  
+A List containing the EndpointIds of all endpoints that do NOT contain an
 input parameter in the URL
 
 ```csharp
@@ -149,7 +149,7 @@ public System.Collections.Generic.List<int> endpointsWithoutUrlParams { get; set
 
 ## ApiSetAnalysis.endpointsWithUrlParams Property
 
-A List containing the EndpointIds of all endpoints that contain an  
+A List containing the EndpointIds of all endpoints that contain an
 input parameter in the URL
 
 ```csharp
@@ -163,8 +163,8 @@ public System.Collections.Generic.List<int> endpointsWithUrlParams { get; set; }
 
 ## ApiSetAnalysis.inputParameters Property
 
-A list of all the [ApiDocs.Engines.Parameter](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Parameter 'ApiDocs.Engines.Parameter') items.  
-these are all of the items that will be used at some point as  
+A list of all the [ApiDocs.Engines.Parameter](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Parameter 'ApiDocs.Engines.Parameter') items.
+these are all of the items that will be used at some point as
 inputs to the API calls.
 
 ```csharp
@@ -178,7 +178,7 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiA
 
 ## ApiSetAnalysis.inputParametersNotInLookupProperties Property
 
-A list of the [InputParameter](InputParameter.md 'ApiTestGenerator.Models.ApiAnalyzer.InputParameter')s that do not have matching entries in  
+A list of the [InputParameter](InputParameter.md 'ApiTestGenerator.Models.ApiAnalyzer.InputParameter')s that do not have matching entries in
 the [lookupProperties](ApiSetAnalysis.md#ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.lookupProperties 'ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.lookupProperties') collection.
 
 ```csharp
@@ -192,7 +192,7 @@ public System.Collections.Generic.SortedDictionary<string,ApiTestGenerator.Model
 
 ## ApiSetAnalysis.inputParametersNotInProperties Property
 
-A list of the [InputParameter](InputParameter.md 'ApiTestGenerator.Models.ApiAnalyzer.InputParameter')s that do not have matching entries in  
+A list of the [InputParameter](InputParameter.md 'ApiTestGenerator.Models.ApiAnalyzer.InputParameter')s that do not have matching entries in
 the [properties](ApiSetAnalysis.md#ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.properties 'ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.properties') collection.
 
 ```csharp
@@ -232,7 +232,7 @@ public System.Collections.Generic.SortedDictionary<string,ApiTestGenerator.Model
 
 ## ApiSetAnalysis.lookupProperties Property
 
-A collection of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') objects that are in components that act   
+A collection of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') objects that are in components that act 
 as responses to Lookup Endpoints.
 
 ```csharp
@@ -246,8 +246,8 @@ public System.Collections.Generic.SortedDictionary<string,ApiTestGenerator.Model
 
 ## ApiSetAnalysis.properties Property
 
-A list of all the [ApiDocs.Engines.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Property 'ApiDocs.Engines.Property') items.   
-This lists all of the primitive values that get returned as part  
+A list of all the [ApiDocs.Engines.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiDocs.Engines.Property 'ApiDocs.Engines.Property') items. 
+This lists all of the primitive values that get returned as part
 of the response objects.
 
 ```csharp

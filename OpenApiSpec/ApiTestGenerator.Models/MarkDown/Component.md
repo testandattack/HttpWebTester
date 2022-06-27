@@ -3,7 +3,7 @@
 
 ## Component Class
 
-This class defines a container to house the custom class objects  
+This class defines a container to house the custom class objects
 that are used for responses from the API.
 
 ```csharp
@@ -14,7 +14,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ### Remarks
 This class bears the same name as the [
-            Components](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#components-object 'http://spec.openapis.org/oas/v3.0.3#components-object') object in the OpenApiSpec, but it only implements a part of the functionality, specifically  
+            Components](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#components-object 'http://spec.openapis.org/oas/v3.0.3#components-object') object in the OpenApiSpec, but it only implements a part of the functionality, specifically
 the Schema objects stored under the Components object.
 ### Properties
 
@@ -48,7 +48,7 @@ public string Name { get; set; }
 
 ## Component.properties Property
 
-The list of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') items  
+The list of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') items
 that are associated with the schema.
 
 ```csharp

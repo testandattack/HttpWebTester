@@ -26,7 +26,7 @@ public EndPoint();
 
 ## EndPoint(string) Constructor
 
-Creates a new instance of the [EndPoint](EndPoint.md 'ApiTestGenerator.Models.ApiDocs.EndPoint') object  
+Creates a new instance of the [EndPoint](EndPoint.md 'ApiTestGenerator.Models.ApiDocs.EndPoint') object
 and assigns the passed in value to the [controllerName](EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.controllerName 'ApiTestGenerator.Models.ApiDocs.EndPoint.controllerName') property.
 
 ```csharp
@@ -45,7 +45,7 @@ the name of the API controller that houses this endpoint.
 
 ## EndPoint.controllerName Property
 
-[Extension] The name of the [Controller](Controller.md 'ApiTestGenerator.Models.ApiDocs.Controller') object  
+[Extension] The name of the [Controller](Controller.md 'ApiTestGenerator.Models.ApiDocs.Controller') object
 that contains this endpoint.
 
 ```csharp
@@ -59,7 +59,7 @@ public string controllerName { get; set; }
 
 ## EndPoint.customEndPointObjects Property
 
-A list of [CustomOasObjectEngine](https://docs.microsoft.com/en-us/dotnet/api/CustomOasObjectEngine 'CustomOasObjectEngine') items discovered in  
+A list of [CustomOasObjectEngine](https://docs.microsoft.com/en-us/dotnet/api/CustomOasObjectEngine 'CustomOasObjectEngine') items discovered in
 the Api Document json.
 
 ```csharp
@@ -70,14 +70,14 @@ public ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection customEndPointO
 [CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
 
 ### Remarks
-The types of objects can be seen in this enum:  
+The types of objects can be seen in this enum:
 [CustomEndPointObjectTypeEnum](CustomEndPointObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum')
 
 <a name='ApiTestGenerator.Models.ApiDocs.EndPoint.Depricated'></a>
 
 ## EndPoint.Depricated Property
 
-From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')  
+From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')
 field by the same name.
 
 ```csharp
@@ -88,14 +88,14 @@ public bool Depricated { get; set; }
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
 
 ### Remarks
-Declares this operation to be deprecated. Consumers SHOULD refrain from usage   
+Declares this operation to be deprecated. Consumers SHOULD refrain from usage 
 of the declared operation. Default value is false.
 
 <a name='ApiTestGenerator.Models.ApiDocs.EndPoint.Description'></a>
 
 ## EndPoint.Description Property
 
-From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')  
+From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')
 field by the same name.
 
 ```csharp
@@ -106,7 +106,7 @@ public string Description { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-A verbose explanation of the operation behavior. CommonMark syntax MAY be used   
+A verbose explanation of the operation behavior. CommonMark syntax MAY be used 
 for rich text representation.
 
 <a name='ApiTestGenerator.Models.ApiDocs.EndPoint.EndpointId'></a>
@@ -124,9 +124,9 @@ public int EndpointId { get; set; }
 
 ## EndPoint.IsForTestingPurposes Property
 
-A boolean that indicates if this method is exposed solely for  
-the Tester Role and woill not be used by the application.  
-All Test methods contain [ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes 'ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes')  
+A boolean that indicates if this method is exposed solely for
+the Tester Role and woill not be used by the application.
+All Test methods contain [ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes 'ApiTestGenerator.Models.Consts.ParserTokens.DESC_ForTestingPurposes')
 in the Description field.
 
 ```csharp
@@ -140,9 +140,9 @@ public bool IsForTestingPurposes { get; set; }
 
 ## EndPoint.IsLookupMethod Property
 
-A boolean that describes if the method contains the  
-[TKN_LookupMethod](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod') tag indicating  
-that the method is used to grab lookup values for other  
+A boolean that describes if the method contains the
+[TKN_LookupMethod](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod') tag indicating
+that the method is used to grab lookup values for other
 methods in the API.
 
 ```csharp
@@ -156,9 +156,9 @@ public bool IsLookupMethod { get; set; }
 
 ## EndPoint.Method Property
 
-This is the 'Name' of the   
-[http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object') object   
-which is essentially the URI. When combined with the [UriPath](EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath 'ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath')  
+This is the 'Name' of the 
+[http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object') object 
+which is essentially the URI. When combined with the [UriPath](EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath 'ApiTestGenerator.Models.ApiDocs.EndPoint.UriPath')
 property, it describes a unique operation on an API.
 
 ```csharp
@@ -185,8 +185,8 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiD
 
 ## EndPoint.recordedResponseBody Property
 
-This string holds the response body text that was present  
-for the given Http Endpoint. Note: This only applies when   
+This string holds the response body text that was present
+for the given Http Endpoint. Note: This only applies when 
 building an ApiSet from sources like HTTP Archive files.
 
 ```csharp
@@ -200,8 +200,8 @@ public string recordedResponseBody { get; set; }
 
 ## EndPoint.recordedResponseMessage Property
 
-This object holds the response object that was present  
-for the given Http Endpoint. Note: This only applies when   
+This object holds the response object that was present
+for the given Http Endpoint. Note: This only applies when 
 building an ApiSet from sources like HTTP Archive files.
 
 ```csharp
@@ -215,7 +215,7 @@ public System.Net.Http.HttpResponseMessage recordedResponseMessage { get; set; }
 
 ## EndPoint.ReportingName Property
 
-[Extension] This is a name to add to the request in the test harness that will  
+[Extension] This is a name to add to the request in the test harness that will
 be used for grouping results of the tests.
 
 ```csharp
@@ -255,7 +255,7 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiD
 
 ## EndPoint.Summary Property
 
-From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')  
+From the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')
 field by the same name.
 
 ```csharp
@@ -272,10 +272,10 @@ A short summary of what the operation does.
 
 ## EndPoint.UriPath Property
 
-This is the path of the endpoint and is derived from the 'Name' of the  
-[http://spec.openapis.org/oas/v3.0.3#path-item-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#path-item-object 'http://spec.openapis.org/oas/v3.0.3#path-item-object') object   
-which describes the type of request that the endpoint expects.   
-When combined with the [Method](EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.Method 'ApiTestGenerator.Models.ApiDocs.EndPoint.Method')  
+This is the path of the endpoint and is derived from the 'Name' of the
+[http://spec.openapis.org/oas/v3.0.3#path-item-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#path-item-object 'http://spec.openapis.org/oas/v3.0.3#path-item-object') object 
+which describes the type of request that the endpoint expects. 
+When combined with the [Method](EndPoint.md#ApiTestGenerator.Models.ApiDocs.EndPoint.Method 'ApiTestGenerator.Models.ApiDocs.EndPoint.Method')
 property, it describes a unique operation on an API.
 
 ```csharp
@@ -289,7 +289,7 @@ public string UriPath { get; set; }
 
 ## EndPoint.Version Property
 
-This will allow people to extend the ApiSet to manage versioning of endpoints  
+This will allow people to extend the ApiSet to manage versioning of endpoints
 at a future time.
 
 ```csharp

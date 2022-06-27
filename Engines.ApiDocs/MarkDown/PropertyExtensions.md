@@ -14,7 +14,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## PropertyExtensions.GetDescriptionAndCustomObjects(this Property, OpenApiSchema) Method
 
-Parses the [Microsoft.OpenApi.Models.OpenApiSchema.Description](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema.Description 'Microsoft.OpenApi.Models.OpenApiSchema.Description') string (if present)  
+Parses the [Microsoft.OpenApi.Models.OpenApiSchema.Description](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema.Description 'Microsoft.OpenApi.Models.OpenApiSchema.Description') string (if present)
 and finds any custom objects added to it.
 
 ```csharp

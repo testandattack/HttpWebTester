@@ -1150,6 +1150,11 @@
             type of response object returned.
             </summary>
         </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ResponseObject.responseObjectExampleText">
+            <summary>
+            
+            </summary>        
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ResponseObject.abbreviatedResponseObjects">
             <summary>
             [Extension] - This is a collection of objects in the response 

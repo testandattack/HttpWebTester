@@ -36,11 +36,22 @@ public string Description { get; set; }
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
+<a name='ApiTestGenerator.Models.ApiDocs.ResponseObject.responseObjectExampleText'></a>
+
+## ResponseObject.responseObjectExampleText Property
+
+```csharp
+public string responseObjectExampleText { get; set; }
+```
+
+#### Property Value
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
 <a name='ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectName'></a>
 
 ## ResponseObject.ResponseObjectName Property
 
-[Extension] - The class 'name' of response object for  
+[Extension] - The class 'name' of response object for
 responses that use a $ref tag to reference a [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component')
 
 ```csharp
@@ -54,7 +65,7 @@ public string ResponseObjectName { get; set; }
 
 ## ResponseObject.ResponseObjectType Property
 
-A [ResponseTypeEnum](ResponseTypeEnum.md 'ApiTestGenerator.Models.Enums.ResponseTypeEnum') value that describes the  
+A [ResponseTypeEnum](ResponseTypeEnum.md 'ApiTestGenerator.Models.Enums.ResponseTypeEnum') value that describes the
 type of response object returned.
 
 ```csharp

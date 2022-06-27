@@ -3,7 +3,7 @@
 
 ## ApiSetSummaryModel Class
 
-A set of counts for various items in the ApiSet after  
+A set of counts for various items in the ApiSet after
 parasing it.
 
 ```csharp
@@ -17,7 +17,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## ApiSetSummaryModel.apiInfo Property
 
-A copy of the [OpenApiInfo](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#info-object 'http://spec.openapis.org/oas/v3.0.3#info-object') object  
+A copy of the [OpenApiInfo](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#info-object 'http://spec.openapis.org/oas/v3.0.3#info-object') object
 from the API Documentation
 
 ```csharp
@@ -31,7 +31,7 @@ public Microsoft.OpenApi.Models.OpenApiInfo apiInfo { get; set; }
 
 ## ApiSetSummaryModel.apiRoot Property
 
-The UriStem portion of the Swagger Operation that preceeds the   
+The UriStem portion of the Swagger Operation that preceeds the 
 "controller" name i nthe path.
 
 ```csharp
@@ -97,7 +97,7 @@ public int numDepricated { get; set; }
 
 ## ApiSetSummaryModel.NumEndpointsWithExample Property
 
-The number of endpoints that have one or more [ExampleValue](ExampleValue.md 'ApiTestGenerator.Models.ApiDocs.ExampleValue') items   
+The number of endpoints that have one or more [ExampleValue](ExampleValue.md 'ApiTestGenerator.Models.ApiDocs.ExampleValue') items 
 for their input parameters.
 
 ```csharp
@@ -111,7 +111,7 @@ public int NumEndpointsWithExample { get; set; }
 
 ## ApiSetSummaryModel.NumEndpointsWithExamples Property
 
-The number of endpoints that have one or more [System.Collections.Generic.List&lt;&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1') items   
+The number of endpoints that have one or more [System.Collections.Generic.List&lt;&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1 'System.Collections.Generic.List`1') items 
 for their input parameters.
 
 ```csharp
@@ -138,7 +138,7 @@ public int numErrors { get; set; }
 
 ## ApiSetSummaryModel.numInputParametersWithoutLookupProperty Property
 
-The number of input parameters that do not appear to be related  
+The number of input parameters that do not appear to be related
 to any Lookup [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component')s in the API.
 
 ```csharp
@@ -152,7 +152,7 @@ public int numInputParametersWithoutLookupProperty { get; set; }
 
 ## ApiSetSummaryModel.numInputParametersWithoutProperty Property
 
-The number of input parameters that do not appear to be related  
+The number of input parameters that do not appear to be related
 to any [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component')s in the API.
 
 ```csharp
@@ -166,7 +166,7 @@ public int numInputParametersWithoutProperty { get; set; }
 
 ## ApiSetSummaryModel.numInputProperties Property
 
-The number of [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component') Properties that are used as  
+The number of [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component') Properties that are used as
 input parameters.
 
 ```csharp
@@ -190,8 +190,8 @@ public int numLookupComponents { get; set; }
 [System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')
 
 ### Remarks
-This count is tracked separately from the Lookup endpoints because there are  
-sometimes multiple endpoints returning the same lookup DTO. ALSO, this count does  
+This count is tracked separately from the Lookup endpoints because there are
+sometimes multiple endpoints returning the same lookup DTO. ALSO, this count does
 not include primitive response types.
 
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numLookupEndpoints'></a>
@@ -211,7 +211,7 @@ public int numLookupEndpoints { get; set; }
 
 ## ApiSetSummaryModel.numLookupProperties Property
 
-The number of individual objects that can be extracted from returned  
+The number of individual objects that can be extracted from returned
 [Component](Component.md 'ApiTestGenerator.Models.ApiDocs.Component')s of Lookup Endpoints.
 
 ```csharp
@@ -225,7 +225,7 @@ public int numLookupProperties { get; set; }
 
 ## ApiSetSummaryModel.numTestMethods Property
 
-The number of non-depricated [EndPoint](EndPoint.md 'ApiTestGenerator.Models.ApiDocs.EndPoint') items  
+The number of non-depricated [EndPoint](EndPoint.md 'ApiTestGenerator.Models.ApiDocs.EndPoint') items
 in the set that exist solely for testing services.
 
 ```csharp
@@ -239,7 +239,7 @@ public int numTestMethods { get; set; }
 
 ## ApiSetSummaryModel.propertyFormats Property
 
-A list of all of the unique [Format](Property.md#ApiTestGenerator.Models.ApiDocs.Property.Format 'ApiTestGenerator.Models.ApiDocs.Property.Format')  
+A list of all of the unique [Format](Property.md#ApiTestGenerator.Models.ApiDocs.Property.Format 'ApiTestGenerator.Models.ApiDocs.Property.Format')
 entries found in the documentation.
 
 ```csharp
@@ -253,7 +253,7 @@ public System.Collections.Generic.List<string> propertyFormats { get; set; }
 
 ## ApiSetSummaryModel.propertyTypes Property
 
-A list of all of the unique [Type](Property.md#ApiTestGenerator.Models.ApiDocs.Property.Type 'ApiTestGenerator.Models.ApiDocs.Property.Type')  
+A list of all of the unique [Type](Property.md#ApiTestGenerator.Models.ApiDocs.Property.Type 'ApiTestGenerator.Models.ApiDocs.Property.Type')
 entries found in the documentation.
 
 ```csharp
@@ -267,7 +267,7 @@ public System.Collections.Generic.List<string> propertyTypes { get; set; }
 
 ## ApiSetSummaryModel.responseStatuses Property
 
-A list of all unique [Microsoft.OpenApi.Models.OpenApiResponse](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiResponse 'Microsoft.OpenApi.Models.OpenApiResponse') status   
+A list of all unique [Microsoft.OpenApi.Models.OpenApiResponse](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiResponse 'Microsoft.OpenApi.Models.OpenApiResponse') status 
 codes found in the documentation.
 
 ```csharp

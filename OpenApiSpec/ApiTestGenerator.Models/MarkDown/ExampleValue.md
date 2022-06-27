@@ -3,7 +3,7 @@
 
 ## ExampleValue Class
 
-An object loosely based on the [http://spec.openapis.org/oas/v3.0.3#example-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#example-object 'http://spec.openapis.org/oas/v3.0.3#example-object')  
+An object loosely based on the [http://spec.openapis.org/oas/v3.0.3#example-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#example-object 'http://spec.openapis.org/oas/v3.0.3#example-object')
 object.
 
 ```csharp
@@ -27,7 +27,7 @@ public ExampleValue();
 
 ## ExampleValue(string, string) Constructor
 
-Creates a new instance of the [ExampleValue](ExampleValue.md 'ApiTestGenerator.Models.ApiDocs.ExampleValue') object  
+Creates a new instance of the [ExampleValue](ExampleValue.md 'ApiTestGenerator.Models.ApiDocs.ExampleValue') object
 and initiates the [Type](ExampleValue.md#ApiTestGenerator.Models.ApiDocs.ExampleValue.Type 'ApiTestGenerator.Models.ApiDocs.ExampleValue.Type') and [Value](ExampleValue.md#ApiTestGenerator.Models.ApiDocs.ExampleValue.Value 'ApiTestGenerator.Models.ApiDocs.ExampleValue.Value') properties.
 
 ```csharp
@@ -52,7 +52,7 @@ The actual value to use.
 
 ## ExampleValue.GeneratedValue Property
 
-[Extension] - Used to store a formula or other item   
+[Extension] - Used to store a formula or other item 
 describing how to generate values for the example.
 
 ```csharp
@@ -66,7 +66,7 @@ public string GeneratedValue { get; set; }
 
 ## ExampleValue.Type Property
 
-The [OpenApi defined Type](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#data-types 'http://spec.openapis.org/oas/v3.0.3#data-types')   
+The [OpenApi defined Type](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#data-types 'http://spec.openapis.org/oas/v3.0.3#data-types') 
 of the Example value being provided.
 
 ```csharp

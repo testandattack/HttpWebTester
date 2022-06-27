@@ -71,6 +71,6 @@ A class-based response object
 A plain old [String](ResponseTypeEnum.md#ApiTestGenerator.Models.Enums.ResponseTypeEnum.String 'ApiTestGenerator.Models.Enums.ResponseTypeEnum.String').
 
 ### Remarks
-This is used by the test generation software to   
-determine what extraction and validation rule types   
+This is used by the test generation software to 
+determine what extraction and validation rule types 
 can be used with the response.

@@ -3,8 +3,8 @@
 
 ## SwaggerUrlParser Class
 
-This class contains all of the code to read from a serialized copy of an  
-Open API Specification document (from a json file or from the OAS definition URL on an API website)  
+This class contains all of the code to read from a serialized copy of an
+Open API Specification document (from a json file or from the OAS definition URL on an API website)
 and convert it into a [
             Microsoft OpenApiDocument](https://github.com/Microsoft/OpenAPI.NET 'https://github.com/Microsoft/OpenAPI.NET'). It can also serialize and save the document to a local file system.
 
@@ -22,7 +22,7 @@ Implements [SharedResources.ISwaggerParser](https://docs.microsoft.com/en-us/dot
 
 ## SwaggerUrlParser() Constructor
 
-Creates a new instance of the parser using the `settings.json` file in the  
+Creates a new instance of the parser using the `settings.json` file in the
 root directory of the application.
 
 ```csharp
@@ -33,7 +33,7 @@ public SwaggerUrlParser();
 
 ## SwaggerUrlParser(Settings) Constructor
 
-Creates a new instance of the parser using the [GTC.HttpWebTester.Settings.Settings](https://docs.microsoft.com/en-us/dotnet/api/GTC.HttpWebTester.Settings.Settings 'GTC.HttpWebTester.Settings.Settings') object   
+Creates a new instance of the parser using the [GTC.HttpWebTester.Settings.Settings](https://docs.microsoft.com/en-us/dotnet/api/GTC.HttpWebTester.Settings.Settings 'GTC.HttpWebTester.Settings.Settings') object 
 that is passed in.
 
 ```csharp
@@ -79,8 +79,8 @@ public GTC.HttpWebTester.Settings.Settings settings { get; set; }
 
 ## SwaggerUrlParser.CreateAndSaveDtoCode() Method
 
-This method uses the [NSwag](https://github.com/RicoSuter/NSwag 'https://github.com/RicoSuter/NSwag') Nuget package to generate  
-C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location  
+This method uses the [NSwag](https://github.com/RicoSuter/NSwag 'https://github.com/RicoSuter/NSwag') Nuget package to generate
+C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
 specified in the settings file.
 
 ```csharp
@@ -93,8 +93,8 @@ Implements [CreateAndSaveDtoCode()](https://docs.microsoft.com/en-us/dotnet/api/
 
 ## SwaggerUrlParser.CreateAndSaveDtoCode(string) Method
 
-This method uses the [NSwag](https://github.com/RicoSuter/NSwag 'https://github.com/RicoSuter/NSwag') Nuget package to generate  
-C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location  
+This method uses the [NSwag](https://github.com/RicoSuter/NSwag 'https://github.com/RicoSuter/NSwag') Nuget package to generate
+C# source code for the OAS documented items. If no fileName is provided, the file is saved to the location
 specified in the settings file.
 
 ```csharp

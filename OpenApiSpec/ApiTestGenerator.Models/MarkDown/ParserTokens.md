@@ -12,14 +12,14 @@ public class ParserTokens
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; ParserTokens
 
 ### Remarks
-These string constants represent a few different types of 'searchable' strings. The   
-preamble of each token represents the type of string:  
-- `TKN` These items represent strings that can be added to the XML Documentation in a way that they will  
-              show up in the generated OAS document.  
-- `PARAM` These items contain strings that represent the names of common parameters that (when  
-              used by developers in the API) will allow the OAS parser to identify these parameters as properties to  
-              make dynamioc in any generated test harnesses.  
-- `OAS` These items contain strings that are known constants defined within the Open Api Spec.  
+These string constants represent a few different types of 'searchable' strings. The 
+preamble of each token represents the type of string:
+- `TKN` These items represent strings that can be added to the XML Documentation in a way that they will
+              show up in the generated OAS document.
+- `PARAM` These items contain strings that represent the names of common parameters that (when
+              used by developers in the API) will allow the OAS parser to identify these parameters as properties to
+              make dynamioc in any generated test harnesses.
+- `OAS` These items contain strings that are known constants defined within the Open Api Spec.
 - `DESC` These items are more generic and act as a 'catch-all' bucket for terms.
 ### Fields
 
@@ -66,7 +66,7 @@ public const string OAS_NoContentFound = No content object found;
 
 ## ParserTokens.PARAM_EndDate Field
 
-this string represents the name of an API operation's input parameter that contains a [DateTime](https://docs.microsoft.com/en-us/dotnet/api/DateTime 'DateTime')   
+this string represents the name of an API operation's input parameter that contains a [DateTime](https://docs.microsoft.com/en-us/dotnet/api/DateTime 'DateTime') 
 value for the ending date of a query.
 
 ```csharp
@@ -119,7 +119,7 @@ public const string PARAM_MissingTypeField = Type Not Found;
 
 ## ParserTokens.PARAM_StartDate Field
 
-this string represents the name of an API operation's input parameter that contains a [DateTime](https://docs.microsoft.com/en-us/dotnet/api/DateTime 'DateTime')   
+this string represents the name of an API operation's input parameter that contains a [DateTime](https://docs.microsoft.com/en-us/dotnet/api/DateTime 'DateTime') 
 value for the starting date of a query.
 
 ```csharp
@@ -133,7 +133,7 @@ public const string PARAM_StartDate = startDate;
 
 ## ParserTokens.TKN_CalculatedDateStringFormat Field
 
-Contains the arguments used when providing a   
+Contains the arguments used when providing a 
 [TKN_startDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_startDate 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_startDate') or [TKN_endDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_endDate 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_endDate') Token in XML Documentation
 
 ```csharp
@@ -264,7 +264,7 @@ public const string TKN_TestDataFilter = {{TestDataFilter}}(;
 
 ## ParserTokens.TKN_TestDataFilterStringFormat Field
 
-Contains the arguments used when providing a   
+Contains the arguments used when providing a 
 [TKN_TestDataFilter](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_TestDataFilter') Token in XML Documentation
 
 ```csharp

@@ -29,6 +29,11 @@ namespace ApiTestGenerator.Models.ApiDocs
         public ResponseTypeEnum ResponseObjectType { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>        
+        public string responseObjectExampleText { get; set; }
+        
+        /// <summary>
         /// [Extension] - This is a collection of objects in the response 
         /// </summary>
         public Dictionary<string, AbbreviatedResponseObject> abbreviatedResponseObjects { get; set; }
@@ -38,6 +43,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         public ResponseObject()
         {
             abbreviatedResponseObjects = new Dictionary<string, AbbreviatedResponseObject>();
+            responseObjectExampleText = null;
         }
         #endregion
     }

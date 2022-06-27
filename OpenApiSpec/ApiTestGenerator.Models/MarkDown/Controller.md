@@ -3,8 +3,8 @@
 
 ## Controller Class
 
-An object that stores a list of certain  
-[http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object') items  
+An object that stores a list of certain
+[http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object') items
 grouped by the 'name' of the controller they are associated with in code.
 
 ```csharp

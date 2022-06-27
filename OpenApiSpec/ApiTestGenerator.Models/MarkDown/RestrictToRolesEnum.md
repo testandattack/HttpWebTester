@@ -3,7 +3,7 @@
 
 ## RestrictToRolesEnum Enum
 
-Enumerates the types of roles that can be seen in a   
+Enumerates the types of roles that can be seen in a 
 [RestrictTo](https://docs.microsoft.com/en-us/dotnet/api/RestrictTo 'RestrictTo') object.
 
 ```csharp

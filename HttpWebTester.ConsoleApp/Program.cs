@@ -21,7 +21,6 @@ namespace HttpWebTester
             // Step 2 - Analyze the ApiSet
             ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSet, settings);
             analyzer.PerformAnalysis();
-            //analyzer.asa.SerializeAndSaveApiSetAnalysis(@"c:\temp\ApiSetAnalysis.json");
             analyzer.SerializeAndSaveApiSetAnalysis();
         }
 

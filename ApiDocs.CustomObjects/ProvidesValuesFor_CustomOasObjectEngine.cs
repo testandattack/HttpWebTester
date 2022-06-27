@@ -19,38 +19,6 @@ namespace ApiDocs.CustomObjects
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <remarks>
-        /// See this code example for how to handle creating your own custom parser
-        /// <code>
-        /// public override void ParseObject(object sender, CustomOasObjectEventArgs e)
-        /// {
-        ///    if (e.operation.Extensions != null && e.operation.Extensions.Count > 0)
-        ///    {
-        ///        foreach (var operationExtension in e.operation.Extensions)
-        ///        {
-        ///            if (operationExtension.Key == "x-Whatever-YourTokenNameMioghtBe")
-        ///            {
-        ///                // Create a new custom OAS object for the ApiSet
-        ///                var Item = new CustomOasObject();
-        ///
-        ///                // Name the object
-        ///                Item.CustomObjectName = "x-Whatever-YourTokenNameMioghtBe";
-        ///
-        ///                // Retrieve the string value
-        ///                string endpointNames = ((OpenApiString)(operationExtension.Value)).Value;
-        ///
-        ///                //Act on the value here.
-        ///                if (endpointNames.Length > 0)
-        ///                {
-        ///                    Item.CustomObjectValue = endpointNames.CsvStrToList();
-        ///                    e.customObjects.collection.Add(Item);
-        ///                }
-        ///            }
-        ///        }
-        ///    }
-        /// }
-        /// </code>
-        /// </remarks>
         public override void ParseObject(object sender, CustomOasObjectEventArgs e) 
         {
             if (e.operation.Extensions != null && e.operation.Extensions.Count > 0)

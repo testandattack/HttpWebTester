@@ -3,7 +3,7 @@
 
 ## RequestBody Class
 
-This class defines a container to house the Request Body  
+This class defines a container to house the Request Body
 info needed to build a proper request.
 
 ```csharp
@@ -21,7 +21,7 @@ This class is based loosely off the [
 
 ## RequestBody.properties Property
 
-The list of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') items  
+The list of [Property](Property.md 'ApiTestGenerator.Models.ApiDocs.Property') items
 that are associated with the schema.
 
 ```csharp
@@ -48,7 +48,7 @@ public string RequestBodyContentType { get; set; }
 
 ## RequestBody.RequestBodyFormObjectOrType Property
 
-This property holds the [http://spec.openapis.org/oas/v3.0.3#media-type-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#media-type-object 'http://spec.openapis.org/oas/v3.0.3#media-type-object')  
+This property holds the [http://spec.openapis.org/oas/v3.0.3#media-type-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#media-type-object 'http://spec.openapis.org/oas/v3.0.3#media-type-object')
 of the request object to pass in.
 
 ```csharp
@@ -62,8 +62,8 @@ public string? RequestBodyFormObjectOrType { get; set; }
 
 ## RequestBody.RequestBodyJsonObject Property
 
-If the operation is a POST, PUT or PATCH based request,  
-this string holds the class name of the Input DTO that is used  
+If the operation is a POST, PUT or PATCH based request,
+this string holds the class name of the Input DTO that is used
 as a template for the request body.
 
 ```csharp
@@ -77,7 +77,7 @@ public string? RequestBodyJsonObject { get; set; }
 
 ## RequestBody.RequestBodySchemaType Property
 
-This property holds the [http://spec.openapis.org/oas/v3.0.3#media-type-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#media-type-object 'http://spec.openapis.org/oas/v3.0.3#media-type-object')  
+This property holds the [http://spec.openapis.org/oas/v3.0.3#media-type-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#media-type-object 'http://spec.openapis.org/oas/v3.0.3#media-type-object')
 of the request object to pass in.
 
 ```csharp
@@ -91,9 +91,9 @@ public string? RequestBodySchemaType { get; set; }
 
 ## RequestBody.RequestBodyString Property
 
-If the operation is a POST, PUT or PATCH based request,  
-this string holds the Swagger generated Input template  
-text that is generated from the $ref entry in the   
+If the operation is a POST, PUT or PATCH based request,
+this string holds the Swagger generated Input template
+text that is generated from the $ref entry in the 
 [http://spec.openapis.org/oas/v3.0.3#request-body-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#request-body-object 'http://spec.openapis.org/oas/v3.0.3#request-body-object')
 
 ```csharp

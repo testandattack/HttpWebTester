@@ -277,55 +277,47 @@ else
                 // Quick check to see if a DTO is being returned.
                 if (openApiResponse.Content.Count > 0)
                 {
-                    if (openApiResponse.Content[ContentItem].Schema.Type == null)
+                    foreach (var contentItem in openApiResponse.Content)
                     {
-                        response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.Reference.Id;
-                        response.ResponseObjectType = ResponseTypeEnum.Object;
-                    }
-                    else
-                    {
-                        if (openApiResponse.Content[ContentItem].Schema.Type == "string")
+                        if(contentItem.Value.Schema == null)
                         {
-                            if (openApiResponse.Content[ContentItem].Schema.Format != null)
+                            // Found an object being returned that does not have a schema.
+                            if(contentItem.Value.Example != null)
                             {
-                                if (openApiResponse.Content[ContentItem].Schema.Format == "binary")
+                                string tempStr = ((OpenApiString)(contentItem.Value.Example)).Value;
+                                Console.WriteLine("");
+
+                            }
+                        }
+                        else if (contentItem.Value.Schema.Type == null)
+                        {
+                            response.ResponseObjectName = contentItem.Value.Schema.Reference.Id;
+                            response.ResponseObjectType = ResponseTypeEnum.Object;
+                        }
+                        else
+                        {
+                            if (contentItem.Value.Schema.Type == "string")
+                            {
+                                if (contentItem.Value.Schema.Format != null)
+                                {
+                                    if (contentItem.Value.Schema.Format == "binary")
+                                    {
+                                        response.ResponseObjectName = "";
+                                        response.ResponseObjectType = ResponseTypeEnum.BinaryString;
+                                    }
+                                }
+                                else
                                 {
                                     response.ResponseObjectName = "";
-                                    response.ResponseObjectType = ResponseTypeEnum.BinaryString;
+                                    response.ResponseObjectType = ResponseTypeEnum.String;
                                 }
                             }
-                            else
+                            else if (contentItem.Value.Schema.Type == "integer")
                             {
-                                response.ResponseObjectName = "";
-                                response.ResponseObjectType = ResponseTypeEnum.String;
-                            }
-                        }
-                        else if (openApiResponse.Content[ContentItem].Schema.Type == "integer")
-                        {
-                            if (openApiResponse.Content[ContentItem].Schema.Format != null)
-                            {
-                                response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.Format;
-                                response.ResponseObjectType = ResponseTypeEnum.Integer;
-                            }
-                            else
-                            {
-                                response.ResponseObjectName = "";
-                                response.ResponseObjectType = ResponseTypeEnum.List_Integer;
-                            }
-                        }
-                        else if (openApiResponse.Content[ContentItem].Schema.Type == "array")
-                        {
-                            if (openApiResponse.Content[ContentItem].Schema.Items.Type == "object")
-                            {
-                                response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.Items.Reference.Id;
-                                response.ResponseObjectType = ResponseTypeEnum.List_Object;
-                            }
-                            else if (openApiResponse.Content[ContentItem].Schema.Items.Type == "integer")
-                            {
-                                if (openApiResponse.Content[ContentItem].Schema.Items.Format != null)
+                                if (contentItem.Value.Schema.Format != null)
                                 {
-                                    response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.Items.Format;
-                                    response.ResponseObjectType = ResponseTypeEnum.List_Integer;
+                                    response.ResponseObjectName = contentItem.Value.Schema.Format;
+                                    response.ResponseObjectType = ResponseTypeEnum.Integer;
                                 }
                                 else
                                 {
@@ -333,61 +325,95 @@ else
                                     response.ResponseObjectType = ResponseTypeEnum.List_Integer;
                                 }
                             }
-                            else
+                            else if (contentItem.Value.Schema.Type == "array")
                             {
-                                response.ResponseObjectName = $"openApiResponse.Content[ContentItem].Schema.Items.Type = {openApiResponse.Content[ContentItem].Schema.Items.Type}";
-                                response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
-                            }
-                        }
-                        else if (openApiResponse.Content[ContentItem].Schema.Type == "object")
-                        {
-                            if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties == null)
-                            {
-                                response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.Reference.Id;
-                                response.ResponseObjectType = ResponseTypeEnum.Object;
-                            }
-                            else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type == "integer")
-                            {
-                                response.ResponseObjectName = "";
-                                response.ResponseObjectType = ResponseTypeEnum.Integer;
-                            }
-                            else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type == "string")
-                            {
-                                response.ResponseObjectName = "";
-                                response.ResponseObjectType = ResponseTypeEnum.String;
-                            }
-                            else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type == "object")
-                            {
-                                response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Reference.Id;
-                                response.ResponseObjectType = ResponseTypeEnum.Object;
-                            }
-                            else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type == "array")
-                            {
-                                if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Type == null)
+                                if (contentItem.Value.Schema.Items != null)
                                 {
-                                    response.ResponseObjectName = openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Reference.Id;
+                                    if (contentItem.Value.Schema.Items.Type == "object")
+                                    {
+                                        response.ResponseObjectName = contentItem.Value.Schema.Items.Reference.Id;
+                                        response.ResponseObjectType = ResponseTypeEnum.List_Object;
+                                    }
+                                    else if (contentItem.Value.Schema.Items.Type == "integer")
+                                    {
+                                        if (contentItem.Value.Schema.Items.Format != null)
+                                        {
+                                            response.ResponseObjectName = contentItem.Value.Schema.Items.Format;
+                                            response.ResponseObjectType = ResponseTypeEnum.List_Integer;
+                                        }
+                                        else
+                                        {
+                                            response.ResponseObjectName = "";
+                                            response.ResponseObjectType = ResponseTypeEnum.List_Integer;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        response.ResponseObjectName = $"contentItem.Value.Schema.Items.Type = {contentItem.Value.Schema.Items.Type}";
+                                        response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
+                                    }
+                                }
+                                else if(contentItem.Value.Schema.Reference != null)
+                                {
+                                    response.ResponseObjectName = contentItem.Value.Schema.Reference.Id;
                                     response.ResponseObjectType = ResponseTypeEnum.List_Object;
                                 }
-                                else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Type == "integer")
-                                {
-                                    response.ResponseObjectName = $"";
-                                    response.ResponseObjectType = ResponseTypeEnum.List_Integer;
-                                }
-                                else if (openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Type == "string")
-                                {
-                                    response.ResponseObjectName = $"";
-                                    response.ResponseObjectType = ResponseTypeEnum.List_String;
-                                }
                                 else
                                 {
-                                    response.ResponseObjectName = $"openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Type = {openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Items.Type}";
+                                    response.ResponseObjectName = $"contentItem.Value.Schema.Items and contentItem.Value.Schema.Reference were NULL";
                                     response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
                                 }
                             }
-                            else
+                            else if (contentItem.Value.Schema.Type == "object")
                             {
-                                response.ResponseObjectName = $"openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type = {openApiResponse.Content[ContentItem].Schema.AdditionalProperties.Type}";
-                                response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
+                                if (contentItem.Value.Schema.AdditionalProperties == null)
+                                {
+                                    response.ResponseObjectName = contentItem.Value.Schema.Reference.Id;
+                                    response.ResponseObjectType = ResponseTypeEnum.Object;
+                                }
+                                else if (contentItem.Value.Schema.AdditionalProperties.Type == "integer")
+                                {
+                                    response.ResponseObjectName = "";
+                                    response.ResponseObjectType = ResponseTypeEnum.Integer;
+                                }
+                                else if (contentItem.Value.Schema.AdditionalProperties.Type == "string")
+                                {
+                                    response.ResponseObjectName = "";
+                                    response.ResponseObjectType = ResponseTypeEnum.String;
+                                }
+                                else if (contentItem.Value.Schema.AdditionalProperties.Type == "object")
+                                {
+                                    response.ResponseObjectName = contentItem.Value.Schema.AdditionalProperties.Reference.Id;
+                                    response.ResponseObjectType = ResponseTypeEnum.Object;
+                                }
+                                else if (contentItem.Value.Schema.AdditionalProperties.Type == "array")
+                                {
+                                    if (contentItem.Value.Schema.AdditionalProperties.Items.Type == null)
+                                    {
+                                        response.ResponseObjectName = contentItem.Value.Schema.AdditionalProperties.Items.Reference.Id;
+                                        response.ResponseObjectType = ResponseTypeEnum.List_Object;
+                                    }
+                                    else if (contentItem.Value.Schema.AdditionalProperties.Items.Type == "integer")
+                                    {
+                                        response.ResponseObjectName = $"";
+                                        response.ResponseObjectType = ResponseTypeEnum.List_Integer;
+                                    }
+                                    else if (contentItem.Value.Schema.AdditionalProperties.Items.Type == "string")
+                                    {
+                                        response.ResponseObjectName = $"";
+                                        response.ResponseObjectType = ResponseTypeEnum.List_String;
+                                    }
+                                    else
+                                    {
+                                        response.ResponseObjectName = $"contentItem.Value.Schema.AdditionalProperties.Items.Type = {contentItem.Value.Schema.AdditionalProperties.Items.Type}";
+                                        response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
+                                    }
+                                }
+                                else
+                                {
+                                    response.ResponseObjectName = $"contentItem.Value.Schema.AdditionalProperties.Type = {contentItem.Value.Schema.AdditionalProperties.Type}";
+                                    response.ResponseObjectType = ResponseTypeEnum.FailedToParse;
+                                }
                             }
                         }
                     }

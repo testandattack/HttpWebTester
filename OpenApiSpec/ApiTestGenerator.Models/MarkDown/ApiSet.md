@@ -3,13 +3,13 @@
 
 ## ApiSet Class
 
-This class defines a Model used for translating various different web based API   
-calls between the different formats. It is based on the Open API Specification.  
-The idea is to allow an engine to populate this model with information from  
-sources like:  
-- An OAS document  
-- An Http Archive (HAR) file.  
-- A Postman request collection.  
+This class defines a Model used for translating various different web based API 
+calls between the different formats. It is based on the Open API Specification.
+The idea is to allow an engine to populate this model with information from
+sources like:
+- An OAS document
+- An Http Archive (HAR) file.
+- A Postman request collection.
 and turn the results into a test harness that can be executed.
 
 ```csharp

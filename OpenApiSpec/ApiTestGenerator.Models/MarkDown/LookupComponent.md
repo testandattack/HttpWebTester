@@ -40,7 +40,7 @@ public System.Collections.Generic.Dictionary<string,ApiTestGenerator.Models.ApiD
 
 ## LookupComponent.ResponseObjectName Property
 
-[Extension] - The class 'name' of response object for  
+[Extension] - The class 'name' of response object for
 responses that use a $ref tag to reference a [ComponentEngine](https://docs.microsoft.com/en-us/dotnet/api/ComponentEngine 'ComponentEngine')
 
 ```csharp
@@ -54,7 +54,7 @@ public string ResponseObjectName { get; set; }
 
 ## LookupComponent.ResponseObjectType Property
 
-A [ResponseTypeEnum](ResponseTypeEnum.md 'ApiTestGenerator.Models.Enums.ResponseTypeEnum') value that describes the  
+A [ResponseTypeEnum](ResponseTypeEnum.md 'ApiTestGenerator.Models.Enums.ResponseTypeEnum') value that describes the
 type of response object returned.
 
 ```csharp
