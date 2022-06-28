@@ -1,4 +1,9 @@
 https://github.com/testandattack/HttpWebTester/blob/master/Engines.ApiDocs/MarkDown/
+M:OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(Microsoft.OpenApi.Any.IOpenApiAny)|OpenApiAnyExtensions.md#OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(thisMicrosoft.OpenApi.Any.IOpenApiAny)|GetPrimitiveValue(this IOpenApiAny)
+N:OpenApiUtilities|Engines.ApiDocs.md#OpenApiUtilities|OpenApiUtilities
+T:OpenApiUtilities.OpenApiAnyExtensions|OpenApiAnyExtensions.md|OpenApiAnyExtensions
+M:OpenApiUtilities.OpenApiArrayExtensions.ToString(Microsoft.OpenApi.Any.OpenApiArray)|OpenApiArrayExtensions.md#OpenApiUtilities.OpenApiArrayExtensions.ToString(thisMicrosoft.OpenApi.Any.OpenApiArray)|ToString(this OpenApiArray)
+T:OpenApiUtilities.OpenApiArrayExtensions|OpenApiArrayExtensions.md|OpenApiArrayExtensions
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(System.String)|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(string)|SaveEndpointSummariesAsCsv(string)
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis()|SerializeAndSaveApiSetAnalysis()
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis(System.String)|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis(string)|SerializeAndSaveApiSetAnalysis(string)

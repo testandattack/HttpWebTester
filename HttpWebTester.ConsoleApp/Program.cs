@@ -6,22 +6,35 @@ using Serilog;
 using Serilog.Formatting.Compact;
 using System.IO;
 using Engines.ApiDocs.Extensions;
-
+using PostmanManager;
+using RestSharp;
+using System;
+using Newtonsoft.Json;
+using ServiceStack.Api.Postman;
 namespace HttpWebTester
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Settings settings = CreateLogger();
+            //Settings settings = CreateLogger();
 
-            // Step 1 - Read the OAS and create an ApiSet from the data
-            ApiSet apiSet = GetApiSet(settings);
+            //// Step 1 - Read the OAS and create an ApiSet from the data
+            //ApiSet apiSet = GetApiSet(settings);
 
-            // Step 2 - Analyze the ApiSet
-            ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSet, settings);
-            analyzer.PerformAnalysis();
-            analyzer.SerializeAndSaveApiSetAnalysis();
+            //// Step 2 - Analyze the ApiSet
+            //ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSet, settings);
+            //analyzer.PerformAnalysis();
+            //analyzer.SerializeAndSaveApiSetAnalysis();
+            //JsonToCsharp mgr = new JsonToCsharp();
+            //mgr.CreateClasses(@"C:\Temp\Postman\PostmanCollectionSchema.json", @"C:\Temp\Postman\PostmanCollectionSchema.cs");
+            Post
+            //Properties postman = new Properties();
+            using (StreamReader sr = new StreamReader(@"dataCatalogPostman.json"))
+            {
+                postman = JsonConvert.DeserializeObject<Properties>(sr.ReadToEnd());
+            }
+            Console.WriteLine("");
         }
 
         static Settings CreateLogger()
