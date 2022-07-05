@@ -11,6 +11,8 @@ using RestSharp;
 using System;
 using Newtonsoft.Json;
 using ServiceStack.Api.Postman;
+using System.Collections.Generic;
+
 namespace HttpWebTester
 {
     class Program
@@ -28,11 +30,16 @@ namespace HttpWebTester
             //analyzer.SerializeAndSaveApiSetAnalysis();
             //JsonToCsharp mgr = new JsonToCsharp();
             //mgr.CreateClasses(@"C:\Temp\Postman\PostmanCollectionSchema.json", @"C:\Temp\Postman\PostmanCollectionSchema.cs");
-            Post
             //Properties postman = new Properties();
+            PostmanCollection pc = new PostmanCollection();
             using (StreamReader sr = new StreamReader(@"dataCatalogPostman.json"))
             {
-                postman = JsonConvert.DeserializeObject<Properties>(sr.ReadToEnd());
+                var settings = new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Objects,
+                    Converters = new List<JsonConverter> { new PostmanItem_JsonConverter() }
+                };
+                pc = JsonConvert.DeserializeObject<PostmanCollection>(sr.ReadToEnd(), settings);
             }
             Console.WriteLine("");
         }

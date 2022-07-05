@@ -36,7 +36,7 @@ namespace PostmanManager.Models
         /// <summary>
         /// A human friendly identifier to make sense of the version numbers. E.g: 'beta-3'
         /// </summary>
-        [JsonProperty("major")]
+        [JsonProperty("identifier")]
         public string Identifier { get; set; }
     }
 }
