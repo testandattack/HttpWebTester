@@ -6,6 +6,10 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// Using the Proxy, you can configure your custom proxy into 
+    /// the postman for particular url match
+    /// </summary>
     public class Proxy
     {
         /// <summary>

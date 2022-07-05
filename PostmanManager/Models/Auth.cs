@@ -52,27 +52,27 @@ namespace PostmanManager.Models
         public List<AuthAttribute> EdgeGrid { get; set; }
 
         /// <summary>
-        /// 
+        /// The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)
         /// </summary>
-        [JsonProperty("")]
+        [JsonProperty("hawk")]
         public List<AuthAttribute> Hawk { get; set; }
 
         /// <summary>
-        /// 
+        /// The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)
         /// </summary>
-        [JsonProperty("")]
+        [JsonProperty("ntlm")]
         public List<AuthAttribute> Ntlm { get; set; }
 
         /// <summary>
-        /// 
+        /// "The attributes for [OAuth2](https://oauth.net/1/)
         /// </summary>
-        [JsonProperty("")]
+        [JsonProperty("oauth1")]
         public List<AuthAttribute> OAuth1 { get; set; }
 
         /// <summary>
-        /// 
+        /// Helper attributes for [OAuth2](https://oauth.net/2/)
         /// </summary>
-        [JsonProperty("")]
+        [JsonProperty("oauth2")]
         public List<AuthAttribute> OAuth2 { get; set; }
     }
 
