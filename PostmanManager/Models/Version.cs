@@ -11,6 +11,8 @@ namespace PostmanManager.Models
     /// and this field holds the version number. While optional, 
     /// it is recommended that you use this field to its fullest extent!
     /// </summary>
+    [JsonObject(Title = "version")]
+    [JsonConverter(typeof(PostmanVersion_JsonConverter))]
     public class Version
     {
         /// <summary>
@@ -37,6 +39,44 @@ namespace PostmanManager.Models
         /// A human friendly identifier to make sense of the version numbers. E.g: 'beta-3'
         /// </summary>
         [JsonProperty("identifier")]
-        public string Identifier { get; set; }
+        public string Identifier
+        {
+            get
+            {
+                return _identifier;
+            }
+
+            set
+            {
+                if (value.Length > 10)
+                    _identifier = value.Remove(10);
+                else
+                    _identifier = value;
+            }
+        }
+        private string _identifier; 
+
+        /// <summary>
+        /// Holds the string representation of a Postman Version if the JSON has
+        /// the Version stored as a string instead of an object
+        /// </summary>
+        public string VersionAsString { get; set; }
+
+
+        public override string ToString()
+        {
+            if (Major == 0 && Minor == 0 && Patch == 0 && String.IsNullOrEmpty(Identifier))
+                return VersionAsString;
+            else
+                return $"{Major}.{Minor}.{Patch}-{Identifier}";
+        }
+
+        public bool IsString()
+        {
+            if (Major == 0 && Minor == 0 && Patch == 0 && String.IsNullOrEmpty(Identifier))
+                return false;
+            else
+                return true;
+        }
     }
 }

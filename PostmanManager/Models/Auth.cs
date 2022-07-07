@@ -6,6 +6,10 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// Represents authentication helpers provided by Postman
+    /// </summary>
+    [JsonObject(Title = "auth")]
     public class Auth
     {
         [JsonProperty("type")]
@@ -74,18 +78,5 @@ namespace PostmanManager.Models
         /// </summary>
         [JsonProperty("oauth2")]
         public List<AuthAttribute> OAuth2 { get; set; }
-    }
-
-    public class AuthAttribute
-    {
-
-        [JsonProperty("key")]
-        public string Key { get; set; }
-
-        [JsonProperty("value")]
-        public object Value { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
     }
 }

@@ -5,6 +5,11 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// If object, contains the complete broken-down URL for this request. If string, contains the literal request URL.
+    /// </summary>
+    [JsonObject(Title = "url")]
+    [JsonConverter(typeof(PostmanUrl_JsonConverter))]
     public class Url
     {
         /// <summary>
@@ -23,13 +28,14 @@ namespace PostmanManager.Models
         /// The host for the URL, E.g: api.yourdomain.com. 
         /// </summary>
         [JsonProperty("host")]
-        public string Host { get; set; }
+        [JsonConverter(typeof(StringOrStringArrayConverter))]
+        public string[] Host { get; set; }
 
         /// <summary>
         /// The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.
         /// </summary>
         [JsonProperty("path")]
-        public PathItem Path { get; set; }
+        public Path Path { get; set; }
 
         /// <summary>
         /// The port number present in this URL. An empty value implies 80/443 depending on whether the protocol field contains http/https.

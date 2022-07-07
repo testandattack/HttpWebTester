@@ -5,6 +5,10 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// A representation of a list of ssl certificates
+    /// </summary>
+    [JsonObject(Title = "certificate", ItemNullValueHandling = NullValueHandling.Ignore)]
     public class Certificate
     {
         /// <summary>

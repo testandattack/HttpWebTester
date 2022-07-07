@@ -5,6 +5,10 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// A representation of a list of cookies
+    /// </summary>
+    [JsonObject(Title = "cookie", ItemNullValueHandling = NullValueHandling.Ignore)]
     public class Cookie
     {
 
@@ -16,10 +20,11 @@ namespace PostmanManager.Models
 
         /// <summary>
         /// When the cookie expires.
-        /// NOTE: Type = oneOf
+        /// NOTE: Type = oneOf: string, number
         /// </summary>
         [JsonProperty("expires")]
-        public string Expires { get; set; }
+        [JsonConverter(typeof(StringOrNumberConverter))]
+        public StringOrNumber Expires { get; set; }
 
         /// <summary>
         /// No Description Given

@@ -6,6 +6,7 @@ using PostmanManager.Models;
 
 namespace PostmanManager
 {
+
     [JsonObject(Title = "properties")]
     public class PostmanCollection
     {

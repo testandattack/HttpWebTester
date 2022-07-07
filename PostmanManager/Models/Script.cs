@@ -9,9 +9,9 @@ namespace PostmanManager.Models
     /// A script is a snippet of Javascript code that can be 
     /// used to to perform setup or teardown operations on a particular response.
     /// </summary>
+    [JsonObject(Title = "script")]
     public class Script
     {
-
         /// <summary>
         /// A unique, user defined identifier that can  
         /// be used to refer to this script from requests.
@@ -30,10 +30,10 @@ namespace PostmanManager.Models
         /// represents a single line of code. Having lines 
         /// separate makes it possible to easily track 
         /// changes made to scripts.
-        /// NOTE: Type = oneOf
         /// </summary>
         [JsonProperty("exec")]
-        public string Exec { get; set; }
+        [JsonConverter(typeof(StringOrStringArrayConverter))]
+        public string[] Exec { get; set; }
 
         /// <summary>
         /// No Description Given
@@ -46,6 +46,5 @@ namespace PostmanManager.Models
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
-
     }
 }

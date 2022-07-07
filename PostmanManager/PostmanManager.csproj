@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="sampleCollection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="dataCatalogPostman.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

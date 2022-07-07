@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "9d5bd6a8-b571-4d3d-b8c2-236bd6a77717",
+		"name": "caerodp-dev2-DataCatalogAPIGateway",
+		"description": "Windmill2 based API service that acts ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"version":  "1.0.2-beta"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"description": "Sample Item Group Description",
+			"item": [
+				{
+					"name": "data-catalog",
+					"description": "Sample Item Group With Auth",
+					"auth": {
+						"type": "apikey",
+						"apikey": [
+							{
+								"key": "key",
+								"value": "Authorization",
+								"type": "string"
+							},
+							{
+								"key": "value",
+								"value": "<API Key>",
+								"type": "string"
+							},
+							{
+								"key": "in",
+								"value": "header",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"name": "configuration",
+					"item": [
+						{
+							"name": "config Operation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/v1/configuration/?page[number]=35842682&page[size]=48512358",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"v1",
+										"configuration",
+										""
+									],
+									"query": [
+										{
+											"key": "page[number]",
+											"value": "35842682"
+										},
+										{
+											"key": "page[size]",
+											"value": "48512358"
+										}
+									]
+								},
+								"description": "Gets the active configuration (settings) of this service."
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://caero-LoadB-C23WO6AMBK3C-7e36dfc564388d63.elb.us-east-1.amazonaws.com",
+			"type": "string"
+		}
+	]
+}

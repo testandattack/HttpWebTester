@@ -7,7 +7,7 @@ using PostmanManager.Models;
 
 namespace PostmanManager
 {
-    public class PostmanItem_JsonConverter : JsonConverter
+    public class JsonConverterTemplate : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -23,12 +23,13 @@ namespace PostmanManager
             if (type != null)
             {
                 baseEvent = new Item();
+                serializer.Populate(obj.CreateReader(), baseEvent as Item);
             }
             else
             {
                 baseEvent = new ItemGroup();
+                serializer.Populate(obj.CreateReader(), baseEvent as ItemGroup);
             }
-            serializer.Populate(obj.CreateReader(), baseEvent);
             return baseEvent;
         }
 

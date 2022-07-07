@@ -2,6 +2,7 @@
 using Engines.ApiDocs;
 using GTC.HttpWebTester.Settings;
 using GTC.SwaggerParsing;
+using GTC.Extensions;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System.IO;
@@ -12,6 +13,8 @@ using System;
 using Newtonsoft.Json;
 using ServiceStack.Api.Postman;
 using System.Collections.Generic;
+using Newtonsoft.Json.Serialization;
+using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 
 namespace HttpWebTester
 {
@@ -19,7 +22,7 @@ namespace HttpWebTester
     {
         static void Main(string[] args)
         {
-            //Settings settings = CreateLogger();
+            Settings appSettings = CreateLogger();
 
             //// Step 1 - Read the OAS and create an ApiSet from the data
             //ApiSet apiSet = GetApiSet(settings);
@@ -32,14 +35,21 @@ namespace HttpWebTester
             //mgr.CreateClasses(@"C:\Temp\Postman\PostmanCollectionSchema.json", @"C:\Temp\Postman\PostmanCollectionSchema.cs");
             //Properties postman = new Properties();
             PostmanCollection pc = new PostmanCollection();
-            using (StreamReader sr = new StreamReader(@"dataCatalogPostman.json"))
+            using (StreamReader sr = new StreamReader(@"sampleCollection.json"))
             {
+                List<string> errors = new List<string>();
+
                 var settings = new JsonSerializerSettings
                 {
-                    TypeNameHandling = TypeNameHandling.Objects,
-                    Converters = new List<JsonConverter> { new PostmanItem_JsonConverter() }
+                    Error = delegate (object sender, ErrorEventArgs args)
+                    {
+                        errors.Add(args.ErrorContext.Error.Message);
+                        args.ErrorContext.Handled = true;
+                    },
+                    TypeNameHandling = TypeNameHandling.Objects
                 };
                 pc = JsonConvert.DeserializeObject<PostmanCollection>(sr.ReadToEnd(), settings);
+                Console.WriteLine(errors.ToString("\r\n"));
             }
             Console.WriteLine("");
         }

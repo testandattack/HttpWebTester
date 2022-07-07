@@ -6,6 +6,8 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    [JsonObject(Title = "header")]
+    [JsonConverter(typeof(PostmanHeader_JsonConverter))]
     public class Header
     {
         /// <summary>
@@ -31,6 +33,6 @@ namespace PostmanManager.Models
         /// A description of the header
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public Description Description { get; set; }
     }
 }

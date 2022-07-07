@@ -10,13 +10,13 @@ namespace PostmanManager.Models
         /// <summary>
         /// A variable ID is a unique user-defined value that identifies the variable within a collection. In traditional terms, this would be a variable name.
         /// </summary>
-        [JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// A variable key is a human friendly value that identifies the variable within a collection. In traditional terms, this would be a variable name.
         /// </summary>
-        [JsonProperty("key", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("key")]
         public string Key { get; set; }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace PostmanManager.Models
         public bool System { get; set; }
 
         /// <summary>
-        /// 
+        /// No Description Given
         /// </summary>
         [JsonProperty("disabled")]
         public bool Disabled { get; set; }

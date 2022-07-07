@@ -7,6 +7,10 @@ using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// This field contains the data usually contained in the request body.
+    /// </summary>
+    [JsonObject(Title = "body", ItemNullValueHandling = NullValueHandling.Ignore)]
     public class Body
     {
         /// <summary>

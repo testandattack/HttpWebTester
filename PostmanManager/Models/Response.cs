@@ -1,41 +1,50 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace PostmanManager.Models
 {
+    /// <summary>
+    /// A response represents an HTTP response.
+    /// </summary>
+    [JsonObject(Title = "response")]
     public class Response
     {
 
         /// <summary>
-        /// 
+        /// A unique, user defined identifier that can  be used to 
+        /// refer to this response from requests.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// <see cref="Request"/>
         /// </summary>
         [JsonProperty("originalRequest")]
         public Request OriginalRequest { get; set; }
 
         /// <summary>
-        /// 
-        /// NOTE: Type = oneOf
+        /// The time taken by the request to complete. If a number, the '
+        /// unit is milliseconds. If the response is manually created, 
+        /// this can be set to `null`.
         /// </summary>
         [JsonProperty("responseTime")]
-        public string a { get; set; }
+        [JsonConverter(typeof(StringOrNumberConverter))]
+        public StringOrNumber ResponseTime { get; set; }
 
         /// <summary>
-        /// 
+        /// Set of timing information related to request and response in milliseconds
         /// </summary>
         [JsonProperty("timings", NullValueHandling = NullValueHandling.Ignore)]
         public object Timings { get; set; }
 
         /// <summary>
-        /// 
-        /// NOTE: Type = oneOf
+        /// No HTTP request is complete without its headers, and the 
+        /// same is true for a Postman request. This field is an array 
+        /// containing all the headers.
         /// </summary>
         [JsonProperty("header")]
         public List<Header> Headers { get; set; }

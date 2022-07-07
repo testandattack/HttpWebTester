@@ -6,7 +6,7 @@ using System.Text;
 namespace PostmanManager.Models
 {
     /// <summary>
-    /// 
+    /// Detailed description of the info block
     /// </summary>
     public class Info
     {
@@ -35,7 +35,7 @@ namespace PostmanManager.Models
         /// No description given
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public Description Description { get; set; }
 
         /// <summary>
         /// see the <see cref="Version"/> class for info.
