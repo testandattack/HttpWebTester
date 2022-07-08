@@ -8,8 +8,7 @@ namespace PostmanManager.Models
     /// <summary>
     /// Items are entities which contain an actual HTTP request, and sample responses attached to it.
     /// </summary>
-    [JsonObject(Title = "item")]
-    [JsonConverter(typeof(PostmanItem_JsonConverter))]
+    //[JsonObject(Title = "item")]
     public class ItemGroup : ItemCollection
     {
         /// <summary>
@@ -50,6 +49,7 @@ namespace PostmanManager.Models
         /// and sample responses attached to it.
         /// </summary>
         [JsonProperty("item")]
+        //[JsonConverter(typeof(PostmanItem_JsonConverter))]
         public List<ItemCollection> Items { get; set; }
 
         /// <summary>

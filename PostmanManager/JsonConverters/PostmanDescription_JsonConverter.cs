@@ -30,7 +30,18 @@ namespace PostmanManager
                 }
                 else
                 {
-                    itemDescription = reader.Value as Description;
+                    var result = (JToken)serializer.Deserialize(reader);
+
+                    if (result["content"] != null)
+                        itemDescription.Content = result["url"].ToString();
+
+                    if (result["auth"] != null)
+                        itemDescription.Auth = result["auth"].ToObject<Auth>();
+
+                    if (result["proxy"] != null)
+                        itemDescription.Proxy = result["proxy"].ToObject<Proxy>();
+
+                    return itemDescription;                    
                 }
             }
             catch (Exception ex)

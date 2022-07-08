@@ -31,7 +31,34 @@ namespace PostmanManager
                 else
                 {
                     var result = (JToken)serializer.Deserialize(reader);
-                    return result.ToObject<Request>();
+                    
+                    Request request = new Request();
+
+                    if (result["url"] != null)
+                        request.Url = result["url"].ToObject<Url>();
+                    
+                    if (result["auth"] != null)
+                        request.Auth = result["auth"].ToObject<Auth>();
+                    
+                    if (result["proxy"] != null)
+                        request.Proxy = result["proxy"].ToObject<Proxy>();
+                    
+                    if (result["certificate"] != null)
+                        request.Certificate = result["certificate"].ToObject<Certificate>();
+
+                    if (result["method"] != null)
+                        request.Me = result["method"].ToString();
+
+                    if (result["description"] != null)
+                        request.Description = result["description"].ToObject<Description>();
+
+                    if (result["header"] != null)
+                        request.Headers = result["header"].ToObject<List<Header>>();
+
+                    if (result["body"] != null)
+                        request.Body = result["body"].ToObject<Body>();
+
+                    return request;
                 }
             }
             catch (Exception ex)
@@ -47,5 +74,38 @@ namespace PostmanManager
         {
             throw new NotImplementedException();
         }
+    }
+
+
+    public class WrapWithValueConverter<TValue> : JsonConverter
+    {
+        // Here we take advantage of the fact that a converter applied to a 
+        // property has highest precedence to avoid an infinite recursion.
+        class DTO
+        {
+            [JsonConverter(typeof(NoConverter))]
+            public TValue value { get; set; }
+            public object GetValue() => value;
+        }
+
+        public override bool CanConvert(Type objectType) => typeof(TValue).IsAssignableFrom(objectType);
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            => serializer.Serialize(writer, new DTO { value = (TValue)value });
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            => serializer.Deserialize<DTO>(reader)?.GetValue();
+    }
+
+    public class NoConverter : JsonConverter
+    {
+        // NoConverter taken from this answer https://stackoverflow.com/a/39739105/3744182
+        // By https://stackoverflow.com/users/3744182/dbc
+        // To https://stackoverflow.com/questions/39738714/selectively-use-default-json-converter
+        public override bool CanConvert(Type objectType) { throw new NotImplementedException(); /* This converter should only be applied via attributes */ }
+        public override bool CanRead => false;
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => throw new NotImplementedException();
+        public override bool CanWrite => false;
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotImplementedException();
     }
 }

@@ -24,6 +24,7 @@ namespace HttpWebTester
         {
             Settings appSettings = CreateLogger();
 
+            #region -- Api Analysis -----
             //// Step 1 - Read the OAS and create an ApiSet from the data
             //ApiSet apiSet = GetApiSet(settings);
 
@@ -31,11 +32,11 @@ namespace HttpWebTester
             //ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSet, settings);
             //analyzer.PerformAnalysis();
             //analyzer.SerializeAndSaveApiSetAnalysis();
-            //JsonToCsharp mgr = new JsonToCsharp();
-            //mgr.CreateClasses(@"C:\Temp\Postman\PostmanCollectionSchema.json", @"C:\Temp\Postman\PostmanCollectionSchema.cs");
-            //Properties postman = new Properties();
+            #endregion
+
             PostmanCollection pc = new PostmanCollection();
-            using (StreamReader sr = new StreamReader(@"sampleCollection.json"))
+
+            using (StreamReader sr = new StreamReader(@"dataCatalogPostman.json"))
             {
                 List<string> errors = new List<string>();
 

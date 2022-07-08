@@ -29,8 +29,7 @@ namespace PostmanManager
                 }
                 else
                 {
-                    var result = (JToken)serializer.Deserialize(reader);
-                    return result.ToObject<List<Header>>();
+                    return serializer.Deserialize<List<Header>>(reader);
                 }
             }
             catch (Exception ex)

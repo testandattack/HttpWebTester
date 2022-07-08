@@ -30,8 +30,8 @@ namespace PostmanManager
                 }
                 else
                 {
-                    var result = (JToken)serializer.Deserialize(reader);
-                    return result.ToObject<Url>();
+                    return new Url();
+                    //return serializer.Deserialize<Url>(reader);
                 }
             }
             catch (Exception ex)

@@ -22,6 +22,7 @@ namespace PostmanManager
             {
                 if(reader.TokenType == JsonToken.String)
                 {
+                    Console.WriteLine("PostmanPath_JsonConverter: found String");
                     itemPath.stringPath = reader.Value.ToString();
                     itemPath.objectPath = null;
                     itemPath.stringArrayPath = null;
@@ -29,20 +30,23 @@ namespace PostmanManager
                 }
                 else if(reader.TokenType == JsonToken.StartArray)
                 {
+                    Console.WriteLine("PostmanPath_JsonConverter: found StartArray");
                     var result = (JToken)serializer.Deserialize(reader);
                     if (result.First.Type == JTokenType.String)
                     {
+                        Console.WriteLine("PostmanPath_JsonConverter: found String inside StartArray");
                         itemPath.stringArrayPath = result.ToObject<string[]>();
                         itemPath.objectPath = null;
                         itemPath.stringPath = null;
-                    itemPath.Type = PathObjectType_Enum.StringArray;
+                        itemPath.Type = PathObjectType_Enum.StringArray;
                     }
                     else
                     {
+                        Console.WriteLine("PostmanPath_JsonConverter: found Object inside StartArray");
                         itemPath.objectPath = result.ToObject<object[]>();
                         itemPath.objectPath = null;
                         itemPath.stringPath = null;
-                    itemPath.Type = PathObjectType_Enum.ObjectArray;
+                        itemPath.Type = PathObjectType_Enum.ObjectArray;
                     }
                 }
             }

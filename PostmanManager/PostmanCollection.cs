@@ -7,7 +7,7 @@ using PostmanManager.Models;
 namespace PostmanManager
 {
 
-    [JsonObject(Title = "properties")]
+    //[JsonObject(Title = "properties")]
     public class PostmanCollection
     {
         [JsonProperty("info")]

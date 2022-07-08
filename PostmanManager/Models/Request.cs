@@ -57,7 +57,7 @@ namespace PostmanManager.Models
         /// The description of this request.
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public Description Description { get; set; }
 
         /// <summary>
         /// A representation for a list of headers.

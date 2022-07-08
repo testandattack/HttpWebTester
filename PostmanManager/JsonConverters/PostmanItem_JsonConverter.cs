@@ -12,38 +12,34 @@ namespace PostmanManager
     {
         public override bool CanConvert(Type objectType)
         {
-            return typeof(ItemCollection).IsAssignableFrom(objectType);
+            //if (objectType == typeof(Item) || objectType == typeof(ItemGroup))
+            //    return true;
+
+            //return false;
+            return objectType == typeof(ItemCollection);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var tokenType = reader.TokenType;
-            try
-            {
-                JObject obj = JObject.Load(reader);
-                Console.WriteLine($"Reading {(string)obj["request"]}");
+            JObject obj = JObject.Load(reader);
+            //Console.WriteLine($"Reading {(string)obj["itemCollection"]}");
 
-                string type = (string)obj["request"];
-                if (type != null)
-                {
-                    var item = new Item();
-                    serializer.Populate(obj.CreateReader(), item as Item);
-                    Console.WriteLine($"PostmanItem_JsonConverter: ItemName = {item.Name}");
-                    return item;
-                }
-                else
-                {
-                    var itemGroup = new ItemGroup();
-                    serializer.Populate(obj.CreateReader(), itemGroup as ItemGroup);
-                    Console.WriteLine($"PostmanItem_JsonConverter: ItemName = {itemGroup.Name}");
-                    return itemGroup;
-                }
-            }
-            catch (Exception ex)
+            if(obj.ContainsKey("item"))
             {
-                Console.WriteLine($"Exception in PostmanItem_JsonConverter with {tokenType}: {reader.Value.ToString()}");
+                //return serializer.Deserialize<List<ItemGroup>>(reader);
+                Console.WriteLine($"PostmanItem_JsonConverter: ItemGroup");
+                var itemGroup = new ItemGroup();
+                serializer.Populate(obj.CreateReader(), itemGroup as ItemGroup);
+                return itemGroup;
             }
-            return null;
+            else
+            {
+                //return serializer.Deserialize<Item>(reader);
+                Console.WriteLine($"PostmanItem_JsonConverter: Item");
+                var item = new Item();
+                serializer.Populate(obj.CreateReader(), item as Item);
+                return item;
+            }
         }
 
         public override bool CanWrite => false;

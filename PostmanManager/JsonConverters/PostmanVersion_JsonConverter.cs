@@ -34,7 +34,7 @@ namespace PostmanManager
                 }
                 else
                 {
-                    itemVersion = reader.Value as Version;
+                    itemVersion = serializer.Deserialize<Version>(reader);
                     itemVersion.VersionAsString = string.Empty;
                 }
             }

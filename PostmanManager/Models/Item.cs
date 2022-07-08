@@ -10,8 +10,8 @@ namespace PostmanManager.Models
     /// To this end, it is necessary to be able to group requests together. This 
     /// can be achived using 'Folders'. A folder just is an ordered set of requests.
     /// </summary>
-    [JsonObject(Title = "item")]
-    [JsonConverter(typeof(PostmanItem_JsonConverter))]
+    //[JsonObject(Title = "item")]
+    //[JsonConverter(typeof(PostmanItem_JsonConverter))]
     public class Item : ItemCollection
     {
         /// <summary>
