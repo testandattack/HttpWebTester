@@ -35,24 +35,9 @@ namespace HttpWebTester
             #endregion
 
             PostmanCollection pc = new PostmanCollection();
+            pc.LoadCollection("dataCatalogPostman.json");
 
-            using (StreamReader sr = new StreamReader(@"dataCatalogPostman.json"))
-            {
-                List<string> errors = new List<string>();
-
-                var settings = new JsonSerializerSettings
-                {
-                    Error = delegate (object sender, ErrorEventArgs args)
-                    {
-                        errors.Add(args.ErrorContext.Error.Message);
-                        args.ErrorContext.Handled = true;
-                    },
-                    TypeNameHandling = TypeNameHandling.Objects
-                };
-                pc = JsonConvert.DeserializeObject<PostmanCollection>(sr.ReadToEnd(), settings);
-                Console.WriteLine(errors.ToString("\r\n"));
-            }
-            Console.WriteLine("");
+            pc.SaveCollection(@"c:\temp\trialPostman.json");
         }
 
         static Settings CreateLogger()

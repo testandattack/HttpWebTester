@@ -17,7 +17,7 @@ namespace PostmanManager.Models
         /// A unique, user defined identifier that can  be used to 
         /// refer to this response from requests.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("name")]
         public string Id { get; set; }
 
         /// <summary>

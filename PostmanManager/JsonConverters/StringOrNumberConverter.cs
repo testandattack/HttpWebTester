@@ -50,7 +50,7 @@ namespace PostmanManager
                     writer.WritePropertyName(nameof(StringOrNumber));
                     writer.WriteValue((value as StringOrNumber).StringValue);
                 }
-                else if ((value as StringOrNumber).StringValue != null)
+                else if ((value as StringOrNumber).NumberValue != null)
                 {
                     writer.WritePropertyName(nameof(StringOrNumber));
                     writer.WriteValue((value as StringOrNumber).NumberValue);

@@ -8,6 +8,9 @@ using Version = PostmanManager.Models.Version;
 
 namespace PostmanManager
 {
+    /// <summary>
+    /// Custom Json Converter to handle <see cref="Request"/> objects from Postman
+    /// </summary>
     public class PostmanRequest_JsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -24,12 +27,14 @@ namespace PostmanManager
             {
                 if (reader.TokenType == JsonToken.String)
                 {
+                    Console.WriteLine(" PostmanRequest_JsonConverter String token");
                     Request request = new Request();
                     request.RawRequest = reader.Value.ToString();
                     return request;
                 }
                 else
                 {
+                    Console.WriteLine(" PostmanRequest_JsonConverter object token");
                     var result = (JToken)serializer.Deserialize(reader);
                     
                     Request request = new Request();
@@ -47,7 +52,7 @@ namespace PostmanManager
                         request.Certificate = result["certificate"].ToObject<Certificate>();
 
                     if (result["method"] != null)
-                        request.Me = result["method"].ToString();
+                        request.Method = result["method"].ToString();
 
                     if (result["description"] != null)
                         request.Description = result["description"].ToObject<Description>();
@@ -72,7 +77,34 @@ namespace PostmanManager
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var obj = new JObject();
+            var request = (value as Request);
+
+            if (request.Auth != null)
+                obj.Add("auth", JToken.FromObject(request.Auth));
+
+            if (request.Body != null)
+                obj.Add("body", JToken.FromObject(request.Body));
+
+            if (request.Certificate != null)
+                obj.Add("certificate", JToken.FromObject(request.Certificate));
+
+            if (request.Description != null)
+                obj.Add("description", JToken.FromObject(request.Description));
+
+            if (request.Headers != null)
+                obj.Add("header", JToken.FromObject(request.Headers));
+
+            if (request.Method != null)
+                obj.Add("method", request.Method);
+
+            if (request.Proxy != null)
+                obj.Add("proxy", JToken.FromObject(request.Proxy));
+
+            if (request.Url != null)
+                obj.Add("url", JToken.FromObject(request.Url));
+
+            obj.WriteTo(writer);
         }
     }
 

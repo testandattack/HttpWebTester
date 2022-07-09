@@ -8,6 +8,9 @@ using Serilog;
 
 namespace PostmanManager
 {
+    /// <summary>
+    /// Custom Json Converter to handle <see cref="ItemCollection"/> objects from Postman
+    /// </summary>
     public class PostmanItem_JsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -26,16 +29,14 @@ namespace PostmanManager
 
             if(obj.ContainsKey("item"))
             {
-                //return serializer.Deserialize<List<ItemGroup>>(reader);
-                Console.WriteLine($"PostmanItem_JsonConverter: ItemGroup");
+                Log.Debug($"PostmanItem_JsonConverter: ItemGroup");
                 var itemGroup = new ItemGroup();
                 serializer.Populate(obj.CreateReader(), itemGroup as ItemGroup);
                 return itemGroup;
             }
             else
             {
-                //return serializer.Deserialize<Item>(reader);
-                Console.WriteLine($"PostmanItem_JsonConverter: Item");
+                Log.Debug($"PostmanItem_JsonConverter: Item");
                 var item = new Item();
                 serializer.Populate(obj.CreateReader(), item as Item);
                 return item;
@@ -44,6 +45,14 @@ namespace PostmanManager
 
         public override bool CanWrite => false;
 
+        /// <summary>
+        /// This overridden method never gets called since the base item is 
+        /// an abstract class and the concrete instances do not need custom
+        /// serializers.
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();

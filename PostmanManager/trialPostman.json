@@ -1,0 +1,2835 @@
+{
+  "info": {
+    "name": "caerodp-dev2-DataCatalogAPIGateway",
+    "_postman_id": "9d5bd6a8-b571-4d3d-b8c2-236bd6a77717",
+    "description": {
+      "content": "Windmill2 based API service that acts as a frontend to the Data Platform data catalog.\n\nContact Support:\n Name: Data Platform Team\n Email: dataplatform-dev@rockwellcollins.com",
+      "type": "text"
+    },
+    "version": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "data-catalog",
+          "item": [
+            {
+              "name": "databases",
+              "item": [
+                {
+                  "name": "{database Name}",
+                  "item": [
+                    {
+                      "name": "tables/{table Name}/add Filename",
+                      "item": [
+                        {
+                          "name": "{add Filename}",
+                          "item": [
+                            {
+                              "name": "table Get Add Filename",
+                              "variable": null,
+                              "id": null,
+                              "request": {
+                                "auth": {
+                                  "type": "apikey",
+                                  "apikey": [
+                                    {
+                                      "key": "key",
+                                      "value": "Authorization",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "value",
+                                      "value": "<API Key>",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "in",
+                                      "value": "header",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "description": {
+                                  "content": "Returns a table given a database name and a table name.",
+                                  "type": "text"
+                                },
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json",
+                                    "disabled": false
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "response": [
+                                {
+                                  "id": null,
+                                  "originalRequest": {
+                                    "header": [
+                                      {
+                                        "key": "Authorization",
+                                        "value": "<API Key>",
+                                        "disabled": false,
+                                        "description": {
+                                          "content": "Added as a part of security scheme: apikey",
+                                          "type": "text"
+                                        }
+                                      }
+                                    ],
+                                    "method": "GET",
+                                    "url": {}
+                                  },
+                                  "responseTime": null,
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json",
+                                      "disabled": false
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                                  "status": "OK",
+                                  "code": 200
+                                },
+                                {
+                                  "id": null,
+                                  "originalRequest": {
+                                    "header": [
+                                      {
+                                        "key": "Authorization",
+                                        "value": "<API Key>",
+                                        "disabled": false,
+                                        "description": {
+                                          "content": "Added as a part of security scheme: apikey",
+                                          "type": "text"
+                                        }
+                                      }
+                                    ],
+                                    "method": "GET",
+                                    "url": {}
+                                  },
+                                  "responseTime": null,
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json",
+                                      "disabled": false
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                                  "status": "Internal Server Error",
+                                  "code": 500
+                                }
+                              ]
+                            },
+                            {
+                              "name": "table Get Add Filename",
+                              "variable": null,
+                              "id": null,
+                              "request": {
+                                "description": {
+                                  "content": "Returns a table given a database name and a table name.",
+                                  "type": "text"
+                                },
+                                "header": [],
+                                "method": "OPTIONS",
+                                "url": {}
+                              },
+                              "response": [
+                                {
+                                  "id": null,
+                                  "originalRequest": {
+                                    "header": [],
+                                    "method": "OPTIONS",
+                                    "url": {}
+                                  },
+                                  "responseTime": null,
+                                  "header": [
+                                    {
+                                      "key": "Access-Control-Allow-Origin",
+                                      "value": "pariatur velit ut",
+                                      "disabled": false,
+                                      "description": {
+                                        "content": "",
+                                        "type": "text"
+                                      }
+                                    },
+                                    {
+                                      "key": "Access-Control-Allow-Methods",
+                                      "value": "pariatur velit ut",
+                                      "disabled": false,
+                                      "description": {
+                                        "content": "",
+                                        "type": "text"
+                                      }
+                                    },
+                                    {
+                                      "key": "Access-Control-Allow-Headers",
+                                      "value": "pariatur velit ut",
+                                      "disabled": false,
+                                      "description": {
+                                        "content": "",
+                                        "type": "text"
+                                      }
+                                    },
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain",
+                                      "disabled": false
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "body": "",
+                                  "status": "No Content",
+                                  "code": 204
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "table Get Table Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "<API Key>",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "description": {
+                              "content": "Returns a table given a database name and a table name.",
+                              "type": "text"
+                            },
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "disabled": false
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"data\": [\n    {\n      \"type\": \"GlueDatabaseTable\",\n      \"attributes\": {\n        \"databaseName\": \"collins-dp-dev-data-catalog-db\",\n        \"tableName\": \"flight-data\",\n        \"searchString\": \"flight\"\n      }\n    }\n  ]\n}",
+                              "status": "OK",
+                              "code": 200
+                            },
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                              "status": "Internal Server Error",
+                              "code": 500
+                            }
+                          ]
+                        },
+                        {
+                          "name": "table Get Table Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "description": {
+                              "content": "Returns a table given a database name and a table name.",
+                              "type": "text"
+                            },
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [],
+                                "method": "OPTIONS",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Access-Control-Allow-Origin",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Methods",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Headers",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "",
+                              "status": "No Content",
+                              "code": 204
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "database Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Gets the details of a Glue database given its name.",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "database Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Gets the details of a Glue database given its name.",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "table Get",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "<API Key>",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "description": {
+                      "content": "Returns an array of databases.",
+                      "type": "text"
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "disabled": false
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"data\": [\n    {\n      \"type\": \"GlueDatabase\",\n      \"attributes\": {\n        \"name\": \"Example Database\",\n        \"description\": \"Example Description\"\n      }\n    }\n  ]\n}",
+                      "status": "OK",
+                      "code": 200
+                    },
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                      "status": "Internal Server Error",
+                      "code": 500
+                    }
+                  ]
+                },
+                {
+                  "name": "table Get",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "description": {
+                      "content": "Returns an array of databases.",
+                      "type": "text"
+                    },
+                    "header": [],
+                    "method": "OPTIONS",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "",
+                      "status": "No Content",
+                      "code": 204
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "crawlers",
+              "item": [
+                {
+                  "name": "others",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "other Crawlers Getby Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "<API Key>",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "description": {
+                              "content": "Returns a list of other crawlers with matching keyword",
+                              "type": "text"
+                            },
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "disabled": false
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                              "status": "OK",
+                              "code": 200
+                            },
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                              "status": "Internal Server Error",
+                              "code": 500
+                            }
+                          ]
+                        },
+                        {
+                          "name": "other Crawlers Getby Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "description": {
+                              "content": "Returns a list of other crawlers with matching keyword",
+                              "type": "text"
+                            },
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [],
+                                "method": "OPTIONS",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Access-Control-Allow-Origin",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Methods",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Headers",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "",
+                              "status": "No Content",
+                              "code": 204
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "other Crawlers Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Returns an object containing all other crawlers",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "other Crawlers Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Returns an object containing all other crawlers",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "id/{id}",
+                  "item": [
+                    {
+                      "name": "crawler Get By Id",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Gets the details of a Crawler given its ID.",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "crawler Get By Id",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Gets the details of a Crawler given its ID.",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "{name}",
+                  "item": [
+                    {
+                      "name": "crawlers Get By Name",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Returns a list of crawlers with matching keyword",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "crawlers Get By Name",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Returns a list of crawlers with matching keyword",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "crawlers Get All",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "<API Key>",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "description": {
+                      "content": "Returns an object containing all crawlers",
+                      "type": "text"
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "disabled": false
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"data\": [\n    {\n      \"type\": \"Crawler\",\n      \"attributes\": {\n        \"crawlerId\": \"47cf0a8b-7150-4e3a-9c59-8da5b5278e85\",\n        \"crawlerName\": \"collins-dp-dev-crawler\",\n        \"crawlerDescription\": \"This crawler is created by the Data Catalog service.\"\n      }\n    }\n  ]\n}",
+                      "status": "OK",
+                      "code": 200
+                    },
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                      "status": "Internal Server Error",
+                      "code": 500
+                    }
+                  ]
+                },
+                {
+                  "name": "crawlers Get All",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "description": {
+                      "content": "Returns an object containing all crawlers",
+                      "type": "text"
+                    },
+                    "header": [],
+                    "method": "OPTIONS",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "",
+                      "status": "No Content",
+                      "code": 204
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "catalogs",
+              "item": [
+                {
+                  "name": "others",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "other Catalogs Get By Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "<API Key>",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "description": {
+                              "content": "Returns a list of other catalogs with matching keyword",
+                              "type": "text"
+                            },
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "disabled": false
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                              "status": "OK",
+                              "code": 200
+                            },
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [
+                                  {
+                                    "key": "Authorization",
+                                    "value": "<API Key>",
+                                    "disabled": false,
+                                    "description": {
+                                      "content": "Added as a part of security scheme: apikey",
+                                      "type": "text"
+                                    }
+                                  }
+                                ],
+                                "method": "GET",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                              "status": "Internal Server Error",
+                              "code": 500
+                            }
+                          ]
+                        },
+                        {
+                          "name": "other Catalogs Get By Name",
+                          "variable": null,
+                          "id": null,
+                          "request": {
+                            "description": {
+                              "content": "Returns a list of other catalogs with matching keyword",
+                              "type": "text"
+                            },
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "response": [
+                            {
+                              "id": null,
+                              "originalRequest": {
+                                "header": [],
+                                "method": "OPTIONS",
+                                "url": {}
+                              },
+                              "responseTime": null,
+                              "header": [
+                                {
+                                  "key": "Access-Control-Allow-Origin",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Methods",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Access-Control-Allow-Headers",
+                                  "value": "pariatur velit ut",
+                                  "disabled": false,
+                                  "description": {
+                                    "content": "",
+                                    "type": "text"
+                                  }
+                                },
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain",
+                                  "disabled": false
+                                }
+                              ],
+                              "cookie": [],
+                              "body": "",
+                              "status": "No Content",
+                              "code": 204
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "other Catalogs Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Returns an object containing all other data catalogs",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "other Catalogs Get",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Returns an object containing all other data catalogs",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "id/{id}",
+                  "item": [
+                    {
+                      "name": "catalog Get By Id",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Gets the details of a Catalog given its ID.",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "catalog Get By Id",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Gets the details of a Catalog given its ID.",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "{name}",
+                  "item": [
+                    {
+                      "name": "catalogs Get By Name",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "<API Key>",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "content": "Returns a list of catalogs with matching keyword(s)",
+                          "type": "text"
+                        },
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json",
+                            "disabled": false
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+                          "status": "OK",
+                          "code": 200
+                        },
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [
+                              {
+                                "key": "Authorization",
+                                "value": "<API Key>",
+                                "disabled": false,
+                                "description": {
+                                  "content": "Added as a part of security scheme: apikey",
+                                  "type": "text"
+                                }
+                              }
+                            ],
+                            "method": "GET",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                          "status": "Internal Server Error",
+                          "code": 500
+                        }
+                      ]
+                    },
+                    {
+                      "name": "catalogs Get By Name",
+                      "variable": null,
+                      "id": null,
+                      "request": {
+                        "description": {
+                          "content": "Returns a list of catalogs with matching keyword(s)",
+                          "type": "text"
+                        },
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "response": [
+                        {
+                          "id": null,
+                          "originalRequest": {
+                            "header": [],
+                            "method": "OPTIONS",
+                            "url": {}
+                          },
+                          "responseTime": null,
+                          "header": [
+                            {
+                              "key": "Access-Control-Allow-Origin",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Methods",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Access-Control-Allow-Headers",
+                              "value": "pariatur velit ut",
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text"
+                              }
+                            },
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain",
+                              "disabled": false
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "",
+                          "status": "No Content",
+                          "code": 204
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "catalogs Get All",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "<API Key>",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "description": {
+                      "content": "Returns an object containing all data catalogs",
+                      "type": "text"
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "disabled": false
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"data\": [\n    {\n      \"type\": \"CatalogExpanded\",\n      \"attributes\": {\n        \"catalogId\": \"47cf0a8b-7150-4e3a-9c59-8da5b5278e85\",\n        \"catalogEntryName\": \"collins-dp-dev-data-catalog\",\n        \"addFilename\": true\n      }\n    }\n  ]\n}",
+                      "status": "OK",
+                      "code": 200
+                    },
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Authorization",
+                            "value": "<API Key>",
+                            "disabled": false,
+                            "description": {
+                              "content": "Added as a part of security scheme: apikey",
+                              "type": "text"
+                            }
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                      "status": "Internal Server Error",
+                      "code": 500
+                    }
+                  ]
+                },
+                {
+                  "name": "catalogs Get All",
+                  "variable": null,
+                  "id": null,
+                  "request": {
+                    "description": {
+                      "content": "Returns an object containing all data catalogs",
+                      "type": "text"
+                    },
+                    "header": [],
+                    "method": "OPTIONS",
+                    "url": {}
+                  },
+                  "response": [
+                    {
+                      "id": null,
+                      "originalRequest": {
+                        "header": [],
+                        "method": "OPTIONS",
+                        "url": {}
+                      },
+                      "responseTime": null,
+                      "header": [
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "pariatur velit ut",
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text"
+                          }
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain",
+                          "disabled": false
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "",
+                      "status": "No Content",
+                      "code": 204
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "databases Get",
+              "variable": null,
+              "id": null,
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<API Key>",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "description": {
+                  "content": "Returns an object containing all databases and their tables.",
+                  "type": "text"
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "method": "GET",
+                "url": {}
+              },
+              "response": [
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "<API Key>",
+                        "disabled": false,
+                        "description": {
+                          "content": "Added as a part of security scheme: apikey",
+                          "type": "text"
+                        }
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"data\": [\n    {\n      \"type\": \"GlueDataCatalog\",\n      \"attributes\": {\n        \"name\": \"Example Data Catalog\",\n        \"description\": \"Example Description\"\n      }\n    }\n  ]\n}",
+                  "status": "OK",
+                  "code": 200
+                },
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "<API Key>",
+                        "disabled": false,
+                        "description": {
+                          "content": "Added as a part of security scheme: apikey",
+                          "type": "text"
+                        }
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                  "status": "Internal Server Error",
+                  "code": 500
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "configuration",
+          "item": [
+            {
+              "name": "config Operation",
+              "variable": null,
+              "id": null,
+              "request": {
+                "description": {
+                  "content": "Gets the active configuration (settings) of this service.",
+                  "type": "text"
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "method": "GET",
+                "url": {}
+              },
+              "response": [
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"data\": [\n    {\n      \"type\": \"Configuration\",\n      \"attributes\": {\n        \"info\": {\n          \"title\": \"Windmill2 Minimal Application\",\n          \"version\": \"1.0.0\"\n        },\n        \"servers\": [\n          {\n            \"description\": \"Default: API Gateway\",\n            \"url\": \"https://override.from.ssmparameter.com/\"\n          }\n        ],\n        \"service\": {\n          \"port\": 8080,\n          \"awsRegion\": \"us-west-1\",\n          \"ssmBasePath\": \"/windmill-api/config\",\n          \"nodeEnv\": \"development\"\n        }\n      }\n    }\n  ]\n}",
+                  "status": "OK",
+                  "code": 200
+                },
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                  "status": "Internal Server Error",
+                  "code": 500
+                }
+              ]
+            },
+            {
+              "name": "config Reload",
+              "variable": null,
+              "id": null,
+              "request": {
+                "description": {
+                  "content": "Reloads the active configuration (settings) which will probably make a call to SSM Parameter store.",
+                  "type": "text"
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "method": "GET",
+                "url": {}
+              },
+              "response": [
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"est mollit\",\n      \"id\": \"officia dolore\",\n      \"links\": {},\n      \"meta\": {},\n      \"attributes\": {\n        \"info\": {\n          \"title\": \"Windmill2 Minimal Application\",\n          \"description\": \"A Windmill2 API minimal application\",\n          \"termsOfService\": \"https://github.com/productOps/windmill2-api/terms\",\n          \"contact\": {\n            \"name\": \"Windmill2 API Support\",\n            \"url\": \"https://github.com/productOps/windmill2-api\",\n            \"email\": \"devops+whatever.another@productops.com\"\n          },\n          \"license\": {\n            \"name\": \"Copyright (C) 2019 productOps, Inc.\",\n            \"url\": \"https://github.com/productOps/windmill2-api/license.html\"\n          },\n          \"version\": \"1.0.0\"\n        },\n        \"servers\": [\n          {\n            \"url\": \"tempor c\",\n            \"description\": \"qui commodo pariatur magna\",\n            \"variables\": [\n              {\n                \"default\": \"culpa irure officia non\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"deserunt\"\n              },\n              {\n                \"default\": \"enim eiusmod pariatur sit qui\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"ullamco deserunt\"\n              }\n            ]\n          },\n          {\n            \"url\": \"labore aliqua adipisicing\",\n            \"description\": \"culpa nostrud non dolore\",\n            \"variables\": [\n              {\n                \"default\": \"nulla non consequat\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"aliquip et mollit\"\n              },\n              {\n                \"default\": \"in do\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"Duis aute sit dolor in\"\n              }\n            ]\n          }\n        ],\n        \"service\": {\n          \"port\": -99286607.73738116,\n          \"nodeEnv\": \"nostrud in tempor\",\n          \"awsRegion\": \"consequat reprehenderit\",\n          \"ssmBasePath\": \"proident\",\n          \"rootUrl\": \"ad aliqua mollit Ut\"\n        },\n        \"logging\": {\n          \"example1\": {\n            \"level\": \"info\",\n            \"transports\": {\n              \"Cloudwatch\": {\n                \"type\": \"CloudWatchTransport\",\n                \"options\": {\n                  \"logGroupName\": \"windmill-test\"\n                }\n              },\n              \"S3\": {\n                \"type\": \"S3Transport\",\n                \"options\": {\n                  \"bucket\": \"windmill-test\"\n                }\n              }\n            }\n          }\n        },\n        \"databases\": {\n          \"example1\": {\n            \"dialect\": \"postgres\",\n            \"dialectOptions\": \"in do si\",\n            \"password\": \"veniam in est\",\n            \"port\": 5432,\n            \"query\": {},\n            \"replication\": false,\n            \"database\": \"Duis ut aute\",\n            \"username\": \"enim officia in eu cupidatat\",\n            \"host\": \"ut Excepteur mollit\",\n            \"logging\": {},\n            \"pool\": {\n              \"max\": 5,\n              \"min\": 11426993.970524937,\n              \"idle\": 10000,\n              \"acquire\": 10000,\n              \"evict\": 10000,\n              \"handleDisconnects\": true,\n              \"validate\": {},\n              \"quoteIdentifiers\": true,\n              \"isolationLevel\": \"REPEATABLE READ\",\n              \"retry\": {\n                \"match\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"max\": 41876824.63155046,\n                \"typeValidation\": true,\n                \"operatorsAliases\": true\n              }\n            }\n          }\n        }\n      }\n    },\n    {\n      \"type\": \"dolore magna esse ea\",\n      \"id\": \"reprehenderit culpa ad enim pariatur\",\n      \"links\": {},\n      \"meta\": {},\n      \"attributes\": {\n        \"info\": {\n          \"title\": \"Windmill2 Minimal Application\",\n          \"description\": \"A Windmill2 API minimal application\",\n          \"termsOfService\": \"https://github.com/productOps/windmill2-api/terms\",\n          \"contact\": {\n            \"name\": \"Windmill2 API Support\",\n            \"url\": \"https://github.com/productOps/windmill2-api\",\n            \"email\": \"devops+whatever.another@productops.com\"\n          },\n          \"license\": {\n            \"name\": \"Copyright (C) 2019 productOps, Inc.\",\n            \"url\": \"https://github.com/productOps/windmill2-api/license.html\"\n          },\n          \"version\": \"1.0.0\"\n        },\n        \"servers\": [\n          {\n            \"url\": \"nisi sunt Ut ad\",\n            \"description\": \"dolore aliquip sed fugiat ut\",\n            \"variables\": [\n              {\n                \"default\": \"proident\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"occaecat enim eu\"\n              },\n              {\n                \"default\": \"consectetur dolore nisi id\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"aliqua\"\n              }\n            ]\n          },\n          {\n            \"url\": \"laboris\",\n            \"description\": \"aliqua nostrud magna\",\n            \"variables\": [\n              {\n                \"default\": \"sed sunt labore eu veniam\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"eu est\"\n              },\n              {\n                \"default\": \"exercitation ea L\",\n                \"enum\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"description\": \"laboris\"\n              }\n            ]\n          }\n        ],\n        \"service\": {\n          \"port\": 16049581.397666395,\n          \"nodeEnv\": \"aliquip\",\n          \"awsRegion\": \"adipisicing occaecat consequat\",\n          \"ssmBasePath\": \"sed dolor dolor\",\n          \"rootUrl\": \"et dolor tempor aliqua in\"\n        },\n        \"logging\": {\n          \"example1\": {\n            \"level\": \"info\",\n            \"transports\": {\n              \"Cloudwatch\": {\n                \"type\": \"CloudWatchTransport\",\n                \"options\": {\n                  \"logGroupName\": \"windmill-test\"\n                }\n              },\n              \"S3\": {\n                \"type\": \"S3Transport\",\n                \"options\": {\n                  \"bucket\": \"windmill-test\"\n                }\n              }\n            }\n          }\n        },\n        \"databases\": {\n          \"example1\": {\n            \"dialect\": \"postgres\",\n            \"dialectOptions\": \"ad\",\n            \"password\": \"velit cillum\",\n            \"port\": 5432,\n            \"query\": {},\n            \"replication\": false,\n            \"database\": \"sint aute Lorem\",\n            \"username\": \"dolor veniam fugiat ut\",\n            \"host\": \"minim sint aute exercitation laborum\",\n            \"logging\": {},\n            \"pool\": {\n              \"max\": 5,\n              \"min\": 56513768.55881426,\n              \"idle\": 10000,\n              \"acquire\": 10000,\n              \"evict\": 10000,\n              \"handleDisconnects\": true,\n              \"validate\": {},\n              \"quoteIdentifiers\": true,\n              \"isolationLevel\": \"REPEATABLE READ\",\n              \"retry\": {\n                \"match\": [\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  },\n                  {\n                    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                  }\n                ],\n                \"max\": 22111102.405700266,\n                \"typeValidation\": false,\n                \"operatorsAliases\": true\n              }\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "status": "OK",
+                  "code": 200
+                },
+                {
+                  "id": null,
+                  "originalRequest": {
+                    "header": [],
+                    "method": "GET",
+                    "url": {}
+                  },
+                  "responseTime": null,
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "disabled": false
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+                  "status": "Internal Server Error",
+                  "code": 500
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swagger UI Operation",
+          "variable": null,
+          "id": null,
+          "request": {
+            "description": {
+              "content": "Swagger UI",
+              "type": "text"
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "method": "GET",
+            "url": {}
+          },
+          "response": [
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+              "status": "OK",
+              "code": 200
+            },
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"sit sunt Duis dolore\",\n    \"id\": \"eiusmod Lorem\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure laborum conseq\",\n      \"fullStack\": \"id ipsum elit\",\n      \"jseInfo\": {\n        \"message\": \"sint magna\",\n        \"name\": \"velit dolor in cillum ullamco\",\n        \"stack\": \"laborum\"\n      },\n      \"allInfo\": {\n        \"status\": -59482969.35413349\n      }\n    }\n  }\n}",
+              "status": "Internal Server Error",
+              "code": 500
+            }
+          ]
+        },
+        {
+          "name": "health Check Operation",
+          "variable": null,
+          "id": null,
+          "request": {
+            "description": {
+              "content": "Health Check",
+              "type": "text"
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "method": "GET",
+            "url": {}
+          },
+          "response": [
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"HealthCheck\",\n      \"attributes\": {\n        \"status\": \"OK\"\n      }\n    }\n  ]\n}",
+              "status": "OK",
+              "code": 200
+            },
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+              "status": "Internal Server Error",
+              "code": 500
+            }
+          ]
+        },
+        {
+          "name": "oas Operation",
+          "variable": null,
+          "id": null,
+          "request": {
+            "description": {
+              "content": "Returns an Open Api Spec JSON of the API",
+              "type": "text"
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "method": "GET",
+            "url": {}
+          },
+          "response": [
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": [\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    },\n    {\n      \"type\": \"User\",\n      \"meta\": {},\n      \"attributes\": {\n        \"displayName\": \"Some User\"\n      }\n    }\n  ]\n}",
+              "status": "OK",
+              "code": 200
+            },
+            {
+              "id": null,
+              "originalRequest": {
+                "header": [],
+                "method": "GET",
+                "url": {}
+              },
+              "responseTime": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "disabled": false
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"jsonapi\": {\n    \"version\": \"1.0\"\n  },\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    },\n    {\n      \"status\": \"500\",\n      \"code\": \"J45223\",\n      \"title\": \"Some Error\",\n      \"detail\": \"So much information about the some error\",\n      \"meta\": {}\n    }\n  ],\n  \"meta\": {},\n  \"links\": {},\n  \"data\": {\n    \"type\": \"voluptate\",\n    \"id\": \"exercitation consectetur vo\",\n    \"links\": {},\n    \"meta\": {},\n    \"attributes\": {\n      \"jseShortmsg\": \"irure voluptate fugiat pariatur\",\n      \"fullStack\": \"laboris et voluptate nostrud\",\n      \"jseInfo\": {\n        \"message\": \"ullamco reprehenderit in\",\n        \"name\": \"aliqua nulla fugiat nostrud anim\",\n        \"stack\": \"nisi in ullamco fugiat eiusmod\"\n      },\n      \"allInfo\": {\n        \"status\": 35002016.42434585\n      }\n    }\n  }\n}",
+              "status": "Internal Server Error",
+              "code": 500
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": null,
+  "variable": [
+    {
+      "id": null,
+      "key": "baseUrl",
+      "value": "http://caero-LoadB-C23WO6AMBK3C-7e36dfc564388d63.elb.us-east-1.amazonaws.com",
+      "type": 1,
+      "name": null,
+      "description": null,
+      "system": false,
+      "disabled": false
+    }
+  ],
+  "protocolProfileBehavior": null
+}

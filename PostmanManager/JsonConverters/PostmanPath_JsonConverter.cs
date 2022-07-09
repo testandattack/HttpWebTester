@@ -8,6 +8,9 @@ using Version = PostmanManager.Models.Version;
 
 namespace PostmanManager
 {
+    /// <summary>
+    /// Custom Json Converter to handle <see cref="Path"/> objects from Postman
+    /// </summary>
     public class PostmanPath_JsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -61,15 +64,23 @@ namespace PostmanManager
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
-            //var obj = new JObject();
+            var obj = new JObject();
 
-            //obj.Add("major", (value as Version).Major);
-            //obj.Add("minor", (value as Version).Minor);
-            //obj.Add("patch", (value as Version).Patch);
-            //obj.Add("identifier", (value as Version).Identifier);
-
-            //obj.WriteTo(writer);
+            if ((value as Path).stringPath != null)
+            {
+                obj.Add("path", (value as Path).stringPath);
+                obj.WriteTo(writer);
+            }
+            else if ((value as Path).stringArrayPath != null)
+            {
+                obj.Add("path", JToken.FromObject((value as Path).stringArrayPath));
+                obj.WriteTo(writer);
+            }
+            else if ((value as Path).objectPath != null)
+            {
+                obj.Add("path", JToken.FromObject((value as Path).objectPath));
+                obj.WriteTo(writer);
+            }
         }
     }
 }

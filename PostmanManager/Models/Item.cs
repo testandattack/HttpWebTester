@@ -17,13 +17,13 @@ namespace PostmanManager.Models
         /// <summary>
         /// A human readable identifier for the current item.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public Description Description { get; set; }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace PostmanManager.Models
         /// <summary>
         /// Defines a script associated with an associated event name
         /// </summary>
-        [JsonProperty("event")]
+        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public List<Event> Event { get; set; }
 
         /// <summary>
         /// Set of configurations used to alter the usual behavior of sending the request.
         /// </summary>
-        [JsonProperty("protocolProfileBehavior")]
+        [JsonProperty("protocolProfileBehavior", NullValueHandling = NullValueHandling.Ignore)]
         public object ProtocolProfileBehavior { get; set; }
 
         [JsonProperty("id")]
@@ -53,7 +53,7 @@ namespace PostmanManager.Models
         [JsonProperty("request"), JsonRequired]
         public Request Request { get; set; }
 
-        [JsonProperty("response")]
+        [JsonProperty("response", NullValueHandling = NullValueHandling.Ignore)]
         public List<Response> Responses { get; set; }
     }
 }

@@ -44,22 +44,10 @@ namespace PostmanManager
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
-            //var obj = new JObject();
+            var obj = new JObject();
+            obj.Add(nameof(value), new JArray(value));
 
-            //if(value.GetType() == typeof(string[]))
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
-            //obj.Add("content", (value as Description).Content);
-            //obj.Add("type", (value as Description).Type);
-            //obj.Add("varsion", (value as Description).Version.ToString());
-
-            //obj.WriteTo(writer);
+            obj.WriteTo(writer);
         }
     }
 }

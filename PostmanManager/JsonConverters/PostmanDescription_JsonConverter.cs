@@ -7,6 +7,9 @@ using PostmanManager.Models;
 
 namespace PostmanManager
 {
+    /// <summary>
+    /// Custom Json Converter to handle <see cref="Description"/> objects from Postman
+    /// </summary>
     public class PostmanDescription_JsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -24,22 +27,24 @@ namespace PostmanManager
             {
                 if (reader.TokenType == JsonToken.String)
                 {
+                    Console.WriteLine(" PostmanDescription_JsonConverter String token");
                     itemDescription.Content = reader.Value.ToString();
                     itemDescription.Type = "text";
                     itemDescription.Version = null;
                 }
                 else
                 {
+                    Console.WriteLine(" PostmanDescription_JsonConverter object token");
                     var result = (JToken)serializer.Deserialize(reader);
 
                     if (result["content"] != null)
                         itemDescription.Content = result["url"].ToString();
 
-                    if (result["auth"] != null)
-                        itemDescription.Auth = result["auth"].ToObject<Auth>();
+                    if (result["type"] != null)
+                        itemDescription.Type = result["type"].ToString();
 
-                    if (result["proxy"] != null)
-                        itemDescription.Proxy = result["proxy"].ToObject<Proxy>();
+                    if (result["version"] != null)
+                        itemDescription.Version = result["version"].ToObject<Models.Version>();
 
                     return itemDescription;                    
                 }
@@ -57,12 +62,15 @@ namespace PostmanManager
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-
             var obj = new JObject();
+            var description = (value as Description);
 
-            obj.Add("content", (value as Description).Content);
-            obj.Add("type", (value as Description).Type);
-            obj.Add("varsion", (value as Description).Version.ToString());
+            if(description.Content != null)
+                obj.Add("content", description.Content);
+            if(description.Type != null)
+                obj.Add("type", description.Type);
+            if (description.Version != null)
+                obj.Add("version", JToken.FromObject(description.Version));
 
             obj.WriteTo(writer);
         }

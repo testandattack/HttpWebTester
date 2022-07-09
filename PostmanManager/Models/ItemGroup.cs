@@ -20,7 +20,7 @@ namespace PostmanManager.Models
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public Description Description { get; set; }
 
         /// <summary>
@@ -29,19 +29,19 @@ namespace PostmanManager.Models
         /// lot of time. Variables can be defined, and referenced 
         /// to from any part of a request.
         /// </summary>
-        [JsonProperty("variable")]
+        [JsonProperty("variable", NullValueHandling = NullValueHandling.Ignore)]
         public List<Variable> Variables { get; set; }
 
         /// <summary>
         /// Defines a script associated with an associated event name
         /// </summary>
-        [JsonProperty("event")]
+        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
         public List<Event> Event { get; set; }
 
         /// <summary>
         /// Set of configurations used to alter the usual behavior of sending the request.
         /// </summary>
-        [JsonProperty("protocolProfileBehavior")]
+        [JsonProperty("protocolProfileBehavior", NullValueHandling = NullValueHandling.Ignore)]
         public object ProtocolProfileBehavior { get; set; }
 
         /// <summary>

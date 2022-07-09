@@ -10,6 +10,7 @@ namespace PostmanManager.Models
     /// Represents authentication helpers provided by Postman
     /// </summary>
     [JsonObject(Title = "auth")]
+    [JsonConverter(typeof(PostmanAuth_JsonConverter))]
     public class Auth
     {
         [JsonProperty("type")]

@@ -8,6 +8,9 @@ using Version = PostmanManager.Models.Version;
 
 namespace PostmanManager
 {
+    /// <summary>
+    /// Custom Json Converter to handle <see cref="Version"/> objects from Postman
+    /// </summary>
     public class PostmanVersion_JsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -25,6 +28,7 @@ namespace PostmanManager
             {
                 if(reader.TokenType == JsonToken.String)
                 {
+                    Console.WriteLine(" PostmanVersion_JsonConverter string token");
                     itemVersion = new Version();
                     itemVersion.Major = 0;
                     itemVersion.Minor = 0;
@@ -34,7 +38,8 @@ namespace PostmanManager
                 }
                 else
                 {
-                    itemVersion = serializer.Deserialize<Version>(reader);
+                    Console.WriteLine(" PostmanVersion_JsonConverter object token");
+                    //itemVersion = serializer.Deserialize<Version>(reader);
                     itemVersion.VersionAsString = string.Empty;
                 }
             }
