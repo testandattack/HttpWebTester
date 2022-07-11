@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
     <ProjectReference Include="..\OpenApiSpec\SwaggerParser\SwaggerParsing.csproj" />
-    <ProjectReference Include="..\PostmanManager\PostmanManager.csproj" />
     <ProjectReference Include="..\Settings\Settings.csproj" />
   </ItemGroup>
 

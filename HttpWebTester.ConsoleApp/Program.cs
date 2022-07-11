@@ -34,10 +34,6 @@ namespace HttpWebTester
             //analyzer.SerializeAndSaveApiSetAnalysis();
             #endregion
 
-            PostmanCollection pc = new PostmanCollection();
-            pc.LoadCollection("dataCatalogPostman.json");
-
-            pc.SaveCollection(@"c:\temp\trialPostman.json");
         }
 
         static Settings CreateLogger()

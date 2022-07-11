@@ -22,8 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedResources", "SharedRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDocs.CustomObjects", "ApiDocs.CustomObjects\ApiDocs.CustomObjects.csproj", "{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostmanManager", "PostmanManager\PostmanManager.csproj", "{70C7E62A-9E9B-4298-BCFC-3E1E178E3416}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,10 +56,6 @@ Global
 		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B981D617-13E7-47AD-AB6B-F04A2C8C8FF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70C7E62A-9E9B-4298-BCFC-3E1E178E3416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70C7E62A-9E9B-4298-BCFC-3E1E178E3416}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70C7E62A-9E9B-4298-BCFC-3E1E178E3416}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70C7E62A-9E9B-4298-BCFC-3E1E178E3416}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
