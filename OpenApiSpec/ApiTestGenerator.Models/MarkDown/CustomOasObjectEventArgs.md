@@ -3,7 +3,7 @@
 
 ## CustomOasObjectEventArgs Class
 
-The class to hold the properties that get passed into any event handler for
+The class to hold the properties that get passed into any event handler for  
 custom objects.
 
 ```csharp
@@ -17,8 +17,8 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## CustomOasObjectEventArgs.customObjects Property
 
-The [CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection') for the endpoint being processed.
-This is passed to the event handler so that the method can add the new object
+The [CustomOasObjectCollection](CustomOasObjectCollection.md 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection') for the endpoint being processed.  
+This is passed to the event handler so that the method can add the new object  
 to the collection.
 
 ```csharp

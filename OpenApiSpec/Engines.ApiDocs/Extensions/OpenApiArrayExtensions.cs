@@ -12,7 +12,7 @@ namespace OpenApiUtilities
         /// walks an array of items, retrieving the value from the <see cref="OpenApiAnyExtensions.GetPrimitiveValue(IOpenApiAny)"/> method
         /// </summary>
         /// <param name="source">The <c>IOpenApiArray</c> to which this method is exposed.</param>
-        public static string ToString(this OpenApiArray source)
+        public static string AsString(this OpenApiArray source)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var item in source)

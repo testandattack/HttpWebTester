@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace ApiTestGenerator.Models.ApiDocs
@@ -31,7 +32,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// 
         /// </summary>        
-        public string responseObjectExampleText { get; set; }
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public string ResponseObjectExampleText { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ResponseObjectExampleTextIsEncoded { get; set; }
         
         /// <summary>
         /// [Extension] - This is a collection of objects in the response 
@@ -43,7 +51,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         public ResponseObject()
         {
             abbreviatedResponseObjects = new Dictionary<string, AbbreviatedResponseObject>();
-            responseObjectExampleText = null;
+            ResponseObjectExampleText = null;
         }
         #endregion
     }

@@ -2,6 +2,7 @@
 using ApiTestGenerator.Models.Consts;
 using ApiTestGenerator.Models.Enums;
 using GTC.Extensions;
+//using GTC.OpenApiUtilities;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenApiUtilities;
 
 namespace Engines.ApiDocs.Extensions
 {
@@ -284,9 +286,17 @@ else
                             // Found an object being returned that does not have a schema.
                             if(contentItem.Value.Example != null)
                             {
-                                string tempStr = ((OpenApiString)(contentItem.Value.Example)).Value;
-                                Console.WriteLine("");
-
+                                if (contentItem.Value.Example.IsPrimitiveType() == true)
+                                {
+                                    response.ResponseObjectExampleText = ((OpenApiString)(contentItem.Value.Example)).Value;
+                                    response.ResponseObjectExampleTextIsEncoded = false;
+                                }
+                                else
+                                {
+                                    string tempStr = JsonConvert.SerializeObject(contentItem.Value.Example);
+                                    response.ResponseObjectExampleText = tempStr.Base64Encode();
+                                    response.ResponseObjectExampleTextIsEncoded = true;
+                                }
                             }
                         }
                         else if (contentItem.Value.Schema.Type == null)

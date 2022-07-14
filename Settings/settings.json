@@ -1,20 +1,22 @@
 {
-  "DefaultInputLocation": "c:\\Temp",
-  "DefaultOutputLocation": "c:\\Temp",
+  "DefaultInputLocation": "c:\\Temp\\MiscOasFiles",
+  "DefaultOutputLocation": "c:\\Temp\\MiscOasFiles",
   "logSettings": {
-    "DefaultLogFileName": "c:\\Temp\\ApiSet_ParsingLog.log",
+    "DefaultLogFileName": "c:\\Temp\\MiscOasFiles\\ApiSet_ParsingLog.log",
     "MinLogEventLevel": "Information",
-    "ClearLogFileOnStartup": false
+    "ClearLogFileOnStartup": true
   },
   "swaggerSettings": {
     "BaseUriAddress": "http://localhost:52321/",
     "SwaggerStreamLocation": "swagger/v1/swagger.json",
-    //"SwaggerFileLocation": "c:\\temp\\Asc_swagger.json",
-    "SwaggerFileLocation": "c:\\temp\\twc_osmc.json",
+    //"SwaggerFileLocation": "Asc_swagger.json",
+    "SwaggerFileLocation": "SwaggerPetstore_OAS.json",
     "ReadSwaggerFromFile": true,
     //"apiRoot": "/api/",
-    "apiRoot": "/osmc/",
-    "DtoCodeFileName": "ResponseObjects.cs",
+    //"apiRoot": "/osmc/",
+    "GenerateDtoCode": true,
+    "IgnoreDtoCodeGenerationErrors": true,
+    "DtoCodeFileName": "SwaggerPetstore_OAS.cs",
     "CodeNamespace": "ApiSet.Testing",
     "CoreClassName": "MyClass",
     "GenerateExceptionClasses": false,

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,9 +8,9 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.25" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="108.0.1" />
-    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00940" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
@@ -21,7 +21,17 @@
   <ItemGroup>
     <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
     <ProjectReference Include="..\OpenApiSpec\SwaggerParser\SwaggerParsing.csproj" />
+    <ProjectReference Include="..\PostmanItemManager\PostmanItemManager.csproj" />
     <ProjectReference Include="..\Settings\Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Swagger Petstore.postman_collection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SwaggerPetstore_OAS.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

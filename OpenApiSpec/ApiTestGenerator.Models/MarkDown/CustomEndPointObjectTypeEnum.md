@@ -14,7 +14,7 @@ public enum CustomEndPointObjectTypeEnum
 
 `CalculatedDateValue` 6
 
-[PARAM_StartDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate') 
+[PARAM_StartDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate')   
             or [PARAM_EndDate](ParserTokens.md#ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate')
 
 <a name='ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.GetsInputFrom'></a>

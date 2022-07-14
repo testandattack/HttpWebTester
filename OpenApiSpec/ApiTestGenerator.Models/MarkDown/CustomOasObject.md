@@ -26,10 +26,10 @@ public string CustomObjectName { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-The preferred convention (per the OAS standards) is to make the name of any custom entry 
-use "x-" at the beginning of the custom entry. The two samples included with the ApiSet
-code have names of:
-- x-provides-values-for
+The preferred convention (per the OAS standards) is to make the name of any custom entry   
+use "x-" at the beginning of the custom entry. The two samples included with the ApiSet  
+code have names of:  
+- x-provides-values-for  
 - x-method-name
 
 <a name='ApiTestGenerator.Models.ApiDocs.CustomOasObject.CustomObjectValue'></a>
@@ -46,7 +46,7 @@ public object CustomObjectValue { get; set; }
 [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
 ### Remarks
-The ApiSet parsing engine assumes that the value is stored in the OAS as a string.
-The custom methods you can provide may convert the string into a standard object,
-such as a List or Dictionary, but you will have to provide the parser to convert 
+The ApiSet parsing engine assumes that the value is stored in the OAS as a string.  
+The custom methods you can provide may convert the string into a standard object,  
+such as a List or Dictionary, but you will have to provide the parser to convert   
 the string into that object.

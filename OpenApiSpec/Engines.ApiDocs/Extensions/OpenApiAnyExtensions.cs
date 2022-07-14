@@ -15,7 +15,7 @@ namespace OpenApiUtilities
             Type exampleType = source.GetType();
             if(exampleType == typeof(OpenApiArray))
             {
-                return (source as OpenApiArray).ToString();
+                return (source as OpenApiArray).AsString();
             }
             else if (exampleType == typeof(OpenApiNull))
             {
@@ -28,6 +28,26 @@ namespace OpenApiUtilities
             else
             {
                 return source.GetPrimitiveValue();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsPrimitiveType(this IOpenApiAny source)
+        {
+            Type exampleType = source.GetType();
+            if (exampleType == typeof(OpenApiArray)
+                || (exampleType == typeof(OpenApiNull))
+                || (exampleType == typeof(OpenApiObject)))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

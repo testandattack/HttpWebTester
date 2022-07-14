@@ -1,0 +1,881 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PostmanManager</name>
+    </assembly>
+    <members>
+        <member name="T:PostmanManager.PostmanAuth_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Auth"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanDescription_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Description"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanHeader_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Header"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanItem_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.ItemCollection"/> objects from Postman
+            </summary>
+        </member>
+        <member name="M:PostmanManager.PostmanItem_JsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            This overridden method never gets called since the base item is 
+            an abstract class and the concrete instances do not need custom
+            serializers.
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="T:PostmanManager.PostmanPath_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Path"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanRequest_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Request"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanUrl_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Url"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanVersion_JsonConverter">
+            <summary>
+            Custom Json Converter to handle <see cref="T:PostmanManager.Models.Version"/> objects from Postman
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Auth">
+            <summary>
+            Represents authentication helpers provided by Postman
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.ApiKey">
+            <summary>
+            The attributes for API Key Authentication.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.AwsV4">
+            <summary>
+            The attributes for [AWS Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.Basic">
+            <summary>
+            The attributes for [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.Bearer">
+            <summary>
+            The helper attributes for [Bearer Token Authentication](https://tools.ietf.org/html/rfc6750)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.Digest">
+            <summary>
+            The attributes for [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.EdgeGrid">
+            <summary>
+            The attributes for [Akamai EdgeGrid Authentication](https://developer.akamai.com/legacy/introduction/Client_Auth.html).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.Hawk">
+            <summary>
+            The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.Ntlm">
+            <summary>
+            The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.OAuth1">
+            <summary>
+            "The attributes for [OAuth2](https://oauth.net/1/)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Auth.OAuth2">
+            <summary>
+            Helper attributes for [OAuth2](https://oauth.net/2/)
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.AuthAttribute">
+            <summary>
+            Represents an attribute for any authorization method 
+            provided by Postman. For example `username` and `password` 
+            are set as auth attributes for Basic Authentication method.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.AuthAttribute.Key">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.AuthAttribute.Value">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.AuthAttribute.Type">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Body">
+            <summary>
+            This field contains the data usually contained in the request body.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.Mode">
+            <summary>
+            Postman stores the type of data associated with this request in this field.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.Raw">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.UrlEncoded">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.FormData">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.File">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.Graphql">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.Options">
+            <summary>
+            Additional configurations and options set for various body modes.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Body.Disabled">
+            <summary>
+            When set to true, prevents this form data entity from being sent.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Certificate">
+            <summary>
+            A representation of a list of ssl certificates
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Certificate.Name">
+            <summary>
+            A name for the certificate for user reference
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Certificate.Matches">
+            <summary>
+            A list of Url match pattern strings, to identify Urls this certificate can be used for.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Certificate.Key">
+            <summary>
+            An object containing path to file containing private key, on the file system
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Certificate.Cert">
+            <summary>
+            An object containing path to file certificate, on the file system
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Certificate.PassPhrase">
+            <summary>
+            The passphrase for the certificate
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Cookie">
+            <summary>
+            A representation of a list of cookies
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Domain">
+            <summary>
+            The domain for which this cookie is valid.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Expires">
+            <summary>
+            When the cookie expires.
+            NOTE: Type = oneOf: string, number
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.MaxAge">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.HostOnly">
+            <summary>
+            True if the cookie is a host-only cookie. (i.e. a request's URL domain must exactly match the domain of the cookie).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.HttpOnly">
+            <summary>
+            Indicates if this cookie is HTTP Only. (if True, the cookie is inaccessible to client-side scripts)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Name">
+            <summary>
+            This is the name of the Cookie.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Path">
+            <summary>
+            The path associated with the Cookie.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Secure">
+            <summary>
+            Indicates if the 'secure' flag is set on the Cookie, meaning that it is transmitted over secure connections only. (typically HTTPS)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Session">
+            <summary>
+            True if the cookie is a session cookie.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Value">
+            <summary>
+            The value of the Cookie.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Cookie.Extensions">
+            <summary>
+            Custom attributes for a cookie go here, such as the [Priority Field](https://code.google.com/p/chromium/issues/detail?id=232693)
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Description.Content">
+            <summary>
+            The content of the description goes here, as a raw string.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Description.Type">
+            <summary>
+            Holds the mime type of the raw description content. 
+            E.g: 'text/markdown' or 'text/html'.\nThe type is 
+            used to correctly render the description when generating 
+            documentation, or in the Postman app.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Description.Version">
+            <summary>
+            Description can have versions associated with it, which should be put in this property.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Event.Id">
+            <summary>
+            A unique identifier for the enclosing event.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Event.Listen">
+            <summary>
+            Can be set to `test` or `prerequest` for test scripts or pre-request scripts respectively.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Event.Script">
+            <summary>
+            "A script is a snippet of Javascript code that can be used to to perform setup or teardown operations on a particular response.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Event.Disabled">
+            <summary>
+            Indicates whether the event is disabled. If absent, the event is assumed to be enabled.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FileUploadObject.Source">
+            <summary>
+            Contains the name of the file to upload. _Not the path_.
+            A null src indicates that no file has been selected as a part of the request body.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FileUploadObject.Content">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.Key">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.Value">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.Src">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.Disabled">
+            <summary>
+            When set to true, prevents this form data entity from being sent.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.ContentType">
+            <summary>
+            Override Content-Type header of this form data entity.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.FormParameter.Description">
+            <summary>
+            A description of the header
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Header.Key">
+            <summary>
+            This holds the LHS of the HTTP Header, e.g ``Content-Type`` or ``X-Custom-Header``
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Header.Value">
+            <summary>
+            The value (or the RHS) of the Header is stored in this field.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Header.Disabled">
+            <summary>
+            If set to true, the current header will not be sent with requests.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Header.Description">
+            <summary>
+            A description of the header
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Info">
+            <summary>
+            Detailed description of the info block
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Info.Name">
+            <summary>
+            A collection's friendly name is defined by this field. 
+            You would want to set this field to a value that would 
+            allow you to easily identify this collection among a 
+            bunch of other collections, as such outlining its usage or content.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Info.PostmanId">
+            <summary>
+            Every collection is identified by the unique value of 
+            this field. The value of this field is usually easiest 
+            to generate using a UID generator function. If you already 
+            have a collection, it is recommended that you maintain the 
+            same id since changing the id usually implies that is a 
+            different collection than it was originally.\n *Note: This 
+            field exists for compatibility reasons with Collection Format V1.*
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Info.Description">
+            <summary>
+            No description given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Info.Version">
+            <summary>
+            see the <see cref="P:PostmanManager.Models.Info.Version"/> class for info.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Info.Schema">
+            <summary>
+            This should ideally hold a link to the Postman schema 
+            that is used to validate this collection. 
+            E.g: https://schema.getpostman.com/collection/v1
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Item">
+            <summary>
+            One of the primary goals of Postman is to organize the development of APIs. 
+            To this end, it is necessary to be able to group requests together. This 
+            can be achived using 'Folders'. A folder just is an ordered set of requests.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Item.Name">
+            <summary>
+            A human readable identifier for the current item.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Item.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Item.Variables">
+            <summary>
+            Using variables in your Postman requests eliminates 
+            the need to duplicate requests, which can save a 
+            lot of time. Variables can be defined, and referenced 
+            to from any part of a request.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Item.Event">
+            <summary>
+            Defines a script associated with an associated event name
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Item.ProtocolProfileBehavior">
+            <summary>
+            Set of configurations used to alter the usual behavior of sending the request.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.ItemGroup">
+            <summary>
+            Items are entities which contain an actual HTTP request, and sample responses attached to it.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Name">
+            <summary>
+            A human readable identifier for the current item.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Variables">
+            <summary>
+            Using variables in your Postman requests eliminates 
+            the need to duplicate requests, which can save a 
+            lot of time. Variables can be defined, and referenced 
+            to from any part of a request.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Event">
+            <summary>
+            Defines a script associated with an associated event name
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.ProtocolProfileBehavior">
+            <summary>
+            Set of configurations used to alter the usual behavior of sending the request.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Items">
+            <summary>
+            Items are entities which contain an actual HTTP request, 
+            and sample responses attached to it.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.ItemGroup.Auth">
+            <summary>
+            Represents authentication helpers provided by Postman.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Path">
+            <summary>
+            The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Path.stringPath">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Path.stringArrayPath">
+            <summary>
+            The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Path.objectPath">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Proxy">
+            <summary>
+            Using the Proxy, you can configure your custom proxy into 
+            the postman for particular url match
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Proxy.Match">
+            <summary>
+            The Url match for which the proxy config is defined.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Proxy.Host">
+            <summary>
+            The proxy server host
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Proxy.Port">
+            <summary>
+            The proxy server port
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Proxy.Tunnel">
+            <summary>
+            The tunneling details for the proxy config
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Proxy.Disabled">
+            <summary>
+            When set to true, ignores this proxy configuration entity
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Request">
+            <summary>
+            A request represents an HTTP request. If a string, the string is assumed to be the 
+            request URL and the method is assumed to be 'GET'.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.RawRequest">
+            <summary>
+            This string holds the value of a Postman Request object that was stored as a string value.
+            If the Request is an object, then this string will be empty.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Url">
+            <summary>
+            If object, contains the complete broken-down URL for this request. If 
+            string, contains the literal request URL.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Auth">
+            <summary>
+            Represents authentication helpers provided by Postman
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Proxy">
+            <summary>
+            Using the Proxy, you can configure your custom proxy into the postman for 
+            particular url match
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Certificate">
+            <summary>
+            A representation of an ssl certificate
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Method">
+            <summary>
+            The Standard HTTP method associated with this request.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Description">
+            <summary>
+            The description of this request.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Headers">
+            <summary>
+            A representation for a list of headers.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Request.Body">
+            <summary>
+            This field contains the data usually contained in the request body.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Response">
+            <summary>
+            A response represents an HTTP response.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Id">
+            <summary>
+            A unique, user defined identifier that can  be used to 
+            refer to this response from requests.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.OriginalRequest">
+            <summary>
+            <see cref="T:PostmanManager.Models.Request"/>
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.ResponseTime">
+            <summary>
+            The time taken by the request to complete. If a number, the '
+            unit is milliseconds. If the response is manually created, 
+            this can be set to `null`.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Timings">
+            <summary>
+            Set of timing information related to request and response in milliseconds
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Headers">
+            <summary>
+            No HTTP request is complete without its headers, and the 
+            same is true for a Postman request. This field is an array 
+            containing all the headers.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Cookies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Body">
+            <summary>
+            The raw text of the response
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Status">
+            <summary>
+            The response status, e.g: '200 OK'
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Response.Code">
+            <summary>
+            The numerical response code, example: 200, 201, 404, etc.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Script">
+            <summary>
+            A script is a snippet of Javascript code that can be 
+            used to to perform setup or teardown operations on a particular response.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Script.Id">
+            <summary>
+            A unique, user defined identifier that can  
+            be used to refer to this script from requests.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Script.Type">
+            <summary>
+            Type of the script. E.g: 'text/javascript'
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Script.Exec">
+            <summary>
+            This is an array of strings, where each line 
+            represents a single line of code. Having lines 
+            separate makes it possible to easily track 
+            changes made to scripts.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Script.Url">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Script.Name">
+            <summary>
+            script name
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.StringOrNumber">
+            <summary>
+            Generic class to handle Json objects that are of type "oneOf" where
+            the choices are "String", "Integer", or null.
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Url">
+            <summary>
+            If object, contains the complete broken-down URL for this request. If string, contains the literal request URL.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Raw">
+            <summary>
+            The string representation of the request URL, including the protocol, host, path, hash, query parameter(s) and path variable(s).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Protocol">
+            <summary>
+            The protocol associated with the request, E.g: 'http'
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Host">
+            <summary>
+            The host for the URL, E.g: api.yourdomain.com. 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Path">
+            <summary>
+            The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Port">
+            <summary>
+            The port number present in this URL. An empty value implies 80/443 depending on whether the protocol field contains http/https.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.QueryParams">
+            <summary>
+            An array of QueryParams, which is basically the query string part of the URL, parsed into separate variables
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Url.Hash">
+            <summary>
+            Contains the URL fragment (if any). Usually this is not transmitted over the network, but it could be useful to store this in some cases.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.UrlEncodedParameter.Key">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.UrlEncodedParameter.Value">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.UrlEncodedParameter.Disabled">
+            <summary>
+            No description given 
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.UrlEncodedParameter.Description">
+            <summary>
+            A description of the header
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Id">
+            <summary>
+            A variable ID is a unique user-defined value that identifies the variable within a collection. In traditional terms, this would be a variable name.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Key">
+            <summary>
+            A variable key is a human friendly value that identifies the variable within a collection. In traditional terms, this would be a variable name.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Value">
+            <summary>
+            The value that a variable holds in this collection. Ultimately, the variables will be replaced by this value, when say running a set of requests from a collection
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Type">
+            <summary>
+            A variable may have multiple types. This field specifies the type of the variable.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Name">
+            <summary>
+            Variable name
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Description">
+            <summary>
+            The raw text description of the variable. NOTE: currently this class does not saupport the use of
+            objects to hold the description.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.System">
+            <summary>
+            When set to true, indicates that this variable has been set by Postman
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Variable.Disabled">
+            <summary>
+            No Description Given
+            </summary>
+        </member>
+        <member name="T:PostmanManager.Models.Version">
+            <summary>
+            Postman allows you to version your collections as they grow, 
+            and this field holds the version number. While optional, 
+            it is recommended that you use this field to its fullest extent!
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Version.Major">
+            <summary>
+            Increment this number if you make changes to the collection that changes its behaviour. 
+            E.g: Removing or adding new test scripts. (partly or completely).
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Version.Minor">
+            <summary>
+            You should increment this number if you make changes that will not break 
+            anything that uses the collection. E.g: removing a folder.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Version.Patch">
+            <summary>
+            Ideally, minor changes to a collection should result in the increment of this number.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Version.Identifier">
+            <summary>
+            A human friendly identifier to make sense of the version numbers. E.g: 'beta-3'
+            </summary>
+        </member>
+        <member name="P:PostmanManager.Models.Version.VersionAsString">
+            <summary>
+            Holds the string representation of a Postman Version if the JSON has
+            the Version stored as a string instead of an object
+            </summary>
+        </member>
+        <member name="T:PostmanManager.PostmanCollection">
+            <summary>
+            The root item for postman collections
+            <remarks>
+            FROM [geoffgr]. The summary documentation is directly from the postman 
+            schema listed below:
+            <code>
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "id": "https://schema.getpostman.com/json/collection/v2.1.0/",
+            </code>
+            <para>The C# objects created in this package are not guaranteed to be 
+            identical to the objects in postman, but they should always serialize to 
+            a json object that can be imported into Postman.</para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.Info">
+            <summary>
+            Detailed description of the info block
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.Items">
+            <summary>
+            Items are the basic unit for a Postman collection. 
+            You can think of them as corresponding to a single 
+            API endpoint. Each Item has one request and may have 
+            multiple API responses associated with it.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.Events">
+            <summary>
+            Postman allows you to configure scripts to run when specific events 
+            occur. These scripts are stored here, and can be referenced in the 
+            collection by their ID.
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.Variables">
+            <summary>
+            Collection variables allow you to define a set of variables, 
+            that are a *part of the collection*, as opposed to environments, 
+            which are separate entities.\n*Note: Collection variables must 
+            not contain any sensitive information.*
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.Auth">
+            <summary>
+            Represents authentication helpers provided by Postman
+            </summary>
+        </member>
+        <member name="P:PostmanManager.PostmanCollection.ProtocolProfileBehavior">
+            <summary>
+            Set of configurations used to alter the usual behavior of sending the request.
+            </summary>
+        </member>
+    </members>
+</doc>

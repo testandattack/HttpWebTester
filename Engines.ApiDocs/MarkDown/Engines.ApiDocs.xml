@@ -73,6 +73,13 @@
             </summary>
             <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
         </member>
+        <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Calls all the individual extraInfo extension methods
+            </summary>
+            <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+            <param name="extraInfo"></param>
+        </member>
         <member name="M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetOasVersion(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Sets the Open API Scec version used for the document
@@ -153,6 +160,13 @@
             A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiAny class
             </summary>
         </member>
+        <member name="M:OpenApiUtilities.OpenApiAnyExtensions.IsPrimitiveType(Microsoft.OpenApi.Any.IOpenApiAny)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
         <member name="M:OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(Microsoft.OpenApi.Any.IOpenApiAny)">
             <summary>
             Reads the passed in <see cref="T:Microsoft.OpenApi.Any.IOpenApiAny"/> object and returns the value
@@ -172,11 +186,16 @@
             A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiArray class
             </summary>
         </member>
-        <member name="M:OpenApiUtilities.OpenApiArrayExtensions.ToString(Microsoft.OpenApi.Any.OpenApiArray)">
+        <member name="M:OpenApiUtilities.OpenApiArrayExtensions.AsString(Microsoft.OpenApi.Any.OpenApiArray)">
             <summary>
             walks an array of items, retrieving the value from the <see cref="M:OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(Microsoft.OpenApi.Any.IOpenApiAny)"/> method
             </summary>
             <param name="source">The <c>IOpenApiArray</c> to which this method is exposed.</param>
+        </member>
+        <member name="T:OpenApiUtilities.OpenApiDocumentExtensions">
+            <summary>
+            A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiDocument class
+            </summary>
         </member>
     </members>
 </doc>

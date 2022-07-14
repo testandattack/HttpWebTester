@@ -56,6 +56,17 @@ namespace Engines.ApiDocs.Extensions
         }
 
         /// <summary>
+        /// Calls all the individual extraInfo extension methods
+        /// </summary>
+        /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>
+        /// <param name="extraInfo"></param>
+        public static void AddCoreInfo(this ApiSetEngine source, Dictionary<string, string> extraInfo)
+        {
+            source.SetOasVersion(extraInfo);
+            source.SetSchemes(extraInfo);
+        }
+
+        /// <summary>
         /// Sets the Open API Scec version used for the document
         /// </summary>
         /// <param name="source">The <c>ApiSetEngine</c> to which this method is exposed.</param>

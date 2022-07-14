@@ -58,8 +58,26 @@ The object that holds the parsed OAS document
 public Microsoft.OpenApi.Models.OpenApiDocument apiDocument { get; set; }
 ```
 
+Implements [apiDocument](https://docs.microsoft.com/en-us/dotnet/api/SharedResources.ISwaggerParser.apiDocument 'SharedResources.ISwaggerParser.apiDocument')
+
 #### Property Value
 [Microsoft.OpenApi.Models.OpenApiDocument](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiDocument 'Microsoft.OpenApi.Models.OpenApiDocument')
+
+<a name='GTC.SwaggerParsing.SwaggerUrlParser.extraInfo'></a>
+
+## SwaggerUrlParser.extraInfo Property
+
+This dictionary stores info from the serialized string that is not
+picked up by the `OpenApiDocument` object.
+
+```csharp
+public System.Collections.Generic.Dictionary<string,string> extraInfo { get; set; }
+```
+
+Implements [extraInfo](https://docs.microsoft.com/en-us/dotnet/api/SharedResources.ISwaggerParser.extraInfo 'SharedResources.ISwaggerParser.extraInfo')
+
+#### Property Value
+[System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
 
 <a name='GTC.SwaggerParsing.SwaggerUrlParser.settings'></a>
 
@@ -70,6 +88,8 @@ the local instance of the [GTC.HttpWebTester.Settings.Settings](https://docs.mic
 ```csharp
 public GTC.HttpWebTester.Settings.Settings settings { get; set; }
 ```
+
+Implements [settings](https://docs.microsoft.com/en-us/dotnet/api/SharedResources.ISwaggerParser.settings 'SharedResources.ISwaggerParser.settings')
 
 #### Property Value
 [GTC.HttpWebTester.Settings.Settings](https://docs.microsoft.com/en-us/dotnet/api/GTC.HttpWebTester.Settings.Settings 'GTC.HttpWebTester.Settings.Settings')

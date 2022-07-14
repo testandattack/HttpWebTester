@@ -3,8 +3,8 @@
 
 ## Property Class
 
-A custom object that implements some of the 
-[http://spec.openapis.org/oas/v3.0.3#properties](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#properties 'http://spec.openapis.org/oas/v3.0.3#properties') listed in 
+A custom object that implements some of the   
+[http://spec.openapis.org/oas/v3.0.3#properties](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#properties 'http://spec.openapis.org/oas/v3.0.3#properties') listed in   
 the OpenApiSpec.
 
 ```csharp
@@ -18,7 +18,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## Property.arrayFormat Property
 
-If array is of an OpenApi primitive type, this field describes the
+If array is of an OpenApi primitive type, this field describes the  
 format of the type contained in the array.
 
 ```csharp
@@ -29,12 +29,12 @@ public string arrayFormat { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-Primitives have an optional modifier property: format. OAS uses several known formats 
-to define in fine detail the data type being used. However, to support documentation 
-needs, the format property is an open string-valued property, and can have any value. 
-Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
-specification. Types that are not accompanied by a format property follow the type 
-definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+Primitives have an optional modifier property: format. OAS uses several known formats   
+to define in fine detail the data type being used. However, to support documentation   
+needs, the format property is an open string-valued property, and can have any value.   
+Formats such as "email", "uuid", and so on, MAY be used even though undefined by this   
+specification. Types that are not accompanied by a format property follow the type   
+definition in the JSON Schema. Tools that do not recognize a specific format MAY default   
 back to the type alone, as if the format is not specified.
 
 <a name='ApiTestGenerator.Models.ApiDocs.Property.arrayType'></a>
@@ -51,10 +51,10 @@ public string arrayType { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-Primitive data types in the OAS are based on the types supported by the JSON Schema 
-Specification Wright Draft 00. Note that integer as a type is also supported and is 
-defined as a JSON number without a fraction or exponent part. null is not supported 
-as a type (see nullable for an alternative solution). Models are defined using the 
+Primitive data types in the OAS are based on the types supported by the JSON Schema   
+Specification Wright Draft 00. Note that integer as a type is also supported and is   
+defined as a JSON number without a fraction or exponent part. null is not supported   
+as a type (see nullable for an alternative solution). Models are defined using the   
 Schema Object, which is an extended subset of JSON Schema Specification Wright Draft 00.
 
 <a name='ApiTestGenerator.Models.ApiDocs.Property.customEndPointObjects'></a>
@@ -84,15 +84,15 @@ public string Description { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-The text that shows up in the Description 
-            is any text added through XML Comments to the parameter 
+The text that shows up in the Description   
+            is any text added through XML Comments to the parameter   
             in the API code
 
 <a name='ApiTestGenerator.Models.ApiDocs.Property.Format'></a>
 
 ## Property.Format Property
 
-If array is of an OpenApi primitive type, this field describes the
+If array is of an OpenApi primitive type, this field describes the  
 format of the type contained in the array.
 
 ```csharp
@@ -103,12 +103,12 @@ public string Format { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-Primitives have an optional modifier property: format. OAS uses several known formats 
-to define in fine detail the data type being used. However, to support documentation 
-needs, the format property is an open string-valued property, and can have any value. 
-Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
-specification. Types that are not accompanied by a format property follow the type 
-definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+Primitives have an optional modifier property: format. OAS uses several known formats   
+to define in fine detail the data type being used. However, to support documentation   
+needs, the format property is an open string-valued property, and can have any value.   
+Formats such as "email", "uuid", and so on, MAY be used even though undefined by this   
+specification. Types that are not accompanied by a format property follow the type   
+definition in the JSON Schema. Tools that do not recognize a specific format MAY default   
 back to the type alone, as if the format is not specified.
 
 <a name='ApiTestGenerator.Models.ApiDocs.Property.IsArray'></a>
@@ -141,7 +141,7 @@ public string Name { get; set; }
 
 ## Property.propertyParsingError Property
 
-A string that holds any error message that arose while parsing the component
+A string that holds any error message that arose while parsing the component  
 for all properties.
 
 ```csharp
@@ -155,8 +155,8 @@ public string propertyParsingError { get; set; }
 
 ## Property.Reference Property
 
-A string pointing to another object to be referenced.
-[http://spec.openapis.org/oas/v3.0.3#fixed-fields-18](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#fixed-fields-18 'http://spec.openapis.org/oas/v3.0.3#fixed-fields-18') 
+A string pointing to another object to be referenced.  
+[http://spec.openapis.org/oas/v3.0.3#fixed-fields-18](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#fixed-fields-18 'http://spec.openapis.org/oas/v3.0.3#fixed-fields-18')   
 for more information.
 
 ```csharp
@@ -170,7 +170,7 @@ public string Reference { get; set; }
 
 ## Property.Type Property
 
-The [OpenApi defined Type](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#data-types 'http://spec.openapis.org/oas/v3.0.3#data-types') 
+The [OpenApi defined Type](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#data-types 'http://spec.openapis.org/oas/v3.0.3#data-types')   
 of the property.
 
 ```csharp

@@ -32,3 +32,4 @@
 | :--- | :--- |
 | [OpenApiAnyExtensions](OpenApiAnyExtensions.md 'OpenApiUtilities.OpenApiAnyExtensions') | A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiAny class |
 | [OpenApiArrayExtensions](OpenApiArrayExtensions.md 'OpenApiUtilities.OpenApiArrayExtensions') | A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiArray class |
+| [OpenApiDocumentExtensions](OpenApiDocumentExtensions.md 'OpenApiUtilities.OpenApiDocumentExtensions') | A set of extension methods to work on the Microsoft.OpenApi.Models.OpenApiDocument class |

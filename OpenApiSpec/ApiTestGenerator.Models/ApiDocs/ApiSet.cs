@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using GTC.HttpWebTester.Settings;
+using System.ComponentModel;
+using ApiTestGenerator.Models.Enums;
+using Newtonsoft.Json.Converters;
 
 namespace ApiTestGenerator.Models.ApiDocs
 {
@@ -33,7 +36,29 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// The left part of the UriStem that comes before 'controller' names.
         /// </summary>
+        /// <remarks>
+        /// The OAS allows for [but does not require] the definition of a "basePath" node, which is part of the
+        /// url to reach an API operation. Some OAS generators will define this value. Some will leave the root 
+        /// as part of the <see cref="Servers"/> Url address. Some will leave the value as the first part of 
+        /// the 'path' node. Some may not define a root for the api. <br/>
+        /// This variable holds one of the following values:
+        /// <list type="number">
+        /// <item>The value defined in the <c>basePath</c> node, if present will be stored here.</item>
+        /// <item>The value added to the <c>settings.json</c> file, if defined will be stored here.</item>
+        /// <item>The Servers Url addresses will be searched for a common value with an 
+        /// extension method and (if found) will be stored here.</item>
+        /// <item>An empty string if there is not a common basePath, or if the value is
+        /// not provided by one of the above items.</item>
+        /// </list>
+        /// </remarks>
         public string apiRoot { get; set; }
+
+        /// <summary>
+        /// Lists the source for the <see cref="ApiSet.apiRoot"/> object
+        /// </summary>
+        [DefaultValue(ApiRootSourceEnum.empty)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApiRootSourceEnum apiRootSourceLocation { get; set; }
 
         /// <summary>
         /// The Open API Specification version used for creating the document.
@@ -96,6 +121,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <param name="settings"></param>
         public ApiSet(Settings settings)
         {
+            apiRootSourceLocation = ApiRootSourceEnum.empty;
             Initialize(string.Empty, settings);
         }
 
@@ -106,6 +132,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <param name="settings"></param>
         public ApiSet(string ApiRoot, Settings settings)
         {
+            apiRootSourceLocation = ApiRootSourceEnum.settingsFile;
             Initialize(ApiRoot, settings);
         }
 

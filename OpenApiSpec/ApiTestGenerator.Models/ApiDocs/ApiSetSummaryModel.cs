@@ -1,6 +1,10 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using ApiTestGenerator.Models.Enums;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace ApiTestGenerator.Models.ApiDocs
@@ -12,6 +16,12 @@ namespace ApiTestGenerator.Models.ApiDocs
     public class ApiSetSummaryModel
     {
         #region -- Properties -----
+        #region -- items inherited from ApiSet -----
+        /// <summary>
+        /// A string containing the Open API Specification version of the OAS document that this summary represents.
+        /// </summary>
+        public string oasVersion { get; set; }
+        
         /// <summary>
         /// A copy of the <see cref="http://spec.openapis.org/oas/v3.0.3#info-object">OpenApiInfo</see> object
         /// from the API Documentation
@@ -23,6 +33,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// "controller" name i nthe path.
         /// </summary>
         public string apiRoot { get; set; }
+
+        /// <summary>
+        /// Lists the source for the <see cref="ApiSet.apiRoot"/> object
+        /// </summary>
+        [DefaultValue(ApiRootSourceEnum.empty)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApiRootSourceEnum apiRootSourceLocation { get; set; }
+        #endregion
 
         /// <summary>
         /// the number of <see cref="Controller"/> items in the set.
@@ -94,7 +112,6 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         public int numInputParametersWithoutLookupProperty { get; set; }
 
-
         /// <summary>
         /// The number of endpoints that have one or more <see cref="ExampleValue"/> items 
         /// for their input parameters.
@@ -128,6 +145,19 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         #region -- Constructors -----
         public ApiSetSummaryModel()
+        {
+            apiRoot = string.Empty;
+            Initialize();
+        }
+
+        public ApiSetSummaryModel(string ApiRoot)
+        {
+            apiRoot = ApiRoot;
+            Initialize();
+        }
+
+
+        private void Initialize()
         {
             responseStatuses = new List<string>();
 

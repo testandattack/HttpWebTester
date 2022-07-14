@@ -33,3 +33,19 @@ The `IOpenApiAny` to which this method is exposed.
 #### Returns
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')  
 a string representation of the contained primitive value.
+
+<a name='OpenApiUtilities.OpenApiAnyExtensions.IsPrimitiveType(thisMicrosoft.OpenApi.Any.IOpenApiAny)'></a>
+
+## OpenApiAnyExtensions.IsPrimitiveType(this IOpenApiAny) Method
+
+```csharp
+public static bool IsPrimitiveType(this Microsoft.OpenApi.Any.IOpenApiAny source);
+```
+#### Parameters
+
+<a name='OpenApiUtilities.OpenApiAnyExtensions.IsPrimitiveType(thisMicrosoft.OpenApi.Any.IOpenApiAny).source'></a>
+
+`source` [Microsoft.OpenApi.Any.IOpenApiAny](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Any.IOpenApiAny 'Microsoft.OpenApi.Any.IOpenApiAny')
+
+#### Returns
+[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')

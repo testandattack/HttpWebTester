@@ -3,7 +3,7 @@
 
 ## ObjectTypeEnum Enum
 
-Enumerates the types of data objects that can be found in
+Enumerates the types of data objects that can be found in  
 an [Microsoft.OpenApi.Models.OpenApiSchema](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema 'Microsoft.OpenApi.Models.OpenApiSchema') object
 
 ```csharp

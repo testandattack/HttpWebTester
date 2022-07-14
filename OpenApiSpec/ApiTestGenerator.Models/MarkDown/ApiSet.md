@@ -3,13 +3,13 @@
 
 ## ApiSet Class
 
-This class defines a Model used for translating various different web based API 
-calls between the different formats. It is based on the Open API Specification.
-The idea is to allow an engine to populate this model with information from
-sources like:
-- An OAS document
-- An Http Archive (HAR) file.
-- A Postman request collection.
+This class defines a Model used for translating various different web based API   
+calls between the different formats. It is based on the Open API Specification.  
+The idea is to allow an engine to populate this model with information from  
+sources like:  
+- An OAS document  
+- An Http Archive (HAR) file.  
+- A Postman request collection.  
 and turn the results into a test harness that can be executed.
 
 ```csharp
@@ -76,6 +76,32 @@ public string apiRoot { get; set; }
 
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+### Remarks
+The OAS allows for [but does not require] the definition of a "basePath" node, which is part of the  
+url to reach an API operation. Some OAS generators will define this value. Some will leave the root   
+as part of the [Servers](ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.Servers 'ApiTestGenerator.Models.ApiDocs.ApiSet.Servers') Url address. Some will leave the value as the first part of   
+the 'path' node. Some may not define a root for the api. <br/>  
+This variable holds one of the following values:  
+1. The value defined in the `basePath` node, if present will be stored here.  
+2. The value added to the `settings.json` file, if defined will be stored here.  
+3. The Servers Url addresses will be searched for a common value with an   
+              extension method and (if found) will be stored here.  
+4. An empty string if there is not a common basePath, or if the value is  
+              not provided by one of the above items.
+
+<a name='ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation'></a>
+
+## ApiSet.apiRootSourceLocation Property
+
+Lists the source for the [apiRoot](ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot 'ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot') object
+
+```csharp
+public ApiTestGenerator.Models.Enums.ApiRootSourceEnum apiRootSourceLocation { get; set; }
+```
+
+#### Property Value
+[ApiRootSourceEnum](ApiRootSourceEnum.md 'ApiTestGenerator.Models.Enums.ApiRootSourceEnum')
 
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSet.Components'></a>
 

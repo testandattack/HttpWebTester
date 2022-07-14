@@ -1,6 +1,10 @@
 https://github.com/testandattack/HttpWebTester/blob/master/ApiTestGenerator.Models/MarkDown/
 N:ApiTestGenerator.Models.Enums|ApiTestGenerator.Models.md#ApiTestGenerator.Models.Enums|ApiTestGenerator.Models.Enums
 T:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum|AnalyzerErrorCategoryEnum.md|AnalyzerErrorCategoryEnum
+F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath|ApiRootSourceEnum.md#ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath|basePath
+F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.settingsFile|ApiRootSourceEnum.md#ApiTestGenerator.Models.Enums.ApiRootSourceEnum.settingsFile|settingsFile
+F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.empty|ApiRootSourceEnum.md#ApiTestGenerator.Models.Enums.ApiRootSourceEnum.empty|empty
+T:ApiTestGenerator.Models.Enums.ApiRootSourceEnum|ApiRootSourceEnum.md|ApiRootSourceEnum
 F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.RestrictTo|CustomEndPointObjectTypeEnum.md#ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.RestrictTo|RestrictTo
 F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.ProvidesValuesFor|CustomEndPointObjectTypeEnum.md#ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.ProvidesValuesFor|ProvidesValuesFor
 F:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.MethodName|CustomEndPointObjectTypeEnum.md#ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum.MethodName|MethodName
@@ -90,6 +94,7 @@ N:ApiTestGenerator.Models.ApiDocs|ApiTestGenerator.Models.md#ApiTestGenerator.Mo
 T:ApiTestGenerator.Models.ApiDocs.AbbreviatedResponseObject|AbbreviatedResponseObject.md|AbbreviatedResponseObject
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.settings|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.settings|settings
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot|apiRoot
+P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation|apiRootSourceLocation
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.OasVersion|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.OasVersion|OasVersion
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.Info|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.Info|Info
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.Servers|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.Servers|Servers
@@ -101,8 +106,10 @@ M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor|ApiSet.md#ApiTestGenerator.Models
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(GTC.HttpWebTester.Settings.Settings)|ApiSet(Settings)
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(System.String,GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(string,GTC.HttpWebTester.Settings.Settings)|ApiSet(string, Settings)
 T:ApiTestGenerator.Models.ApiDocs.ApiSet|ApiSet.md|ApiSet
+P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion|oasVersion
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiInfo|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiInfo|apiInfo
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRoot|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRoot|apiRoot
+P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRootSourceLocation|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRootSourceLocation|apiRootSourceLocation
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numControllers|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numControllers|numControllers
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numActiveEndpoints|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numActiveEndpoints|numActiveEndpoints
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numDepricated|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numDepricated|numDepricated
@@ -206,7 +213,8 @@ T:ApiTestGenerator.Models.ApiDocs.RequestBody|RequestBody.md|RequestBody
 P:ApiTestGenerator.Models.ApiDocs.ResponseObject.Description|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.Description|Description
 P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectName|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectName|ResponseObjectName
 P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectType|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectType|ResponseObjectType
-P:ApiTestGenerator.Models.ApiDocs.ResponseObject.responseObjectExampleText|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.responseObjectExampleText|responseObjectExampleText
+P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleText|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleText|ResponseObjectExampleText
+P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleTextIsEncoded|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleTextIsEncoded|ResponseObjectExampleTextIsEncoded
 P:ApiTestGenerator.Models.ApiDocs.ResponseObject.abbreviatedResponseObjects|ResponseObject.md#ApiTestGenerator.Models.ApiDocs.ResponseObject.abbreviatedResponseObjects|abbreviatedResponseObjects
 T:ApiTestGenerator.Models.ApiDocs.ResponseObject|ResponseObject.md|ResponseObject
 P:ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.apiSet|ApiSetAnalysis.md#ApiTestGenerator.Models.ApiAnalyzer.ApiSetAnalysis.apiSet|apiSet

@@ -13,6 +13,7 @@ using System.Text;
 using GTC.HttpWebTester.Settings;
 using SharedResources;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// A simple utility to read/write Swagger Documentation from/to a URL or a static file and 
@@ -178,6 +179,7 @@ namespace GTC.SwaggerParsing
             extraInfo = new Dictionary<string, string>();
 
             GetOasVersion(ref serializedDocument);
+            GetBasePath(ref serializedDocument);
             GetSchemes(ref serializedDocument);
         }
 
@@ -195,6 +197,21 @@ namespace GTC.SwaggerParsing
             else
             {
                 extraInfo.Add("OAS Version", oasVersion);
+            }
+        }
+
+        private void GetBasePath(ref string serializedDocument)
+        {
+            string basePath = serializedDocument.FindSubString("\"basePath\": \"", "\"");
+            if (basePath == string.Empty)
+            {
+                extraInfo.Add("basePath", "");
+                Log.ForContext("Source Context", "SwaggerUrlParser").Information("GetBasePath did not find an entry.");
+            }
+            else
+            {
+                extraInfo.Add("basePath", basePath);
+                Log.ForContext("Source Context", "SwaggerUrlParser").Information("GetBasePath found {basePath}", basePath);
             }
         }
 

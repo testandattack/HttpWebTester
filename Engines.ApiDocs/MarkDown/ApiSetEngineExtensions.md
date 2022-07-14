@@ -10,6 +10,27 @@ public static class ApiSetEngineExtensions
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; ApiSetEngineExtensions
 ### Methods
 
+<a name='Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_)'></a>
+
+## ApiSetEngineExtensions.AddCoreInfo(this ApiSetEngine, Dictionary<string,string>) Method
+
+Calls all the individual extraInfo extension methods
+
+```csharp
+public static void AddCoreInfo(this Engines.ApiDocs.ApiSetEngine source, System.Collections.Generic.Dictionary<string,string> extraInfo);
+```
+#### Parameters
+
+<a name='Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_).source'></a>
+
+`source` [ApiSetEngine](ApiSetEngine.md 'Engines.ApiDocs.ApiSetEngine')
+
+The `ApiSetEngine` to which this method is exposed.
+
+<a name='Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_).extraInfo'></a>
+
+`extraInfo` [System.Collections.Generic.Dictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2 'System.Collections.Generic.Dictionary`2')
+
 <a name='Engines.ApiDocs.Extensions.ApiSetEngineExtensions.GetListOfURLs(thisEngines.ApiDocs.ApiSetEngine)'></a>
 
 ## ApiSetEngineExtensions.GetListOfURLs(this ApiSetEngine) Method

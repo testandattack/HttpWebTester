@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HttpWebTester.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "twc_osmc.json twc_osmc.cs"
+    }
+  }
+}

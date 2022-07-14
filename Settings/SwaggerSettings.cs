@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
@@ -15,6 +16,8 @@ namespace GTC.HttpWebTester.Settings
         /// <summary>
         /// The root portion of the API's UriStem.
         /// </summary>
+        [DefaultValue("")]
+        [JsonProperty("apiRoot", DefaultValueHandling = DefaultValueHandling.Populate)]
         public string apiRoot { get; set; }
 
         /// <summary>
@@ -51,8 +54,23 @@ namespace GTC.HttpWebTester.Settings
         /// the parser will get the Swagger Document from the 
         /// <see cref="BaseUriAddress"/> and <see cref="SwaggerStreamLocation"/>
         /// </summary>
+        [DefaultValue(true)]
         public bool ReadSwaggerFromFile { get; set; }
 
+        /// <summary>
+        /// If true, then the app will attempt to generate C# code from the 
+        /// components section of the OAS
+        /// </summary>
+        [DefaultValue(false)]
+        public bool GenerateDtoCode { get; set; }
+
+        /// <summary>
+        /// If true, the parser will continue working on the AOS parsing if
+        /// the Code generation throws an error.
+        /// </summary>
+        [DefaultValue(true)]
+        public bool IgnoreDtoCodeGenerationErrors { get; set; }
+        
         /// <summary>
         /// The name of the file to use when saving the generated DTO code.
         /// </summary>
@@ -71,11 +89,13 @@ namespace GTC.HttpWebTester.Settings
         /// <summary>
         /// Should exception classes be generated?
         /// </summary>
+        [DefaultValue(false)]
         public bool GenerateExceptionClasses { get; set; }
 
         /// <summary>
         /// Should client classes be generated?
         /// </summary>
+        [DefaultValue(false)]
         public bool GenerateClientClasses { get; set; }
     }
 }

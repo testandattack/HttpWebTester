@@ -24,7 +24,7 @@ public string ControllerName { get; set; }
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 ### Remarks
-For controllers that have lookup calls which share
-the same output DTO as a call in the "Lookups" controller,
-This field will track that and will be used to provide
+For controllers that have lookup calls which share  
+the same output DTO as a call in the "Lookups" controller,  
+This field will track that and will be used to provide  
 input to the other endpoints in the same controller.

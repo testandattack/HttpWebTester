@@ -1,9 +1,11 @@
 https://github.com/testandattack/HttpWebTester/blob/master/Engines.ApiDocs/MarkDown/
+M:OpenApiUtilities.OpenApiAnyExtensions.IsPrimitiveType(Microsoft.OpenApi.Any.IOpenApiAny)|OpenApiAnyExtensions.md#OpenApiUtilities.OpenApiAnyExtensions.IsPrimitiveType(thisMicrosoft.OpenApi.Any.IOpenApiAny)|IsPrimitiveType(this IOpenApiAny)
 M:OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(Microsoft.OpenApi.Any.IOpenApiAny)|OpenApiAnyExtensions.md#OpenApiUtilities.OpenApiAnyExtensions.GetPrimitiveValue(thisMicrosoft.OpenApi.Any.IOpenApiAny)|GetPrimitiveValue(this IOpenApiAny)
 N:OpenApiUtilities|Engines.ApiDocs.md#OpenApiUtilities|OpenApiUtilities
 T:OpenApiUtilities.OpenApiAnyExtensions|OpenApiAnyExtensions.md|OpenApiAnyExtensions
-M:OpenApiUtilities.OpenApiArrayExtensions.ToString(Microsoft.OpenApi.Any.OpenApiArray)|OpenApiArrayExtensions.md#OpenApiUtilities.OpenApiArrayExtensions.ToString(thisMicrosoft.OpenApi.Any.OpenApiArray)|ToString(this OpenApiArray)
+M:OpenApiUtilities.OpenApiArrayExtensions.AsString(Microsoft.OpenApi.Any.OpenApiArray)|OpenApiArrayExtensions.md#OpenApiUtilities.OpenApiArrayExtensions.AsString(thisMicrosoft.OpenApi.Any.OpenApiArray)|AsString(this OpenApiArray)
 T:OpenApiUtilities.OpenApiArrayExtensions|OpenApiArrayExtensions.md|OpenApiArrayExtensions
+T:OpenApiUtilities.OpenApiDocumentExtensions|OpenApiDocumentExtensions.md|OpenApiDocumentExtensions
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(System.String)|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(string)|SaveEndpointSummariesAsCsv(string)
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis()|SerializeAndSaveApiSetAnalysis()
 M:Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis(System.String)|ApiSetAnalysisEngine.md#Engines.ApiDocs.ApiSetAnalysisEngine.SerializeAndSaveApiSetAnalysis(string)|SerializeAndSaveApiSetAnalysis(string)
@@ -19,6 +21,7 @@ N:Engines.ApiDocs.Extensions|Engines.ApiDocs.md#Engines.ApiDocs.Extensions|Engin
 T:Engines.ApiDocs.Extensions.ApiSetAnalysisExtensions|ApiSetAnalysisExtensions.md|ApiSetAnalysisExtensions
 M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SaveListOfURLs(Engines.ApiDocs.ApiSetEngine,System.String)|ApiSetEngineExtensions.md#Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SaveListOfURLs(thisEngines.ApiDocs.ApiSetEngine,string)|SaveListOfURLs(this ApiSetEngine, string)
 M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.GetListOfURLs(Engines.ApiDocs.ApiSetEngine)|ApiSetEngineExtensions.md#Engines.ApiDocs.Extensions.ApiSetEngineExtensions.GetListOfURLs(thisEngines.ApiDocs.ApiSetEngine)|GetListOfURLs(this ApiSetEngine)
+M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})|ApiSetEngineExtensions.md#Engines.ApiDocs.Extensions.ApiSetEngineExtensions.AddCoreInfo(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_)|AddCoreInfo(this ApiSetEngine, Dictionary<string,string>)
 M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetOasVersion(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})|ApiSetEngineExtensions.md#Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetOasVersion(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_)|SetOasVersion(this ApiSetEngine, Dictionary<string,string>)
 M:Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetSchemes(Engines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary{System.String,System.String})|ApiSetEngineExtensions.md#Engines.ApiDocs.Extensions.ApiSetEngineExtensions.SetSchemes(thisEngines.ApiDocs.ApiSetEngine,System.Collections.Generic.Dictionary_string,string_)|SetSchemes(this ApiSetEngine, Dictionary<string,string>)
 T:Engines.ApiDocs.Extensions.ApiSetEngineExtensions|ApiSetEngineExtensions.md|ApiSetEngineExtensions
