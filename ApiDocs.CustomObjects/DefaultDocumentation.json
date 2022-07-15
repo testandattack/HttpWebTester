@@ -2,10 +2,8 @@
   "LinksBaseUrl": "https://github.com/testandattack/HttpWebTester/blob/master/ApiDocs.CustomObjects/MarkDown/",
   "LinksOutputFilePath": "MarkDown\\ApiDocs.CustomObjects.txt",
   "GeneratedAccessModifiers": "Public,Protected,ProtectedInternal",
-  "Markdown": {
-    "IgnoreLineBreak": true,
-    "TableOfContentsModes": "IncludeKind,IncludeSummary"
-  },
+  "Markdown.IgnoreLineBreak": true,
+  "Markdown.TableOfContentsModes": "IncludeKind,IncludeSummary",
   "GeneratedPages": "Assembly,Types",
   "AssemblyPageName": "ApiDocs.CustomObjects",
   "FileNameFactory": "Name"

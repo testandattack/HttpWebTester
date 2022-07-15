@@ -90,6 +90,12 @@
             The object that holds the parsed OAS document
             </summary>
         </member>
+        <member name="P:GTC.SwaggerParsing.SwaggerUrlParser.extraInfo">
+            <summary>
+            This dictionary stores info from the serialized string that is not
+            picked up by the <c>OpenApiDocument</c> object.
+            </summary>
+        </member>
         <member name="M:GTC.SwaggerParsing.SwaggerUrlParser.#ctor">
             <summary>
             Creates a new instance of the parser using the <c>settings.json</c> file in the

@@ -106,9 +106,9 @@ namespace Engines.ApiDocs
             Dictionary<int, string> endpoints = new Dictionary<int, string>();
             foreach (var item in asa.endpointSummaries)
             {
-                //string url = item.Key.Substring(item.Key.IndexOf("/api/"));
-                string url = item.Key.Substring(item.Key.IndexOf(asa.summaryInfo.apiRoot));
-                if(endpoints.ContainsValue(url) == true)
+                string url = GetUrlWithoutBasePath(item);
+
+                if (endpoints.ContainsValue(url) == true)
                 {
                     if (asa.endpointsWithMultipleMethods.ContainsKey(url))
                     {
@@ -142,6 +142,21 @@ namespace Engines.ApiDocs
                     asa.endpointsWithMultipleMethods.Remove(item.Key);
                 }
             }
+        }
+
+        private string GetUrlWithoutBasePath(KeyValuePair<string, EndpointSummary> item)
+        {
+            string url;
+            if (asa.summaryInfo.apiRootSourceLocation == ApiRootSourceEnum.settingsFile)
+            {
+                url = item.Key.Substring(item.Key.IndexOf(asa.summaryInfo.apiRoot));
+            }
+            else
+            {
+                url = item.Key;
+            }
+
+            return url;
         }
 
         public void AnalyzeApiComponents()

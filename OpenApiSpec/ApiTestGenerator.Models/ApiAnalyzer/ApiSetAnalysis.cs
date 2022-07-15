@@ -142,6 +142,9 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
             apiSet = ApiSet;
             summaryInfo = new ApiSetSummaryModel();
             summaryInfo.apiInfo = apiSet.Info;
+            summaryInfo.apiRoot = apiSet.apiRoot;
+            summaryInfo.apiRootSourceLocation = apiSet.apiRootSourceLocation;
+            summaryInfo.oasVersion = apiSet.OasVersion;
             InitializeCollections();
         }
 

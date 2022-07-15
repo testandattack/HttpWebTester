@@ -51,6 +51,7 @@
 | Enums | |
 | :--- | :--- |
 | [AnalyzerErrorCategoryEnum](AnalyzerErrorCategoryEnum.md 'ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum') | Defines the category of error in the ApiSetAnalyzerError list |
+| [ApiRootSourceEnum](ApiRootSourceEnum.md 'ApiTestGenerator.Models.Enums.ApiRootSourceEnum') | Lists the source for the [apiRoot](ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot 'ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot') object |
 | [CustomEndPointObjectTypeEnum](CustomEndPointObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum') | Enumerates the types of [CustomEndPointObject](https://docs.microsoft.com/en-us/dotnet/api/CustomEndPointObject 'CustomEndPointObject')s that are currently supported. |
 | [ObjectTypeEnum](ObjectTypeEnum.md 'ApiTestGenerator.Models.Enums.ObjectTypeEnum') | Enumerates the types of data objects that can be found in<br/>an [Microsoft.OpenApi.Models.OpenApiSchema](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema 'Microsoft.OpenApi.Models.OpenApiSchema') object |
 | [ParameterIsInEnum](ParameterIsInEnum.md 'ApiTestGenerator.Models.Enums.ParameterIsInEnum') | Lists the locations within an OpenApiOperation that a parameter can show up. |

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DefaultDocumentation" Version="0.8.0" PrivateAssets="all" />
+    <PackageReference Include="JsonSubTypes" Version="1.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NJsonSchema.CodeGeneration.CSharp" Version="10.7.2" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="ServiceStack.Api.Postman" Version="1.0.11" />
+    <PackageReference Include="TestAndAttack.Extensions" Version="2.1.0" />
+    <PackageReference Include="TestAndAttack.OpenApiUtilities" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MarkDown\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
+    <ProjectReference Include="..\OpenApiSpec\Engines.ApiDocs\Engines.ApiDocs.csproj" />
+    <ProjectReference Include="..\Settings\Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sampleCollection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="dataCatalogPostman.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PostmanCollectionSchema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

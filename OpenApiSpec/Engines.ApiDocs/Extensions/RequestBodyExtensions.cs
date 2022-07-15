@@ -13,7 +13,8 @@ namespace Engines.ApiDocs.Extensions
             foreach (var property in openApiSchema.Properties)
             {
                 source.properties.Add(property.Key, property.Value.GetPropertyItem(property.Key, endpointName));
-                if (property.Value.Type.ToLower() == "string" && property.Value.Format.ToLower() == "binary")
+                if (property.Value.Type.ToLower() == "string" 
+                        && (property.Value.Format == null || property.Value.Format.ToLower() == "binary"))
                 {
                     source.FormPostFileUploadPropertyName = property.Key;
                 }

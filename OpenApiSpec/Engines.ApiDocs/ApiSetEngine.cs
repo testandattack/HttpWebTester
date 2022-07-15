@@ -16,6 +16,7 @@ using GTC.Extensions;
 using System.Text.RegularExpressions;
 using GTC.HttpWebTester.Settings;
 using ApiDocs.CustomObjects;
+using OpenApiUtilities;
 
 namespace Engines.ApiDocs
 {
@@ -47,13 +48,17 @@ namespace Engines.ApiDocs
             settings = Settings;
         }
 
-        public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot)
+        public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot, Dictionary<string, string> extraInfo)
         {
             apiSet = new ApiSet(ApiRoot, settings);
             // This call adds all of the custom objects that have been registered in the "ApiDocs.CustomObjects" namespace.
             //apiSet.CustomObjects.collection = AddAllCustomObjects.BuildCustomObjects();
 
             Log.ForContext("SourceContext", "ApiSetEngine").Information("BuildApiSetEngine: Starting parse of {@value1}", openApiDocument.Info);
+
+            // First, take care of the basePath
+            SetExtraInfo(ApiRoot, extraInfo);
+
             apiSet.Info = openApiDocument.Info;
             GetSecurityInfo(openApiDocument);
             AddServers(openApiDocument);
@@ -63,6 +68,27 @@ namespace Engines.ApiDocs
         #endregion
 
         #region -- Public Methods -----
+        public void SetExtraInfo(string apiRootFromSettings, Dictionary<string, string> extraInfo)
+        {
+            if (extraInfo.ContainsKey("basePath"))
+            {
+                if (extraInfo["basePath"] != "")
+                {
+                    apiSet.apiRoot = extraInfo["basePath"];
+                    apiSet.apiRootSourceLocation = ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath;
+                    return;
+                }
+            }
+            if(apiRootFromSettings != string.Empty)
+            {
+                apiSet.apiRoot = apiRootFromSettings;
+                apiSet.apiRootSourceLocation = ApiRootSourceEnum.settingsFile;
+                return;
+            }
+            apiSet.apiRoot = string.Empty;
+            apiSet.apiRootSourceLocation = ApiRootSourceEnum.empty;
+        }
+
         public void GetSecurityInfo(OpenApiDocument openApiDocument)
         {
             this.GetSecurityRequirementInfo(openApiDocument.SecurityRequirements.ToList());
@@ -70,6 +96,8 @@ namespace Engines.ApiDocs
 
         public void BuildControllerList(OpenApiDocument openApiDocument)
         {
+            List<string> controllerNames = openApiDocument.GetAllOperationTags();
+
             int currentRequestId = 1;
             foreach (var path in openApiDocument.Paths)
             {
@@ -119,8 +147,10 @@ namespace Engines.ApiDocs
         {
             // The path Key is the UriPath of the API endpoint. The controller name is
             // made by taking the first part of the path after the root.
-            // Get the controller name that this path would belong to,
-            string controllerName = path.Key.FindSubString(apiSet.apiRoot, "/", true);
+            // Get the controller name that this path would belong to.
+
+
+            string controllerName = GetControllerNameFromApiRoot(path.Key);
             foreach (var controller in apiSet.Controllers.Values)
             {
                 if (controller.Name == controllerName)
@@ -138,6 +168,30 @@ namespace Engines.ApiDocs
             return newController;
         }
 
+        private string GetControllerNameFromApiRoot(string pathKey)
+        {
+            // Note, Need to make sure the string does not start with a '/' character.
+            string cleanPathKey;
+            if (pathKey.StartsWith("/") == true)
+                cleanPathKey = pathKey.Substring(1);
+            else
+                cleanPathKey = pathKey;
+
+            // Now get the first part of the URL
+            switch(apiSet.apiRootSourceLocation)
+            {
+                case ApiRootSourceEnum.basePath:
+                case ApiRootSourceEnum.empty:
+                    return cleanPathKey.GetLeftPart("/", false);
+
+                case ApiRootSourceEnum.settingsFile:
+                    return pathKey.FindSubString(apiSet.apiRoot, "/", true);
+
+                default:
+                    return cleanPathKey.GetLeftPart("/", false);
+            }
+        }
+
         private int AddEndPoints(Controller controller, string pathUri, OpenApiPathItem path, int startingId)
         {
             OpenApiPathItem item = path;
@@ -149,62 +203,6 @@ namespace Engines.ApiDocs
             }
             return startingId;
         }
-
-        //private static int ParseEndpoint_Temp(Controller controller, string pathUri, int startingId, OpenApiPathItem item, KeyValuePair<OperationType, OpenApiOperation> operation)
-        //{
-        //    Log.ForContext<ApiSetEngine>().Debug("[{method}]: Adding {@OpenApiPathItem} {OpenApiMethod}", "AddEndPoint", pathUri, operation.Key);
-        //    EndPoint endPoint = new EndPoint(controller.Name);
-        //    endPoint.EndpointId = startingId;
-
-        //    endPoint.UriPath = pathUri;
-        //    endPoint.Method = operation.Key.ToString();
-        //    endPoint.Depricated = operation.Value.Deprecated;
-
-        //    endPoint.Summary = operation.Value.Summary;
-        //    if (operation.Value.Summary != null && operation.Value.Summary.Contains(ParserTokens.DESC_ForTestingPurposes))
-        //    {
-        //        endPoint.IsForTestingPurposes = true;
-        //    }
-
-        //    if (operation.Value.Description != null)
-        //    {
-        //        endPoint.Description = operation.Value.Description.Replace("\r\n", "");
-        //    }
-
-        //    endPoint.ReportingName = pathUri
-        //        .Replace("/api/", "")
-        //        .Replace("/", "-")
-        //        .Replace("{", "<")
-        //        .Replace("}", ">");
-
-
-        //    endPoint.AddParameters(operation.Value, controller.EndPoints.Count + 1);
-        //    foreach (var parm in item.Parameters)
-        //    {
-        //        if (parm != null)
-        //        {
-        //            endPoint.AddParameter(controller.EndPoints.Count, parm);
-        //        }
-        //    }
-
-        //    endPoint.CheckForDynamicDates(operation.Value);
-        //    //endPoint.AddRestrictions(operation.Value);
-        //    //endPoint.AddMethodsThatUseThisResponse(operation.Value);
-        //    //endPoint.AddSourceMethodName(operation.Value);
-        //    //endPoint.AddTestDataFilter(operation.Value);
-        //    endPoint.CheckFor_IsLookupMethod(operation.Value);
-
-        //    if (endPoint.Method.ToUpper() == "POST" || endPoint.Method.ToUpper() == "PUT")
-        //    {
-        //        endPoint.AddRequestBody(operation.Value);
-        //    }
-        //    endPoint.AddResponseItems(operation.Value);
-
-        //    string endPointKey = $"{endPoint.Method} | {endPoint.UriPath}";
-        //    controller.EndPoints.Add(endPointKey, endPoint);
-        //    startingId++;
-        //    return startingId;
-        //}
 
         private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiSet apiSet)
         {
@@ -260,61 +258,74 @@ namespace Engines.ApiDocs
                 , "BuildAndAddAbbreviatedResponseObject", endPointName);
             AbbreviatedResponseObject item = new AbbreviatedResponseObject();
 
-            #region -- handle Type -----
-            // Even though Type is a required field, SwaggerGen does not handle
-            // the C# type "Dynamic" properly, so we have to account for it here.
-            if (property.Value.Type == null)
+            try
             {
-                item.type = ParserTokens.PARAM_MissingTypeField;
-                Log.ForContext<AbbreviatedResponseObject>().Warning("[{method}]: Found ResponseObject in {EndPoint} without a Type. Assuming it is of type Dynamic"
-                    , "BuildAndAddAbbreviatedResponseObject", endPointName);
+                #region -- handle Type -----
+                // Even though Type is a required field, SwaggerGen does not handle
+                // the C# type "Dynamic" properly, so we have to account for it here.
+                if (property.Value.Type == null)
+                {
+                    item.type = ParserTokens.PARAM_MissingTypeField;
+                    Log.ForContext<AbbreviatedResponseObject>().Warning("[{method}]: Found ResponseObject in {EndPoint} without a Type. Assuming it is of type Dynamic"
+                        , "BuildAndAddAbbreviatedResponseObject", endPointName);
+                }
+                else
+                    item.type = property.Value.Type;
+                #endregion
+
+                #region -- handle Nullable -----
+                if (property.Value.Nullable == true)
+                    item.nullable = "true";
+                else
+                    item.nullable = "false";
+                #endregion
+
+                if (item.type == "array")
+                {
+                    #region -- handle Reference -----
+                    if (property.Value.Items.Reference != null)
+                        item.reference = property.Value.Items.Reference.Id;
+                    else if (property.Value.Items.Type != null)
+                        item.reference = property.Value.Items.Type;
+                    else
+                        item.reference = ParserTokens.PARAM_MissingInfo;
+                    #endregion
+
+                    #region -- handle Format -----
+                    if (property.Value.Items.Format != null)
+                        item.format = property.Value.Items.Format;
+                    else
+                        item.format = string.Empty;
+                    #endregion
+                }
+                else if (item.type == "string")
+                {
+                    item.reference = "";
+                    item.format = "";
+                }
+                else
+                {
+                    #region -- handle Reference -----
+                    if (property.Value.Reference != null)
+                        item.reference = property.Value.Reference.ReferenceV3;
+                    else
+                        item.reference = string.Empty;
+                    #endregion
+
+                    #region -- handle Format -----
+                    if (property.Value.Format != null)
+                        item.format = property.Value.Format;
+                    else
+                        item.format = string.Empty;
+                    #endregion
+                }
+
             }
-            else
-                item.type = property.Value.Type;
-            #endregion
-
-            #region -- handle Nullable -----
-            if (property.Value.Nullable == true)
-                item.nullable = "true";
-            else
-                item.nullable = "false";
-            #endregion
-
-            if (item.type == "array")
+            catch (Exception ex)
             {
-                #region -- handle Reference -----
-                if (property.Value.Items.Reference != null)
-                    item.reference = property.Value.Items.Reference.Id;
-                else if (property.Value.Items.Type != null)
-                    item.reference = property.Value.Items.Type;
-                else
-                    item.reference = ParserTokens.PARAM_MissingInfo;
-                #endregion
-
-                #region -- handle Format -----
-                if (property.Value.Items.Format != null)
-                    item.format = property.Value.Items.Format;
-                else
-                    item.format = string.Empty;
-                #endregion
+                Log.ForContext<AbbreviatedResponseObject>().Error(ex, "Failed to build AbbreviatedResponseObject for {propertyName} in {endpointName}", property.Key, endPointName);
+                item.reference = "Failed to parse the item";
             }
-            else
-            {
-                #region -- handle Reference -----
-                if (property.Value.Reference != null)
-                    item.reference = property.Value.Reference.ReferenceV3;
-                else
-                    item.reference = string.Empty;
-                #endregion
-
-                #region -- handle Format -----
-                if (property.Value.Format != null)
-                    item.format = property.Value.Format;
-                else
-                    item.format = string.Empty;
-                #endregion
-            }
-
             return item;
         }
         #endregion
@@ -378,14 +389,12 @@ namespace Engines.ApiDocs
                 sw.Write(sb.ToString());
             }
         }
-
         #endregion
 
     }
 
     public static class JsonStringExtensions
     {
-
         public static string ToJsonCompact(this string source)
         {
             // First see if we are using full CR-LF or just LF
@@ -399,6 +408,5 @@ namespace Engines.ApiDocs
             }
             return Regex.Replace(source, @"\s+", " ");
         }
-
     }
 }

@@ -3,7 +3,7 @@
 
 ## ICustomOasObjectEngine<T> Interface
 
-Interface for describing custom objects that can be added  
+Interface for describing custom objects that can be added
 to Swagger Documentation.
 
 ```csharp
@@ -37,8 +37,8 @@ System.Type CustomOasObjectEngineType { get; }
 
 ## ICustomOasObjectEngine<T>.CheckForObject(T) Method
 
-This method is the entry point for parsing a custom object added to the OpenApiDocument.  
-The default immplementation returns null. This allows the custom object event handler to  
+This method is the entry point for parsing a custom object added to the OpenApiDocument.
+The default immplementation returns null. This allows the custom object event handler to
 get wired up to any OAS type and not fail if that type doesn't have any custome events.
 
 ```csharp

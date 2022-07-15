@@ -361,6 +361,26 @@
             <summary>
             The left part of the UriStem that comes before 'controller' names.
             </summary>
+            <remarks>
+            The OAS allows for [but does not require] the definition of a "basePath" node, which is part of the
+            url to reach an API operation. Some OAS generators will define this value. Some will leave the root 
+            as part of the <see cref="P:ApiTestGenerator.Models.ApiDocs.ApiSet.Servers"/> Url address. Some will leave the value as the first part of 
+            the 'path' node. Some may not define a root for the api. <br/>
+            This variable holds one of the following values:
+            <list type="number">
+            <item>The value defined in the <c>basePath</c> node, if present will be stored here.</item>
+            <item>The value added to the <c>settings.json</c> file, if defined will be stored here.</item>
+            <item>The Servers Url addresses will be searched for a common value with an 
+            extension method and (if found) will be stored here.</item>
+            <item>An empty string if there is not a common basePath, or if the value is
+            not provided by one of the above items.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation">
+            <summary>
+            Lists the source for the <see cref="P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot"/> object
+            </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSet.OasVersion">
             <summary>
@@ -421,6 +441,11 @@
             parasing it.
             </summary>
         </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion">
+            <summary>
+            A string containing the Open API Specification version of the OAS document that this summary represents.
+            </summary>
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiInfo">
             <summary>
             A copy of the <see cref="!:http://spec.openapis.org/oas/v3.0.3#info-object">OpenApiInfo</see> object
@@ -431,6 +456,11 @@
             <summary>
             The UriStem portion of the Swagger Operation that preceeds the 
             "controller" name i nthe path.
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRootSourceLocation">
+            <summary>
+            Lists the source for the <see cref="P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot"/> object
             </summary>
         </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numControllers">
@@ -1150,6 +1180,16 @@
             type of response object returned.
             </summary>
         </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleText">
+            <summary>
+            
+            </summary>        
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.ResponseObject.ResponseObjectExampleTextIsEncoded">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:ApiTestGenerator.Models.ApiDocs.ResponseObject.abbreviatedResponseObjects">
             <summary>
             [Extension] - This is a collection of objects in the response 
@@ -1275,6 +1315,27 @@
         <member name="T:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum">
             <summary>
             Defines the category of error in the ApiSetAnalyzerError list
+            </summary>
+        </member>
+        <member name="T:ApiTestGenerator.Models.Enums.ApiRootSourceEnum">
+            <summary>
+            Lists the source for the <see cref="P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot"/> object
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath">
+            <summary>
+            The value defined in the <c>basePath</c> node
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.settingsFile">
+            <summary>
+            The value added to the <c>settings.json</c> file
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.empty">
+            <summary>
+            An empty string if there is not a common basePath, or if the value is
+            not provided by one of the above items.
             </summary>
         </member>
         <member name="T:ApiTestGenerator.Models.Enums.CustomEndPointObjectTypeEnum">

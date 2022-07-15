@@ -49,7 +49,9 @@ namespace Engines.ApiDocs
                 endPoint.Description = operation.Value.Description.Replace("\r\n", "");
 
             // Build a reporting name
-            endPoint.ReportingName = pathUri.Replace(settings.swaggerSettings.apiRoot, "")
+            //NOTE TODO: The reporting name has to include the apiRoot since sometimes the 
+            // apiRoot is empty and the Replace() method does not handle empty values.
+            endPoint.ReportingName = pathUri
                 .Replace("/", "-")
                 .Replace("{", "<")
                 .Replace("}", ">");

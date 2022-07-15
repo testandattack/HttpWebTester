@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using GTC.HttpWebTester.Settings;
 using SharedResources;
+using System.Collections.Generic;
 
 /// <summary>
 /// A simple utility to read/write Swagger Documentation from/to a URL or a static file and 
@@ -37,6 +38,12 @@ namespace GTC.SwaggerParsing
         /// The object that holds the parsed OAS document
         /// </summary>
         public OpenApiDocument apiDocument { get; private set; }
+
+        /// <summary>
+        /// This dictionary stores info from the serialized string that is not
+        /// picked up by the <c>OpenApiDocument</c> object.
+        /// </summary>
+        public Dictionary<string, string> extraInfo { get; set; }
 
         /// <summary>
         /// Creates a new instance of the parser using the <c>settings.json</c> file in the
@@ -77,6 +84,9 @@ namespace GTC.SwaggerParsing
 
             Log.ForContext<SwaggerUrlParser>().Information("Parsing doc at {endpoint}", _sourceLocation);
             var stream = httpClient.GetStreamAsync(uriAddress).GetAwaiter().GetResult();
+
+            // TODO: Need to add routine here to read the stream so we can call GetExtraInfo, without
+            // consuming the stream (so the call to OpenApiStreamReader still works.
             OpenApiDiagnostic openApiDiagnostic;
             apiDocument = new OpenApiStreamReader().Read(stream, out openApiDiagnostic);
             Log.ForContext<SwaggerUrlParser>().Debug("ApiDocument read. {@output}", openApiDiagnostic);
@@ -140,6 +150,62 @@ namespace GTC.SwaggerParsing
             using (StreamWriter sw = new StreamWriter(codeFileName, false))
             {
                 sw.Write(sCode);
+            }
+        }
+        #endregion
+
+        #region -- private methods -----
+        private void GetExtraInfo(ref string serializedDocument)
+        {
+            extraInfo = new Dictionary<string, string>();
+
+            GetOasVersion(ref serializedDocument);
+            GetBasePath(ref serializedDocument);
+            GetSchemes(ref serializedDocument);
+        }
+
+        private void GetOasVersion(ref string serializedDocument)
+        {
+            string oasVersion = serializedDocument.FindSubString("\"swagger\": \"", "\"");
+            if (oasVersion == string.Empty)
+            {
+                oasVersion = serializedDocument.FindSubString("\"openapi\": \"", "\"");
+            }
+            if (oasVersion == string.Empty)
+            {
+                extraInfo.Add("OAS Version", "Could not determine version.");
+            }
+            else
+            {
+                extraInfo.Add("OAS Version", oasVersion);
+            }
+        }
+
+        private void GetBasePath(ref string serializedDocument)
+        {
+            string basePath = serializedDocument.FindSubString("\"basePath\": \"", "\"");
+            if (basePath == string.Empty)
+            {
+                extraInfo.Add("basePath", "");
+                Log.ForContext("Source Context", "SwaggerUrlParser").Information("GetBasePath did not find an entry.");
+            }
+            else
+            {
+                extraInfo.Add("basePath", basePath);
+                Log.ForContext("Source Context", "SwaggerUrlParser").Information("GetBasePath found {basePath}", basePath);
+            }
+        }
+
+        private void GetSchemes(ref string serializedDocument)
+        {
+            string schemes = serializedDocument.FindSubString("\"schemes\": [", "]");
+            if (schemes == string.Empty)
+            {
+                extraInfo.Add("Schemes", "No schemes found.");
+            }
+            else
+            {
+                extraInfo.Add("Schemes", schemes.Flattened(2048));
             }
         }
         #endregion

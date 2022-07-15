@@ -41,6 +41,19 @@ public string apiRoot { get; set; }
 #### Property Value
 [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
+<a name='ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRootSourceLocation'></a>
+
+## ApiSetSummaryModel.apiRootSourceLocation Property
+
+Lists the source for the [apiRoot](ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot 'ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot') object
+
+```csharp
+public ApiTestGenerator.Models.Enums.ApiRootSourceEnum apiRootSourceLocation { get; set; }
+```
+
+#### Property Value
+[ApiRootSourceEnum](ApiRootSourceEnum.md 'ApiTestGenerator.Models.Enums.ApiRootSourceEnum')
+
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.numActiveEndpoints'></a>
 
 ## ApiSetSummaryModel.numActiveEndpoints Property
@@ -234,6 +247,19 @@ public int numTestMethods { get; set; }
 
 #### Property Value
 [System.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System.Int32')
+
+<a name='ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion'></a>
+
+## ApiSetSummaryModel.oasVersion Property
+
+A string containing the Open API Specification version of the OAS document that this summary represents.
+
+```csharp
+public string oasVersion { get; set; }
+```
+
+#### Property Value
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 
 <a name='ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.propertyFormats'></a>
 

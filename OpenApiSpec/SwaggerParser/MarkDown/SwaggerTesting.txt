@@ -13,6 +13,7 @@ N:GTC.SwaggerParsing|SwaggerParsing.md#GTC.SwaggerParsing|GTC.SwaggerParsing
 T:GTC.SwaggerParsing.SwaggerFileParser|SwaggerFileParser.md|SwaggerFileParser
 P:GTC.SwaggerParsing.SwaggerUrlParser.settings|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.settings|settings
 P:GTC.SwaggerParsing.SwaggerUrlParser.apiDocument|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.apiDocument|apiDocument
+P:GTC.SwaggerParsing.SwaggerUrlParser.extraInfo|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.extraInfo|extraInfo
 M:GTC.SwaggerParsing.SwaggerUrlParser.#ctor|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.SwaggerUrlParser()|SwaggerUrlParser()
 M:GTC.SwaggerParsing.SwaggerUrlParser.#ctor(GTC.HttpWebTester.Settings.Settings)|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.SwaggerUrlParser(GTC.HttpWebTester.Settings.Settings)|SwaggerUrlParser(Settings)
 M:GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument|SwaggerUrlParser.md#GTC.SwaggerParsing.SwaggerUrlParser.PopulateApiDocument()|PopulateApiDocument()

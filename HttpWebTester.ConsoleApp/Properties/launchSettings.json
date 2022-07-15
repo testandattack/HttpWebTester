@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "HttpWebTester.ConsoleApp": {
+      "commandName": "Project"
+    }
+  }
+}

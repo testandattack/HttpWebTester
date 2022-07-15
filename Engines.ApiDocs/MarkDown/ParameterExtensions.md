@@ -14,7 +14,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 ## ParameterExtensions.GetDescriptionAndCustomObjects(this Parameter, OpenApiParameter) Method
 
-Parses the [Microsoft.OpenApi.Models.OpenApiParameter.Description](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiParameter.Description 'Microsoft.OpenApi.Models.OpenApiParameter.Description') string (if present)  
+Parses the [Microsoft.OpenApi.Models.OpenApiParameter.Description](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiParameter.Description 'Microsoft.OpenApi.Models.OpenApiParameter.Description') string (if present)
 and finds any custom objects added to it.
 
 ```csharp

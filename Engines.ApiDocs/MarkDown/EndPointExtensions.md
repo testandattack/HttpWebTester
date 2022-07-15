@@ -3,9 +3,9 @@
 
 ## EndPointExtensions Class
 
-An object that is based on the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')  
-object, but is enhanced with extra information to help with test generation.  
-The 'Name' of the object is stored in the Key of the KeyValuePair and is made   
+An object that is based on the [http://spec.openapis.org/oas/v3.0.3#operation-object](https://docs.microsoft.com/en-us/dotnet/api/http://spec.openapis.org/oas/v3.0.3#operation-object 'http://spec.openapis.org/oas/v3.0.3#operation-object')
+object, but is enhanced with extra information to help with test generation.
+The 'Name' of the object is stored in the Key of the KeyValuePair and is made 
 by combining the [Method](https://docs.microsoft.com/en-us/dotnet/api/Method 'Method') and [UriPath](https://docs.microsoft.com/en-us/dotnet/api/UriPath 'UriPath') objects
 
 ```csharp
@@ -63,7 +63,7 @@ the [Microsoft.OpenApi.Models.OpenApiOperation](https://docs.microsoft.com/en-us
 
 ## EndPointExtensions.AddResponseItem(OpenApiResponse, string) Method
 
-Walks the operation's Response array to find the response object associated with   
+Walks the operation's Response array to find the response object associated with 
 ResponseItem type of '200'.
 
 ```csharp
@@ -88,7 +88,7 @@ Describes the type of response object to look for
 
 ## EndPointExtensions.CheckFor_IsLookupMethod(this EndPoint, OpenApiOperation) Method
 
-Sets the [IsLookupMethod](https://docs.microsoft.com/en-us/dotnet/api/IsLookupMethod 'IsLookupMethod') flag based on the  
+Sets the [IsLookupMethod](https://docs.microsoft.com/en-us/dotnet/api/IsLookupMethod 'IsLookupMethod') flag based on the
 presence or absence of the [ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod 'ApiTestGenerator.Models.Consts.ParserTokens.TKN_LookupMethod') custom extension
 
 ```csharp
@@ -110,8 +110,8 @@ the [Microsoft.OpenApi.Models.OpenApiOperation](https://docs.microsoft.com/en-us
 
 ## EndPointExtensions.CheckForDynamicDates(this EndPoint, OpenApiOperation) Method
 
-Adds any [ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate') or   
-[ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate') items to parameters that  
+Adds any [ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_StartDate') or 
+[ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate 'ApiTestGenerator.Models.Consts.ParserTokens.PARAM_EndDate') items to parameters that
 have the same name.
 
 ```csharp
