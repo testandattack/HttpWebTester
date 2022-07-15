@@ -96,6 +96,8 @@ namespace Engines.ApiDocs
 
         public void BuildControllerList(OpenApiDocument openApiDocument)
         {
+            List<string> controllerNames = openApiDocument.GetAllOperationTags();
+
             int currentRequestId = 1;
             foreach (var path in openApiDocument.Paths)
             {
@@ -145,8 +147,10 @@ namespace Engines.ApiDocs
         {
             // The path Key is the UriPath of the API endpoint. The controller name is
             // made by taking the first part of the path after the root.
-            // Get the controller name that this path would belong to,
-            string controllerName = GetControllerName(path.Key);
+            // Get the controller name that this path would belong to.
+
+
+            string controllerName = GetControllerNameFromApiRoot(path.Key);
             foreach (var controller in apiSet.Controllers.Values)
             {
                 if (controller.Name == controllerName)
@@ -164,7 +168,7 @@ namespace Engines.ApiDocs
             return newController;
         }
 
-        private string GetControllerName(string pathKey)
+        private string GetControllerNameFromApiRoot(string pathKey)
         {
             // Note, Need to make sure the string does not start with a '/' character.
             string cleanPathKey;

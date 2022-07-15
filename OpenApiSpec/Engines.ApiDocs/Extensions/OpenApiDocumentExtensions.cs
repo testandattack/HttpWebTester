@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GTC.Extensions;
 
 namespace OpenApiUtilities
 {
@@ -39,6 +40,37 @@ namespace OpenApiUtilities
         //    else
         //        return string.Empty;
         //}
+
+        public static List<string> GetAllOperationTags(this OpenApiDocument source)
+        {
+            List<string> operationTags = new List<string>();
+
+            // First, retrieve any tags defined at the root level
+            if(source.Tags != null && source.Tags.Count > 0)
+            {
+                foreach(var tag in source.Tags)
+                {
+                    operationTags.AddUnique(tag.Name);
+                }
+            }
+
+            // Next add all tags at the operation level
+            foreach(var path in source.Paths.Values)
+            {
+                foreach(var operation in path.Operations.Values)
+                {
+                    if(operation.Tags != null && operation.Tags.Count > 0)
+                    {
+                        foreach(var tag in operation.Tags)
+                        {
+                            operationTags.AddUnique(tag.Name);
+                        }
+                    }
+                }
+            }
+
+            return operationTags;
+        }
 
     }
 }

@@ -4,16 +4,17 @@
   "logSettings": {
     "DefaultLogFileName": "c:\\Temp\\MiscOasFiles\\ApiSet_ParsingLog.log",
     "MinLogEventLevel": "Information",
-    "ClearLogFileOnStartup": true
+    "ClearLogFileOnStartup": false
   },
   "swaggerSettings": {
     "BaseUriAddress": "http://localhost:52321/",
     "SwaggerStreamLocation": "swagger/v1/swagger.json",
     //"SwaggerFileLocation": "Asc_swagger.json",
-    "SwaggerFileLocation": "SwaggerPetstore_OAS.json",
+    "SwaggerFileLocation": "twc_osmc.json",
+    //"SwaggerFileLocation": "SwaggerPetstore_OAS.json",
     "ReadSwaggerFromFile": true,
     //"apiRoot": "/api/",
-    //"apiRoot": "/osmc/",
+    "apiRoot": "/osmc/",
     "GenerateDtoCode": true,
     "IgnoreDtoCodeGenerationErrors": true,
     "DtoCodeFileName": "SwaggerPetstore_OAS.cs",
