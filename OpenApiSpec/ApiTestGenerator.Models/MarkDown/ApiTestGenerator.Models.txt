@@ -1,4 +1,14 @@
 https://github.com/testandattack/HttpWebTester/blob/master/ApiTestGenerator.Models/MarkDown/
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateProperty|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateProperty|DuplicateProperty
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.Property_MissingType|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.Property_MissingType|Property_MissingType
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndpointRestrictionSummary|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndpointRestrictionSummary|AnalyzeEndpointRestrictionSummary
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndPointRestrictions|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndPointRestrictions|AnalyzeEndPointRestrictions
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeRequestBodies|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeRequestBodies|AnalyzeRequestBodies
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeInputParameters|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeInputParameters|AnalyzeInputParameters
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeApiComponents|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeApiComponents|AnalyzeApiComponents
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.ResponseObject_MissingType|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.ResponseObject_MissingType|ResponseObject_MissingType
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateEndpoint|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateEndpoint|DuplicateEndpoint
+F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateLookupEndpoint|AnalyzerErrorCategoryEnum.md#ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateLookupEndpoint|DuplicateLookupEndpoint
 N:ApiTestGenerator.Models.Enums|ApiTestGenerator.Models.md#ApiTestGenerator.Models.Enums|ApiTestGenerator.Models.Enums
 T:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum|AnalyzerErrorCategoryEnum.md|AnalyzerErrorCategoryEnum
 F:ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath|ApiRootSourceEnum.md#ApiTestGenerator.Models.Enums.ApiRootSourceEnum.basePath|basePath
@@ -92,6 +102,10 @@ P:ApiTestGenerator.Models.ApiDocs.AbbreviatedResponseObject.nullable|Abbreviated
 P:ApiTestGenerator.Models.ApiDocs.AbbreviatedResponseObject.reference|AbbreviatedResponseObject.md#ApiTestGenerator.Models.ApiDocs.AbbreviatedResponseObject.reference|reference
 N:ApiTestGenerator.Models.ApiDocs|ApiTestGenerator.Models.md#ApiTestGenerator.Models.ApiDocs|ApiTestGenerator.Models.ApiDocs
 T:ApiTestGenerator.Models.ApiDocs.AbbreviatedResponseObject|AbbreviatedResponseObject.md|AbbreviatedResponseObject
+P:ApiTestGenerator.Models.ApiDocs.Error.ErrorMessage|Error.md#ApiTestGenerator.Models.ApiDocs.Error.ErrorMessage|ErrorMessage
+P:ApiTestGenerator.Models.ApiDocs.Error.ObjectWithError|Error.md#ApiTestGenerator.Models.ApiDocs.Error.ObjectWithError|ObjectWithError
+M:ApiTestGenerator.Models.ApiDocs.Error.GetErrorCategory(System.Int32,ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum)|Error.md#ApiTestGenerator.Models.ApiDocs.Error.GetErrorCategory(int,ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum)|GetErrorCategory(int, AnalyzerErrorCategoryEnum)
+T:ApiTestGenerator.Models.ApiDocs.Error|Error.md|Error
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.settings|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.settings|settings
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRoot|apiRoot
 P:ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.apiRootSourceLocation|apiRootSourceLocation
@@ -106,6 +120,8 @@ M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor|ApiSet.md#ApiTestGenerator.Models
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(GTC.HttpWebTester.Settings.Settings)|ApiSet(Settings)
 M:ApiTestGenerator.Models.ApiDocs.ApiSet.#ctor(System.String,GTC.HttpWebTester.Settings.Settings)|ApiSet.md#ApiTestGenerator.Models.ApiDocs.ApiSet.ApiSet(string,GTC.HttpWebTester.Settings.Settings)|ApiSet(string, Settings)
 T:ApiTestGenerator.Models.ApiDocs.ApiSet|ApiSet.md|ApiSet
+M:ApiTestGenerator.Models.ApiDocs.ApiSetError.#ctor(System.String,System.Object)|ApiSetError.md#ApiTestGenerator.Models.ApiDocs.ApiSetError.ApiSetError(string,object)|ApiSetError(string, object)
+T:ApiTestGenerator.Models.ApiDocs.ApiSetError|ApiSetError.md|ApiSetError
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.oasVersion|oasVersion
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiInfo|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiInfo|apiInfo
 P:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRoot|ApiSetSummaryModel.md#ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel.apiRoot|apiRoot

@@ -24,6 +24,7 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// </list>
     /// and turn the results into a test harness that can be executed.
     /// </summary>
+    [JsonObject(Title = "apiSet")]
     public class ApiSet
     {
         #region -- Properties -----
@@ -51,6 +52,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// not provided by one of the above items.</item>
         /// </list>
         /// </remarks>
+        [JsonProperty(PropertyName = "apiRoot", NullValueHandling = NullValueHandling.Ignore)]
         public string apiRoot { get; set; }
 
         /// <summary>
@@ -80,23 +82,26 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// A list of <see cref="Controller"/> objects
         /// </summary>
+        [JsonProperty(PropertyName = "controllers", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, Controller> Controllers { get; private set; }
 
         /// <summary>
         /// A list of <see cref="Component"/> objects
         /// </summary>
         //public SortedDictionary<string,Component> Components { get; private set; }
+        [JsonProperty(PropertyName = "components", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, Component> Components { get; private set; }
 
         /// <summary>
         /// The list of OpenApiSecuritySchemes associated with this OAS Document
         /// </summary>
+        [JsonProperty(PropertyName = "securitySchemes", NullValueHandling = NullValueHandling.Ignore)]
         public List<OpenApiSecurityScheme> SecuritySchemes { get; private set; }
 
         /// <summary>
         /// The transfer protocos(s) used by the API. [OAS v2.x only]
         /// </summary>
-        [JsonProperty(PropertyName = "Schemes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "schemes", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> Schemes { get; set; }
 
         ///// <summary>

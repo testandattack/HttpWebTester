@@ -1,4 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace ApiTestGenerator.Models.Enums
 {
@@ -10,6 +13,7 @@ namespace ApiTestGenerator.Models.Enums
     /// determine what extraction and validation rule types 
     /// can be used with the response.
     /// </remarks>
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum ResponseTypeEnum
     {
         /// <summary>

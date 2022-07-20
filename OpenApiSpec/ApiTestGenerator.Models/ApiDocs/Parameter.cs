@@ -176,11 +176,11 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         public string controllerName { get; set; }
 
-        /// <summary>
-        /// This is a sequentially assigned Id that shows the order in which the endpoint
-        /// shows up within the controller.
-        /// </summary>
-        public int operationId { get; set; }
+        ///// <summary>
+        ///// This is a sequentially assigned Id that shows the order in which the endpoint
+        ///// shows up within the controller.
+        ///// </summary>
+        //public int operationId { get; set; }
 
         /// <summary>
         /// Stores the value of a custom token <see cref="ParseTokens.TKN_GetsInputFrom"/> that
@@ -209,18 +209,17 @@ namespace ApiTestGenerator.Models.ApiDocs
             uriPath = string.Empty;
             uriMethod = string.Empty;
             controllerName = string.Empty;
-            operationId = -1;
+q
             inputProvider = string.Empty;
             Required = false;
         }
 
         /// <summary>
         /// Creates a new instance of the <see cref="Parameter"/> object
-        /// and initializes the <see cref="operationId"/> and <see cref="controllerName"/> properties
+        /// and initializes the <see cref="controllerName"/> properties
         /// </summary>
-        /// <param name="operationNumber"><see cref="operationId"/></param>
         /// <param name="ControllerName"><see cref="controllerName"/></param>
-        public Parameter(int operationNumber, string ControllerName)
+        public Parameter(string ControllerName)
         {
             Name = string.Empty;
             Type = string.Empty;
@@ -229,7 +228,6 @@ namespace ApiTestGenerator.Models.ApiDocs
             IsArray = false;
             uriPath = string.Empty;
             uriMethod = string.Empty;
-            operationId = operationNumber;
             controllerName = ControllerName;
             customEndPointObjects = new CustomOasObjectCollection();
         }
@@ -271,11 +269,11 @@ namespace ApiTestGenerator.Models.ApiDocs
         {
             Parameter p1 = (Parameter)this;
             Parameter p2 = (Parameter)obj;
-            if (p1.operationId < p2.operationId)
-                return -1;
-            if (p1.operationId > p2.operationId)
-                return 1;
-            else
+            //if (p1.operationId < p2.operationId)
+            //    return -1;
+            //if (p1.operationId > p2.operationId)
+            //    return 1;
+            //else
                 return string.Compare(p1.Name, p2.Name, true);
         }
         #endregion

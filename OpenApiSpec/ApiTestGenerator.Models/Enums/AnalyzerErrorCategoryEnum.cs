@@ -10,24 +10,54 @@ namespace ApiTestGenerator.Models.Enums
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AnalyzerErrorCategoryEnum
     {
+        /// <summary>
+        /// 
+        /// </summary>
         DuplicateProperty,
 
+        /// <summary>
+        /// 
+        /// </summary>
         Property_MissingType,
 
+        /// <summary>
+        /// 
+        /// </summary>
         AnalyzeEndpointRestrictionSummary,
 
+        /// <summary>
+        /// 
+        /// </summary>
         AnalyzeEndPointRestrictions,
 
+        /// <summary>
+        /// 
+        /// </summary>
         AnalyzeRequestBodies,
 
+        /// <summary>
+        /// 
+        /// </summary>
         AnalyzeInputParameters,
 
+        /// <summary>
+        /// 
+        /// </summary>
         AnalyzeApiComponents,
 
+        /// <summary>
+        /// 
+        /// </summary>
         ResponseObject_MissingType,
 
+        /// <summary>
+        /// 
+        /// </summary>
         DuplicateEndpoint,
 
+        /// <summary>
+        /// 
+        /// </summary>
         DuplicateLookupEndpoint
     }
 }

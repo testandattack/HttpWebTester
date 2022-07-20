@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
 using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 using SharedResources;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
 
 namespace HttpWebTester
 {
@@ -24,13 +26,19 @@ namespace HttpWebTester
         {
             Settings appSettings = CreateLogger();
 
-            if(args.Length == 0)
-                //CreateAndAnalyzeApiSet(appSettings, "SwaggerPetstore_OAS.json", "SwaggerPetstore_OAS.cs");
-                CreateAndAnalyzeApiSet(appSettings);
-            else if(args.Length == 2)
-                CreateAndAnalyzeApiSet(appSettings, args[0], args[1]);
+            ApiSet apiSet = new ApiSet(appSettings);
+            //CreateSchema(apiSet, "c:\\temp\\ApiSet_Schema.json");
+
+            #region -- ApiSet Stuff -----
+            //if (args.Length == 0)
+            //    //CreateAndAnalyzeApiSet(appSettings, "SwaggerPetstore_OAS.json", "SwaggerPetstore_OAS.cs");
+            //    CreateAndAnalyzeApiSet(appSettings);
+            //else if(args.Length == 2)
+            //    CreateAndAnalyzeApiSet(appSettings, args[0], args[1]);
+            #endregion
         }
 
+        #region -- Utilities -----
         static Settings CreateLogger()
         {
             Settings settings = new Settings("settings.json");
@@ -59,6 +67,23 @@ namespace HttpWebTester
             return settings;
         }
 
+        static void CreateSchema(string fileName)
+        {
+            JSchemaGenerator generator = new JSchemaGenerator();
+            generator.SchemaLocationHandling = SchemaLocationHandling.Inline;
+            generator.SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default;
+            generator.SchemaReferenceHandling = SchemaReferenceHandling.All;
+            generator.DefaultRequired = Required.Default;
+            JSchema schema = generator.Generate(typeof(ApiSet));
+
+            using( StreamWriter sw = new StreamWriter(fileName, false))
+            {
+                sw.Write(JsonConvert.SerializeObject(schema, Formatting.Indented));
+            }
+        }
+        #endregion
+
+        #region -- ApiSet Stuff -----
         static void CreateAndAnalyzeApiSet(Settings appSettings)
         {
             if(appSettings.swaggerSettings.SwaggerFileLocation.Contains("\\"))
@@ -132,7 +157,9 @@ namespace HttpWebTester
                 }
             }
         }
+        #endregion
 
+        #region -- Postman Stuff -----
         static void ReadAndProcessPostmanCollection(Settings appSettings)
         {
             PostmanItemManager manager = new PostmanItemManager("Swagger Petstore.postman_collection.json");
@@ -140,5 +167,6 @@ namespace HttpWebTester
             manager.postmanCollection.Info.PostmanId = Guid.NewGuid().ToString();
             manager.SaveCollection("Swagger Modified Petstore.postman_collection.json");
         }
+        #endregion
     }
 }

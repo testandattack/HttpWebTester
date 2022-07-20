@@ -338,6 +338,29 @@
             for more information.
             </summary>
         </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.Error">
+            <summary>
+            A base class for storing errors when working with ApiSets and ApiSetAnalyzers
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.Error.ErrorMessage">
+            <summary>
+            The text of the error message
+            </summary>
+        </member>
+        <member name="P:ApiTestGenerator.Models.ApiDocs.Error.ObjectWithError">
+            <summary>
+            A copy of the ovject that had the error.
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiDocs.Error.GetErrorCategory(System.Int32,ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum)">
+            <summary>
+            Returns a string built from an error number and the error category
+            </summary>
+            <param name="iNum"></param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.ApiSet">
             <summary>
             This class defines a Model used for translating various different web based API 
@@ -434,6 +457,18 @@
             </summary>
             <param name="ApiRoot"></param>
             <param name="settings"></param>
+        </member>
+        <member name="T:ApiTestGenerator.Models.ApiDocs.ApiSetError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiTestGenerator.Models.ApiDocs.ApiSetError.#ctor(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <param name="objectWithError"></param>
         </member>
         <member name="T:ApiTestGenerator.Models.ApiDocs.ApiSetSummaryModel">
             <summary>
@@ -1315,6 +1350,56 @@
         <member name="T:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum">
             <summary>
             Defines the category of error in the ApiSetAnalyzerError list
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.Property_MissingType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndpointRestrictionSummary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndPointRestrictions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeRequestBodies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeInputParameters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeApiComponents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.ResponseObject_MissingType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateEndpoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiTestGenerator.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateLookupEndpoint">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:ApiTestGenerator.Models.Enums.ApiRootSourceEnum">
