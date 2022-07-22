@@ -8,5 +8,6 @@ namespace ApiSet.Engines.Interfaces
 {
     public interface IRequestBodyEngine
     {
+        RequestBody GetRequestBody(OpenApiOperation apiOperation);
     }
 }

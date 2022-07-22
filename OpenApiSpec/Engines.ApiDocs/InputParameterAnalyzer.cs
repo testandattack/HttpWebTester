@@ -9,7 +9,7 @@ namespace Engines.ApiDocs
 {
     public class InputParameterAnalyzer
     {
-        private ApiSet _apiSet;
+        private ApiDoc _apiSet;
 
         public Dictionary<string, InputParameter> InputParameters { get; set; }
 
@@ -27,7 +27,7 @@ namespace Engines.ApiDocs
             return false;
         }
 
-        public void LoadInputParameters(ApiSet apiSet)
+        public void LoadInputParameters(ApiDoc apiSet)
         {
             _apiSet = apiSet;
             foreach (var controller in apiSet.Controllers.Values)

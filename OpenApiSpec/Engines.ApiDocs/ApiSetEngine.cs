@@ -27,7 +27,7 @@ namespace Engines.ApiDocs
     /// <remarks>
     /// This set of information is language agnostic and built from OpenApi 
     /// Documentation so that it can be consumed by test creation software
-    /// directly. The reason for this extra step is because the ApiSet object
+    /// directly. The reason for this extra step is because the ApiDoc object
     /// incorporates custom code and OpenApiSchema extensions that enhance
     /// the swagger documentation way beyond the normal information available.
     /// </remarks>
@@ -35,7 +35,7 @@ namespace Engines.ApiDocs
     {
         private Settings settings;
 
-        public ApiSet apiSet { get; private set; }
+        public ApiDoc apiSet { get; private set; }
 
         #region -- Constructors -----
         public ApiSetEngine() 
@@ -50,7 +50,7 @@ namespace Engines.ApiDocs
 
         public void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot, Dictionary<string, string> extraInfo)
         {
-            apiSet = new ApiSet(ApiRoot, settings);
+            apiSet = new ApiDoc(ApiRoot, settings);
             // This call adds all of the custom objects that have been registered in the "ApiDocs.CustomObjects" namespace.
             //apiSet.CustomObjects.collection = AddAllCustomObjects.BuildCustomObjects();
 
@@ -111,7 +111,7 @@ namespace Engines.ApiDocs
         public void BuildComponentList(OpenApiDocument openApiDocument)
         {
             int x = 0;
-            Log.ForContext<ApiSetEngine>().Information("[{method}]: Adding Components to ApiSet", "BuildComponentList");
+            Log.ForContext<ApiSetEngine>().Information("[{method}]: Adding Components to ApiDoc", "BuildComponentList");
             foreach (var componentSchema in openApiDocument.Components.Schemas)
             {
                 Log.ForContext<ApiSetEngine>().Debug("[{method}]: {@ComponentSchema}", "BuildComponentList", componentSchema.Key);
@@ -204,7 +204,7 @@ namespace Engines.ApiDocs
             return startingId;
         }
 
-        private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiSet apiSet)
+        private void AddRequestBodyItems(OpenApiDocument openApiDocument, ApiDoc apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {
@@ -225,7 +225,7 @@ namespace Engines.ApiDocs
             }
         }
 
-        private void AddResponseObjectDetails(OpenApiDocument openApiDocument, ApiSet apiSet)
+        private void AddResponseObjectDetails(OpenApiDocument openApiDocument, ApiDoc apiSet)
         {
             foreach (Controller controller in apiSet.Controllers.Values)
             {
@@ -334,14 +334,14 @@ namespace Engines.ApiDocs
         #region -- Read and Write methods -----
         public void LoadApiSetFromFile(string fileName)
         {
-            ApiSet apiSet = null;
+            ApiDoc apiSet = null;
             using (StreamReader sr = new StreamReader(fileName))
             {
-                apiSet = JsonConvert.DeserializeObject<ApiSet>(sr.ReadToEnd());
+                apiSet = JsonConvert.DeserializeObject<ApiDoc>(sr.ReadToEnd());
             }
             if (apiSet == null)
             {
-                Log.ForContext<ApiSet>().Error("LoadApiSetFromFile failed to load the set from {fileName}", fileName);
+                Log.ForContext<ApiDoc>().Error("LoadApiSetFromFile failed to load the set from {fileName}", fileName);
                 throw new NullReferenceException($"LoadApiSetFromFile failed to load the set from {fileName}");
             }
         }
@@ -362,11 +362,11 @@ namespace Engines.ApiDocs
                 {
                     sw.Write(str);
                 }
-                Log.ForContext<ApiSet>().Information("SerializeAndSaveApiSet completed successfully");
+                Log.ForContext<ApiDoc>().Information("SerializeAndSaveApiSet completed successfully");
             }
             catch (Exception ex)
             {
-                Log.ForContext<ApiSet>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSet");
+                Log.ForContext<ApiDoc>().Error(ex, "[EXCEPTION] {callingMethod} failed.", "SerializeAndSaveApiSet");
             }
         }
 

@@ -16,7 +16,7 @@ namespace ApiDocs.CustomObjects
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This base class has all of the event hooks and handler methods that tie into the ApiSet\Endpoint parser.
+    /// This base class has all of the event hooks and handler methods that tie into the ApiDoc\Endpoint parser.
     /// </para>
     /// <para>
     /// To add custom objects, create your own class and have it inherit from this class. Then, update the 
@@ -62,7 +62,7 @@ namespace ApiDocs.CustomObjects
         ///            // Make sure the current extensoin is the one you are looking for
         ///            if (operationExtension.Key == "x-Whatever-YourTokenNameMioghtBe")
         ///            {
-        ///                // Create a new CustomOasObject for the ApiSet
+        ///                // Create a new CustomOasObject for the ApiDoc
         ///                var Item = new CustomOasObject();
         ///
         ///                // Name the object

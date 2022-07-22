@@ -23,7 +23,7 @@ namespace PostmanItemManagement
         #endregion
 
         #region -- public methods -----
-        public void BuildPostmanCollectionFromApiSet(ApiSet apiSet)
+        public void BuildPostmanCollectionFromApiSet(ApiDoc apiSet)
         {
 
         }

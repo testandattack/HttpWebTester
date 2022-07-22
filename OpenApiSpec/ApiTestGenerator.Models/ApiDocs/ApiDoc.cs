@@ -25,11 +25,11 @@ namespace ApiTestGenerator.Models.ApiDocs
     /// and turn the results into a test harness that can be executed.
     /// </summary>
     [JsonObject(Title = "apiSet")]
-    public class ApiSet
+    public class ApiDoc
     {
         #region -- Properties -----
         /// <summary>
-        /// The <see cref="Settings"/> to use with this ApiSet.
+        /// The <see cref="Settings"/> to use with this ApiDoc.
         /// </summary>
         [JsonIgnore]
         public Settings settings { get; set; }
@@ -80,10 +80,16 @@ namespace ApiTestGenerator.Models.ApiDocs
         public List<OpenApiServer> Servers { get; set; }
 
         /// <summary>
-        /// A list of <see cref="Controller"/> objects
+        /// A list of <see cref="Controller"/> objects. These are 
         /// </summary>
         [JsonProperty(PropertyName = "controllers", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, Controller> Controllers { get; private set; }
+
+        /// <summary>
+        /// A list of <see cref="EndPoint"/> objects.These are the same thing as OAS operations.
+        /// </summary>
+        [JsonProperty(PropertyName = "endpoints", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, EndPoint> Endpoints { get; private set; }
 
         /// <summary>
         /// A list of <see cref="Component"/> objects
@@ -113,29 +119,29 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         #region -- Constructors -----
         /// <summary>
-        /// Creates a new empty ApiSet instance.
+        /// Creates a new empty ApiDoc instance.
         /// </summary>
-        public ApiSet()
+        public ApiDoc()
         {
             Initialize(string.Empty, null);
         }
 
         /// <summary>
-        /// Creates a new empty ApiSet instance using the provided <paramref name="settings"/> object.
+        /// Creates a new empty ApiDoc instance using the provided <paramref name="settings"/> object.
         /// </summary>
         /// <param name="settings"></param>
-        public ApiSet(Settings settings)
+        public ApiDoc(Settings settings)
         {
             apiRootSourceLocation = ApiRootSourceEnum.empty;
             Initialize(string.Empty, settings);
         }
 
         /// <summary>
-        /// Creates a new ApiSet instance using the provided <paramref name="ApiRoot"/> and <paramref name="settings"/> objects.
+        /// Creates a new ApiDoc instance using the provided <paramref name="ApiRoot"/> and <paramref name="settings"/> objects.
         /// </summary>
         /// <param name="ApiRoot"></param>
         /// <param name="settings"></param>
-        public ApiSet(string ApiRoot, Settings settings)
+        public ApiDoc(string ApiRoot, Settings settings)
         {
             apiRootSourceLocation = ApiRootSourceEnum.settingsFile;
             Initialize(ApiRoot, settings);
@@ -143,8 +149,8 @@ namespace ApiTestGenerator.Models.ApiDocs
 
         private void Initialize(string ApiRoot, Settings Settings)
         {
-            settings = Settings;
             apiRoot = ApiRoot;
+            settings = Settings;
             Controllers = new Dictionary<string, Controller>();
             Components = new Dictionary<string, Component>();
             SecuritySchemes = new List<OpenApiSecurityScheme>();

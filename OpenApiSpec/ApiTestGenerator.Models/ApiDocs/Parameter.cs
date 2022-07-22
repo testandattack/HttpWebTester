@@ -153,7 +153,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         [JsonProperty(PropertyName = "required")]
         public bool Required { get; set; }
 
-        // These are properties added to the ApiSet to allow easier building of test objects.
+        // These are properties added to the ApiDoc to allow easier building of test objects.
         // In many cases these items are OpenApi schema extensions or are embedded levels below 
         // the main level. Moving them here and adding some calculated fields allows easier
         // overall manipulation.

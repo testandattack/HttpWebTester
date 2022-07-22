@@ -17,16 +17,16 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// The <see cref="ApiDocs"/> object to analyze
         /// </summary>
         [JsonIgnore]
-        public ApiSet apiSet { get; set; }
+        public ApiDoc apiSet { get; set; }
 
         /// <summary>
-        /// A collection of <see cref="EndpointSummary"/> items found while analyzing the ApiSet.
+        /// A collection of <see cref="EndpointSummary"/> items found while analyzing the ApiDoc.
         /// </summary>
         [JsonIgnore]
         public SortedDictionary<string, EndpointSummary> sortedEndpointSummaries { get; private set; }
 
         /// <summary>
-        /// The name of the ApiSet that was analyzed
+        /// The name of the ApiDoc that was analyzed
         /// </summary>
         public string AnalysisName { get; set; }
 
@@ -41,7 +41,7 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         public ApiSetSummaryModel summaryInfo { get; set; }
 
         /// <summary>
-        /// A collection of <see cref="ApiSetAnalyzerError"/> items found while analyzing the ApiSet.
+        /// A collection of <see cref="ApiSetAnalyzerError"/> items found while analyzing the ApiDoc.
         /// </summary>
         public Dictionary<string, ApiSetAnalyzerError> analyzerErrors { get; set; }
 
@@ -127,17 +127,17 @@ namespace ApiTestGenerator.Models.ApiAnalyzer
         /// </summary>
         public ApiSetAnalysis()
         {
-            apiSet = new ApiSet();
+            apiSet = new ApiDoc();
             summaryInfo = new ApiSetSummaryModel();
             InitializeCollections();
         }
 
         /// <summary>
-        /// A constructor that lets you provide a pre-populated ApiSet
+        /// A constructor that lets you provide a pre-populated ApiDoc
         /// to this object.
         /// </summary>
         /// <param name="ApiSet">The <see cref="ApiSet"/> to add to this Analysis model.</param>
-        public ApiSetAnalysis(ApiSet ApiSet)
+        public ApiSetAnalysis(ApiDoc ApiSet)
         {
             apiSet = ApiSet;
             summaryInfo = new ApiSetSummaryModel();

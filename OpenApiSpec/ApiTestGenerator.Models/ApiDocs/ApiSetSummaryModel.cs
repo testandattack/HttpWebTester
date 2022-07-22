@@ -10,7 +10,7 @@ using System.Text;
 namespace ApiTestGenerator.Models.ApiDocs
 {
     /// <summary>
-    /// A set of counts for various items in the ApiSet after
+    /// A set of counts for various items in the ApiDoc after
     /// parasing it.
     /// </summary>
     public class ApiSetSummaryModel

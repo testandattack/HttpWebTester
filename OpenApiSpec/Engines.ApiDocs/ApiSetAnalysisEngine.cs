@@ -18,7 +18,7 @@ namespace Engines.ApiDocs
 {
     public class ApiSetAnalysisEngine
     {
-        private ApiSet apiSet;
+        private ApiDoc apiSet;
         private ApiSetSummaryModel summaryInfo;
         public Settings settings { get; private set; }
 
@@ -33,7 +33,7 @@ namespace Engines.ApiDocs
             asa.AnalysisName = summaryInfo.apiInfo.Title;
         }
 
-        public ApiSetAnalysisEngine(ApiSet ApiSet, Settings Settings)
+        public ApiSetAnalysisEngine(ApiDoc ApiSet, Settings Settings)
         {
             asa = new ApiSetAnalysis(ApiSet);
             
@@ -368,7 +368,7 @@ namespace Engines.ApiDocs
 
         #region -- Load and Save methods -----
         /// <summary>
-        /// call this to make a table-like summary of the ApiSet to load into excel.
+        /// call this to make a table-like summary of the ApiDoc to load into excel.
         /// </summary>
         /// <param name="fileName"></param>
         public void SaveEndpointSummariesAsCsv(string fileName)
@@ -430,7 +430,7 @@ namespace Engines.ApiDocs
                 Log.ForContext<ApiSetAnalysis>().Error("LoadApiSetAnalysisFromFile failed to load the set from {fileName}", fileName);
                 throw new NullReferenceException($"LoadApiSetAnalysisFromFile failed to load the set from {fileName}");
             }
-            asa.apiSet = new ApiSet();
+            asa.apiSet = new ApiDoc();
         }
         #endregion
 

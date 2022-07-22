@@ -15,18 +15,23 @@ namespace ApiSet.Engines
         #region -- Properties -----
         private readonly ISettings _settings;
         private readonly ILogger _logger;
-
+        private readonly IPropertyEngine _propertyEngine;
         #endregion
 
         #region -- Constructors -----
-        public RequestBodyEngine(ILogger logger, ISettings settings)
+        public RequestBodyEngine(ILogger logger, ISettings settings, IPropertyEngine propertyEngine)
         {
             _settings = settings;
             _logger = logger;
+            _propertyEngine = propertyEngine;
         }
         #endregion
 
         #region -- Methods -----
+        public RequestBody GetRequestBody(OpenApiOperation apiOperation)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

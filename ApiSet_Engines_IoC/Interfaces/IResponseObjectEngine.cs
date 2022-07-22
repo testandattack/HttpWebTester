@@ -8,5 +8,6 @@ namespace ApiSet.Engines.Interfaces
 {
     public interface IResponseObjectEngine
     {
+        ResponseObject GetResponseObject(OpenApiOperation apiOperation);
     }
 }

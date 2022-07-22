@@ -37,7 +37,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         public string Method { get; set; }
 
         /// <summary>
-        /// This will allow people to extend the ApiSet to manage versioning of endpoints
+        /// This will allow people to extend the ApiDoc to manage versioning of endpoints
         /// at a future time. 
         /// </summary>
         public string Version { get; set; }
@@ -129,14 +129,14 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// <summary>
         /// This string holds the response body text that was present
         /// for the given Http Endpoint. Note: This only applies when 
-        /// building an ApiSet from sources like HTTP Archive files.
+        /// building an ApiDoc from sources like HTTP Archive files.
         /// </summary>
         public string recordedResponseBody { get; set; }
 
         /// <summary>
         /// This object holds the response object that was present
         /// for the given Http Endpoint. Note: This only applies when 
-        /// building an ApiSet from sources like HTTP Archive files.
+        /// building an ApiDoc from sources like HTTP Archive files.
         /// </summary>
         public HttpResponseMessage recordedResponseMessage { get; set; }
         #endregion

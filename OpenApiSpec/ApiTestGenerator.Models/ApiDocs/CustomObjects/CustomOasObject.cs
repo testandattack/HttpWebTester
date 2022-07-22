@@ -15,7 +15,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// </summary>
         /// <remarks>
         /// The preferred convention (per the OAS standards) is to make the name of any custom entry 
-        /// use "x-" at the beginning of the custom entry. The two samples included with the ApiSet
+        /// use "x-" at the beginning of the custom entry. The two samples included with the ApiDoc
         /// code have names of:
         /// <list type="bullet">
         /// <item>x-provides-values-for</item>
@@ -28,7 +28,7 @@ namespace ApiTestGenerator.Models.ApiDocs
         /// The value of the custom item.
         /// </summary>
         /// <remarks>
-        /// The ApiSet parsing engine assumes that the value is stored in the OAS as a string.
+        /// The ApiDoc parsing engine assumes that the value is stored in the OAS as a string.
         /// The custom methods you can provide may convert the string into a standard object,
         /// such as a List or Dictionary, but you will have to provide the parser to convert 
         /// the string into that object.

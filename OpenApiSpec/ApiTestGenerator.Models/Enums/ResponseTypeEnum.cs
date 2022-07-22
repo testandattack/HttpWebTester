@@ -62,7 +62,7 @@ namespace ApiTestGenerator.Models.Enums
         none = 9,
         
         /// <summary>
-        /// The ApiSet parser was not able to determine the response object type.
+        /// The ApiDoc parser was not able to determine the response object type.
         /// </summary>
         FailedToParse = 10
     }

@@ -8,5 +8,14 @@ namespace ApiSet.Engines.Interfaces
 {
     public interface IApiSetEngine
     {
+        void BuildApiSet(OpenApiDocument openApiDocument, string ApiRoot, Dictionary<string, string> extraInfo);
+
+        void LoadApiDocFromFile(string fileName);
+
+        void SerializeAndSaveApiDoc();
+        
+        void SerializeAndSaveApiDoc(string fileName);
+
+        void SaveListOfURLs(string fileName);
     }
 }

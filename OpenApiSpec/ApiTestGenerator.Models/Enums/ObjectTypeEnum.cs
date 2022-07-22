@@ -183,7 +183,7 @@ namespace ApiTestGenerator.Models.Enums
         #endregion
 
         /// <summary>
-        /// The ApiSet parser was not able to determine the response object type.
+        /// The ApiDoc parser was not able to determine the response object type.
         /// </summary>
         FailedToParse
     }

@@ -26,7 +26,7 @@ namespace HttpWebTester
         {
             Settings appSettings = CreateLogger();
 
-            ApiSet apiSet = new ApiSet(appSettings);
+            ApiDoc apiSet = new ApiDoc(appSettings);
             //CreateSchema(apiSet, "c:\\temp\\ApiSet_Schema.json");
 
             #region -- ApiSet Stuff -----
@@ -74,7 +74,7 @@ namespace HttpWebTester
             generator.SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default;
             generator.SchemaReferenceHandling = SchemaReferenceHandling.All;
             generator.DefaultRequired = Required.Default;
-            JSchema schema = generator.Generate(typeof(ApiSet));
+            JSchema schema = generator.Generate(typeof(ApiDoc));
 
             using( StreamWriter sw = new StreamWriter(fileName, false))
             {
@@ -117,7 +117,7 @@ namespace HttpWebTester
         static void CreateApiSet(Settings appSettings, string oasName, string dtoName)
         {
             ISwaggerParser parser;
-            // Step 1 - Read the OAS and create an ApiSet from the data
+            // Step 1 - Read the OAS and create an ApiDoc from the data
             if (appSettings.swaggerSettings.ReadSwaggerFromFile == true)
                 parser = new SwaggerFileParser(appSettings);
             else
@@ -132,7 +132,7 @@ namespace HttpWebTester
             apiSetEngine.AddCoreInfo(parser.extraInfo);
             apiSetEngine.SerializeAndSaveApiSet();
 
-            // Step 2 - Analyze the ApiSet
+            // Step 2 - Analyze the ApiDoc
             ApiSetAnalysisEngine analyzer = new ApiSetAnalysisEngine(apiSetEngine.apiSet, appSettings);
             analyzer.PerformAnalysis();
             analyzer.SerializeAndSaveApiSetAnalysis();
