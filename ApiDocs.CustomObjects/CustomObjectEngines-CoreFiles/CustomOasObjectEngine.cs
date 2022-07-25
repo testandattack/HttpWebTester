@@ -1,5 +1,5 @@
-﻿using ApiTestGenerator.Models.ApiDocs;
-using ApiTestGenerator.Models.Enums;
+﻿using ApiSet.Models.ApiDocs;
+using ApiSet.Models.Enums;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Any;
 using Newtonsoft.Json;

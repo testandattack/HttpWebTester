@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
+    <Folder Include="MarkDown\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MarkDown\" />
+    <ProjectReference Include="..\ApiSet.Models\ApiSet.Models.csproj" />
   </ItemGroup>
 
 </Project>

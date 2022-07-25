@@ -1,4 +1,4 @@
-﻿using ApiTestGenerator.Models.ApiDocs;
+﻿using ApiSet.Models.ApiDocs;
 using Engines.ApiDocs;
 using GTC.HttpWebTester.Settings;
 using GTC.SwaggerParsing;

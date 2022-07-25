@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ApiTestGenerator.Models.ApiDocs;
+using ApiSet.Models.ApiDocs;
 using PostmanManager;
 
 namespace PostmanItemManagement

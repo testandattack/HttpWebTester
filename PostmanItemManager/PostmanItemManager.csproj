@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiDocs.CustomObjects\ApiDocs.CustomObjects.csproj" />
-    <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
-    <ProjectReference Include="..\OpenApiSpec\Engines.ApiDocs\Engines.ApiDocs.csproj" />
+    <ProjectReference Include="..\ApiSet.Models\ApiSet.Models.csproj" />
+    <ProjectReference Include="..\Engines.ApiDocs\Engines.ApiDocs.csproj" />
     <ProjectReference Include="..\Settings\Settings.csproj" />
   </ItemGroup>
 

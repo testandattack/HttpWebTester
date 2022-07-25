@@ -22,7 +22,7 @@
             </summary>
             <remarks>
             <para>
-            This base class has all of the event hooks and handler methods that tie into the ApiSet\Endpoint parser.
+            This base class has all of the event hooks and handler methods that tie into the ApiDoc\Endpoint parser.
             </para>
             <para>
             To add custom objects, create your own class and have it inherit from this class. Then, update the 
@@ -30,7 +30,7 @@
             </para>
             </remarks>
         </member>
-        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection)">
+        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiSet.Models.ApiDocs.CustomOasObjectCollection)">
             <summary>
             This method triggers the building of event handlers and the triggering of the
             events themselves. It is called by the <c>Endpoint Engine</c>.
@@ -41,7 +41,7 @@
             <param name="openApiOperation">This is the OAS operation that is being parsed to build the EndPoint object</param>
             <param name="items">This is the Endpoint's collection of custom objects.</param>
         </member>
-        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(System.Object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)">
+        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(System.Object,ApiSet.Models.ApiDocs.CustomOasObjectEventArgs)">
              <summary>
              This is the method that you should override in your derived class.
              </summary>
@@ -61,7 +61,7 @@
                         // Make sure the current extensoin is the one you are looking for
                         if (operationExtension.Key == "x-Whatever-YourTokenNameMioghtBe")
                         {
-                            // Create a new CustomOasObject for the ApiSet
+                            // Create a new CustomOasObject for the ApiDoc
                             var Item = new CustomOasObject();
             
                             // Name the object
@@ -98,7 +98,7 @@
              </para>
              </remarks>
         </member>
-        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)">
+        <member name="M:ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiSet.Models.ApiDocs.CustomOasObjectEventArgs)">
             <summary>
             This method is part of the C# event handler functionality.
             </summary>
@@ -129,7 +129,7 @@
             A custom Operation Object parser
             </summary>
         </member>
-        <member name="M:ApiDocs.CustomObjects.ProvidesValuesFor_CustomOasObjectEngine.ParseObject(System.Object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)">
+        <member name="M:ApiDocs.CustomObjects.ProvidesValuesFor_CustomOasObjectEngine.ParseObject(System.Object,ApiSet.Models.ApiDocs.CustomOasObjectEventArgs)">
             <summary>
             This is the method that parses the <see cref="P:Microsoft.OpenApi.Models.OpenApiOperation.Extensions"/> objects from the OAS.
             </summary>

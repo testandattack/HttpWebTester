@@ -1,11 +1,11 @@
-﻿using ApiTestGenerator.Models.Enums;
+﻿using ApiSet.Models.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System;
-using ApiTestGenerator.Models.ApiDocs;
+using ApiSet.Models.ApiDocs;
 
 namespace ApiDocs.CustomObjects
 {

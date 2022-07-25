@@ -8,6 +8,6 @@ namespace GTC.HttpWebTester.Settings
     {
         void LoadSettings(string fileName);
 
-        Settings ReadSettingsFromFile(string fileName)
+        Settings ReadSettingsFromFile(string fileName);
     }
 }

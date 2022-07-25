@@ -27,7 +27,7 @@ public void LoadApiSetAnalysisFromFile(string fileName);
 
 ## ApiSetAnalysisEngine.SaveEndpointSummariesAsCsv(string) Method
 
-call this to make a table-like summary of the ApiSet to load into excel.
+call this to make a table-like summary of the ApiDoc to load into excel.
 
 ```csharp
 public void SaveEndpointSummariesAsCsv(string fileName);

@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTestGenerator.Models", "OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj", "{04849D55-8C5E-4826-8751-2AFCEE470442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSet.Models", "ApiSet.Models\ApiSet.Models.csproj", "{04849D55-8C5E-4826-8751-2AFCEE470442}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engines.ApiDocs", "OpenApiSpec\Engines.ApiDocs\Engines.ApiDocs.csproj", "{320F4A5E-8A5C-464D-A767-2876EF166B3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engines.ApiDocs", "Engines.ApiDocs\Engines.ApiDocs.csproj", "{320F4A5E-8A5C-464D-A767-2876EF166B3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerParsing", "OpenApiSpec\SwaggerParser\SwaggerParsing.csproj", "{8D9BFF6C-5F28-40FB-9449-87171D4B29D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerParsing", "SwaggerParser\SwaggerParsing.csproj", "{8D9BFF6C-5F28-40FB-9449-87171D4B29D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Settings", "Settings\Settings.csproj", "{7A67AC01-B356-4F89-818E-9ADBC3891F55}"
 EndProject
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDocs.CustomObjects", "Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostmanItemManager", "PostmanItemManager\PostmanItemManager.csproj", "{CB312AE5-8DC0-47EF-8150-7AB99E366FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSet_Engines_IoC", "ApiSet_Engines_IoC\ApiSet_Engines_IoC.csproj", "{8DE59098-E3DA-4BDC-B39A-8E19C2B52F1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasToApiSet", "OasToApiSet\OasToApiSet.csproj", "{8DE59098-E3DA-4BDC-B39A-8E19C2B52F1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

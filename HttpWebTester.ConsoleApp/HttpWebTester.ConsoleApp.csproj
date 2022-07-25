@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenApiSpec\ApiTestGenerator.Models\ApiTestGenerator.Models.csproj" />
-    <ProjectReference Include="..\OpenApiSpec\SwaggerParser\SwaggerParsing.csproj" />
+    <ProjectReference Include="..\ApiSet.Models\ApiSet.Models.csproj" />
     <ProjectReference Include="..\PostmanItemManager\PostmanItemManager.csproj" />
     <ProjectReference Include="..\Settings\Settings.csproj" />
+    <ProjectReference Include="..\SwaggerParser\SwaggerParsing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

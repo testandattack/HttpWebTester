@@ -10,7 +10,7 @@ public static class PropertyExtensions
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; PropertyExtensions
 ### Methods
 
-<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiTestGenerator.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema)'></a>
+<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiSet.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema)'></a>
 
 ## PropertyExtensions.GetDescriptionAndCustomObjects(this Property, OpenApiSchema) Method
 
@@ -18,17 +18,17 @@ Parses the [Microsoft.OpenApi.Models.OpenApiSchema.Description](https://docs.mic
 and finds any custom objects added to it.
 
 ```csharp
-public static void GetDescriptionAndCustomObjects(this ApiTestGenerator.Models.ApiDocs.Property source, Microsoft.OpenApi.Models.OpenApiSchema property);
+public static void GetDescriptionAndCustomObjects(this ApiSet.Models.ApiDocs.Property source, Microsoft.OpenApi.Models.OpenApiSchema property);
 ```
 #### Parameters
 
-<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiTestGenerator.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema).source'></a>
+<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiSet.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema).source'></a>
 
-`source` [ApiTestGenerator.Models.ApiDocs.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiDocs.Property 'ApiTestGenerator.Models.ApiDocs.Property')
+`source` [ApiSet.Models.ApiDocs.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiSet.Models.ApiDocs.Property 'ApiSet.Models.ApiDocs.Property')
 
-the [ApiTestGenerator.Models.ApiDocs.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiDocs.Property 'ApiTestGenerator.Models.ApiDocs.Property') object to add items to.
+the [ApiSet.Models.ApiDocs.Property](https://docs.microsoft.com/en-us/dotnet/api/ApiSet.Models.ApiDocs.Property 'ApiSet.Models.ApiDocs.Property') object to add items to.
 
-<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiTestGenerator.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema).property'></a>
+<a name='Engines.ApiDocs.Extensions.PropertyExtensions.GetDescriptionAndCustomObjects(thisApiSet.Models.ApiDocs.Property,Microsoft.OpenApi.Models.OpenApiSchema).property'></a>
 
 `property` [Microsoft.OpenApi.Models.OpenApiSchema](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiSchema 'Microsoft.OpenApi.Models.OpenApiSchema')
 

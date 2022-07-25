@@ -20,13 +20,13 @@ Implements [ApiDocs.CustomObjects.ICustomOasObjectEngine&lt;](ICustomOasObjectEn
 
 ### Remarks
 
-This base class has all of the event hooks and handler methods that tie into the ApiSet\Endpoint parser.
+This base class has all of the event hooks and handler methods that tie into the ApiDoc\Endpoint parser.
 
 To add custom objects, create your own class and have it inherit from this class. Then, update the 
 [BuildCustomObjects()](AddAllCustomObjectEngines.md#ApiDocs.CustomObjects.AddAllCustomObjectEngines.BuildCustomObjects() 'ApiDocs.CustomObjects.AddAllCustomObjectEngines.BuildCustomObjects()') method to call your custom class.
 ### Methods
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection)'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiSet.Models.ApiDocs.CustomOasObjectCollection)'></a>
 
 ## CustomOasObjectEngine.LookForCustomObjects(OpenApiOperation, CustomOasObjectCollection) Method
 
@@ -34,58 +34,58 @@ This method triggers the building of event handlers and the triggering of the
 events themselves. It is called by the `Endpoint Engine`.
 
 ```csharp
-public void LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation openApiOperation, ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection items);
+public void LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation openApiOperation, ApiSet.Models.ApiDocs.CustomOasObjectCollection items);
 ```
 #### Parameters
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection).openApiOperation'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiSet.Models.ApiDocs.CustomOasObjectCollection).openApiOperation'></a>
 
 `openApiOperation` [Microsoft.OpenApi.Models.OpenApiOperation](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.OpenApi.Models.OpenApiOperation 'Microsoft.OpenApi.Models.OpenApiOperation')
 
 This is the OAS operation that is being parsed to build the EndPoint object
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection).items'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.LookForCustomObjects(Microsoft.OpenApi.Models.OpenApiOperation,ApiSet.Models.ApiDocs.CustomOasObjectCollection).items'></a>
 
-`items` [ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectCollection')
+`items` [ApiSet.Models.ApiDocs.CustomOasObjectCollection](https://docs.microsoft.com/en-us/dotnet/api/ApiSet.Models.ApiDocs.CustomOasObjectCollection 'ApiSet.Models.ApiDocs.CustomOasObjectCollection')
 
 This is the Endpoint's collection of custom objects.
 
 ### Remarks
 This method is used by the EndPoint Engine and should not be called by your code.
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiSet.Models.ApiDocs.CustomOasObjectEventArgs)'></a>
 
 ## CustomOasObjectEngine.OnOpenApiOperationEvent(CustomOasObjectEventArgs) Method
 
 This method is part of the C# event handler functionality.
 
 ```csharp
-protected virtual void OnOpenApiOperationEvent(ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs e);
+protected virtual void OnOpenApiOperationEvent(ApiSet.Models.ApiDocs.CustomOasObjectEventArgs e);
 ```
 #### Parameters
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs).e'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.OnOpenApiOperationEvent(ApiSet.Models.ApiDocs.CustomOasObjectEventArgs).e'></a>
 
-`e` [ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs')
+`e` [ApiSet.Models.ApiDocs.CustomOasObjectEventArgs](https://docs.microsoft.com/en-us/dotnet/api/ApiSet.Models.ApiDocs.CustomOasObjectEventArgs 'ApiSet.Models.ApiDocs.CustomOasObjectEventArgs')
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs)'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiSet.Models.ApiDocs.CustomOasObjectEventArgs)'></a>
 
 ## CustomOasObjectEngine.ParseObject(object, CustomOasObjectEventArgs) Method
 
 This is the method that you should override in your derived class.
 
 ```csharp
-public virtual void ParseObject(object sender, ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs e);
+public virtual void ParseObject(object sender, ApiSet.Models.ApiDocs.CustomOasObjectEventArgs e);
 ```
 #### Parameters
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs).sender'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiSet.Models.ApiDocs.CustomOasObjectEventArgs).sender'></a>
 
 `sender` [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object')
 
-<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs).e'></a>
+<a name='ApiDocs.CustomObjects.CustomOasObjectEngine.ParseObject(object,ApiSet.Models.ApiDocs.CustomOasObjectEventArgs).e'></a>
 
-`e` [ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs](https://docs.microsoft.com/en-us/dotnet/api/ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs 'ApiTestGenerator.Models.ApiDocs.CustomOasObjectEventArgs')
+`e` [ApiSet.Models.ApiDocs.CustomOasObjectEventArgs](https://docs.microsoft.com/en-us/dotnet/api/ApiSet.Models.ApiDocs.CustomOasObjectEventArgs 'ApiSet.Models.ApiDocs.CustomOasObjectEventArgs')
 
 ### Remarks
 This code example how to create your own custom parser
@@ -102,7 +102,7 @@ public override void ParseObject(object sender, CustomOasObjectEventArgs e)
            // Make sure the current extensoin is the one you are looking for
            if (operationExtension.Key == "x-Whatever-YourTokenNameMioghtBe")
            {
-               // Create a new CustomOasObject for the ApiSet
+               // Create a new CustomOasObject for the ApiDoc
                var Item = new CustomOasObject();
 
                // Name the object

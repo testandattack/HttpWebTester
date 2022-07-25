@@ -1,5 +1,5 @@
-﻿using ApiTestGenerator.Models.ApiDocs;
-using ApiTestGenerator.Models.Consts;
+﻿using ApiSet.Models.ApiDocs;
+using ApiSet.Models.Consts;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using System;

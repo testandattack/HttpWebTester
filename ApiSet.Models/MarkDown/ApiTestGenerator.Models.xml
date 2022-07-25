@@ -1,0 +1,1733 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiSet.Models</name>
+    </assembly>
+    <members>
+        <member name="T:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.apiSet">
+            <summary>
+            The <see cref="N:ApiSet.Models.ApiDocs"/> object to analyze
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.sortedEndpointSummaries">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiAnalyzer.EndpointSummary"/> items found while analyzing the ApiDoc.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisName">
+            <summary>
+            The name of the ApiDoc that was analyzed
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.AnalysisDate">
+            <summary>
+            The local Date-Time that the analysis was performed.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.summaryInfo">
+            <summary>
+            <see cref="T:ApiSet.Models.ApiDocs.ApiSetSummaryModel"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.analyzerErrors">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiAnalyzer.ApiSetAnalyzerError"/> items found while analyzing the ApiDoc.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.endpointSummaries">
+            <summary>
+            A list of every endpoint with an <see cref="T:ApiSet.Models.ApiAnalyzer.EndpointSummary"/> for each one.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithMultipleMethods">
+            <summary>
+            A list of all endpoints that have the same URL, but offer different
+            methods for calling. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.requestBodySummary">
+            <summary>
+            A list showing the quantities and types of request bodies in the API
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.inputParameters">
+            <summary>
+            A list of all the <see cref="!:ApiDocs.Engines.Parameter"/> items.
+            these are all of the items that will be used at some point as
+            inputs to the API calls.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.properties">
+            <summary>
+            A list of all the <see cref="!:ApiDocs.Engines.Property"/> items. 
+            This lists all of the primitive values that get returned as part
+            of the response objects.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.lookupEndpoints">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiAnalyzer.LookupEndPoint"/> items
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.lookupComponents">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiAnalyzer.LookupComponent"/> items
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.lookupProperties">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiDocs.Property"/> objects that are in components that act 
+            as responses to Lookup Endpoints.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.inputParametersNotInProperties">
+            <summary>
+            A list of the <see cref="T:ApiSet.Models.ApiAnalyzer.InputParameter"/>s that do not have matching entries in
+            the <see cref="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.properties"/> collection.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.inputParametersNotInLookupProperties">
+            <summary>
+            A list of the <see cref="T:ApiSet.Models.ApiAnalyzer.InputParameter"/>s that do not have matching entries in
+            the <see cref="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.lookupProperties"/> collection.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.depricatedEndpoints">
+            <summary>
+            A list of all endpoints that have the 'Depricated' attribute.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithoutUrlParams">
+            <summary>
+            A List containing the EndpointIds of all endpoints that do NOT contain an
+            input parameter in the URL
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.endpointsWithUrlParams">
+            <summary>
+            A List containing the EndpointIds of all endpoints that contain an
+            input parameter in the URL
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiAnalyzer.ApiSetAnalysis.#ctor(ApiSet.Models.ApiDocs.ApiDoc)">
+            <summary>
+            A constructor that lets you provide a pre-populated ApiDoc
+            to this object.
+            </summary>
+            <param name="ApiSet">The <see cref="N:ApiSet"/> to add to this Analysis model.</param>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.EndpointSummary.RequestBodyContentType">
+            <summary>
+            an enum defining the type of content in the request body
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiAnalyzer.InputParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Name">
+            <summary>
+            The name of the item
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Type">
+            <summary>
+            The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> 
+            of the property.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Description">
+            <summary>
+            The description of the parameter
+            </summary>
+            <remarks>The text that shows up in the Description 
+            is any text added through XML Comments to the parameter 
+            in the API code</remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Reference">
+            <summary>
+            A string pointing to another object to be referenced.
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#fixed-fields-18"/> 
+            for more information.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Format">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.IsArray">
+            <summary>
+            True if the parameter is an array of items
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.arrayType">
+            <summary>
+            If <see cref="P:ApiSet.Models.ApiAnalyzer.InputParameter.IsArray"/> = true, this tells the type of items in the array
+            </summary>
+            <remarks>
+            Primitive data types in the OAS are based on the types supported by the JSON Schema 
+            Specification Wright Draft 00. Note that integer as a type is also supported and is 
+            defined as a JSON number without a fraction or exponent part. null is not supported 
+            as a type (see nullable for an alternative solution). Models are defined using the 
+            Schema Object, which is an extended subset of JSON Schema Specification Wright Draft 00.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.arrayFormat">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.ShowsUpIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.Required">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.InputProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.NameVariations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.MatchesTheseComponents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.InputParameter.UsedByTheseEndpoints">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiAnalyzer.InputParameter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiAnalyzer.InputParameter.#ctor(System.String,System.String,System.String,System.Boolean,System.String,System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="type"></param>
+            <param name="isArray"></param>
+            <param name="ArrayType"></param>
+            <param name="format"></param>
+            <param name="required"></param>
+            <param name="inputProvider"></param>
+            <param name="showsUpIn"></param>
+        </member>
+        <member name="M:ApiSet.Models.ApiAnalyzer.InputParameter.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.LookupComponent.EndpointNames">
+            <summary>
+            The names of the Endpoints returning this DTO.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.LookupComponent.ResponseObjectName">
+            <summary>
+            [Extension] - The class 'name' of response object for
+            responses that use a $ref tag to reference a <see cref="!:ComponentEngine"/> 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.LookupComponent.ResponseObject">
+            <summary>
+            [Extension] - This is a collection of objects in the response 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.LookupComponent.ResponseObjectType">
+            <summary>
+            A <see cref="T:ApiSet.Models.Enums.ResponseTypeEnum"/> value that describes the
+            type of response object returned.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiAnalyzer.LookupEndPoint.ControllerName">
+            <summary>
+            The name of the controller housing this endpoint.
+            </summary>
+            <remarks>
+            For controllers that have lookup calls which share
+            the same output DTO as a call in the "Lookups" controller,
+            This field will track that and will be used to provide
+            input to the other endpoints in the same controller.
+            </remarks>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.AbbreviatedResponseObject">
+            <summary>
+            [Extension] Holds a few key properties about the response object.
+            </summary>
+            <remarks>
+            Used to quickly describe Primitive values that may not have a 
+            <see cref="T:ApiSet.Models.ApiDocs.Component"/> to reference.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.AbbreviatedResponseObject.type">
+            <summary>
+            The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> 
+            of the response object property.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.AbbreviatedResponseObject.format">
+            <summary>
+            this field describes the format of the object
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.AbbreviatedResponseObject.nullable">
+            <summary>
+            Indicates whether the property can be null.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.AbbreviatedResponseObject.reference">
+            <summary>
+            A string pointing to another object to be referenced.
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#fixed-fields-18"/> 
+            for more information.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.Error">
+            <summary>
+            A base class for storing errors when working with ApiSets and ApiSetAnalyzers
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Error.ErrorMessage">
+            <summary>
+            The text of the error message
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Error.ObjectWithError">
+            <summary>
+            A copy of the ovject that had the error.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.Error.GetErrorCategory(System.Int32,ApiSet.Models.Enums.AnalyzerErrorCategoryEnum)">
+            <summary>
+            Returns a string built from an error number and the error category
+            </summary>
+            <param name="iNum"></param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.ApiDoc">
+            <summary>
+            This class defines a Model used for translating various different web based API 
+            calls between the different formats. It is based on the Open API Specification.
+            The idea is to allow an engine to populate this model with information from
+            sources like:
+            <list type="bullet">
+            <item>An OAS document</item>
+            <item>An Http Archive (HAR) file.</item>
+            <item>A Postman request collection.</item>
+            </list>
+            and turn the results into a test harness that can be executed.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.settings">
+            <summary>
+            The <see cref="T:GTC.HttpWebTester.Settings.Settings"/> to use with this ApiDoc.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.apiRoot">
+            <summary>
+            The left part of the UriStem that comes before 'controller' names.
+            </summary>
+            <remarks>
+            The OAS allows for [but does not require] the definition of a "basePath" node, which is part of the
+            url to reach an API operation. Some OAS generators will define this value. Some will leave the root 
+            as part of the <see cref="P:ApiSet.Models.ApiDocs.ApiDoc.Servers"/> Url address. Some will leave the value as the first part of 
+            the 'path' node. Some may not define a root for the api. <br/>
+            This variable holds one of the following values:
+            <list type="number">
+            <item>The value defined in the <c>basePath</c> node, if present will be stored here.</item>
+            <item>The value added to the <c>settings.json</c> file, if defined will be stored here.</item>
+            <item>The Servers Url addresses will be searched for a common value with an 
+            extension method and (if found) will be stored here.</item>
+            <item>An empty string if there is not a common basePath, or if the value is
+            not provided by one of the above items.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.apiRootSourceLocation">
+            <summary>
+            Lists the source for the <see cref="!:ApiSet.apiRoot"/> object
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.OasVersion">
+            <summary>
+            The Open API Specification version used for creating the document.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Info">
+            <summary>
+            Contains the <see cref="T:Microsoft.OpenApi.Models.OpenApiInfo"/> object from the Swagger Documentation
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Servers">
+            <summary>
+            A list of <see cref="T:Microsoft.OpenApi.Models.OpenApiServer"/> objects
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Controllers">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.Controller"/> objects. These are 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Endpoints">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> objects.These are the same thing as OAS operations.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Components">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.Component"/> objects
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.SecuritySchemes">
+            <summary>
+            The list of OpenApiSecuritySchemes associated with this OAS Document
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiDoc.Schemes">
+            <summary>
+            The transfer protocos(s) used by the API. [OAS v2.x only]
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ApiDoc.#ctor">
+            <summary>
+            Creates a new empty ApiDoc instance.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ApiDoc.#ctor(GTC.HttpWebTester.Settings.Settings)">
+            <summary>
+            Creates a new empty ApiDoc instance using the provided <paramref name="settings"/> object.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ApiDoc.#ctor(System.String,GTC.HttpWebTester.Settings.Settings)">
+            <summary>
+            Creates a new ApiDoc instance using the provided <paramref name="ApiRoot"/> and <paramref name="settings"/> objects.
+            </summary>
+            <param name="ApiRoot"></param>
+            <param name="settings"></param>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.ApiSetError">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ApiSetError.#ctor(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="msg"></param>
+            <param name="objectWithError"></param>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.ApiSetSummaryModel">
+            <summary>
+            A set of counts for various items in the ApiDoc after
+            parasing it.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.oasVersion">
+            <summary>
+            A string containing the Open API Specification version of the OAS document that this summary represents.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.apiInfo">
+            <summary>
+            A copy of the <see cref="!:http://spec.openapis.org/oas/v3.0.3#info-object">OpenApiInfo</see> object
+            from the API Documentation
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.apiRoot">
+            <summary>
+            The UriStem portion of the Swagger Operation that preceeds the 
+            "controller" name i nthe path.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.apiRootSourceLocation">
+            <summary>
+            Lists the source for the <see cref="!:ApiSet.apiRoot"/> object
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numControllers">
+            <summary>
+            the number of <see cref="T:ApiSet.Models.ApiDocs.Controller"/> items in the set.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numActiveEndpoints">
+            <summary>
+            The number of non-depricated <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> items in the set.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numDepricated">
+            <summary>
+            The number of depricated <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> items in the set.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numTestMethods">
+            <summary>
+            The number of non-depricated <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> items
+            in the set that exist solely for testing services.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numComponents">
+            <summary>
+            The number of <see cref="T:ApiSet.Models.ApiDocs.Component"/> items in the set.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numErrors">
+            <summary>
+            The number of non-fatal errors that occurred during analysis
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numLookupEndpoints">
+            <summary>
+            The number of Lookup Endpoint items found in the set.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numLookupComponents">
+            <summary>
+            The number of DTOs that are responses from Lookup Endpoint items
+            </summary>
+            <remarks>
+            This count is tracked separately from the Lookup endpoints because there are
+            sometimes multiple endpoints returning the same lookup DTO. ALSO, this count does
+            not include primitive response types.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numLookupProperties">
+            <summary>
+            The number of individual objects that can be extracted from returned
+            <see cref="T:ApiSet.Models.ApiDocs.Component"/>s of Lookup Endpoints.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numInputProperties">
+            <summary>
+            The number of <see cref="T:ApiSet.Models.ApiDocs.Component"/> Properties that are used as
+            input parameters.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numInputParametersWithoutProperty">
+            <summary>
+            The number of input parameters that do not appear to be related
+            to any <see cref="T:ApiSet.Models.ApiDocs.Component"/>s in the API. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.numInputParametersWithoutLookupProperty">
+            <summary>
+            The number of input parameters that do not appear to be related
+            to any Lookup <see cref="T:ApiSet.Models.ApiDocs.Component"/>s in the API. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.NumEndpointsWithExample">
+            <summary>
+            The number of endpoints that have one or more <see cref="T:ApiSet.Models.ApiDocs.ExampleValue"/> items 
+            for their input parameters.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.NumEndpointsWithExamples">
+            <summary>
+            The number of endpoints that have one or more <see cref="T:System.Collections.Generic.List`1"/> items 
+            for their input parameters.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.responseStatuses">
+            <summary>
+            A list of all unique <see cref="T:Microsoft.OpenApi.Models.OpenApiResponse"/> status 
+            codes found in the documentation.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.propertyTypes">
+            <summary>
+            A list of all of the unique <see cref="P:ApiSet.Models.ApiDocs.Property.Type"/>
+            entries found in the documentation.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ApiSetSummaryModel.propertyFormats">
+            <summary>
+            A list of all of the unique <see cref="P:ApiSet.Models.ApiDocs.Property.Format"/>
+            entries found in the documentation.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.Component">
+            <summary>
+            This class defines a container to house the custom class objects
+            that are used for responses from the API. 
+            </summary>
+            <remarks>
+            This class bears the same name as the <see cref="!:http://spec.openapis.org/oas/v3.0.3#components-object">
+            Components</see> object in the OpenApiSpec, but it only implements a part of the functionality, specifically
+            the Schema objects stored under the Components object.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Component.Name">
+            <summary>
+            The name of the schema object.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Component.ClassName">
+            <summary>
+            The name of the class inside source code for the object being stored.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Component.properties">
+            <summary>
+            The list of <see cref="T:ApiSet.Models.ApiDocs.Property"/> items
+            that are associated with the schema.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.Controller">
+            <summary>
+            An object that stores a list of certain
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/> items
+            grouped by the 'name' of the controller they are associated with in code. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Controller.Name">
+            <summary>
+            The name of the controller
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Controller.EndPoints">
+            <summary>
+            A collection of <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> objects and their names
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.CustomOasObject">
+            <summary>
+            This is the base class for creating custom objects.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.CustomOasObject.CustomObjectName">
+            <summary>
+            The name of the custom object.
+            </summary>
+            <remarks>
+            The preferred convention (per the OAS standards) is to make the name of any custom entry 
+            use "x-" at the beginning of the custom entry. The two samples included with the ApiDoc
+            code have names of:
+            <list type="bullet">
+            <item>x-provides-values-for</item>
+            <item>x-method-name</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.CustomOasObject.CustomObjectValue">
+            <summary>
+            The value of the custom item.
+            </summary>
+            <remarks>
+            The ApiDoc parsing engine assumes that the value is stored in the OAS as a string.
+            The custom methods you can provide may convert the string into a standard object,
+            such as a List or Dictionary, but you will have to provide the parser to convert 
+            the string into that object.
+            </remarks>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.CustomOasObjectCollection">
+            <summary>
+            A class that contains a collection of custom objects added to the OAS documentation.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.CustomOasObjectCollection.collection">
+            <summary>
+            ther dictionary that contains the collection of custom object.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.CustomOasObjectCollection.#ctor">
+            <summary>
+            The default constructor
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.CustomOasObjectCollection.GetEnumerator">
+            <summary>
+            Gets the enumerator for the dictionary of objects making up this collection.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.CustomOasObjectEventArgs">
+            <summary>
+            The class to hold the properties that get passed into any event handler for
+            custom objects.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.CustomOasObjectEventArgs.operation">
+            <summary>
+            The <see cref="T:Microsoft.OpenApi.Models.OpenApiOperation"/> that might contain custom objects
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.CustomOasObjectEventArgs.customObjects">
+            <summary>
+            The <see cref="T:ApiSet.Models.ApiDocs.CustomOasObjectCollection"/> for the endpoint being processed.
+            This is passed to the event handler so that the method can add the new object
+            to the collection.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.EndPoint">
+            <summary>
+            This object is the equivalent to an OAS "Operation" object.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.EndpointId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.UriPath">
+            <summary>
+            This is the path of the endpoint and is derived from the 'Name' of the
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#path-item-object"/> object 
+            which describes the type of request that the endpoint expects. 
+            When combined with the <see cref="P:ApiSet.Models.ApiDocs.EndPoint.Method"/>
+            property, it describes a unique operation on an API.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.Method">
+            <summary>
+            This is the 'Name' of the 
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/> object 
+            which is essentially the URI. When combined with the <see cref="P:ApiSet.Models.ApiDocs.EndPoint.UriPath"/>
+            property, it describes a unique operation on an API.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.Version">
+            <summary>
+            This will allow people to extend the ApiDoc to manage versioning of endpoints
+            at a future time. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.parameters">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.Parameter"/> objects.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.Depricated">
+            <summary>
+            From the <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/>
+            field by the same name.
+            </summary>
+            <remarks>
+            Declares this operation to be deprecated. Consumers SHOULD refrain from usage 
+            of the declared operation. Default value is false.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.Description">
+            <summary>
+            From the <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/>
+            field by the same name.
+            </summary>
+            <remarks>
+            A verbose explanation of the operation behavior. CommonMark syntax MAY be used 
+            for rich text representation.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.Summary">
+            <summary>
+            From the <see cref="!:http://spec.openapis.org/oas/v3.0.3#operation-object"/>
+            field by the same name.
+            </summary>
+            <remarks>
+            A short summary of what the operation does.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.ReportingName">
+            <summary>
+            [Extension] This is a name to add to the request in the test harness that will
+            be used for grouping results of the tests.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.controllerName">
+            <summary>
+            [Extension] The name of the <see cref="T:ApiSet.Models.ApiDocs.Controller"/> object
+            that contains this endpoint.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.IsLookupMethod">
+            <summary>
+            A boolean that describes if the method contains the
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_LookupMethod"/> tag indicating
+            that the method is used to grab lookup values for other
+            methods in the API.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.IsForTestingPurposes">
+            <summary>
+            A boolean that indicates if this method is exposed solely for
+            the Tester Role and woill not be used by the application.
+            All Test methods contain <see cref="F:ApiSet.Models.Consts.ParserTokens.DESC_ForTestingPurposes"/>
+            in the Description field.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.ResponseItems">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.ResponseObject"/> items that the endpoint can supply.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.requestBody">
+            <summary>
+            <see cref="T:ApiSet.Models.ApiDocs.RequestBody"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.customEndPointObjects">
+            <summary>
+            A list of <see cref="!:CustomOasObjectEngine"/> items discovered in
+            the Api Document json.
+            </summary>
+            <remarks>
+            The types of objects can be seen in this enum:
+            <see cref="T:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum"/>
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.recordedResponseBody">
+            <summary>
+            This string holds the response body text that was present
+            for the given Http Endpoint. Note: This only applies when 
+            building an ApiDoc from sources like HTTP Archive files.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.EndPoint.recordedResponseMessage">
+            <summary>
+            This object holds the response object that was present
+            for the given Http Endpoint. Note: This only applies when 
+            building an ApiDoc from sources like HTTP Archive files.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.EndPoint.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> object.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.EndPoint.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.EndPoint"/> object
+            and assigns the passed in value to the <see cref="P:ApiSet.Models.ApiDocs.EndPoint.controllerName"/> property.
+            </summary>
+            <param name="ControllerName">the name of the API controller that houses this endpoint.</param>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.ExampleValue">
+            <summary>
+            An object loosely based on the <see cref="!:http://spec.openapis.org/oas/v3.0.3#example-object"/>
+            object.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ExampleValue.Type">
+            <summary>
+            The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> 
+            of the Example value being provided.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ExampleValue.Value">
+            <summary>
+            The actual value of the provided example
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ExampleValue.GeneratedValue">
+            <summary>
+            [Extension] - Used to store a formula or other item 
+            describing how to generate values for the example.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ExampleValue.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.ExampleValue"/> object.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.ExampleValue.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.ExampleValue"/> object
+            and initiates the <see cref="P:ApiSet.Models.ApiDocs.ExampleValue.Type"/> and <see cref="P:ApiSet.Models.ApiDocs.ExampleValue.Value"/> properties.
+            </summary>
+            <param name="type">The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> of the example</param>
+            <param name="value">The actual value to use.</param>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.Parameter">
+            <summary>
+            An object the contains information about input parameters for OpenApi endpoint calls
+            It is based on the <see href="https://spec.openapis.org/oas/v3.0.0#parameter-object"/> OAS object.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Name">
+            <summary>
+            The name of the item
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Type">
+            <summary>
+            The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> 
+            of the property.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Description">
+            <summary>
+            The description of the parameter
+            </summary>
+            <remarks>The text that shows up in the Description 
+            is any text added through XML Comments to the parameter 
+            in the API code</remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Reference">
+            <summary>
+            A string pointing to another object to be referenced.
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#fixed-fields-18"/> 
+            for more information.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Format">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.IsArray">
+            <summary>
+            True if the parameter is an array of items
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.arrayType">
+            <summary>
+            If <see cref="P:ApiSet.Models.ApiDocs.Parameter.IsArray"/> = true, this tells the type of items in the array
+            </summary>
+            <remarks>
+            Primitive data types in the OAS are based on the types supported by the JSON Schema 
+            Specification Wright Draft 00. Note that integer as a type is also supported and is 
+            defined as a JSON number without a fraction or exponent part. null is not supported 
+            as a type (see nullable for an alternative solution). Models are defined using the 
+            Schema Object, which is an extended subset of JSON Schema Specification Wright Draft 00.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.arrayFormat">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.customEndPointObjects">
+            <summary>
+            A list of <see cref="T:ApiSet.Models.ApiDocs.CustomOasObjectCollection"/> items that may be added to the parameter.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.ExampleValue">
+            <summary>
+            Represents an <see cref="!:http://spec.openapis.org/oas/v3.0.3#example-object">
+            OpenApi Example</see> entry.
+            </summary>
+            <remarks>
+            Example of the parameter’s potential value. The example SHOULD match the 
+            specified schema and encoding properties if present. The example field is 
+            mutually exclusive of the examples field. Furthermore, if referencing a schema 
+            that contains an example, the example value SHALL override the example provided 
+            by the schema. To represent examples of media types that cannot naturally be 
+            represented in JSON or YAML, a string value can contain the example with escaping 
+            where necessary.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.ExampleValues">
+            <summary>
+            Represents a list of <see cref="!:http://spec.openapis.org/oas/v3.0.3#example-object">
+            OpenApi Example</see> entries.
+            </summary>
+            <remarks>
+            Examples of the parameter’s potential value. Each example SHOULD contain a value 
+            in the correct format as specified in the parameter encoding. The examples field 
+            is mutually exclusive of the example field. Furthermore, if referencing a schema 
+            that contains an example, the examples value SHALL override the example provided 
+            by the schema.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.ShowsUpIn">
+            <summary>
+            describes the location where the parameter can appear
+            </summary>
+            <remarks>Possible values are:
+            <list type="bullet">
+            <item>query</item>
+            <item>header</item>
+            <item>path</item>
+            <item>cookie</item>
+            </list></remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.Required">
+            <summary>
+            Shows whether the parameter is mandatory
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.uriPath">
+            <summary>
+            Allows for a link back to the parent endpoint through 
+            <see cref="P:ApiSet.Models.ApiDocs.Parameter.controllerName"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriMethod"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriPath"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.uriMethod">
+            <summary>
+            Allows for a link back to the parent endpoint through 
+            <see cref="P:ApiSet.Models.ApiDocs.Parameter.controllerName"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriMethod"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriPath"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.controllerName">
+            <summary>
+            Allows for a link back to the parent endpoint through 
+            <see cref="P:ApiSet.Models.ApiDocs.Parameter.controllerName"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriMethod"/> + <see cref="P:ApiSet.Models.ApiDocs.Parameter.uriPath"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Parameter.inputProvider">
+            <summary>
+            Stores the value of a custom token <see cref="!:ParseTokens.TKN_GetsInputFrom"/> that
+            references what response object to use when getting test values for this parameter.
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.Parameter.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.Parameter"/> object
+            </summary>
+        </member>
+        <member name="M:ApiSet.Models.ApiDocs.Parameter.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:ApiSet.Models.ApiDocs.Parameter"/> object
+            and initializes the <see cref="P:ApiSet.Models.ApiDocs.Parameter.controllerName"/> properties
+            </summary>
+            <param name="ControllerName"><see cref="P:ApiSet.Models.ApiDocs.Parameter.controllerName"/></param>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.Property">
+            <summary>
+            A custom object that implements some of the 
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#properties"/> listed in 
+            the OpenApiSpec. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.Name">
+            <summary>
+            The name of the item
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.Type">
+            <summary>
+            The <see cref="!:http://spec.openapis.org/oas/v3.0.3#data-types">OpenApi defined Type</see> 
+            of the property.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.Description">
+            <summary>
+            The description of the parameter
+            </summary>
+            <remarks>The text that shows up in the Description 
+            is any text added through XML Comments to the parameter 
+            in the API code</remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.Reference">
+            <summary>
+            A string pointing to another object to be referenced.
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#fixed-fields-18"/> 
+            for more information.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.Format">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.IsArray">
+            <summary>
+            True if the parameter is an array of items
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.arrayType">
+            <summary>
+            If <see cref="P:ApiSet.Models.ApiDocs.Property.IsArray"/> = true, this tells the type of items in the array
+            </summary>
+            <remarks>
+            Primitive data types in the OAS are based on the types supported by the JSON Schema 
+            Specification Wright Draft 00. Note that integer as a type is also supported and is 
+            defined as a JSON number without a fraction or exponent part. null is not supported 
+            as a type (see nullable for an alternative solution). Models are defined using the 
+            Schema Object, which is an extended subset of JSON Schema Specification Wright Draft 00.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.arrayFormat">
+            <summary>
+            If array is of an OpenApi primitive type, this field describes the
+            format of the type contained in the array.
+            </summary>
+            <remarks>
+            Primitives have an optional modifier property: format. OAS uses several known formats 
+            to define in fine detail the data type being used. However, to support documentation 
+            needs, the format property is an open string-valued property, and can have any value. 
+            Formats such as "email", "uuid", and so on, MAY be used even though undefined by this 
+            specification. Types that are not accompanied by a format property follow the type 
+            definition in the JSON Schema. Tools that do not recognize a specific format MAY default 
+            back to the type alone, as if the format is not specified.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.customEndPointObjects">
+            <summary>
+            A <see cref="T:ApiSet.Models.ApiDocs.CustomOasObjectCollection"/> that may be added to the parameter.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.Property.propertyParsingError">
+            <summary>
+            A string that holds any error message that arose while parsing the component
+            for all properties.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.ApiDocs.RequestBody">
+            <summary>
+            This class defines a container to house the Request Body
+            info needed to build a proper request.
+            </summary>
+            <remarks>
+            This class is based loosely off the <see cref="!:http://spec.openapis.org/oas/v3.0.3#request-body-object">
+            Request Body</see> object in the OpenApiSpec.
+            </remarks>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.RequestBodyContentType">
+            <summary>
+            Holds the media content type being passed in through the Request Body.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.RequestBodyJsonObject">
+            <summary>
+            If the operation is a POST, PUT or PATCH based request,
+            this string holds the class name of the Input DTO that is used
+            as a template for the request body.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.RequestBodyString">
+            <summary>
+            If the operation is a POST, PUT or PATCH based request,
+            this string holds the Swagger generated Input template
+            text that is generated from the $ref entry in the 
+            <see cref="!:http://spec.openapis.org/oas/v3.0.3#request-body-object"/>
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.RequestBodySchemaType">
+            <summary>
+            This property holds the <see cref="!:http://spec.openapis.org/oas/v3.0.3#media-type-object"/>
+            of the request object to pass in. 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.RequestBodyFormObjectOrType">
+            <summary>
+            This property holds the <see cref="!:http://spec.openapis.org/oas/v3.0.3#media-type-object"/>
+            of the request object to pass in.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.RequestBody.properties">
+            <summary>
+            The list of <see cref="T:ApiSet.Models.ApiDocs.Property"/> items
+            that are associated with the schema.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.Description">
+            <summary>
+            The description for the stsus code that this response
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.ResponseObjectName">
+            <summary>
+            [Extension] - The class 'name' of response object for
+            responses that use a $ref tag to reference a <see cref="T:ApiSet.Models.ApiDocs.Component"/> 
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.ResponseObjectType">
+            <summary>
+            A <see cref="T:ApiSet.Models.Enums.ResponseTypeEnum"/> value that describes the
+            type of response object returned.
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.ResponseObjectExampleText">
+            <summary>
+            
+            </summary>        
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.ResponseObjectExampleTextIsEncoded">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ApiSet.Models.ApiDocs.ResponseObject.abbreviatedResponseObjects">
+            <summary>
+            [Extension] - This is a collection of objects in the response 
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Consts.ParserTokens">
+            <summary>
+            This class contains constant string values that are used for parsing OAS documents.
+            </summary>
+            <remarks>
+            These string constants represent a few different types of 'searchable' strings. The 
+            preamble of each token represents the type of string:
+            <list type="bullet">
+            <item><c>TKN</c> These items represent strings that can be added to the XML Documentation in a way that they will
+            show up in the generated OAS document.</item>
+            <item><c>PARAM</c> These items contain strings that represent the names of common parameters that (when
+            used by developers in the API) will allow the OAS parser to identify these parameters as properties to
+            make dynamioc in any generated test harnesses.</item>
+            <item><c>OAS</c> These items contain strings that are known constants defined within the Open Api Spec.</item>
+            <item><c>DESC</c> These items are more generic and act as a 'catch-all' bucket for terms.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_GetsInputFrom">
+            <summary>
+            Gets the fully qualified name of the property that will provide input into this parameter
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_ClassName">
+            <summary>
+            Gets the fully qualified class name of this DTO
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_TestDataFilter">
+            <summary>
+            Provides filtering/alignment information for retrieving input data from multiple response objects
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_TestDataFilterStringFormat">
+            <summary>
+            Contains the arguments used when providing a 
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_TestDataFilter"/> Token in XML Documentation
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_startDate">
+            <summary>
+            Sets a dynamic value for the start date based on current day offset.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_endDate">
+            <summary>
+            Sets a dynamic value for the end date based on current day offset.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_CalculatedDateStringFormat">
+            <summary>
+            Contains the arguments used when providing a 
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_startDate"/> or <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_endDate"/> Token in XML Documentation
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_ProvidesValuesFor">
+            <summary>
+            A Swagger custom property that contains a list of methods that this endpoint can potentially provide values for.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_MethodName">
+            <summary>
+            A Swagger custom property that contains the name of the method
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_RestrictTo">
+            <summary>
+            A Swagger custom property that contains a list of roles that this method allows access to
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.TKN_LookupMethod">
+            <summary>
+            This tag value, when present, indicates that this method is a lookup method.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.PARAM_StartDate">
+            <summary>
+            this string represents the name of an API operation's input parameter that contains a <see cref="!:DateTime"/> 
+            value for the starting date of a query.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.PARAM_EndDate">
+            <summary>
+            this string represents the name of an API operation's input parameter that contains a <see cref="!:DateTime"/> 
+            value for the ending date of a query.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.PARAM_List_Precursor">
+            <summary>
+            this string represents the precursor for an API operation's input parameter name that contains a List of values. 
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.PARAM_MissingInfo">
+            <summary>
+            this string represents an item in the OAS schema that has missing info.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.PARAM_MissingTypeField">
+            <summary>
+            this string represents an item in the OAS schema that has a missing field type.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.OAS_JsonContentType">
+            <summary>
+            the string to search for in the content-type that indicates the response is a JSON object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.OAS_FormDataContentType">
+            <summary>
+            the string to search for in the content-type that indicates the response is a binary or form data object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Consts.ParserTokens.OAS_NoContentFound">
+            <summary>
+            the string to search for in the content-type that indicates there was no response object.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum">
+            <summary>
+            Defines the category of error in the ApiSetAnalyzerError list
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.Property_MissingType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndpointRestrictionSummary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeEndPointRestrictions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeRequestBodies">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeInputParameters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.AnalyzeApiComponents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.ResponseObject_MissingType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateEndpoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.AnalyzerErrorCategoryEnum.DuplicateLookupEndpoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.ApiRootSourceEnum">
+            <summary>
+            Lists the source for the <see cref="!:ApiSet.apiRoot"/> object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ApiRootSourceEnum.basePath">
+            <summary>
+            The value defined in the <c>basePath</c> node
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ApiRootSourceEnum.settingsFile">
+            <summary>
+            The value added to the <c>settings.json</c> file
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ApiRootSourceEnum.empty">
+            <summary>
+            An empty string if there is not a common basePath, or if the value is
+            not provided by one of the above items.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum">
+            <summary>
+            Enumerates the types of <see cref="!:CustomEndPointObject"/>s that are currently supported. 
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.RestrictTo">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_RestrictTo"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.ProvidesValuesFor">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_ProvidesValuesFor"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.MethodName">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_MethodName"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.TestDataFilter">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_TestDataFilter"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.GetsInputFrom">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.TKN_GetsInputFrom"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.CustomEndPointObjectTypeEnum.CalculatedDateValue">
+            <summary>
+            <see cref="F:ApiSet.Models.Consts.ParserTokens.PARAM_StartDate"/> 
+            or <see cref="F:ApiSet.Models.Consts.ParserTokens.PARAM_EndDate"/>
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.ObjectTypeEnum">
+            <summary>
+            Enumerates the types of data objects that can be found in
+            an <see cref="T:Microsoft.OpenApi.Models.OpenApiSchema"/> object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List">
+            <summary>
+            A <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.List"/> of items, referred to as arrays in the openApi spec
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.List"/> of items, referred to as arrays in the openApi spec
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.none">
+            <summary>
+            The endpoint does not return any data.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Object">
+            <summary>
+            A class-based response object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.BinaryString">
+            <summary>
+            A binary string (usually a downloadable file, etc)
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.String">
+            <summary>
+            A plain old <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.String"/>.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Integer">
+            <summary>
+            A plain old <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Boolean">
+            <summary>
+            A <see cref="T:System.Boolean"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Double">
+            <summary>
+            A <see cref="T:System.Double"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime">
+            <summary>
+            A <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Date">
+            <summary>
+            The Date portion of a <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Long">
+            <summary>
+            An <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.Byte">
+            <summary>
+            A <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Byte"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Objecgt">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Object"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_BinaryString">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.BinaryString"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_String">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.String"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Integer">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Integer"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Boolean">
+            <summary>
+            A list of<see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Boolean"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Double">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Double"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_DateTime">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Date">
+            <summary>
+            A list of The Date portion of a <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Long">
+            <summary>
+            A list of <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_Byte">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Byte"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Object">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Object"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_BinaryString">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.BinaryString"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_String">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.String"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Integer">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Integer"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Boolean">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Boolean"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Double">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Double"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_DateTime">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Date">
+            <summary>
+            A list of lists of The Date portion of a <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.DateTime"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Long">
+            <summary>
+            A list of lists of <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.List_List_Byte">
+            <summary>
+            A list of lists of <see cref="F:ApiSet.Models.Enums.ObjectTypeEnum.Byte"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ObjectTypeEnum.FailedToParse">
+            <summary>
+            The ApiDoc parser was not able to determine the response object type.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.ParameterIsInEnum">
+            <summary>
+            Lists the locations within an OpenApiOperation that a parameter can show up.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ParameterIsInEnum.query">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ParameterIsInEnum.header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ParameterIsInEnum.path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ParameterIsInEnum.formData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ParameterIsInEnum.body">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.ResponseTypeEnum">
+            <summary>
+            Describes the type of object returned from the API.
+            </summary>
+            <remarks>
+            This is used by the test generation software to 
+            determine what extraction and validation rule types 
+            can be used with the response.
+            </remarks>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.Object">
+            <summary>
+            A class-based response object
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.BinaryString">
+            <summary>
+            A binary string (usually a downloadable file, etc)
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.String">
+            <summary>
+            A plain old <see cref="F:ApiSet.Models.Enums.ResponseTypeEnum.String"/>.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.Integer">
+            <summary>
+            A plain old <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.List_Object">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ResponseTypeEnum.Object"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.List_BinaryString">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ResponseTypeEnum.BinaryString"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.List_String">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ResponseTypeEnum.String"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.List_Integer">
+            <summary>
+            A list of <see cref="F:ApiSet.Models.Enums.ResponseTypeEnum.Integer"/> items
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.none">
+            <summary>
+            The endpoint does not return any data.
+            </summary>
+        </member>
+        <member name="F:ApiSet.Models.Enums.ResponseTypeEnum.FailedToParse">
+            <summary>
+            The ApiDoc parser was not able to determine the response object type.
+            </summary>
+        </member>
+        <member name="T:ApiSet.Models.Enums.RestrictToRolesEnum">
+            <summary>
+            Enumerates the types of roles that can be seen in a 
+            <see cref="!:RestrictTo"/> object.
+            </summary>
+        </member>
+    </members>
+</doc>
